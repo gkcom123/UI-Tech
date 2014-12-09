@@ -1,0 +1,17 @@
+.menu-disabled-true
+{
+    color:aqua;
+    background-color: blue;
+}
+.error
+{
+    background-color: red;
+}
+.warning
+{
+    background-color: green;
+}
+.selected
+{
+    background-color: lightgreen;
+}

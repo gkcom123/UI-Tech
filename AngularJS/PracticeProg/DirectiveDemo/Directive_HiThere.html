@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+<head lang="en" >
+    <meta charset="UTF-8">
+    <title>Simple Custom directive Demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+</head>
+<body>
+<hello-dear></hello-dear>
+<script>
+  var appModule = angular.module('app',[]);
+  appModule.directive('helloDear',function()
+  {
+    return{
+      restrict:'E',
+        //template:'<div>Hi Gunjan Best of luck</div>',
+      templateUrl:'HelloTemplate.html',
+      replace: true // default behaviour is to append content to elements, set replace true to
+      // replace the original template
+    };
+  });
+
+</script>
+</body>
+</html>
