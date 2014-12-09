@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../styles/style.css"/>
+</head>
+<body>
+<div ng-controller="HeaderController">
+    <div ng-class='{error:isError,warning:isWarning}'>{{messageText}}</div>
+    <button ng-click = 'showError()'>Simulate Error</button>
+    <button ng-click = 'showWarning()'>Simulate Warning</button>
+</div>
+<table ng-controller='RestTableController'>
+    <tr ng-repeat='rest in directory' ng-click='selectRestaurant($index)' ng-class='{selected:$index==selectedRow}'>
+        <td>{{rest.name}}</td>
+        <td>{{rest.cuisine}}</td>
+    </tr>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+<script src="../script/CssDemoController.js" ></script>
+
+
+</body>
+</html>
