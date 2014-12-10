@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="clickMe"/>
+<script>
+  //Flow
+  //1. it finds a button, adds a click listener, and sets a timeout.
+  // 2.Then the turn is complete, and the browser will update the web page if necessary, and begin accepting user input.
+  // If the browser detects a click on #clickMe, it creates a new turn, which executes the buttonClicked function.
+  // When that function returns, that turn is complete.
+  //  After 2000 milliseconds, the browser creates a new turn which calls timerComplete.
+  //    Our JavaScript code is run in turns, and in between the turns is when the page is repainted, and input is accepted.
+
+  var button = document.getElementById('clickMe');
+
+  function buttonClicked () {
+    alert('the button was clicked');
+  }
+
+  button.addEventListener('click', buttonClicked);
+
+  function timerComplete () {
+    alert('timer complete');
+  }
+
+  setTimeout(timerComplete, 2000);
+</script>
+</body>
+</html>
