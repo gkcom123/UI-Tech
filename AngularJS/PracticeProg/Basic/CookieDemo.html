@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+  function SearchController($scope,$cookieStore)
+  {
+    $scope.search = function(text)
+    {
+      //search the cookie
+
+      //Get the result or initialize an empty array if nothing found
+      var pastSearches = $cookieStore.get('myApp.past.searches') || [];
+      if(pastSearches.length>5)
+      {
+        pastSearches.splice(0);
+
+      }
+      pastSearches.push(text);
+      $cookieStore.put('myApp.past.searches',pastSearches);
+    };
+  }
+</script>
+</body>
+</html>

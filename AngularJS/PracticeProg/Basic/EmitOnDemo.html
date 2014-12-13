@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Emit and Broadcast Demo</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+</head>
+<body>
+  <div ng-app='emitApp'>
+    <div ng-controller="ParentCtrl">
+      <button ng-click="go()">Button </button>
+      <div ng-controller="SiblingCtrl">
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var app = angular.module('emitApp',[]);
+  app.controller('ParentCtrl', function($scope,$rootScope) {
+    $scope.go = function() {
+      console.log("Broadcast from root scope");
+      $scope.$broadcast('ParentControllerEvent',"Broadcast from root scope")
+
+    }
+  });
+
+  app.controller('SiblingCtrl',function($scope,$rootScope) {
+    $scope.$on('ParentControllerEvent', function (event, data) {
+      console.log("SiblingCtrl->"+data);
+    });
+
+  });
+</script>
+</html>
