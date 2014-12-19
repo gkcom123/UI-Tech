@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Interpolation Demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+</head>
+<body>
+  <body ng-app="myApp">
+    <div ng-controller="MyController">
+      <input ng-model="to" type="email"
+             placeholder="Recipient" />
+      <textarea ng-model="emailBody"></textarea>
+      <pre>{{ previewText }}</pre>
+  </div>
+  <script>
+    angular.module('myApp', [])
+      .controller('MyController',
+      function($scope, $interpolate) {
+        $scope.to = 'ari@fullstack.io';
+        $scope.emailBody = 'Hello {{ to }},\n\nMy name is Ari too!';
+        // Set up a watch
+        $scope.$watch('emailBody', function(body) {
+          if (body) {
+            var template = $interpolate(body);
+            $scope.previewText =
+              template({to: $scope.to});
+          }
+        });
+      });
+  </script>
+</body>
+
+</body>
+</html>
