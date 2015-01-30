@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+  <div>
+    <button> I am a button</button>
+    <button> I am a button</button>
+    <button> I am a button</button>
+    <button> I am a button</button>
+  </div>
+  <script>
+    var buttons = document.getElementsByTagName("button");
+    for (var i=0;i<buttons.length;i++)
+    {
+      var button = buttons[i];
+      button.i= i;
+      button.addEventListener('click',function()
+      {
+        console.log(this.i);
+      })
+    }
+  </script>
+
+</body>
+</html>

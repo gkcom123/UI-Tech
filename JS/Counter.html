@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+  <div>
+    <button> I am a button</button>
+  </div>
+
+<script>
+  var counter = {
+    cnt : 0,
+    inc:function()
+    {
+      this.cnt++;
+      alert(this.cnt);
+    }
+  };
+  var el = document.getElementsByTagName("button")[0];
+  el.addEventListener("click",function()
+  {
+    counter.inc()
+  },false);
+</script>
+</body>
+</html>
