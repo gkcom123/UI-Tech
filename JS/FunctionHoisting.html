@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  function test() {
+    //foo(); // TypeError "foo is not a function"
+    bar(); // "this will run!"
+    var foo = function () { // function expression assigned to local variable 'foo'
+      alert("this won't run!");
+    }
+    function bar() { // function declaration, given the name 'bar'
+      alert("this will run!");
+    }
+  }
+  test();
+
+
+  var foo = "Hello";
+  (function() {
+    var bar = " World";
+    alert(foo + bar);
+  })();
+  alert(foo + bar);
+</script>
+</body>
+</html>

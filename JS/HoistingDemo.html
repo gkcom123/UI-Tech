@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  var myvar = 'my value';
+
+  (function() {
+    alert(myvar); // undefined when below line are not commented
+    var myvar = 'local value';
+  })();
+</script>
+</body>
+</html>

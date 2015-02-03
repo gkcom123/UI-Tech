@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  var person1 = {name: 'Marvin', age: 42, size: '2xM'};
+  var person2 = {name: 'Zaphod', age: 42000000000, size: '1xS'};
+  var sayHello = function(){
+    alert('Hello, ' + this.name);
+  };
+  var sayGoodbye = function(){
+    alert('Goodbye, ' + this.name);
+  };
+  sayGoodbye.call(person1);
+  sayGoodbye.call(person2);
+  sayGoodbye.apply(person2);
+
+</script>
+</body>
+</html>

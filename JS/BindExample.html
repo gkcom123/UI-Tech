@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  //this.x = 9;
+  var module = {
+    x: 81,
+    getX: function() { return this.x; }
+  };
+
+  module.getX(); // 81
+
+  var getX = module.getX;
+  console.log(getX()); // 9, because in this case, "this" refers to the global object
+
+  // Create a new function with 'this' bound to module
+  var boundGetX = getX.bind(module);
+  boundGetX(); // 81
+</script>
+
+</body>
+</html>
