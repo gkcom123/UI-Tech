@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  var fruitSaladRecipe = "2 apples, papaya, coconut, 5 oranges, apple, banana",
+    ingredients = fruitSaladRecipe.split(/,\s+/),
+    ingredientHash = {},
+    num = 0; // Total number of fruits
+  for (var i=0 ; i<ingredients.length ; i++) {
+
+    var ingredient = ingredients[i],
+      fruitType = ingredient.match(/(\w+)$/)[1].replace(/s$/, ""),
+      numPieces;
+    if (/^\d+/.test(ingredient)) {
+      var num = ingredient.match(/^(\d+)/)[1];
+      numPieces = parseInt(num, 10);
+    }else{
+      numPieces = 1;
+    }
+    if (/^(?:banana)$/.test(fruitType)) {
+      // Speaking of bananas, let's add some more! Those things are delicious!
+      numPieces *= 2;
+    }
+    num += numPieces;
+    if (fruitType in ingredientHash) {
+      numPieces += ingredientHash[fruitType];
+    }
+    ingredientHash[fruitType] = numPieces;
+  }
+  var message = num + " fruit(s) in total:";
+  for (var ingredient in ingredientHash) {
+    if (ingredientHash.hasOwnProperty(ingredient)) {
+      message += "  " + ingredientHash[ingredient] + " " + ingredient + "(s)";
+    }
+  }
+  alert(message);
+</script>
+</body>
+</html>

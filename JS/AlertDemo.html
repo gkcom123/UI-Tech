@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  /*function wrapInObject(value) {
+   return {
+     value: value
+    };
+
+  }
+  alert(wrapInObject("foo").value);*/
+
+  function wrapInObjectr(value) {
+    return    {
+      value: value
+    };
+  }
+  console.log(wrapInObjectr("foo"));
+//  alert(wrapInObjectr("foo").value);
+
+  var a = "foo",
+    b = a;
+  b += "bar";
+  alert(a);
+
+  function f(a) {
+    return function(b) {
+      return a + b;
+    };
+  }
+  var add5 = f("gunjan");
+  console.log(add5("Kumar"));
+  var addNum = f(3);
+  console.log(addNum(4));
+</script>
+</body>
+</html>

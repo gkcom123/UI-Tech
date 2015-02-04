@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  (function(n){
+    return (n && n*arguments.callee(n-1)) || 1;})(10);
+
+  function Foo(){}
+  Foo.prototype.bar = 42;
+  var foo = new Foo();
+
+  // returns true, but with no effect,
+  // since bar is an inherited property
+  delete foo.bar;
+
+  // logs 42, property still inherited
+  console.log(foo.bar);
+
+  // deletes property on prototype
+  delete Foo.prototype.bar;
+
+  // logs "undefined", property no longer inherited
+  console.log(foo.bar);
+
+  myobj = {
+    h: 4,
+    k: 5
+  };
+//myobj['h']=null;
+myobj.h = undefined;
+  console.log("Here you go.>"+ myobj.h);
+  myobj.h = 4;
+  console.log("Here you go.>"+ myobj.h);
+  console.log("Here you go.>"+delete myobj.h);
+  myobj.h = 4;
+  console.log("Here you go.>"+ myobj.h);
+
+  /*function wrapInObject(value) {
+    return
+    {
+      value: value
+    };
+  }
+  alert(wrapInObject("foo").value);
+*/
+
+  function makeNumberSequenceGenerator(nextValue) {
+    return function() {
+      return nextValue++;
+
+    };
+  }
+  var ret = makeNumberSequenceGenerator(10);
+  var sec = ret();
+  console.log(sec);
+  //alert(makeNumberSequenceGenerator(10).nextValue().nextValue());
+
+  function isFalseBooleanValue(bool) {
+    var result = bool===false;
+    console.log(result);
+  }
+  isFalseBooleanValue("true");
+
+  (function() {
+    for (var i=0 ; i<2 ; i++) {
+      alert(i);
+    }
+  })();
+  /*for (var i=3 ; i<5 ; i++) {
+    alert(i);
+    document.write(i);
+  }*/
+
+  /*window.onload = function() {
+    document.write("Hello, world!");
+  };*/
+  for (var i=0 ; i<10 ; i++) {
+    var button = document.createElement("button");
+    button.i= i;
+    button.onclick = function() {
+      alert("You clicked button number "+this.i);
+    };
+    document.body.appendChild(button).appendChild(document.createTextNode("Button "+i));
+  }
+</script>
+</body>
+</html>
