@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  function StringBuffer(initialStr) {
+    this.append(initialStr);
+  }
+  StringBuffer.prototype = {
+    items: [],
+    append: function(str) {
+      //console.log(this.items[this.items.length]);
+      //console.log(str);
+
+      this.items[this.items.length] = str instanceof StringBuffer ? str.toString() : str;
+      //console.log(this.items[this.items.length] = str instanceof StringBuffer);
+
+      return this;
+    },
+    toString: function() {
+      return this.items.join("");
+    }
+  };
+ // alert(new StringBuffer("foo").append(new StringBuffer("bar")).toString());
+  var fStr = new StringBuffer("foo");
+  var nstr = fStr.append(new StringBuffer("bar"));
+  alert(nstr);
+
+
+  function printZeroToNinetyNine() {
+    for (var i = 0; i < 100; i += 1) {
+      setTimeout(function () {
+        console.log(i);
+      }, 0);
+    }
+  }
+  printZeroToNinetyNine();
+ // alert(new StringBuffer("foo").append(new StringBuffer("bar")));
+  function delayedPrint() {
+    for (var i = 0; i < 100; i += 1) {
+      (function (value) {
+        setTimeout(function () {
+          console.log(i);
+        }, 1000 * value);
+      }(i));
+    }
+  }
+  delayedPrint();
+
+
+</script>
+</body>
+</html>

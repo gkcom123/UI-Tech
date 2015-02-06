@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  function createObject(name, value) {
+    var returnObject = {};
+    returnObject[name] = value;
+    returnObject['addTo' + name] = function () {
+      return value += 1;
+    };
+    return returnObject;
+  }
+  var obj = createObject('Property', 100);
+  console.log(obj.Property);
+  console.log(obj.addToProperty());
+  debugger;
+  console.log(obj.Property);
+</script>
+
+</body>
+</html>

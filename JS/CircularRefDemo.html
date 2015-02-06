@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  document.write("Circular references between JavaScript and DOM!");
+  var obj;
+  window.onload = function(){
+    obj=document.getElementById("DivElement");
+    document.getElementById("DivElement").expandoProperty=obj;
+    /*
+     As you can see in the above listing, the JavaScript object obj has a reference to the DOM object
+     represented by DivElement. The DOM object, in turn, has a reference to the JavaScript object
+     through the expandoProperty. A circular reference exists between the JavaScript object
+     and the DOM object. Because DOM objects are managed through reference counting,
+     neither object will ever be destroyed.*/
+
+
+    obj.bigString=new Array(1000).join(new Array(2000).join("XXXXX"));
+  };
+</script>
+</body>
+</html>
