@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script>
+  console.log(this.document === document); // true
+
+  // In web browsers, the window object is also the global object:
+  console.log(this === window); // true
+
+  this.a = 37;
+  console.log(window.a); // 37
+
+  var obj = {};
+  obj.foo = function() {
+    alert(this.firstName);
+  };
+  var f = obj.foo;
+  f();
+  obj.firstName = "Fred";
+  obj.foo(); // alerts "Fred"
+
+
+  var obj = {};
+  obj.foo = function() {
+    alert(this.firstName);
+  };
+  obj.firstName = "Fred";
+  obj.foo(); // alerts "Fred"
+
+  var differentObj = {};
+  differentObj.firstName = "Barney";
+  differentObj.bar = obj.foo; // Not *calling* it, just getting a reference to it
+  differentObj.bar(); // alerts "Barney"
+
+
+  function Guess(killer, location, weapon)
+  {
+    this.killer = killer;
+    this.location = location;
+    this.weapon = weapon;
+  }
+  Guess.prototype.accuse = function()
+  {
+    //alert(this);
+    alert('It was ' + this.killer
+    + ' in the ' + this.location
+    + ' with the ' + this.weapon
+    + '!');
+  };
+
+  function testGuess()
+  {
+    var mustardStudyLeadPipe;
+    var plumHallRope;
+
+    mustardStudyLeadPipe = new Guess(
+      'Colonel Mustard',
+      'study',
+      'lead pipe');
+    mustardStudyLeadPipe.accuse();
+
+    plumHallRope = new Guess(
+      'Professor Plum',
+      'hall',
+      'rope');
+    plumHallRope.accuse();
+  }
+  function testGuessRef()
+  {
+    var mustardStudyLeadPipe;
+    var plumHallRope;
+    var accuse;
+
+    mustardStudyLeadPipe = new Guess(
+      'Colonel Mustard',
+      'study',
+      'lead pipe');
+    //mustardStudyLeadPipe.accuse();
+
+    plumHallRope = new Guess(
+      'Professor Plum',
+      'hall',
+      'rope');
+    accuse = plumHallRope.accuse;
+    accuse();
+  }
+  testGuess();
+  alert("Calling Ref Function")
+  testGuessRef();
+
+  function testGuess2()
+  {
+    var plumHallRope;
+    var fakeGuess;
+
+    plumHallRope = new Guess(
+      'Professor Plum',
+      'hall',
+      'rope');
+    plumHallRope.accuse();
+
+    fakeGuess = {};
+    fakeGuess.location = 'library';
+    fakeGuess.killer = 'Mrs. Peacock';
+    fakeGuess.weapon = 'revolver';
+    fakeGuess.demo = plumHallRope.accuse;
+    fakeGuess.demo();
+  }
+  testGuess2();
+</script>
+</html>

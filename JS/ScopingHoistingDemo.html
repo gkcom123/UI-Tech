@@ -7,9 +7,9 @@
 <body>
 <script>
   var foo = 1;
-  console.log(foo);
+  console.log(foo);//1
   function bar() {
-    if (!foo) {
+    if (!foo) {//this will be true as foo will be hoisted and its value will be undefined
       var foo = 10;
     }
     alert(foo);// This has created a new scope in function
@@ -20,6 +20,7 @@
   var a = 1;
   function b() {
     a = 10;
+    alert(a);
     return;
     function a() {}
   }
