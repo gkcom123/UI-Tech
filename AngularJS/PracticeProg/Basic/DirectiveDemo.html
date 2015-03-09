@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="dApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Directive Demo</title>
+</head>
+<body ng-controller="SomeController">
+    <button ng-click="clickUnfocussed()">
+        Not Focused
+    </button>
+    <button ngbk-focus ng-click="clickFocused()">
+        i m focused
+    </button>
+    <div>{{message.text}}</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+    <script>
+        var appModule = angular.module('dApp',[]);
+        appModule.directive('ngbkFocus',function(){
+            return{
+                //The link function gets a reference to the enclosing scope, the DOM element it lives on, an
+                //array of any attribute passed to directive, and the controller on DOM elelemnts
+                link:function(scope, element, attrs, controller) {
+                    element[0].focus();
+                }
+            };
+        });
+
+        function SomeController($scope) {
+            $scope.message = {text: 'Nothing clicked yet'};
+
+            $scope.clickUnfocussed = function () {
+                $scope.message.text = "unfocussed";
+            }
+            $scope.clickFocused = function () {
+                $scope.message.text = "focussed";
+            }
+        }
+    </script>
+</body>
+</html>

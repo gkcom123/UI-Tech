@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="StudentListCntrl">
+<ul>
+    <li ng-repeat='student in students'>
+        <span>{{$index+1}}</span>
+
+       <span>{{student.id}}</span>
+        {{student.name}}
+        <span>{{$first}}</span>
+        <span>{{$middle}}</span>
+        <span>{{$last}}</span>
+    </li>
+</ul>
+<button ng-click ="insertTOm()">Insert</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+<script src="../script/NgRepeatController.js" ></script>
+
+</body>
+</html>

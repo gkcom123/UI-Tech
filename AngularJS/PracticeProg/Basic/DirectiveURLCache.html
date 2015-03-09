@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Template Cache Demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+</head>
+<body>
+  <hello-cache></hello-cache>
+  <script>
+    var appModule = angular.module('app',[]);
+    appModule.run(function($templateCache)
+      {
+        $templateCache.put('helloTemplateCached.html','<div>Hi Gunjan All the Best </div>');
+      }
+    );
+
+    appModule.directive('helloCache',function() {
+      return{
+        restrict:'E',
+          templateUrl : 'helloTemplateCached.html',
+        replace :  true
+
+      };
+    });
+
+  </script>
+</body>
+</html>

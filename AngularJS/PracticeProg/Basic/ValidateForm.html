@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+<h1>Sign Up</h1>
+<form name="adduserForm" ng-controller="AddUserCtrl">
+    <div ng-show='message'>{{message}}</div>
+    <div> First Name:<input ng-model="user.first" required></div>
+    <div> Last Name:<input ng-model="user.last" required></div>
+    <div> Email Name:<input type="email" ng-model="user.mail" required></div>
+    <div> Age:<input type="number" ng-model="user.age" ng-maxlength='3' ng-minlength='1' ></div>
+    <button ng-click="addUser()" ng-disabled ='!adduserForm.$valid'>Submit</button>
+</form>
+<script>
+    function AddUserCtrl($scope)
+    {
+        $scope.message = '';
+        $scope.addUser = function()
+        {
+            $scope.message = 'Thanks, '+$scope.user.first+', We added you ';
+        }
+    }
+
+
+
+</script>
+
+</body>
+</html>
