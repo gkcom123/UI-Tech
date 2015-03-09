@@ -2,3 +2,24 @@
   content: none;
 }
 
+.tab-pane {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 0.8em;
+}
+
+/* remove this style */
+.glyphicon-pushpin,
+.glyphicon-heart {
+  color: #3F2B22;
+}
+
+/* add these styles */
+
+.glyphicon {
+  color: #3F2B22;
+}
+.active .glyphicon {
+  color: #cdae51;
+}
