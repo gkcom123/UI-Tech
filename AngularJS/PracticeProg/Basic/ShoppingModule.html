@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="shoppingModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+</head>
+<body ng-controller='CartController'>
+<h1>Your Shopping Order</h1>
+<div ng-repeat='item in items'>
+    <span>{{item.title}}</span>
+    <input ng-model='item.quantity'>
+    <span> {{item.price | currency}} </span>
+    <span> {{item.price * item.quantity | currency}}</span>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+<script>
+    //create a module to support our shopping views
+    var shoppingModule = angular.module('shoppingModule',[]);
+    //set up a service factory to create our items interface to the server side database.
+    shoppingModule.factory('Items',function()
+    {
+        var items = {};
+        items.query = function()
+        {
+            //pull data from server
+            return [
+                {title:'Paint',quantity:8,price:3},{title:'New Paint  new',quantity:21,price:3.95}
+            ];
+        };
+        return items;
+
+    });
+    //we can use Items in several controller, hence promoting code re-usuability . Any change in Items fetching
+    // techinque would effect only the service Items.
+    function CartController(Items,$scope)
+    {
+        $scope.items = Items.query();
+    }
+
+</script>
+</body>
+</html>
