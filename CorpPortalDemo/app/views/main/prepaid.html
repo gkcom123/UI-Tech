@@ -1,0 +1,149 @@
+<div class="tfsContainerCls">
+  <tfs-login-header></tfs-login-header>
+  <div class="fixheaderPhontom"></div>
+	<section class="container" ng-controller="prepaidController">
+		<ng-include src="'reachargeEnable.html'" ng-if="prepaidState == 'enable'"></ng-include>
+		<ng-include src="'reachargeVerfication.html'" ng-if="prepaidState == 'verification'"></ng-include>
+		<ng-include src="'reachargeAccount.html'" ng-if="prepaidState == 'enabled'"></ng-include>
+	</section>
+</div>
+<tfs-footer></tfs-footer>
+
+
+<script type="text/ng-template" id="reachargeEnable.html">
+	<div class="prePaidWrap rel">
+		<form id="prepaidSubmitFormID" class="validateform" role="form" name="form">
+			<div class="spin" style="display: none;"><span class="spinIcon"></span></div>
+			<h3 style="margin-top: 0px;">Enable Enterprise Prepaid account</h3>
+			<h5 class="color666">Corporate Prepaid account option allows you to empower employees to take cashless trips and avoid wasting time reimbursing bills.</h5>
+			<div class="prePaidDivider"></div>
+			<div>
+				<div class="color666 f16" style="margin: 10px 0px;">Provide below details to enable prepaid account</div>
+				<div class="row" style="margin: 0px 15px;">
+					<div class="col-md-2 col-sm-4" style="margin-top:10px;">PAN Number<span class="mandatoryStar">*</span></div>
+					<div class="col-md-5 col-sm-8" style="margin-top:10px;">
+						<input type="text" class="form-control panInput" name="panNumber" tabindex="1" maxlength="10" placeholder="XXXXX1234X" />
+					</div>
+				</div>
+				<div class="color666 f16"  style="margin: 10px 0px;">Kindly upload scan copy of below required documents for verification</div>
+				<div class="row" style="margin: 0px 15px;">
+					<div class="col-md-2 col-sm-4" style="margin-top:10px;">Document 1<span class="mandatoryStar">*</span></div>
+					<div class="col-md-10 col-sm-8">
+							<div class="fL">
+							    <input type="text" readonly class="form-control" value="PAN Card" style="margin-top:10px;margin-right: 20px;width:270px;">
+				                <input type="hidden" name="panCardImageName" id="panCardImageNameId" value=""/>
+				                <label id="panCardImageName-error" class="error" for="panCardImageName" style="display:none;"></label>
+			                </div>
+		                 	<div ng-file-select id="primaryInputId" class="btn blueBtn bdr5 fL" style="padding: 6px 20px;margin-top:10px;" ng-model="myFiles" ng-file-change="uploadPrimary($files)" ng-multiple="false" ng-accept="'application/pdf'" tabindex="0" resetOnClick="true">
+		                 		<span id="panCardButtonText">UPLOAD</span>
+		                 	</div>
+        	                 <span id="panCardButtonSuccess" class="glyphicon glyphicon-ok fL pdfSuccessMark" style="display:none;"></span>
+			                <div class="clearfix"></div> 
+			                <div class="hintTxt">Upload .PDF format files only</div>
+					</div>
+				</div>
+				<div class="row" style="margin: 0px 15px;">
+					<div class="col-md-2 col-sm-4" style="margin-top:10px;">Document 2<span class="mandatoryStar">*</span></div>
+					<div class="col-md-10 col-sm-8">
+						<div class="fL">
+							<div id="secondaryDocumentID" class="documentSelect" dropdown-select="secondaryDocuments"
+			                        dropdown-model="secondaryDocument"
+			                        dropdown-item-label="name"
+			                        dropdown-onchange="secondaryDocumentSelected(selected)"  style="margin-top:10px;margin-right: 20px;">
+			                </div>
+			                <input type="hidden" name="tanCardImageName" id="tanCardImageNameId" value=""/>
+			                <label id="tanCardImageName-error" class="error" for="tanCardImageName" style="display:none;"></label>
+		                </div>
+		                <div ng-file-select id="secondaryInputId" class="btn blueBtn bdr5 fL" style="padding: 6px 20px;margin-top:10px;" ng-model="secondaryFiles" ng-file-change="uploadSecondary($files)" ng-multiple="false" ng-accept="'application/pdf'" tabindex="0" resetOnClick="true">
+		                	<span id="tanCardButtonText">UPLOAD</span>
+		                </div>
+		                <span id="tanCardButtonSuccess" class="glyphicon glyphicon-ok fL pdfSuccessMark" style="display:none;"></span>
+		                <div class="clearfix"></div>
+		                <div class="hintTxt">Upload .PDF format files only</div>
+					</div>
+				</div>
+				<button type="button" class="btn btn-lg blueBtn bdr5" style="margin-left:30px;margin-top: 20px;" ng-click="onPaymentEnableClick()">ENABLE PREPAID PAYMENT</button>
+			</div> 
+		</form>
+	</div>
+</script>
+
+<script type="text/ng-template" id="reachargeVerfication.html">
+	 <div class="alignCenter" style="margin-top: 35px;">
+		<h4>Your Enterprise Prepaid payment option is activated!</h4>
+		<div>Go ahead and change the way your teams travel. Forever.</div>
+		<button type="button" class="btn btn-lg blueBtn bdr5" style="margin-left:30px;margin-top: 20px;" ng-click="gotoPrepaidTab()">RECHARGE PREPAID ACCOUNT</button>
+	</div>
+</script>
+
+ <script type="text/ng-template" id="reachargeAccount.html">
+ 		<div class="prePaidWrap">
+ 			<h3 style="margin-top: 0px;">Recharge your prepaid account</h3>
+ 			<h5 class="color666">Add cash to your corporate prepaid account using below options.</h5>
+ 			<div class="prePaidDivider"></div>
+			<div>
+				<div class="color666 f16">Account Transfer or Cheque Deposit</div>
+				<div class="color999">Transfer money(NEFT) or deposit a cheque to our bank account to recharge your prepaid account. Your account will be recharged in one working day after receiving the money.</div>
+				<div class="row" style="margin-top:20px;">
+					<div class="col-md-1 col-sm-2"><span class="pdNumCircle">1</span></div>
+					<div class="col-md-11 col-sm-10" style="margin-top: 10px;">
+						<div class="f16">Transfer money or Cheque Deposit to below account</div>
+						<div class="color666">
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Account Name :</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Serendipity Infolabs Pvt. Ltd.</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Current Account Number:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd">711856048</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">NEFT/IFSC/RTGS Code:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd">CITI0000004</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Branch Name & Address:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Citi Bank, No 5, MG Road, Bangalore</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row"  style="margin-top:20px;">
+					<div class="col-md-1 col-sm-2"><span class="pdNumCircle">2</span></div>
+					<div class="col-md-11 col-sm-10"  style="margin-top: 10px;">
+						<div class="f16">Drop a mail to <a href="mailto:enterprise-payments@taxiforsure.com">enterprise-payments@taxiforsure.com</a> with below details from your registered Email ID.</div>
+						<div class="color666">
+							<div class="row">
+								<div class="col-md-3 col-sm-6 prepaidTableTd">Organisation Name:</div>
+								<div class="col-md-3 col-sm-6 prepaidTableTd" ng-bind="corpData.corporateName"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Corporate ID:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd" ng-bind="corpData.id"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Amount:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd colorCCC">Rs. XXXXX/-</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Transfer type:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Account Transfer / Cheque deposit</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Date of deposit:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd colorCCC">DD/MM/YYYY</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3  col-sm-6 prepaidTableTd">Transaction Reference number / Cheque Number:</div>
+								<div class="col-md-3  col-sm-6 prepaidTableTd colorCCC">CITIXXXXX</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top:20px;">
+					<div class="col-md-1  col-sm-2"><span class="pdNumCircle">3</span></div>
+					<div class="col-md-11  col-sm-10 f16" style="margin-top: 10px;">Your prepaid account will be recharged in one working day after receiving the money.</div>
+				</div>
+			</div>
+		</div>
+ </script>

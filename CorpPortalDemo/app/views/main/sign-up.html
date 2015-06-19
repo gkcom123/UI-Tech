@@ -1,0 +1,156 @@
+<div class="tfsContainerCls">
+	<tfs-header></tfs-header>
+	<section>
+	    <div id="registerContainerID" class="container" ng-controller="signUpController">
+	    	<div class="col-md-2"></div>
+	    	<div class="col-md-8">
+		    	<div class="spin" style="display: none;"><span class="spinIcon"></span></div>
+				<div id="registerWrapID" class="registerWrap rel" >
+					<div class="alignCenter">
+						<h1 class="color999">Registration Form</h1>
+						<h4 class="colorCCC">Complete the registration form and get going instantly</h4>
+					</div>
+					<form id="registerForm" role="form" class="rel validateform" name="form">
+						<div class="companyDetailsWrap registerBdrBox">
+							<span class="corp_sprite companyDetailsIcon regIcons"></span>
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-6">
+									<h4 class="color999">COMPANY DETAILS</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1"></div>
+		            			<div class="col-md-5 form-group">
+		                    			<input type="text" class="form-control" ng-model="corporateName" name="corporateName" placeholder="Company Name" maxlength="50" tabindex="1"/>
+		                    			<input type="hidden" class="form-control" name="paymentType" value="{{paymentType}}"/>
+		                    			<input type="hidden" class="form-control" name="createdBy" value="{{createdBy}}"/>
+		            			</div>
+		        				<div class="col-md-5 form-group">
+			        				<input type="text" class="form-control" name="orgWebsite" placeholder="Website (optional)" maxlength="50" tabindex="2"/>
+		            			</div>
+		        			</div>
+		        			<div class="row">
+		        				<div class="col-md-1"></div>
+		            			<div class="col-md-5 form-group">
+		            				<input type="text" class="form-control" name="addressLine1" placeholder="Address 1" tabindex="3"/>
+		            			</div>
+		            			<div class="col-md-5 form-group">
+		            				<input type="text" class="form-control" name="addressLine2" placeholder="Address 2" tabindex="4"/>
+		            				<input type="hidden" class="form-control" name="addressLine3" placeholder="Address 3" value=""/>
+		            			</div>
+		        			</div>
+		        			<div class="row">
+		        				<div class="col-md-1"></div>
+		            			<div class="col-md-5 form-group">
+		                    			<tfs-autocomplete
+		        						auto-list = "states"
+		        						auto-model = "state"
+		        						auto-item-label = "name"
+		        						apply-place-holder = "applyStatePlaceHolder"
+		        						item-onchange = "stateChanged(selected)"
+		        						class="bdr5"
+		        					></tfs-autocomplete>
+		                        	<input type="hidden" id="stateInput" name="stateId" value=""/>
+		                        	<input type="hidden" id="countryInput" name="countryId" value=""/>
+		            			</div>
+		            			<div class="col-md-5 form-group">
+		            				<tfs-autocomplete
+		        						auto-list = "cities"
+		        						auto-model = "city"
+		        						auto-item-label = "name"
+		        						item-onchange = "cityChanged(selected)"
+		        						apply-place-holder = "applyCityPlaceHolder"
+		        						update-list-on-open = true
+		        						class="bdr5"
+		        					></tfs-autocomplete>
+		        					<input type="hidden" id="cityInput" name="cityName" value=""/>
+		            			</div>
+		        			</div>
+		        			<div class="row">
+		        				<div class="col-md-1"></div>
+		            			<div class="col-md-5 form-group">
+		            				<input type="text" class="form-control"  number-only ng-model="pincode" name="pincode" placeholder="Pincode" maxlength="6" tabindex="7"/>
+		            			</div>
+		            			<div class="col-md-5 form-group">
+		            				
+		            			</div>
+		        			</div>
+						</div>
+						<div class="contactDetailsWrap registerBdrBox">
+							<span class="corp_sprite personneldetailsIcon regIcons"></span>
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-6">
+									<h4 class="color999">CONTACT DETAILS</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1"></div>
+		            			<div class="col-md-5 form-group">
+		                    		<input type="text" class="form-control" ng-model="contact_name" name="name" placeholder="Contact name" text-only maxlength="50" tabindex="8"/>
+		            			</div>
+		            			<div class="col-md-5 form-group">
+		                    		<input type="text" class="form-control" name="emailId" placeholder="Official Email ID" maxlength="50" tabindex="9"/>
+		                		</div>
+		        			</div>
+		        			<div class="row">
+		        				<div class="col-md-1"></div>
+		            			<div class="col-md-5 form-group">
+		                    		<input type="text" class="form-control" name="designation" placeholder="Designation (optional)" tabindex="10" maxlength="50"/>
+		            			</div>
+		            			<div class="col-md-5 form-group">
+		                    		<input type="text" number-only ng-model="mobileNumber" class="form-control" name="mobileNumber" placeholder="Phone Number" maxlength="10" tabindex="11"/>
+		            			</div>
+		        			</div>
+						</div>
+						<div class="termsCnWrap registerBdrBox">
+							<span class="corp_sprite tncCarIcon regIcons"></span>
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-7">
+									<h4 class="color999">TERMS AND CONDITIONS</h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+								<div class="termsTxt tncContent">
+									<tfs-tnc></tfs-tnc>
+								</div>
+								<div class="" style="padding-top: 15px;">
+									<label class="checkLabel">
+										<input type="checkbox" name="agree" value="true" tabindex="12"/>&nbsp; I agree to the terms and conditions of this agreement
+									</label>
+									<a href="http://cdn1.taxiforsure.com/v2/img/corp/TFS_Corporate_T&C.pdf" class="color333 fR" target="_blank">Download</a>
+								</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 alignCenter" style="margin: 50px 0px;">
+							<button type="button" class="btn btn-lg blueBtn bdr5" ng-click="createAccount()">CREATE MY ACCOUNT</button>
+						</div>
+						<div class="clearfix"></div>
+					</form>
+				</div>
+				<div id="registerMsgWrapID" class="registerMsgWrap" style="display:none;">
+						<span class="corp_sprite regSuccessTick"></span>
+						<div style="float: left;width: 72%;">
+							<h1>Congratulations!</h1>
+							<h4>Registration completed. Your account has been submitted for verification.</h4>
+							<h5 class="boldText">Account Status : Verification Pending</h5>
+							<div>You will receive an Email once your account is activated.</div>
+							<div style="margin: 25px 0px;">
+								<span class="boldText">Note: </span>You can enable the Enterprise prepaid payment option after you login.
+							</div>
+							<div style="margin: 0px 0px 25px 0px;">
+								<button type="button" class="btn btn-lg blueBdrBtn bdr5" ng-click="gotoHome()">GO TO HOME PAGE</button>	
+							</div>
+						</div>
+			</div>
+		</div>
+
+		</div>
+	</section>
+</div>
+<tfs-footer></tfs-footer>

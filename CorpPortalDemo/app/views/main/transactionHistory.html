@@ -1,0 +1,71 @@
+<div class="tfsContainerCls">
+	<tfs-login-header></tfs-login-header>
+	<div class="fixheaderPhontom"></div>
+	<div ng-controller="transactionHistoryController" style="margin: 10px 0px;">    
+	    <section class="container">
+	    	<div class="viewBookingWap">
+	    	<div class="row viewBookingHead">
+	                <div class="col-md-5 startingBalance">	
+	                	<form class="navbar-form navbar-left" role="search">
+		                    <span>
+		                    	<label> Starting Balance : </label>
+		                    	<label ng-bind="startingBalance || 0" class="ruppySymbol"></label>	
+							</span>
+	                    </form>             
+	                </div>
+	                <div class="col-md-7">
+	                    <form class="navbar-form navbar-right" role="search">
+		                    <span>
+		                    	<label> Date </label>
+		                    	<input type="daterange " ng-model="dates1" separator="/-/" class="invoiceDate" max-date="{{maxDate1}}" dateLimit="{{limit}}">
+		                    	<button ng-click="search()" class="btn btn-default addFilter"> &nbsp;Search</button>
+							</span>						    
+	                    </form>
+	                </div>
+	            </div>
+	          	<div class="clearfix"></div>
+				<div class="bookingLists rel">					
+					<div class="spin" style="display:none;">
+		                  <span class="spinIcon"></span>
+		            </div>
+	                <table class="table table-bordered ">
+	                    <thead>
+		                    <tr>		                        
+		                        <th><label class="tripID">DATE</label></th>
+		                        <th><label class="carType">ID</label></th>
+		                        <th><label class="pickupLoc">AMOUNT</label></th>
+		                        <th><label class="dropLoc">TRANSACTION TYPE</label></th>
+		                        <th><label class=""></label>BALANCE</th>
+		                    </tr>		                      
+	                    </thead>
+	                    <tbody class="transHistoryPage">	                    	
+		                    <tr ng-if="!transactions.length"><td colspan="5">Please select proper date range and press 'Search'</td></tr>
+		                    <tr ng-repeat="transaction in transactions" ng-if="transactions.length">
+
+		                        <td><span ng-bind="transaction.transactionDateTime"></span></td>
+		                        <td><span ng-bind="transaction.transactionId"></span></td>
+		                        <td><span ng-bind="transaction.transactionValue" class="ruppySymbol"></span></td>
+		                        <td ><span ng-bind="transaction.transactionType"></span></td>
+		                        <td><span ng-bind="transaction.postTransactionBalance || 0" class="ruppySymbol"></span></td>
+		                    </tr>                            
+	                    </tbody>
+	                </table>
+	                <div class="row closingBalance">		                    
+		                <form class="navbar-form navbar-left">
+		                    <span><label> Closing Balance : </label>
+		                    <label ng-bind="closingBalance || 0" class="ruppySymbol"></label></span>
+	                    </form>                    
+	                </div>
+						                
+	                <div class="invoiceDownload">
+			       		<!-- <label> 3 Selected </label> -->
+						<button ng-click="downloadPdf()" class="btn backToBookings"  ng-disabled="disableDownloadButton"> &nbsp;Download PDF</button>
+
+						<button ng-click="downloadExcel()" class="btn backToBookings pull-right"  ng-disabled="disableDownloadButton"> &nbsp;Download Excel</button>
+					</div>
+		        </div>
+    		</div>
+		</section>
+	</div>
+</div>
+<tfs-footer></tfs-footer>

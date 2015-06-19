@@ -1,0 +1,160 @@
+<div class="fareChartWrap bgFFF" ng-controller="faresController">
+
+        <h3>Best Fares In</h3>
+        <div class="cityDrop">
+            <tfs-autocomplete
+                auto-list = "fareCities"
+                auto-model = "fareCity"
+                auto-item-label = "name"
+                item-onchange = "citySelected(selected)"
+            ></tfs-autocomplete>
+        </div>
+
+        <div class="dayNightWap fR">
+            <div class="nightWrap" ng-click='daynightChange("night")' ng-style="nightBg">
+                <i class="corpTaxiIcon inight"></i><br/>
+                <label>({{allfares.night.timings}})</label>
+	        </div>
+
+            <div class="dayWrap" ng-click='daynightChange("day")' ng-style="dayBg">
+                <i class="corpTaxiIcon iday"></i><br/>
+                <label>({{allfares.day.timings}})</label>
+	        </div>
+        </div>
+
+        <div class="fareChartContent">
+            <ul class="fareTabs">
+                <li ng-class="{'activeTabCls': tabIndex == 0, 'airportTabNotPresnet': !airportPresent}" ng-click="setTabIndex(0)">Point to Point</li>
+                <li ng-class="{'activeTabCls': tabIndex == 1}" ng-click="setTabIndex(1)" ng-show="airportPresent">Airport</li>
+                <li ng-class="{'activeTabCls': tabIndex == 2, 'airportTabNotPresnet': !airportPresent}" ng-click="setTabIndex(2)">Hourly Rental</li>
+                <li ng-class="{'activeTabCls': tabIndex == 3, 'airportTabNotPresnet': !airportPresent}" ng-click="setTabIndex(3)">Oustation</li>
+            </ul>
+            <div class="clearfix"></div>
+            <tfs-carousel disable-animation="true" hide-indicator="true" active-index="tabIndex" no-transition="true">
+                <tfs-slide>
+                    <!-- P2P fares -->
+                    <div class="fare-tab-content">
+                        <table>
+                            <thead>
+                                <tr align="center" valign="center">
+                                    <th colspan="2">Car</th>
+                                    <th>Fare</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="fare in fares.p2p">
+                                    <td>
+                                        <div class="corpTaxiIcon {{ fare.car_model}}"></div>
+                                    </td>
+                                    <td align="left"><p>{{ fare.car_name }}</p></td>
+                                    <td>
+                                        <p>&#8377;<b>{{ fare.base_fare | number:0 }}</b>
+                                        for the first {{ fare.base_km }}km<br/>
+                                        <span>( &#8377;{{ fare.extra_km_fare | number:2 }}/km )</span></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </tfs-slide>
+                <tfs-slide>
+                    <div class="fare-tab-content">
+                        <table>
+                            <thead>
+                                <tr align="center" valign="center">
+                                    <th colspan="2">Car</th>
+                                    <th>To Airport</th>
+                                    <th>From Airport</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="fare in fares.at">
+                                    <td><div class="corpTaxiIcon {{ fare.car_model}}"></div></td>
+                                    <td align="left"><p>{{ fare.car_name }}</p></td>
+                                    <td><p>&#8377;<b>{{ fare.fare | number:0 }}</b> flat</p></td>
+                                    <td><p>&#8377;<b>{{ fare.from_fare | number:0 }}</b> flat</p></td>
+                                </tr>
+
+                                <tr ng-repeat="fare in fares['at-km']">
+                                    <td><div class="corpTaxiIcon {{ fare.car_model}}"></div></td>
+                                    <td align="left"><p>{{ fare.car_name }}</p></td>
+                                    <td>
+                                        <p>&#8377;<b>{{ fare.base_fare | number:0 }}</b>
+                                        for the first {{ fare.base_km}} <br/>
+                                        <span>( &#8377;{{ fare.extra_km_fare | number:2 }}/km )</span></p>
+                                    </td>
+                                    <td>
+                                        <p>&#8377;<b>{{ fare.from_base_fare | number:0 }}</b>
+                                        for the first {{ fare.from_base_km}} <br/>
+                                        <span>( &#8377;{{ fare.from_extra_km | number:2 }}/km )</span></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </tfs-slide>
+                <tfs-slide>
+                    <div class="fare-tab-content alignLeft tfsAccordion">
+                        <accordion>
+                            <accordion-group ng-repeat="package in allfares.packages" is-open="fares[package].isOpen">
+                                <accordion-heading>
+                                    <i class="glyphicon" ng-class="{'glyphicon-minus': fares[package].isOpen, 'glyphicon-plus': !fares[package].isOpen}"></i>&nbsp;{{package}}
+                                </accordion-heading>
+                                <table>
+                                    <tbody>
+                                        <tr ng-repeat="fare in fares[package]">
+                                            <td><div class="corpTaxiIcon {{ fare.car_model}}"></div></td>
+                                            <td align="left"><p>{{ fare.car_name }}</p></td>
+                                            <td>
+                                                <p>&#8377;<b>{{ fare.base_fare | number:0 }}</b><br/>
+                                                ( &#8377;{{ fare.extra_km_fare | number:0 }} for extra km / &#8377;{{ fare.extra_hour_fare | number:0}} for extra hour )
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </tfs-slide>
+                <tfs-slide>
+                    <div class="fare-tab-content">
+                        <table>
+                            <thead>
+                                <tr align="center" valign="center">
+                                    <th colspan="2">Car</th>
+                                    <th>Per km</th>
+                                    <th>Min. km/day</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="fare in fares.os">
+                                    <td><div class="corpTaxiIcon {{ fare.car_model}}"></div></td>
+                                    <td align="left"><p>{{ fare.car_name }}</p></td>
+                                    <td>
+                                        <p>&#8377;<b>{{ fare.extra_km_fare | number:2 }}</b><br/>
+                                    </td>
+                                    <td>
+                                        <p>&#8377;<b>{{ fare.base_km }}</b></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </tfs-slide>
+            </tfs-carousel>
+            <div ng-controller="collapseController">
+                <div class="termCondition">
+                    <p class="fL">Terms and Conditions</p>
+                    <img src="http://cdn1.taxiforsure.com/v2/img/corp/fareInfo.png" alt="Information about Fares" class="curP fR" ng-click="isCollapsed = !isCollapsed">
+                </div>
+                <div id="termConditionContent" collapse="isCollapsed">
+                    <ul style="margin: 0; ">
+                        <li>Prices listed above are purely indicative.</li>
+                        <li>Actual fare will be based on time of travel, actual distance travelled, cab waiting time.</li>
+                        <li>Toll &amp; parking charges and any taxes extra as applicable.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</div>

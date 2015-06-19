@@ -1,0 +1,167 @@
+<div class="tfsContainerCls">
+  <tfs-login-header></tfs-login-header>
+  <div class="fixheaderPhontom"></div>
+	<div class="container">
+        <div class="row boookingWap" id="newBooking" ng-controller="parentController">                
+            <div class="col-md-9" >                
+                <new-booking-form ng-show="!showGMap"></new-booking-form>
+                <div id="trackTaxiMap" ng-if="showGMap == true" class="newForm" ng-controller="trackTaxiGmapController"></div> 
+            </div>
+            <div class="col-md-3">
+                <div class="bookingRight" ng-controller="accordianController">
+             		<label ng-click="showBookingPage()" class="btn btn-default backToBookings  glyphicon glyphicon-chevron-left" ng-show="showGMap"> &nbsp;BACK TO BOOKING</label>
+	                 <accordion close-others="oneAtATime">
+	                     <accordion-group>
+	                        <div track-taxi-list></div>
+	                     </accordion-group>
+	                     <accordion-group  is-open="status.isFirstOpen">
+	                        <prepaid-balance></prepaid-balance>
+	                     </accordion-group>
+	                     <accordion-group> 
+	                        <booking-summary></booking-summary>
+	                     </accordion-group>                         
+                	</accordion>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <view-booking></view-booking>       
+        </div>
+    </div>        
+    <div id="myMarquee">
+        <marquee scrollamount="3" scrolldelay="">  
+            ‘Dear Customer, as per  Government notification the rate of Service tax rate effective <b>June 1 2015</b>, will be <b>5.6%.</b> This is for your information.’</marquee>
+    </div>
+</div>
+
+
+<tfs-footer></tfs-footer>
+
+<div ng-controller="ConfirmModalDemoCtrl" style="width: 450px !important;">
+    <script type="text/ng-template" id="confirmContent.html" >
+        <div class="modal-header">
+            <h3 class="modal-title">
+                <div ng-if='bookingdata.action=="new"'>Booking Details</div>
+                <div ng-if='bookingdata.action=="modify"'>Booking Modified</div>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Booking Id :</label>
+                <div class="col-sm-8">
+                  <p>{{bookingdata.booking_id}}</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-4 control-label">PickUp Location :</label>
+                <div class="col-sm-8">
+                  <p>{{bookingdata.pickupLocation}}</p>
+                </div>
+              </div>
+              <div class="form-group" ng-show="bookingdata.showDrop">
+                <label class="col-sm-4 control-label">Drop Location :</label>
+                <div class="col-sm-8">
+                  <p>{{bookingdata.dropLocation}}</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Date :</label>
+                <div class="col-sm-8">
+                  <p>{{bookingdata.pickuptime}}</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Status :</label>
+                <div class="col-sm-8">
+                  <p>{{bookingdata.status}}</p>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary bookingSuccess" ng-click="ok()">OK</button>
+        </div>
+    </script>
+</div>
+
+<div ng-controller="FailedModalDemoCtrl">
+    <script type="text/ng-template" id="failedContent.html" >
+        <div class="modal-header">
+            <h3 class="modal-title">Booking Failed</h3>
+        </div>
+        <div class="modal-body row">
+            <div class="col-sm-12">
+                <p>{{bookingdata.reason}}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary bookingSuccess" ng-click="ok()">OK</button>
+        </div>
+    </script>
+</div>
+
+<script type="text/ng-template" id="prepaid-balance.html">
+	<div class="prepaidWap">
+        <accordion-heading>
+            <span ng-bind="head1"></span> <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+        </accordion-heading>
+
+        <div class="prepaidBalance">
+            <label><span ng-bind="head2"></span></label>
+            <h4><span ng-bind="balance" class="ruppySymbol"></span></h4>
+        </div>
+
+        <hr/>
+        
+        <div ng-show="showProgress">                                   
+            <progressbar animate="false" value="balance" type="{{pbartype}}" max="maxLimit"><b><span ng-bind="pPercent"></span>%</b></progressbar>
+        </div>
+
+        <div class="estTrips">
+            <label>Current estimated on Trip</label>
+            <h4><span ng-bind="totalFare" class="ruppySymbol"></span> (<span ng-bind="tripsCount"></span> Trips)</h4>
+        </div>
+
+        <div ng-show="showPrepaidLink" style="margin-top:20px;">
+            <a href="/prepaid-payment" ng-bind="showPrepaidText"></a>
+        </div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="booking-summary.html">
+	<div class="bookingSummaryWap">
+	    <accordion-heading>
+	            BOOKING SUMMARY <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+	    </accordion-heading>
+	    
+	    <div id="summaryInfo" class="summaryPanel rel" ng-controller="bookingSummaryController">
+	    	<div class="spin" style="display:none;"><span class="spinIcon"></span></div>
+	        <div ng-cloak class="bookingSummary green" ><label>Serviced</label><h4> <span ng-bind="bookingSummary.serviced"></span></h4></div>
+	        <div ng-cloak class="bookingSummary orange" ><label>Issues</label><h4><span ng-bind="bookingSummary.issued"></span></h4></div>
+	        <div ng-cloak class="bookingSummary red" ><label>Cancelled</label><h4><span ng-bind="bookingSummary.cancelled"></span></h4></div>
+	    </div>
+	</div>
+</script>
+
+<script type="text/ng-template" id="track-taxi-list.html">
+	<div class="trackTaxiListWap">
+	    <accordion-heading><span ng-click="showGmap()">
+	        TRACK ALL </span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}" ></i>
+	    </accordion-heading>
+
+	    <div class="btn-group toggleBooking">
+	          <label class="btn btn-default" ng-model="trackModel" btn-radio="'Left'" ng-click="customerOnBoard()">Customer on Board</label>
+	          <label class="btn btn-default" ng-model="trackModel" btn-radio="'Right'" ng-click="driverTracking()">Driver Assigned</label>
+	    </div> 
+
+	    <div id="customerList">
+	        <ul class="trackLists">
+	            <li ng-repeat="cust in taxiList" ng-click="selectedID(cust)">
+	                <span ng-bind="cust.booking_id"></span>
+	                <span class="bold" ng-bind="cust.customer_name"></span>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+</script>

@@ -1,0 +1,82 @@
+<div class="tfsContainerCls">
+	<tfs-login-header></tfs-login-header>
+	<div class="fixheaderPhontom"></div>
+	<div name="invoiceAndReceipt" ng-controller="invoiceAndReceiptController" style="margin: 10px 0px;">    
+	    <section class="container">
+	    	<div class="viewBookingWap">
+	            <div class="row viewBookingHead">
+	                <div class="col-md-5">		                
+		                <div class="btn-group toggleBooking">
+		                    <label class="btn btn-default currentBooking" ng-model="invoiceModel" btn-radio="'Left'" ng-click="showAllInvoices()">Invoice</label>
+		                    <label class="btn btn-default pastBooking" ng-model="invoiceModel" btn-radio="'Right'" ng-click="showAllReceipts()">Receipt</label>
+		                </div>
+	                </div>
+	                <div class="col-md-7">
+	                    <form class="navbar-form navbar-right" role="search">
+
+		                    <span>
+		                    	<input type="daterange " ng-model="dates1" separator="/-/" class="invoiceDate" max-date="{{maxDate1}}">
+							</span>
+						    
+	                    </form>
+	                </div>
+	            </div>
+	          	<div class="clearfix"></div>
+				<div class="bookingLists rel">					
+					<div class="spin" style="display:none;">
+		                  <span class="spinIcon"></span>
+		            </div>
+	                <table  ng-show= !showReceipts class="table table-bordered">
+	                    <thead>
+		                    <tr>
+		                        <th><input type="checkbox" ng-model="checkAllInvoices" ng-change="checkAllInvoicesFun()"></th>
+		                        <th><label class="tripID">INVOICE NO</label></th>
+		                        <th><label class="carType">INVOICE DATE</label></th>
+		                        <th><label class="pickupLoc">AMOUNT</label></th>
+		                        <th><label class="dropLoc">PAID</label></th>
+		                        <th ng-show=showInvoiceNo>OUTSTANDING</th>		                        
+		                    </tr>		                      
+	                    </thead>
+	                    <tbody>
+		                    <tr ng-repeat="invoice in invoices">
+		                        <td><input type="checkbox" ng-model="selectedInvoices.Ids[invoice.invoiceNumber]" ng-change="invoiceSelectionChanged()"></td>                       
+		                        <td><span ng-bind="invoice.invoiceNumber"></span></td>
+		                        <td><span ng-bind="invoice.invoiceDate"></span></td>
+		                        <td><span ng-bind="invoice.amount"></span></td>
+		                        <td ><span ng-bind="invoice.amount - invoice.outstandingAmount "></span></td>
+		                        <td ng-show=showInvoiceNo><span ng-bind="invoice.outstandingAmount"></span></td>
+		                    </tr>                            
+	                    </tbody>
+	                </table>
+	                <table  ng-show=showReceipts class="table table-bordered">
+	                    <thead>
+		                    <tr>
+		                        <th><input type="checkbox" ng-model="checkAllReceipts" ng-change="checkAllReceiptsFun()"></th>
+		                        <th><label class="tripID">RECIEPT NO</label></th>
+		                        <th><label class="carType">DATE OF PAYMENT</label></th>
+		                        <th><label class="pickupLoc">AMOUNT</label></th>
+		                        <th><label class="dropLoc">PURPOSE PAID</label></th>
+		                        <th ng-show=showInvoiceNo>INVOICE NO</th>	                        
+		                    </tr>		                      
+	                    </thead>
+	                    <tbody>
+		                    <tr ng-repeat="receipt in receipts">
+		                        <td><input type="checkbox" ng-model="selectedReceipts.Ids[receipt.receiptNumber]" ng-change="receiptSelectionChanged()"></td>                       
+		                        <td><span ng-bind="receipt.receiptNumber"></span></td>
+		                        <td><span ng-bind="receipt.paymentDate"></span></td>
+		                        <td><span ng-bind="receipt.paidAmount"></span></td>
+		                        <td><span ng-bind="receipt.purposePiad"></span></td>
+		                        <td ng-show=showInvoiceNo><span ng-bind="receipt.invoiceNumber"></span></td>
+		                    </tr>                            
+	                    </tbody>
+	                </table>
+	                <div class="invoiceDownload">
+			       		<!-- <label> 3 Selected </label> -->
+						<button ng-click="downloadPdf()" class="btn backToBookings"  ng-disabled="disableDownloadButton"> &nbsp;Download PDF</button>
+					</div>
+		        </div>
+    		</div>
+		</section>
+	</div>
+</div>
+<tfs-footer></tfs-footer>

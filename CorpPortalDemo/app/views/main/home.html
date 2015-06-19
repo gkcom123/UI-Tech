@@ -1,0 +1,174 @@
+<div class="tfsContainerCls" ng-controller="homeController" style="min-width:768px;">
+		<header class="homeHeader fixedHeader" style="min-width:768px;">        
+	        	<a href="/" class="fL"><img id="homePageLogo" src="http://cdn1.taxiforsure.com/v2/img/corp/corporate_logo_white.png" alt="taxiforsure" style="height: 50px;margin-left: 50px;"></a>
+	        	<div class="fR">
+		        	<div class="homeNavMenu navMenu fL ptFnt" style="margin-top: 15px;">
+		        		<ul>
+		                    <li><a ng-href="/#/?scroll_to=features#features" class="pgLink headerLink" data-link-id="features">FEATURES</a></li>
+		                    <li><a ng-href="/#/?scroll_to=product_tour#product_tour" class="pgLink headerLink" data-link-id="product_tour">PRODUCT TOUR</a></li>
+		                    <li><a href="/#/faq" class="headerLink">FAQ</a></li>
+		                    <li><a href="/#/login" class="headerLink">LOGIN</a></li>
+		                </ul>
+		            </div>
+	            </div>
+	            <div class="clearfix"></div>
+		</header>
+		<a ng-href="/#/?scroll_to=features#features" class="scrollDwnPanel pgLink">Scroll Down&nbsp;<span class="corp_sprite scrollDwnIcon"></span></a>
+		<div class="rel">
+			<img src="//cdn1.taxiforsure.com/v2/img/corp/landing_background.jpg" style="position: relative;width: 100%;">
+			<div id="homeBannerBlk" style="position: absolute;z-index:1;left: 0px;top: 0px;width: 100%;height:100%;">
+				<div class="homeBannerOvrTxt" style="display:table;height:100%;width:100%;">
+					<div style="display:table-cell;vertical-align: middle;">
+						<div class="col-md-1"></div>
+						<div id="changeWayBlk" class="col-md-11 colorFFF ptFnt">
+							<h1 class="largeH1">Change the way</h1>
+							<h1 class="largeH1">your Employees travel</h1>
+							<h3 class="ourReliabiltyTxt">Our reliability, safety and quality…Now for your Enterprise</h3>
+							<div>
+								<button type="button" class="btn btn-lg blueBtn loginBlueBtn bdr5" ng-click="gotoSignUp()" style="width: 220px;padding: 15px 25px;margin-bottom: 10px;margin-right: 10px;">SIGN UP</button>
+								<button type="button" class="btn btn-lg whiteBdrTxtBtn bdr5"  ng-controller="callBackController" ng-click="open()" style="width: 220px;padding: 15px 25px;margin-bottom: 10px;">GET A CALL BACK</button>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="featuresWrap" ng-controller="featuresController">
+			<a class="anchor" id="features"></a>
+			<div style="max-width: 850px;margin: 0px auto;">
+				<div>
+							<div class="dIB alignCenter col-md-2 tourList">
+								<div class="dIB curP" ng-class="{'tourSelect': activeIndex == 0}" ng-click="setActiveIndex(0)">
+									<span class="featureBarCls"></span><br/>
+									<span class="corp_sprite realtime" ng-class="{activeIcon: activeIndex == 0}" style="margin-top: 10px;"></span><br/>
+									<span class="tourTxt">REALTIME<br/>TRACKING</span>
+								</div>
+							</div>
+							<div class="dIB alignCenter col-md-2 tourList">
+								<div class="dIB curP" ng-class="{'tourSelect': activeIndex == 1}" ng-click="setActiveIndex(1)">
+									<span class="featureBarCls"></span><br/>
+									<span class="corp_sprite onepartner" ng-class="{activeIcon: activeIndex == 1}" style="margin-top: 10px;"></span><br/>
+									<span class="tourTxt">ONE NATION.<br/>ONE PARTNER.</span>
+								</div>
+							</div>
+							<div class="dIB alignCenter col-md-2 tourList">
+								<div class="dIB curP" ng-class="{'tourSelect': activeIndex == 2}" ng-click="setActiveIndex(2)">
+									<span class="featureBarCls"></span><br/>
+									<span class="corp_sprite costefficiency" ng-class="{activeIcon: activeIndex == 2}" style="margin-top: 10px;"></span><br/>
+									<span class="tourTxt">DRIVE COST<br/>EFFICIENCY</span>
+								</div>
+							</div>
+							<div class="dIB alignCenter col-md-2 tourList">
+								<div class="dIB curP" ng-class="{'tourSelect': activeIndex == 3}" ng-click="setActiveIndex(3)">
+									<span class="featureBarCls"></span><br/>
+									<span class="corp_sprite reliabiltyquality" ng-class="{activeIcon: activeIndex == 3}" style="margin-top: 10px;"></span><br/>
+									<span class="tourTxt">RELIABILITY<br/>& QUALITY</span>
+								</div>
+							</div>
+							<div class="dIB alignCenter col-md-2 tourList">
+								<div class="dIB curP" ng-class="{'tourSelect': activeIndex == 4}" ng-click="setActiveIndex(4)">
+									<span class="featureBarCls"></span><br/>
+									<span class="corp_sprite cashless" ng-class="{activeIcon: activeIndex == 4}" style="margin-top: 10px;"></span><br/>
+									<span class="tourTxt">CASHLESS<br/>TRAVEL</span>
+								</div>
+							</div>
+							<div class="dIB alignCenter col-md-2 tourList">
+								<div class="dIB curP" ng-class="{'tourSelect': activeIndex == 5}" ng-click="setActiveIndex(5)">
+									<span class="featureBarCls"></span><br/>
+									<span class="corp_sprite simplifybooking" ng-class="{activeIcon: activeIndex == 5}" style="margin-top: 10px;"></span><br/>
+									<span class="tourTxt">SIMPLIFY TAXI<br/>BOOKING</span>
+								</div>
+							</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div style="margin: 30px 0px;">
+				<tfs-carousel interval="tourInterval" disable-animation="true" hide-indicator="true" active-index="activeIndex">
+					<tfs-slide ng-repeat="feature in features">
+						<div class="rel alignLeft" style="height:350px;">
+						    <div class="container">
+						        <div class="col-md-4 col-sm-4 col-xs-4" style="text-align: center;z-index:{{feature.imageZIndex}};">
+						           <img ng-src="{{feature.image_url}}" alt="{{feature.header}}"/>
+						        </div>
+						    </div>
+
+							<div class="color999 featureOverlayWrap" style="z-index:{{feature.imageZIndex ? 0 : 1}};">  
+						      <div class="rel">
+						        <div class="col-md-offset-6 col-md-6">
+						            <div class="fL dT">
+						              <div class="yellowCarWrap"><span class="corp_sprite yellowCar"></span></div>
+						              <h5 class="featureTxt">
+						              		<div  class="featureTourTxt" ng-bind-html="feature.subtext"></div>
+						              		<!-- <button class="blueBtn bdr5" style="margin-top: 10px;" ng-click="openFareChart()" ng-show="feature.showFareBtn">CHECK FARE</button> -->
+						              </h5>
+						            </div>
+						        </div>
+						        <div class="clearfix"></div>
+						      </div>
+						      <div class="featureBar"></div>
+						      <div class="rel">
+						        <div class="col-md-offset-6 col-md-6">
+						        	<span class="fL corp_sprite yellowCar" style="margin-right: 20px;visibility: hidden;"></span>
+						        	<div class="fL">
+						            	<h2 class="ptFnt">{{feature.header}}</h2>
+						            </div>
+						        </div>
+						        <div class="clearfix"></div>
+						      </div>
+							</div>
+						</div>
+					</tfs-slide>
+				      <div class="clearfix"></div>
+				    </tfs-carousel>
+
+			</div>
+		</div>
+		<div class="productTourWrap bgEBEC color999" ng-controller="productTourController">
+			<a class="anchor" id="product_tour"></a>
+			<div class="alignCenter clearfix">
+				<h1 class="largeH1 ptFnt">Product Tour</h1>
+				<h5>Simple way to book and manage your taxi</h5>
+			</div>
+			<div>
+				<div class="col-md-1"></div>
+				<div class="col-md-5" style="margin-top: 20px;">
+					<tfs-carousel disable-animation="true" hide-indicator="true" active-index="activeIndex">
+				      <tfs-slide ng-repeat="tour in tours">
+				        <img ng-src="{{tour.image_url}}" style="margin:auto;">
+				      </tfs-slide>
+				    </tfs-carousel>
+				</div>
+				<div class="col-md-5" style="margin-top: 20px;">
+					<div>
+						<span ng-repeat="tour in tours" ng-click="setActiveIndex($index)" ng-class="{'activePDCircle': activeIndex == {{$index}} }" class="pdNumCircle">{{$index + 1}}</span>
+	    			</div>
+	    			<tfs-carousel disable-animation="true" hide-indicator="true" active-index="activeIndex">
+				      <tfs-slide ng-repeat="tour in tours" >
+				      		<div class="alignLeft" style="margin-top: 20px;">
+				      			<h2 style="margin-bottom: 15px;">{{tour.text}}</h2>
+				      			<h5 class="featureTourTxt">{{tour.sub_text}}</h5>
+				      		</div>
+				      </tfs-slide>
+				    </tfs-carousel>
+
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="cropHomeSignUpWrap">
+				<div class="col-md-1"></div>
+				<div class="col-md-11 colorFFF" style="padding: 60px 0px;">
+					<div class="col-md-6 ptFnt">
+						<h1 style="line-height: 44px;">Sign Up now<br/>to get the best cab service<br/>for your employees</h1>
+					</div>
+					<div class="col-md-6">
+						<button type="button" class="btn btn-lg blueBtn loginBlueBtn bdr5" ng-click="gotoSignUp()" style="width: 220px;padding: 15px 25px;margin-top: 35px;margin-right: 10px;">SIGN UP</button>
+						<button type="button" class="btn btn-lg whiteBdrTxtBtn bdr5"  ng-controller="callBackController" ng-click="open()" style="width: 220px;padding: 15px 25px;margin-top: 35px;">GET A CALL BACK</button>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+		</div>
+</div>
+<tfs-footer></tfs-footer>

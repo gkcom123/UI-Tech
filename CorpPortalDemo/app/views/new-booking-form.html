@@ -1,0 +1,169 @@
+<form id="newForm" 
+      role="form" 
+      class="newForm" 
+      name="form"     
+      spinner >
+
+        <div class="row bookingHead">
+            <div class="col-md-4">
+
+                    <h3 ng-if='action=="new"'>
+                        New Booking
+                    </h3>
+                    <h3 ng-if='action=="modify"'>
+                        Modify Booking <br/><b style="color: #f8da15;font-size: 18px;">{{booking_id}}</b>
+                    </h3>
+
+            </div>
+            <div class="col-md-4">
+                <input type="hidden" ng-model="myCity" readonly/>
+                <div class="wrap-dd-select" ng-click="showList()">
+                    <span class="cityDDSelected" ng-bind="myCity.name"></span>
+                </div>
+                <ul ng-model="example1" bs-selectbox class="dropdown-list" style="display:none;">
+                    <li><input type="text" ng-model="searchCity" placeholder="Search City"/></li>
+                    <li ng-repeat="city in cities | filter:searchCity" value="1" ng-click="citySelected(city)">{{ city.name }}</li>
+                </ul>
+                <!--<div dropdown-select="cities"-->
+                        <!--dropdown-model="myCity"-->
+                        <!--dropdown-item-label="name"-->
+                        <!--dropdown-onchange="citySelected(selected)" >-->
+                <!--</div>-->
+            </div>                          
+
+            <div class="col-md-4">
+                <div id="myBookType" dropdown-select="bookType"
+                        dropdown-model="myBookType"
+                        dropdown-item-label="description"
+                        dropdown-onchange="bookTypeSelected(selected)" >
+                </div>
+            </div>
+        </div>
+        <!-- **********GUEST INFO ******** -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input ng-model="guestName" type="text" class="form-control" name="guestName" id="guestName" placeholder="Guest name" ng-change="guestNameChanged()"  />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input number-only ng-model="guestNumber" type="text" class="form-control" name="guestMobile" id="guestMobile" placeholder="Guest mobile number" ng-blur="guestNumberChanged()" maxlength="10" />
+                    <label id="valNmb" class="error"></label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input ng-model="guestEmail" type="text" class="form-control" name="guestEmail" id="guestEmail" placeholder="Guest Email ID" ng-blur="guestEmailChanged()"  />
+                    <label id="validateEmail" class="error"></label>
+                </div>
+            </div>
+        </div>
+
+    <!-- *******************PICK DROPINFO **********************-->
+
+        <div class="row" ng-controller='PickAndDropController'>
+            <div class="col-md-12 text-center">
+                <div id="swapLocation" class="form-group form-inline swapLocation">
+                	
+                    <div id="pic1" class="form-group move-down">
+                        <input id="picLoc" ng-model="pickLocation" name="pickLocation" type="text" class="form-control" ng-autocomplete="result" options="options"  autocomplete="on" ng-blur="pickLocationFunc()" placeholder="Enter Pickup Location" details="picDetails"
+                        ng-disabled="disableLocationFields" onPaste="return false"/>
+                    </div>
+                    
+                    <div id="tfsLoc" ng-model="airportLocation" class="form-group move-down" style="display:none;">    
+                        <div id="airportBooking" dropdown-select="cityAirports"
+                            dropdown-model="myAirport"
+                            dropdown-item-label="name"
+                            dropdown-onchange="airportTypeChanged(selected,false)" >
+                        </div>
+                    </div>                                    
+
+                    <span class="iconToggle">
+                    	<span id="forAirport" ng-show="showDrop" ng-click="swapAirportLocation()" style="display:none;"><img src="http://cdn1.taxiforsure.com/v2/img/corp/locationToggle.png"></span>
+                    	<span id="forPoint" ng-show="showDrop" ng-click="swapLocations()"><img src="http://cdn1.taxiforsure.com/v2/img/corp/locationToggle.png"></span>
+                    </span>
+
+                    <div id="gglLoc" class="form-group move-down">
+                        <input id="dropLoc" ng-model="dropLocation" type="text"  name="dropLocation" class="form-control" ng-autocomplete="result" details="dropDetails" options="options" ng-blur="dropLocationFunc()" placeholder="Enter Drop Location"
+                        ng-disabled="disableLocationFields" ng-show="showDrop" onPaste="return false"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- ********************DATE TIME INFO ********************-->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group pickupDate form-group ">
+                 
+                    <div ng-controller="DatepickerCtrl">
+                        <p class="input-group">
+                          <input type="text" class="form-control" datepicker-popup="{{format}}"
+                                 ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate"
+                                 datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                 ng-required="true" show-button-bar="false"
+                                 ng-change="changed()" readonly />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+                   </div>                                       
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group text-center">
+
+                      <div ng-controller="TimepickerCtrl" class="pickupTime text-center">
+
+                          <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" readonly-input="true"></timepicker>
+
+                      </div>
+                </div>
+
+            </div>
+            <div id="carType" class="col-md-3 rel">    
+                <div dropdown-select="fareData"
+                        dropdown-model="myCar"
+                        dropdown-item-label="car_type"
+                        dropdown-onchange="carTypeChanged(selected)" >
+                </div>
+                <span class="abs loader inlBlk" style="display:none;">
+                    <img src="http://cdn1.taxiforsure.com/v2/img/corp/cab.png" width="25" height="25" />
+                </span>
+            </div>                          
+
+            <div class="col-md-3">
+                <textarea ng-model="userInstructions" class="form-control addinfo" rows="3" placeholder="Any instructions" ng-change="userInstructionChanged(userInstructions)"></textarea>
+            </div>
+        </div>
+    <!-- *************** RADIO BUTTON INFO ************************ -->
+        <div class="row text-center">
+            <div class="col-md-12">
+                <label class="radio-inline">Payment mode:</label>
+                
+                <label class="radio-inline" ng-show="paymentType == 2 || paymentType == 3">
+                  <input ng-model="paymentMode" type="radio" name="paymentModeOptions" value="3" ng-change="paymodeChanged(paymentMode)" ng-checked="paymentMode==3"> Prepaid
+                </label>
+                
+                <label class="radio-inline" ng-show="paymentType == 4 || paymentType == 5">
+                  <input ng-model="paymentMode" type="radio" name="paymentModeOptions" value="5" ng-change="paymodeChanged(paymentMode)" ng-checked="paymentMode == 5"> Credit
+                </label>
+                
+                <label class="radio-inline" ng-show="paymentType == 1 ||  paymentType == 3 || paymentType == 5">
+                  <input ng-model="paymentMode" type="radio" name="paymentModeOptions" value="4" ng-change="paymodeChanged(paymentMode)" ng-checked="paymentMode == 4" > Cash
+                </label>                                
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+              	<button type="button" class="btn estFare"
+                popover-trigger="mouseenter"
+                popover="{{estimatedFare}}" popover-title="{{estimatedFareTitle}}" >&#8377;</button>
+
+                <button type="button" class="btn btn-lg confirmBooking" ng-click="confirmBooking()">CONFIRM</button>
+
+                <button ng-if='action=="modify"' type="button" class="btn btn-lg" ng-click="createNewBooking()">CREATE NEW BOOKING</button>
+            </div>
+        </div>
+</form>
