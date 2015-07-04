@@ -1,9 +1,9 @@
 'use strict';
 angular.module('corporateApp')
- 	.factory('GetPricingData', function($resource){		    
+ 	.factory('GetPricingData', function($resource){
 		return {
 	        getPricingResource: function(data){
-	            return $resource('api/generic_request/', data)
+	            return $resource('/api/cityInfo/getCarList', data)
 	        }
 	    }
 	})
@@ -17,16 +17,20 @@ angular.module('corporateApp')
 	.factory('GetAirPortLocation', function($resource){
     	return {
             getResource: function(id, corp_id) {
-                return $resource('api/generic_request/',{'url':'/TFS-API-0.0.1-SNAPSHOT/v1/entities/geo/cities/'+id+'/airports','remote_host':'CITY_MODEL', 'corporate_id': corp_id});
+                return $resource('/api/cityInfo/getAirportInfoByCityName',{
+                  'cityid':id,
+                  'url':'/TFS-API-0.0.1-SNAPSHOT/v1/entities/geo/cities/'+id+'/airports','remote_host':'CITY_MODEL',
+                  'corporate_id': corp_id});
+                //return $resource('api/generic_request/',{'url':'/TFS-API-0.0.1-SNAPSHOT/v1/entities/geo/cities/'+id+'/airports','remote_host':'CITY_MODEL', 'corporate_id': corp_id});
             }
         }
     })
     .factory('GetUpcomingBookings',function($resource){
 		return {
-		    getResource: function(id,pageNo,paginationCount){     
+		    getResource: function(id,pageNo,paginationCount){
 		        return $resource('api/generic_request/', {
-	    			'url':'/answer-call/v2/get_corporate_upcoming_bookings_json/', 
-					 'corporate_id': id, 
+	    			'url':'/answer-call/v2/get_corporate_upcoming_bookings_json/',
+					 'corporate_id': id,
 					 'page_number' : pageNo,
 					 'pagination_count' : paginationCount,
 					 'remote_host' :'RTFS_URL'
@@ -34,30 +38,30 @@ angular.module('corporateApp')
 	    	}
 		}
 	})
-	.factory('GetPastBookings', function($resource){        
+	.factory('GetPastBookings', function($resource){
         return {
             getResource: function(id,pageNo,paginationCount){
             	var data = {
-            			'url':'/answer-call/v2/get_corporate_past_bookings_json/', 
-						 'corporate_id': id, 
+            			'url':'/answer-call/v2/get_corporate_past_bookings_json/',
+						 'corporate_id': id,
 						 'page_number' : pageNo,
 						 'pagination_count' : paginationCount,
 						 'remote_host':'RTFS_URL'
-					}		        
+					}
 		        return $resource('api/generic_request/', data);
 	    	}
 		}
 	})
-	.factory('GetBookingCount',function($resource){		
+	.factory('GetBookingCount',function($resource){
 		return {
-		    getResource: function(id){		        
+		    getResource: function(id){
 		        return $resource('api/generic_request/',{'url':'/answer-call/get_corporate_booking_counts_json/', 'corporate_id':id, 'remote_host':'RTFS_URL'});
 	    	}
 		}
 	})
 	.factory('GetPrepaidBalance',function($resource){
 		return {
-		    getResource: function(id){		        
+		    getResource: function(id){
 		        return $resource('api/get-prepaid-amount/',{'corporate_id': id});
 	    	}
 		}
@@ -69,7 +73,7 @@ angular.module('corporateApp')
 			}
 		}
 	})
-	.factory('GetEstimatedFare', function($resource){		
+	.factory('GetEstimatedFare', function($resource){
 		return {
 		    getResource: function(data){
 		        return $resource('api/generic_request/', {
@@ -88,17 +92,17 @@ angular.module('corporateApp')
 	.factory('customerOnBoard', function($resource){
 		return {
 			getResource: function(id){
-				return $resource('api/generic_request/',{	
+				return $resource('api/generic_request/',{
 					'url':'/answer-call/get_corporate_running_bookings_json/',
-				 	'corporate_id': id, 
+				 	'corporate_id': id,
 				 	'remote_host':'RTFS_URL'
-				});				
+				});
 			}
 		}
 	})
 	.factory('CancelThisBooking', function($resource){
 	    return {
-		    getResource: function(){		        
+		    getResource: function(){
 				return $resource('api/generic_request/',{})
 	    	}
 		}
@@ -112,31 +116,31 @@ angular.module('corporateApp')
 	})
 	.factory('ValidateLocation', function($resource){
 	    return {
-		    getResource: function(){		        
+		    getResource: function(){
 				return $resource('api/generic_request/',{});
 	    	}
 		}
 	})
 	.factory('GetCorporateReceipts', function($resource){
 		return {
-			getResource: function(fromDate, tillDate, id){		
-				return $resource('api/generic_request/',{	
+			getResource: function(fromDate, tillDate, id){
+				return $resource('api/generic_request/',{
 					'url':'/settlements/api/settlement/getCorporateRecipts/',
 				 	'corporateId': id,
-				 	'corporate_id': id, 
+				 	'corporate_id': id,
 				 	'fromDate': fromDate,
 				 	'tillDate': tillDate,
 				 	'remote_host':'SETTLEMENT_URL'
-				});		
+				});
 			}
 		}
 	})
 	.factory('GetCorporateInvoices', function($resource){
 		return {
-			getResource: function(fromDate, tillDate, id){				
-				return $resource('api/generic_request/', {	
+			getResource: function(fromDate, tillDate, id){
+				return $resource('api/generic_request/', {
 					'url':'/settlements/api/settlement/getCorporateInvoice',
-				 	'corporateId': id, 
+				 	'corporateId': id,
 				 	'corporate_id': id,
 				 	'fromDate' 	 : fromDate,
 				 	'tillDate'	 : tillDate,
@@ -148,26 +152,26 @@ angular.module('corporateApp')
 	.factory('DownloadInvoice', function($resource){
 		return {
 			getResource: function(invoiceNumber,id){
-				return $resource('api/download_file/', {	
+				return $resource('api/download_file/', {
 					'url':'/settlements/api/settlement/getDownloadInvoice',
-					'corporate_id': id, 
-				 	'invoiceNumber': invoiceNumber,														 	
+					'corporate_id': id,
+				 	'invoiceNumber': invoiceNumber,
 				 	'remote_host':'SETTLEMENT_URL'
-				});				
+				});
 			}
 		}
 	})
 	.factory('DownloadReceipt', function($resource){
 		return {
 			getResource: function(receiptNumber,id){
-				return $resource('api/download_file/',{	
+				return $resource('api/download_file/',{
 					'url':'/settlements/api/settlement/getDownloadRecipts',
-					'corporate_id': id, 
-				 	'receiptNumber': receiptNumber,														 															 	
+					'corporate_id': id,
+				 	'receiptNumber': receiptNumber,
 				 	'remote_host':'SETTLEMENT_URL'
-				});				
+				});
 
 			}
 		}
-	})	
+	})
 ;

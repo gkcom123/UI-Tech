@@ -104,15 +104,21 @@ angular.module('corporateApp')
                 if( oThis.cityProductList[ city_id ] ){
                     callback( oThis.cityProductList[ city_id ] );
                 }else {
-                    request = $resource("/api/common_request/");
+                    request = $resource("/api/cityInfo/getProdByCityId");
+                    //request = $resource("/api/common_request/");
                       data = {
-                          'url': Helper.remoteUrl +'cities/'+city_id + "/products",
+                        //'url': Helper.remoteUrl +'cities/'+city_id + "/products",
+                        'cityid':city_id,
+                        'param': 'cities/'+city_id + "/products",
                           'remote_host': 'CITY_MODEL'
                       };
-                      request.get(data, function success( res ){ 
+                      request.get(data, function success( res ){
                           if( res['status'] == 'success' ){
                                 var products = res.response_data || {};
+                            console.log("Check---------->");
+                            console.log(products[city_id]);
                                 if( products[city_id] ){
+
                                     oThis.cityProductList[ city_id ] = products[city_id];
                                     callback( oThis.cityProductList[ city_id ] );
                                 }
@@ -127,7 +133,7 @@ angular.module('corporateApp')
                 request = $resource('/api/get-corporate-details/',{ 'corporate_id': session_id });
                 request.get(function(res){
                     var corpDetails = res.response_data || {};
-                    if(corpDetails.id){                      
+                    if(corpDetails.id){
                       localStorageService.set('corp-details', corpDetails);
                       $rootScope.$emit('corpDetails', corpDetails);
                       callback(corpDetails);
@@ -151,9 +157,11 @@ angular.module('corporateApp')
                 var polygon,
                     i,
                     bounds = [];
-                if( !oThis.polygonBounds[city_id] ){ 
-                  request = $resource("/api/common_request/");
+                if( !oThis.polygonBounds[city_id] ){
+                  //request = $resource("/api/common_request/");
+                  request = $resource("/api/cityInfo/getPolygonByCityId");
                   data = {
+                      'cityid':city_id,
                       'url': Helper.remoteUrl +'polygon/'+city_id,
                       'remote_host': 'CITY_MODEL'
                   };
@@ -175,7 +183,7 @@ angular.module('corporateApp')
                             }).getBounds();
                         }
                         oThis.polygonBounds[ city_id ] = bounds;
-                        callback && callback( city_id, bounds );              
+                        callback && callback( city_id, bounds );
                     }
                   }, function error(){
                       console.log('error calling polygons list api');
@@ -188,8 +196,8 @@ angular.module('corporateApp')
           }
         }
 
-      // all state goto function automatically added. 
-      //  for goto home function dynamically added 
+      // all state goto function automatically added.
+      //  for goto home function dynamically added
       // gotoHome =  function(){
       //    $state.go("home");
       // }
