@@ -19,11 +19,11 @@ angular.module('corporateApp')
 		});
 		$scope.applyStatePlaceHolder = true;
 
-		// get city 
+		// get city
 		$scope.cities = [];
 		$scope.city   = {name: "City" };
 		$scope.applyCityPlaceHolder = true;
-		
+
 		var rules = {
 			emailId: {
 				email: true
@@ -32,7 +32,7 @@ angular.module('corporateApp')
 				minlength: 10
 			},
 			pincode: {
-				minlength: 6	
+				minlength: 6
 			}
 		};
 
@@ -64,13 +64,13 @@ angular.module('corporateApp')
 					if( !ajaxLock ){
 						Helper.showMask('#registerContainerID');
 						ajaxLock = true;
-						var request = $resource("/api/common_request/");
-	                  
+						//var request = $resource("/api/common_request/");
+						var request = $resource("/api/signUp");
+
 	                  	data.url = '/registration/api/corporate/corporateRegistration/';
 	                  	data.remote_host = 'REGISTRATION_URL';
-	                  
-	                  	delete data.agree;
 
+	                  	delete data.agree;
 		      			request.save(data, function success( res ){
 		      				if( res.status == 'success' ){
 		      					var resData = res.response_data || {},
@@ -99,7 +99,7 @@ angular.module('corporateApp')
 					alert("In order to use our services, you must agree to Terms of Service.");
 				}
 			}
-		}	
+		}
 
 		$scope.stateChanged = function( selected ){
 			$("#stateInput").val( selected.stateId );

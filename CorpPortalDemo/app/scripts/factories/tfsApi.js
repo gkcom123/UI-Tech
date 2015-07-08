@@ -23,8 +23,10 @@ angular.module('corporateApp')
               if( oThis.states.length ){
                   callback( oThis.states );
               }else {
-                  request = $resource("/api/common_request/");
+                  request = $resource("/api/getStateListByCountryId");
+                  //request = $resource("/api/common_request/");
                   data = {
+                      'countryID':conutryId,
                       'url': Helper.remoteUrl + conutryId +'/states/',
                       'remote_host': 'CITY_MODEL'
                   };
@@ -45,10 +47,12 @@ angular.module('corporateApp')
                   callback( oThis.stateCities[ stateId ] );
               }else {
                   data = {
+                      'stateID':stateId,
                       'url': Helper.remoteUrl + stateId +'/cities/',
                       'remote_host': 'CITY_MODEL'
                   };
-                  request = $resource("/api/common_request/");
+                  //request = $resource("/api/common_request/");
+                  request = $resource("/api/getCityListByStateId/");
                   request.get(data, function success( res ){
                     if(res['status'] == 'success'){
                         var cities = res.response_data || [];

@@ -14,6 +14,11 @@ app.get('/', function(req, res){
   res.redirect('/index.html');
 });
 app.post('/api/login', authSrv.login);
+app.post('/api/signUp', authSrv.signUp);
+
+app.get('/api/getStateListByCountryId', authSrv.getstateList);
+app.get('/api/getCityListByStateId', authSrv.getCityByStateId);
+
 app.get('/api/get-corporate-details',corpInfoSrv.getCorporateDetails);
 app.get('/api/get-citylist',cityInfoSrv.getCityList);
 app.get('/api/cityInfo/getProdByCityId',cityInfoSrv.getProdList);

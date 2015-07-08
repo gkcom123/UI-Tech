@@ -87,7 +87,7 @@ exports.getAirportInfoByCityName = function(req,res)
   var result = {"status": "success", "error_desc": "", "error_code": "","response_data":""};
   result.response_data = airportInfo;
   res.send(result);
-}
+};
 exports.getCarList = function (req,res) {
   var city = req.query["city"];
   var result = {
@@ -234,7 +234,7 @@ exports.getCarList = function (req,res) {
   };
   res.send(result);
 
-}
+};
 exports.getPolygonByCityId = function(req,res)
 {
   var cityId = req.query["cityid"];
@@ -387,5 +387,5 @@ exports.getPolygonByCityId = function(req,res)
     };
   //}
   res.send(result);
-}
+};
 
