@@ -11,7 +11,7 @@ angular.module("corporateApp")
 		'localStorageService',
 		'ViewBillFactory',
 		function( $scope, $rootScope, $location, $anchorScroll, GetUpcomingBookings, GetPastBookings, CancelThisBooking, localStorageService, ViewBillFactory ){
-			
+
 	//console.log("Called View Booking controller");
 
 	$scope.corpID 			= localStorageService.get('corp-id');
@@ -25,7 +25,7 @@ angular.module("corporateApp")
 	$scope.Bookings.past 	= false;
 
 	var pageNo 				= 1;
-	var paginationCount		= 10;
+	var paginationCount		= 4 ;
 	var paginationObj 		= {};
 	$scope.disablePrevious 	= true;
 	$scope.disableNext 		= true;
@@ -35,7 +35,7 @@ angular.module("corporateApp")
 	$scope.myPaymentType 	= {pType:'Payment'};
 	$scope.paymentTypeNo 	= '';
 
-	$scope.PymentTypeSelected = function(type){		
+	$scope.PymentTypeSelected = function(type){
 		$scope.paymentTypeNo = type.pCode;
 	}
 
@@ -48,31 +48,31 @@ angular.module("corporateApp")
 	$scope.getSelectedIds =  function(){
 		console.log("Selected IDs :", $scope.selectedBookings.Ids);
 	}
-    
+
     $scope.checkAll;
-    $scope.checkAllFun = function(){    	 
+    $scope.checkAllFun = function(){
     	for (var i=0; i<$scope.Bookings.data.length; i++){
     		$scope.selectedBookings.Ids[$scope.Bookings.data[i].booking_id] = $scope.checkAll;
     	}
-    }    
+    }
 
     //loadPastBookings();
 
     /***  Refresh Bookings Section ***/
     $rootScope.$on('RefreshViewBookings',function(event,data){
     	console.log('Got Refresh Bookings Call');
-        loadUpComingBookings();                		    
-    });        
+        loadUpComingBookings();
+    });
 
-	
+
 	function loadUpComingBookings(){
 
-	    $('.viewBookingWap .spin').show();			    
+	    $('.viewBookingWap .spin').show();
 		$scope.radioModel = 'Left';
 		$scope.showFilters = false;
 		var upComingBookingsResource = GetUpcomingBookings.getResource(localStorageService.get('corp-id'), pageNo, paginationCount);
 
-		upComingBookingsResource.get(function(response){			
+		upComingBookingsResource.get(function(response){
 			if(response.status == 'error' && response.error_code == 400){
 	   			$rootScope.$broadcast('LogoutThisUser',{});
 	    	}
@@ -81,19 +81,19 @@ angular.module("corporateApp")
   					console.warn("GetUpcomingBookings API returned empty Object");
 			}
 			else{
-		    
+
 			    currentBookings = response.response_data.results;
-			    
-				paginationObj = response.response_data.pagination;			
+
+				paginationObj = response.response_data.pagination;
 				$scope.disablePrevious = !(paginationObj.has_previous);
 				$scope.disableNext = !(paginationObj.has_next);
 				$scope.Bookings.current = true;
-				$scope.Bookings.data = response.response_data.results;				
+				$scope.Bookings.data = response.response_data.results;
 			}
 
 			//console.log("Previous :", $scope.disablePrevious + "Next :" + $scope.disableNext);
 			//console.log('Upcoming Bookings :', currentBookings)
-			
+
 			$('.viewBookingWap .spin').hide();
 
 		});
@@ -103,37 +103,37 @@ angular.module("corporateApp")
 
 
 	function loadPastBookings(){
-		$('.viewBookingWap .spin').show();			
+		$('.viewBookingWap .spin').show();
 		clearFilters();
 		$scope.radioModel = 'Right';
 		var pastBookingsResource = GetPastBookings.getResource(localStorageService.get('corp-id'), pageNo, paginationCount);
-		pastBookingsResource.get(function(response){		
-			if(response.status == 'error' && response.error_code == 400){			   		
+		pastBookingsResource.get(function(response){
+			if(response.status == 'error' && response.error_code == 400){
 		   		$rootScope.$broadcast('LogoutThisUser',{});
 		   		return;
-		    }				
+		    }
 
 		    if(Object.getOwnPropertyNames(response.response_data).length === 0){
   					console.warn("GetPastBookings API returned empty Object");
 			}
 			else{
-		    
+
 			    $scope.Bookings.past = true;
-				pastBookings = response.response_data.results;	
+				pastBookings = response.response_data.results;
 				$scope.Bookings.data = response.response_data.results;
-				paginationObj = response.response_data.pagination;		
+				paginationObj = response.response_data.pagination;
 				$scope.disablePrevious = !(paginationObj.has_previous);
-				$scope.disableNext = !(paginationObj.has_next);	
+				$scope.disableNext = !(paginationObj.has_next);
 
 				//console.log('Past Bookings :',pastBookings);
-				//console.log("paginationObj on load pastBookings", pastBookings);		
+				//console.log("paginationObj on load pastBookings", pastBookings);
 				//console.log("Previous :", $scope.disablePrevious + "Next :" + $scope.disableNext);
 			}
 
-			$('.viewBookingWap .spin').hide();	
+			$('.viewBookingWap .spin').hide();
 		});
 	}
-	
+
 
 	$scope.showCurrentBookingData = function(){
 		pageNo = 1;
@@ -150,7 +150,7 @@ angular.module("corporateApp")
 		loadPastBookings();
 
 		$scope.Bookings.current = false;
-		$scope.Bookings.past = true;		
+		$scope.Bookings.past = true;
 		/*if(!$.isEmptyObject(pastBookings)){
 			$('.viewBookingWap .spin').hide();
 		}*/
@@ -178,13 +178,13 @@ angular.module("corporateApp")
 		        };
 
 		    var cancelResource = CancelThisBooking.getResource();
-		    cancelResource.save(cancelData, function success(response){			    
-		        if(response.status == 'error' && response.error_code == 400){		   		
-	   				$rootScope.$broadcast('LogoutThisUser',{});	
-	   				return;	   				
+		    cancelResource.save(cancelData, function success(response){
+		        if(response.status == 'error' && response.error_code == 400){
+	   				$rootScope.$broadcast('LogoutThisUser',{});
+	   				return;
 	   			}
 
-		        if(response.response_data.status == 'success'){		        	
+		        if(response.response_data.status == 'success'){
 		        	$('.viewBookingWap .spin').show();
 		        	loadPastBookings();
 		        	$rootScope.$emit('RefreshCurrentTripsCount',{});
@@ -192,7 +192,7 @@ angular.module("corporateApp")
 		        }
 		        else{
 		        	//console.log("calcellation failed :",response);
-		        	//alert(response.response_data.status);	
+		        	//alert(response.response_data.status);
 		        }
 
 		    }, function error(){});
@@ -214,7 +214,7 @@ angular.module("corporateApp")
             };
 
         var viewBillResource = ViewBillFactory.getResource();
-        
+
         viewBillResource.get(viewBillData, function success(response){
             //console.log('Vie Bill success', response);
         }, function error(){});
@@ -222,7 +222,7 @@ angular.module("corporateApp")
 	};
 
 	/*Filter*/
-	$scope.addFilter = function(){		
+	$scope.addFilter = function(){
 		$scope.showFilters = true;
 	};
 
@@ -231,32 +231,32 @@ angular.module("corporateApp")
 		$scope.searchCar 		 ='';
 		$scope.searchPicLoc 	 ='';
 		$scope.searchDropLoc 	 ='';
-		$scope.searchDateTime 	 ='';		
+		$scope.searchDateTime 	 ='';
 		$scope.searchStatus		 ='';
 		$scope.searchPaymentType ='';
 	}
-	
-	$scope.showPreviousBookings = function(){		
-				
+
+	$scope.showPreviousBookings = function(){
+
 		if(paginationObj.has_previous){
 			pageNo = paginationObj.previous_page;
 
-			if($scope.radioModel == 'Left')			
-				loadUpComingBookings();		
+			if($scope.radioModel == 'Left')
+				loadUpComingBookings();
 			else
 				loadPastBookings();
 		}
 	};
 
-	$scope.showNextBookings =  function(){		
-		
+	$scope.showNextBookings =  function(){
+
 		if(paginationObj.has_next){
 			pageNo = paginationObj.next_page;
 
-			if($scope.radioModel == 'Left')			
-				loadUpComingBookings();		
+			if($scope.radioModel == 'Left')
+				loadUpComingBookings();
 			else
-				loadPastBookings();	
+				loadPastBookings();
 		}
 		else{
 

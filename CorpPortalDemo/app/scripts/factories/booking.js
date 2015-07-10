@@ -28,8 +28,9 @@ angular.module('corporateApp')
     .factory('GetUpcomingBookings',function($resource){
 		return {
 		    getResource: function(id,pageNo,paginationCount){
-		        return $resource('api/generic_request/', {
-	    			'url':'/answer-call/v2/get_corporate_upcoming_bookings_json/',
+		        return $resource('/api/get_corporate_upcoming_bookings/', {
+	    			//'url':'/answer-call/v2/get_corporate_upcoming_bookings_json/',
+	    			'url':'/api/get_corporate_upcoming_bookings/',
 					 'corporate_id': id,
 					 'page_number' : pageNo,
 					 'pagination_count' : paginationCount,
@@ -42,13 +43,13 @@ angular.module('corporateApp')
         return {
             getResource: function(id,pageNo,paginationCount){
             	var data = {
-            			'url':'/answer-call/v2/get_corporate_past_bookings_json/',
+            			'url':'/api/get_corporate_past_bookings/',
 						 'corporate_id': id,
 						 'page_number' : pageNo,
 						 'pagination_count' : paginationCount,
 						 'remote_host':'RTFS_URL'
 					}
-		        return $resource('api/generic_request/', data);
+		        return $resource('/api/get_corporate_past_bookings/', data);
 	    	}
 		}
 	})
@@ -69,7 +70,7 @@ angular.module('corporateApp')
 	.factory('GetTotalCurrentTripFare',function($resource){
 		return {
 			getResource: function(id){
-				return $resource('api/generic_request/',{'url':'answer-call/get_upcoming_bookings_estimated_fare/','corporate_id': id, 'remote_host':'RTFS_URL'});
+				return $resource('api/get_upcoming_bookings_estimated_fare/',{'url':'answer-call/get_upcoming_bookings_estimated_fare/','corporate_id': id, 'remote_host':'RTFS_URL'});
 			}
 		}
 	})

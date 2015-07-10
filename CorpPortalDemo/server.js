@@ -25,6 +25,10 @@ app.get('/api/cityInfo/getProdByCityId',cityInfoSrv.getProdList);
 app.get('/api/cityInfo/getPolygonByCityId',cityInfoSrv.getPolygonByCityId);
 app.get('/api/cityInfo/getAirportInfoByCityName',cityInfoSrv.getAirportInfoByCityName);
 app.get('/api/cityInfo/getCarList',cityInfoSrv.getCarList);
+app.get('/api/get-prepaid-amount',corpInfoSrv.getPrepaidBalance);
+app.get('/api/get_corporate_upcoming_bookings',corpInfoSrv.get_upcoming_bookings);
+app.get('/api/get_corporate_past_bookings',corpInfoSrv.getPastBookings);
+app.get('/api/get_upcoming_bookings_estimated_fare',corpInfoSrv.getUpcomingBookingsEstimatedFare);
 
 
 /*
