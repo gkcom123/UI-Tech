@@ -37,6 +37,17 @@ exports.getCorporateDetails = function(req,res)
 
   res.send(result);
 };
+exports.enquiry = function(req,res)
+{
+  var reqObj = JSON.parse(Object.keys(req.body)[0]);
+ // console.log(reqObj);
+
+  var result = {status: 'success', error_desc: '', error_code: '200', response_data: {username: "Gunjan.kumar",
+      session_id: "c08ba7f4868c15aaba5c1a67012344a0"}, message:'Verified'};
+  setTimeout(function(){
+    res.send(result);
+  }, 1000);
+};
 function getDate()
 {
   var m_names = new Array("January", "February", "March",
@@ -59,9 +70,7 @@ exports.getPrepaidBalance = function (req,res)
 exports.getUpcomingBookingsEstimatedFare = function (req,res)
 {
   var name = req.query["corporate_id"];
-  var result = {
-    "status": "success", "error_desc": "", "error_code": "", "response_data": {"count": 1, "total_estimated_fare": 114.0}
-  };
+  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": {"message": "Mail Sent Successfully"}};
   res.send(result);
 }
 exports.get_upcoming_bookings = function(req,res)

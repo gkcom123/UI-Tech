@@ -15,7 +15,7 @@ app.get('/', function(req, res){
 });
 app.post('/api/login', authSrv.login);
 app.post('/api/signUp', authSrv.signUp);
-
+app.post('/api/corporate-enquiry',corpInfoSrv.enquiry);
 app.get('/api/getStateListByCountryId', authSrv.getstateList);
 app.get('/api/getCityListByStateId', authSrv.getCityByStateId);
 
