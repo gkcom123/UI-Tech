@@ -29,6 +29,7 @@ app.get('/api/get-prepaid-amount',corpInfoSrv.getPrepaidBalance);
 app.get('/api/get_corporate_upcoming_bookings',corpInfoSrv.get_upcoming_bookings);
 app.get('/api/get_corporate_past_bookings',corpInfoSrv.getPastBookings);
 app.get('/api/get_upcoming_bookings_estimated_fare',corpInfoSrv.getUpcomingBookingsEstimatedFare);
+app.get('/api/get_estimated_fare',corpInfoSrv.getEstimatedFare);
 
 
 /*

@@ -14,7 +14,7 @@ angular.module('corporateApp')
 
 		$scope.CorpID = localStorageService.get('corp-id');
 		var cData = localStorageService.get('corp-details');
-		
+
 		/*Check this */
 		$rootScope.$on('corpDetails',function(event, data){
 			$scope.corpData = data;
@@ -23,7 +23,7 @@ angular.module('corporateApp')
 
 		$rootScope.$emit('showGMap',false);
 
-		
+
 		// Validation the form - Config
 		$("#newForm").validate({
 			rules: {
@@ -55,7 +55,7 @@ angular.module('corporateApp')
 			    }
 			}
 		});
-		
+
         $scope.showList = function(){
             $('.dropdown-list').toggle();
         }
@@ -69,14 +69,14 @@ angular.module('corporateApp')
 			$('#gglLoc').show();
 		}
 
-		function showFromAirport(){				
+		function showFromAirport(){
 			$('#pic1').hide();
 		    $('#tfsLoc').css({display: 'inline-block'});
 		    $('#gglLoc').show();
 		    $('#forAirport').show();
 		    $('#forPoint').hide();
 		}
-		
+
 		function showToAirport(){
 			$('#swapLocation').addClass('isToggle');
 			$('#pic1').css({display: 'inline-block'});
@@ -85,7 +85,7 @@ angular.module('corporateApp')
 			$('#forAirport').show();
 			$('#forPoint').hide();
 		}
-		
+
 
 		var isPickupLocationValid 	= true;
 		var isDropLocationValid 	= true;
@@ -109,15 +109,15 @@ angular.module('corporateApp')
 		//$scope.pickupArea;
 		//$scope.dropArea;
 		$scope.pickupLatLong  = {};
-		$scope.dropLocation;		
+		$scope.dropLocation;
 		$scope.dropLatLong    = {};
 		$scope.airportLocation;
 		$scope.airportLatLong = {};
 		$scope.userInstructions;
 		$scope.disableLocationFields = true;
-		
+
         $scope.showDrop   = true;
-        $scope.myCity 	  = {name:"Select City"};        
+        $scope.myCity 	  = {name:"Select City"};
         $scope.myCar 	  = {car_type:"Select Car"};
         $scope.myBookType = {description:"Select Booking type"};
         $scope.surcharge  = 0;
@@ -131,7 +131,7 @@ angular.module('corporateApp')
         	prepaidBalance = data;
         });
 
-		/**JAVA paymentType 
+		/**JAVA paymentType
 			1: cash
 			2: prepaid
 			3: prepaid+cash
@@ -142,11 +142,11 @@ angular.module('corporateApp')
 			4:cash
 			5:credit
 		*/
-        $scope.paymentType = cData.paymentType;        
+        $scope.paymentType = cData.paymentType;
         setPaymentMode();
 
 
-        function setPaymentMode(){	        
+        function setPaymentMode(){
         	var pTypes = Helper.paymentTypes,
  	       		pModes = Helper.paymentModes;
 
@@ -158,7 +158,7 @@ angular.module('corporateApp')
 				$scope.paymentMode = pModes.CASH;
         }
 
-		
+
         $tfsApi.getCities(function( cities ){
      		debugger;
      		$scope.cities = cities;
@@ -166,7 +166,7 @@ angular.module('corporateApp')
      		//Re-enabling Dehli
      		/*for (var n = 0 ; n < $scope.cities.length ; n++) {
 			    if ($scope.cities[n].id == 4) {
-			      $scope.cities.splice(n,1);			      
+			      $scope.cities.splice(n,1);
 			      break;
 			   	}
 			}*/
@@ -176,7 +176,7 @@ angular.module('corporateApp')
 		function disableLocFields(){
 			//console.log('city, btype :',$scope.myBookType,$scope.myCity);
 			if($scope.myCity.name != "Select City" && $scope.selectedBookType != undefined)
-				$scope.disableLocationFields = false;		
+				$scope.disableLocationFields = false;
 			else
 				$scope.disableLocationFields = true;
 		}
@@ -186,13 +186,13 @@ angular.module('corporateApp')
             $scope.myCity = city;
             $('.dropdown-list').hide();
 
-		    $scope.selectedCity   = city.name;		    
-		    $scope.selectedCityID = city.id;		    
+		    $scope.selectedCity   = city.name;
+		    $scope.selectedCityID = city.id;
 		   //$scope.disableLocationFields = false;
 		    //disableLocFields();
-			
+
 			hideAirport();
-			
+
 			$rootScope.$broadcast('modifyBookingData', {'pick': '', 'drop': '', 'direction': ''});
 			$scope.pickupLocation = '';
 			$scope.dropLocation   = '';
@@ -202,10 +202,10 @@ angular.module('corporateApp')
         	$scope.dropLatLong    = '';
         	$scope.RTFS_dropLocality   = '';
         	$scope.RTFS_pickupLocality = '';
-			
+
 			$scope.myBookType = {description:"Select Booking type"};
 			$scope.estimatedFare = '...';
-			$scope.$broadcast('ServiceCitySelected',$scope.selectedCityID);						
+			$scope.$broadcast('ServiceCitySelected',$scope.selectedCityID);
 			$scope.showDrop = true;
 
 			$tfsApi.getCityProductByCityId(city.id, function( products ){
@@ -220,7 +220,7 @@ angular.module('corporateApp')
 		{
 			var newbookType=[];
 			var delElement;
-			
+
 		  	angular.forEach(bookTypeVar, function(btype)
 		  	{
 		  		delElement = false;
@@ -247,31 +247,31 @@ angular.module('corporateApp')
 		  	});
 
 		  	return newbookType;
-		}		
+		}
 
 
 		$scope.bookTypeSelected = function(type){
 
-		    $scope.selectedBookType = type.bookingType; 		    
-		    
+		    $scope.selectedBookType = type.bookingType;
+
 		    disableLocFields();
 		    hideAirport();
 
 		    $scope.direction 			= '';
 		    $scope.pickupLocation 		= '';
-		    $scope.dropLocation   		= '';		 
+		    $scope.dropLocation   		= '';
 		    $scope.pickupLatLong 		= '';
         	$scope.dropLatLong 			= '';
         	$scope.RTFS_dropLocality	= '';
-        	$scope.RTFS_pickupLocality 	= '';        	
+        	$scope.RTFS_pickupLocality 	= '';
 			$scope.estimatedFare 		= '...';
 			$scope.myCar 				= {car_type:"Select Car"};
-            
-		    $rootScope.$broadcast('modifyBookingData', {'pick': '', 'drop': '', 'direction': ''});		    
+
+		    $rootScope.$broadcast('modifyBookingData', {'pick': '', 'drop': '', 'direction': ''});
 		    $scope.$broadcast('setTimeForBookType', [{'booktype': $scope.selectedBookType}]);
 		    $scope.removeDropLocation();
 
-		    if(($scope.selectedBookType == 'at')||($scope.selectedBookType == 'at-km')){  	
+		    if(($scope.selectedBookType == 'at')||($scope.selectedBookType == 'at-km')){
 		    	showFromAirport();
 		    	$rootScope.$broadcast('modifyBookingData', {'direction': 2});
 		    	$scope.fare_type = ($scope.selectedBookType == 'at' ? 1 : 2);
@@ -319,8 +319,8 @@ angular.module('corporateApp')
 			$scope.pickupLatLong  = data[0].picLatLong;
 			$scope.dropLocation   = data[0].drop;
 			$scope.dropLatLong    = data[0].dropLatLong;
-			
-			$rootScope.$broadcast('PickupLocationChanged', [{"location" : $scope.pickupLocation, 'locationLatLong':$scope.pickupLatLong,'modify':false}]);			
+
+			$rootScope.$broadcast('PickupLocationChanged', [{"location" : $scope.pickupLocation, 'locationLatLong':$scope.pickupLatLong,'modify':false}]);
 			$rootScope.$broadcast('DropLocationChanged', [{"location" : $scope.dropLocation, 'locationLatLong':$scope.dropLatLong,'modify':false}]);
 			//checkPricing();
 		});
@@ -367,27 +367,27 @@ angular.module('corporateApp')
 	  			console.warn("/api/consumer-app/is_in_city_mobile/ locality validation API returned empty Object");
 	  			return;
 			}
-			
+
 			var resObj = response.response_data.response_data;
-			
+
 			if(resObj.city == null || resObj.locality == null){
 				alert("Our service is not available in this locality");
 				$rootScope.$broadcast('modifyBookingData', {'pick': '', 'direction': ''});
 				scope.pickupLocation = '';
 				return;
 			}
-			else if(resObj.locality){			
-				$scope.RTFS_pickupLocality = resObj.locality;				
+			else if(resObj.locality){
+				$scope.RTFS_pickupLocality = resObj.locality;
 				isPickupLocationValid = true;
 			}
 		},
 			function error(){});
-			
+
 			if(!data[0].modify)
 				checkPricing();
 
 		});
-		
+
 
 
 		$scope.$on('DropLocationChanged', function(event,data){
@@ -426,7 +426,7 @@ angular.module('corporateApp')
 			   		$rootScope.$broadcast('LogoutThisUser',{});
 			   		return;
 		   		}
-	   			
+
 	   			if(isEmpty(response.response_data) && response.status == 'success'){
 	   				console.log('We are sorry, please try after some time');
 	   			}
@@ -436,7 +436,7 @@ angular.module('corporateApp')
 		  			return;
 				}
 
-				var resObj = response.response_data.response_data;									
+				var resObj = response.response_data.response_data;
 
 				if(resObj.city == null || resObj.locality == null){
 					alert("Our service is not available in this locality.");
@@ -445,12 +445,12 @@ angular.module('corporateApp')
 					return;
 				}
 				else if(resObj.locality){
-					$scope.RTFS_dropLocality = resObj.locality;					
+					$scope.RTFS_dropLocality = resObj.locality;
  					isDropLocationValid = true;
  				}
 			},
-			function error(){});	
-				
+			function error(){});
+
 			if(!data[0].modify)
 				checkPricing();
 		});
@@ -464,9 +464,9 @@ angular.module('corporateApp')
 		}
 
 
-		$scope.$on('AirportLocationChanged',function(event,data){			
-			//direction 2= from airport			
-			$scope.direction = data.direction;			
+		$scope.$on('AirportLocationChanged',function(event,data){
+			//direction 2= from airport
+			$scope.direction = data.direction;
 			$scope.airportLocation = data.airportDetails.name;
 			$scope.airportLatLong.lat = data.airportDetails.latitude;
 			$scope.airportLatLong.lng = data.airportDetails.longitude;
@@ -490,24 +490,24 @@ angular.module('corporateApp')
 		});
 
 		$scope.carTypeChanged = function(car){
-		    
-		    $scope.selectedCarType = car.car_type;			
+
+		    $scope.selectedCarType = car.car_type;
 		    $scope.extra_km_fare= car.extra_km_fare;
 		    $scope.base_km= car.base_km;
 		    $scope.base_fare= car.base_fare;
 		    $scope.extra_hour_fare = car.extra_hour_fare ? car.extra_hour_fare : '';
-		    $scope.extra_hr_fare = car.extra_hour_fare ? (car.extra_hr_fare ? car.extra_hr_fare : '') : '';   
+		    $scope.extra_hr_fare = car.extra_hour_fare ? (car.extra_hr_fare ? car.extra_hr_fare : '') : '';
 		    $scope.surcharge = car.surcharge;
 
 		    $scope.traffic_time_pulse_rate = car.traffic_time_pulse_rate;
 		    $scope.trip_time_pulse_rate = car.trip_time_pulse_rate;
-
-		    if($scope.selectedCarType && ($scope.selectedBookType == 'p2p' || $scope.selectedBookType == 'at' || $scope.selectedBookType == 'at-km')){
+        getApproximateTripFare();
+		    /*if($scope.selectedCarType && ($scope.selectedBookType == 'p2p' || $scope.selectedBookType == 'at' || $scope.selectedBookType == 'at-km')){
 		    	getApproximateTripFare();
 		    }
 		    else{
 		    	$scope.estimatedFare = $scope.base_fare;
-		    }
+		    }*/
 
 		};
 
@@ -527,7 +527,7 @@ angular.module('corporateApp')
 				}
 
 				var phone = $scope.guestNumber;
-				var noArr  = phone.split("");	
+				var noArr  = phone.split("");
 
 				if(noArr[0] == '0'){
 					$('#valNmb')
@@ -535,7 +535,7 @@ angular.module('corporateApp')
 						.text("Number can't begin with '0'");
 					return false;
 				}
-				
+
 				if($scope.guestNumber.length!=10)
 				{
 					$('#valNmb')
@@ -543,7 +543,7 @@ angular.module('corporateApp')
 						.text('Please Enter 10 Digits.');
 
 					return false;
-				}		
+				}
 
 				return true;
 		};
@@ -551,7 +551,7 @@ angular.module('corporateApp')
 				//console.log("guestEmail :" + $scope.guestEmail);
 				$('#validateEmail').hide();
 
-				var gEmail  = $scope.guestEmail;				
+				var gEmail  = $scope.guestEmail;
 				var atIdx  = gEmail.indexOf("@");
 				var dotIdx = gEmail.lastIndexOf(".");
 
@@ -588,10 +588,10 @@ angular.module('corporateApp')
         		if(data.is_airport_km){
      				data.booking_type+='-km';
      			}
-        	}       	
+        	}
 
         	//console.log('The Booking type in modigy:', data.booking_type);
-			setCity(data.city, data.booking_type, data); 
+			setCity(data.city, data.booking_type, data);
 
 			if(data.direction == 2)
 				showFromAirport();
@@ -605,7 +605,7 @@ angular.module('corporateApp')
 			$scope.guestEmail  = data.customer_email;
 			$scope.pickupTime  = ($filter('date')(data.pickup_datetime, 'HH:mm:ss'));
 			/*console.log("inside ModifyThisBooking fun for MD");*/
-			$rootScope.$broadcast('modifyBookingData', {'datetime':data.pickup_datetime, 'dtime':data.pickup_time, 'ddate':data.pickup_date});			
+			$rootScope.$broadcast('modifyBookingData', {'datetime':data.pickup_datetime, 'dtime':data.pickup_time, 'ddate':data.pickup_date});
 
 		});
 
@@ -614,7 +614,7 @@ angular.module('corporateApp')
 			/*console.log("in Setcity ------------------");*/
 		    for(var i=0; i < $scope.cities.length; i++){
 		         if($scope.cities[i].name == city){
-                    $scope.myCity = $scope.cities[i];                    
+                    $scope.myCity = $scope.cities[i];
                     $scope.selectedCity = $scope.myCity.name;
                     $scope.selectedCityID = $scope.myCity.id;
                     $scope.$broadcast('ServiceCitySelected',$scope.selectedCityID);
@@ -635,10 +635,10 @@ angular.module('corporateApp')
 
 
 		function setBookType(bookType,data){
-			
+
 		    for(var i=0; i< $scope.bookType.length; i++){
                 if($scope.bookType[i].bookingType == bookType){
-                    $scope.myBookType = $scope.bookType[i];                       
+                    $scope.myBookType = $scope.bookType[i];
                     $scope.selectedBookType = $scope.bookType[i].bookingType;
                     break;
                 }
@@ -646,10 +646,10 @@ angular.module('corporateApp')
 
             $scope.removeDropLocation();
 
-            if($scope.selectedBookType == 'at' || $scope.selectedBookType == 'at-km'){        
+            if($scope.selectedBookType == 'at' || $scope.selectedBookType == 'at-km'){
 
 		    	$scope.fare_type = ($scope.selectedBookType == 'at' ? 1 : 2);
-            	var aName = (data.direction == 2 ? data.pickup_area : data.drop_area);          			
+            	var aName = (data.direction == 2 ? data.pickup_area : data.drop_area);
 				$scope.$broadcast('LoadAirportLocations',{'cityID':$scope.selectedCityID,'direction':data.direction, 'name':aName});
 
 				/*console.log("inside setBookType fun for MD");*/
@@ -664,7 +664,7 @@ angular.module('corporateApp')
             	$rootScope.$broadcast('modifyBookingData', {'pick': data.pickup_address, 'drop':data.drop_address});
             }
 
-            fetchCarType(data);            
+            fetchCarType(data);
 		}
 
 
@@ -693,8 +693,8 @@ angular.module('corporateApp')
 		    else{
 		    	var bType = data.booking_type;
 		    	var fType = '';
-		    	
-		    	if(data.city == "Bangalore" && (data.booking_type == 'at-km' || data.booking_type == 'at')){		    		
+
+		    	if(data.city == "Bangalore" && (data.booking_type == 'at-km' || data.booking_type == 'at')){
 		    		if(data.booking_type == 'at-km')
 		    			fType = 'km';
 
@@ -710,16 +710,16 @@ angular.module('corporateApp')
                     'pickup_time':$scope.pickupTime,
                     'pickup_area':data.pickup_area,
                     'pickup_date':$scope.pickupDate,
-                    'booking_type':data.booking_type,  
+                    'booking_type':data.booking_type,
                     'normalTrip':0,
                     'corporate_id':$scope.CorpID
                 };
 
                  if(fType == 'km')
                  	pricingData.fare_type = fType;
-                
+
                 //console.log('Pricing Data @ Edit :', pricingData);
-                
+
                 var pricingResource1 = GetPricingData.getPricingResource(pricingData);
                 pricingResource1.get(function(response){
 
@@ -737,11 +737,11 @@ angular.module('corporateApp')
 
 		function setCarType(carType){
 		    //console.log('Came Here Setting CarType from modification>>', carType);
-			for(var i=0; i<$scope.fareData.length; i++){			
-				if($scope.fareData[i].car_type == carType){					
-					$scope.myCar = $scope.fareData[i];			
-					$scope.carTypeChanged($scope.myCar);	
-					//console.log($scope.myCar);				
+			for(var i=0; i<$scope.fareData.length; i++){
+				if($scope.fareData[i].car_type == carType){
+					$scope.myCar = $scope.fareData[i];
+					$scope.carTypeChanged($scope.myCar);
+					//console.log($scope.myCar);
 					break;
 				}
 		    }
@@ -754,7 +754,7 @@ angular.module('corporateApp')
 		function getApproximateTripFare(){
 
 			var estFareData;
-			//console.log('Fetching Fare data');
+			console.log('Fetching Fare data');
 
 			if($scope.selectedBookType && $scope.selectedCity && $scope.selectedCarType && ($scope.dropLocation||!$scope.showDrop) && ($scope.pickupLocation || $scope.airportLocation)){
 
@@ -767,13 +767,13 @@ angular.module('corporateApp')
                     		'corporate_id':localStorageService.get('corp-id')
 		                 };
 
-		        console.log('The estimated Fare Data :', estFareData);		        
+		        console.log('The estimated Fare Data :', estFareData);
 
                 var fareResource = GetEstimatedFare.getResource(estFareData);
                 fareResource.get(function(response){
 
                 	//console.log('Estimated fare API Response :', response);
-                	if(response.status == 'error' && response.error_code == 400){				   		
+                	if(response.status == 'error' && response.error_code == 400){
 				   		$rootScope.$broadcast('LogoutThisUser',{});
 				   		return;
 		   			}
@@ -805,8 +805,8 @@ angular.module('corporateApp')
 
             if($scope.pickupTime && $scope.pickupDate && $scope.selectedBookType && $scope.selectedCity && ($scope.dropLocation||!$scope.showDrop) && ($scope.pickupLocation || $scope.airportLocation)){
 				$('#carType .loader').show();
-				
-		    	if($scope.selectedCity == "Bangalore" && ($scope.selectedBookType == 'at-km' || $scope.selectedBookType == 'at')){		    		
+
+		    	if($scope.selectedCity == "Bangalore" && ($scope.selectedBookType == 'at-km' || $scope.selectedBookType == 'at')){
 		    		if($scope.selectedBookType == 'at-km')
 		    			fType = 'km';
         			bType = 'at';
@@ -831,7 +831,7 @@ angular.module('corporateApp')
                  if(fType == 'km')
                  	pricingData.fare_type = fType;
 
-                //console.log('The Pricing Data :',pricingData);                 
+                //console.log('The Pricing Data :',pricingData);
 
                 var pricingResource = GetPricingData.getPricingResource(pricingData);
                 pricingResource.get(function(response){
@@ -839,17 +839,17 @@ angular.module('corporateApp')
 					$scope.estimatedFare = '...';
 
                 	$('#carType .loader').hide();
-                	
+
                 	if(Object.getOwnPropertyNames(response.response_data).length === 0){
 			  			console.warn("Pricing API in returned empty Object");
 			  			return;
 					}
-					
+
                     if($scope.direction == 2 && $scope.selectedCityID == 1)
                     	$scope.fareData = response.response_data.response_data.fare_obj_from;
                     else
                     	$scope.fareData =  response.response_data.response_data.fare_obj;
-                  
+
                    //console.log("The fareDataVar :", $scope.fareData);
 	                   /*This is to remove duplicate car types*/
 	                   /*var fareDataVar = $scope.fareData;
@@ -865,34 +865,34 @@ angular.module('corporateApp')
 					  	console.log("scope.fareData after modification :", $scope.fareData);*/
 
 					  	if($scope.selectedCarType != ''){
-					  		for(var a=0; a<=$scope.fareData.length; a++){				  			
+					  		for(var a=0; a<=$scope.fareData.length; a++){
 					  			if($scope.fareData[a].car_type == $scope.selectedCarType){
 					  				$scope.carTypeChanged($scope.fareData[a]);
 					  				console.log("inside checkPricing selectedCarType not null check");
 					  			}
-					  			break;	
+					  			break;
 					  		}
-					  	} 
+					  	}
 
 
                 });
 
             }
             else{
-                   //console.log("All Required Vars not present for Pricing API :", pricingData);   
+                   //console.log("All Required Vars not present for Pricing API :", pricingData);
                 }
 
         }
 
 
-        
+
         function clearBookingData(){
 
-        	$scope.booking_id 			= '';        	
+        	$scope.booking_id 			= '';
         	$scope.guestName 			= '';
         	$scope.guestNumber 			= '';
-        	$scope.guestEmail 			= '';    		
-			$scope.userInstructions 	= '';        	
+        	$scope.guestEmail 			= '';
+			$scope.userInstructions 	= '';
         	$scope.pickupLocation 		= '';
         	$scope.dropLocation 		= '';
         	$scope.direction 			= '';
@@ -901,7 +901,7 @@ angular.module('corporateApp')
         	$scope.RTFS_dropLocality	= '';
         	$scope.RTFS_pickupLocality 	= '';
         	$scope.selectedCarType 		= '';
-        	$scope.selectedBookType 	= '';        	
+        	$scope.selectedBookType 	= '';
         	$scope.selectedCity 		= '';
         	$scope.selectedCityID 		= '';
 		    $scope.extra_km_fare 		= '';
@@ -924,16 +924,16 @@ angular.module('corporateApp')
 
 
         	disableLocFields();
-        	
+
 		    $rootScope.$broadcast('modifyBookingData', {'pick': '', 'drop':''});
         	$scope.$broadcast('setmyTime', {'mytime':''});
         	$scope.$broadcast('setmyDate', {'mydate':''});
 
-        	//console.log("Payment mode",$scope.paymentMode);       	
+        	//console.log("Payment mode",$scope.paymentMode);
 
 		    hideAirport();
         }
-        
+
 
         function performSanityCheck(){
 
@@ -941,7 +941,7 @@ angular.module('corporateApp')
         	var sanityChekClear = false;
         	var guestNoValidataion = $scope.guestNumberChanged();
         	var guestEmailValidataion = $scope.guestEmailChanged();
-        	       	
+
         	if(!$scope.selectedCity)
         		missingData = 'Please Select City';
         	else if(!$scope.selectedBookType)
@@ -952,7 +952,7 @@ angular.module('corporateApp')
         		missingData = 'Please provide Guest Email';
         	else if(!$scope.guestNumber || $scope.guestNumber == '')
         		missingData = 'Please Provide Guest Contact Number';
-        	else if(!$scope.selectedCarType)          	      		
+        	else if(!$scope.selectedCarType)
         		missingData = 'Please Select Car Type';
         	else if(!isPickupLocationValid )
         		missingData = 'Pick Location should be withing the selected City.';
@@ -1004,13 +1004,13 @@ angular.module('corporateApp')
 			3:prepaid
 			4:cash
 			5:credit*/
-			
+
 			if($scope.paymentMode == 5)
-				availableBalance = availableBalance * -1; 
+				availableBalance = availableBalance * -1;
 
 			console.log("Inside balanceCheck:", prepaidBalance, cData.overDraftLimit, upcomingBookingsAmount, $scope.estimatedFare);
 			var availableBalance = (prepaidBalance + cData.overDraftLimit) - upcomingBookingsAmount;
-			
+
 			if($scope.estimatedFare == "..." || !$scope.estimatedFare)
 			{
 				$scope.estimatedFare = 0;
@@ -1021,22 +1021,22 @@ angular.module('corporateApp')
 				var bookingdata = {'reason': "Insufficient Balance!! Please make sure you have sufficent Balance to make Bookings." };
             	$rootScope.$broadcast('BookingFailed', {'bookingdata': bookingdata});
 				return false;
-			}				
+			}
 
         }
 
-       
+
 /*-------------------------- Confirm Booking ------------------------*/
 
-		$scope.confirmBooking = function(){	
-			
+		$scope.confirmBooking = function(){
+
 			var validation = $("#newForm").valid();
-			
+
 			if(validation == false){
 				alert('Please Provide All Information.');
 				return false;
 			}
-		
+
 			var sanityCheck = performSanityCheck();
 			if(!sanityCheck){
 				return;
@@ -1048,11 +1048,11 @@ angular.module('corporateApp')
 			}
 
 			var bType = $scope.selectedBookType;
-			if($scope.selectedCity == "Bangalore" && ($scope.selectedBookType == 'at-km' || $scope.selectedBookType == 'at')){			
+			if($scope.selectedCity == "Bangalore" && ($scope.selectedBookType == 'at-km' || $scope.selectedBookType == 'at')){
         		bType = 'at';
 		    }
 
-			
+
 			var data = {
 			           'url':'/answer-call/medusa_book_for_later/',
                        'remote_host': 'RTFS_URL',
@@ -1065,13 +1065,13 @@ angular.module('corporateApp')
                        'customer_name':$scope.guestName,
                        'customer_number':$scope.guestNumber,
                        'customer_email':$scope.guestEmail,
-                       
+
                        'pickup_area':$scope.RTFS_pickupLocality,
                        'pickup_address':$scope.pickupLocation,
                        'pickup_latitude':$scope.pickupLatLong.lat,
                        'pickup_longitude':$scope.pickupLatLong.lng,
                        'pickup_time':$scope.pickupTime,
-                       'pickup_date':$scope.pickupDate,                       
+                       'pickup_date':$scope.pickupDate,
                        'drop_area':$scope.RTFS_dropLocality,
                        'drop_address':$scope.dropLocation,
                        'drop_latitude':$scope.dropLatLong.lat,
@@ -1086,7 +1086,7 @@ angular.module('corporateApp')
                        'extra_hour_fare':$scope.extra_hour_fare,
                        'extra_hr_fare':$scope.extra_hour_fare,
                        'surcharge':$scope.surcharge,
-                       
+
                        'traffic_time_pulse_rate':$scope.traffic_time_pulse_rate,
                        'trip_time_pulse_rate':$scope.trip_time_pulse_rate,
 
@@ -1098,7 +1098,7 @@ angular.module('corporateApp')
              if($scope.selectedCityID == 1 && $scope.selectedBookType == 'at')
              	data.fare = $scope.base_fare;
 
-            data.pickup_address = encodeURIComponent(data.pickup_address);	
+            data.pickup_address = encodeURIComponent(data.pickup_address);
 			data.drop_address = encodeURIComponent(data.drop_address);
 			data.pickup_area  = encodeURIComponent(data.pickup_area);
 			data.drop_area    = encodeURIComponent(data.drop_area);
@@ -1112,7 +1112,7 @@ angular.module('corporateApp')
 			$('#newForm .spin').show();
 
             var myRes = $resource("/api/generic_request/",{});
-            
+
             myRes.save(data, function success(response){
 		  		var resData = response.response_data || {};
 		  			$('#newForm .spin').hide();
@@ -1126,7 +1126,7 @@ angular.module('corporateApp')
 						if(stat=='' && rtfsData.booking_confirmed == true){
 							stat = 'Confirmed';
 						}
-						
+
 						$rootScope.$broadcast('BookingSuccessful', {
 							'bookingdata': {
 								'booking_id': bookid,
@@ -1144,7 +1144,7 @@ angular.module('corporateApp')
                         if(resData.error_code == 201) {
                         	reason = resData.error_desc;
                         }
-                        $rootScope.$broadcast('BookingFailed', {'bookingdata': {'reason': reason }});                        
+                        $rootScope.$broadcast('BookingFailed', {'bookingdata': {'reason': reason }});
                     }
                },
                function error(){}

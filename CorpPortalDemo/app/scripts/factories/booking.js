@@ -77,13 +77,12 @@ angular.module('corporateApp')
 	.factory('GetEstimatedFare', function($resource){
 		return {
 		    getResource: function(data){
-		        return $resource('api/generic_request/', {
-		    		'url':'/answer-call/get_estimated_fare/',
+		        return $resource('api/get_estimated_fare/', {
+		    		'url':'api/get_estimated_fare/',
 				    'remote_host':'RTFS_URL',
 				    'city':data.city,
-					'pickup_area':data.pickup_area,
 					'drop_area':data.drop_area,
-                	'booking_type':data.booking_type,
+              'booking_type':data.booking_type,
 					'car_type':data.car_type,
 					'corporate_id':data.corporate_id
 				});
