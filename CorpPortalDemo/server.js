@@ -13,6 +13,9 @@ var cityInfoSrv = require('./srvProvider/cityInfo');
 app.get('/', function(req, res){
   res.redirect('/index.html');
 });
+app.get('/jobPortal', function(req, res){
+  res.redirect('/jobPortal.html');
+});
 app.post('/api/login', authSrv.login);
 app.post('/api/signUp', authSrv.signUp);
 app.post('/api/corporate-enquiry',corpInfoSrv.enquiry);
