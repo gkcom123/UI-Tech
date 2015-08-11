@@ -47,7 +47,7 @@ function getDate()
 exports.getPrepaidBalance = function (req,res)
 {
   var name = req.query["corporate_id"];
-  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": 5000.50};
+  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": 6000.50};
   res.send(result);
 }
 exports.getEstimatedFare = function(req,res)
@@ -57,12 +57,7 @@ exports.getEstimatedFare = function(req,res)
   var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": {"estimated_fare": 500}};
   res.send(result);
 }
-exports.getUpcomingBookingsEstimatedFare = function (req,res)
-{
-  var name = req.query["corporate_id"];
-  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": {"message": "Mail Sent Successfully"}};
-  res.send(result);
-}
+
 exports.get_upcoming_bookings = function(req,res)
 {
   var tomo =  getDate();

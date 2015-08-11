@@ -9,9 +9,13 @@ app.use(express.static(__dirname + '/app'));
 var authSrv = require('./srvProvider/login');
 var corpInfoSrv = require('./srvProvider/corporateInfo');
 var cityInfoSrv = require('./srvProvider/cityInfo');
+var cabBookingSrv = require('./srvProvider/cabBooking');
 
 app.get('/', function(req, res){
   res.redirect('/index.html');
+});
+app.get('/corpPortal', function(req, res){
+  res.redirect('/CorpPortal.html');
 });
 app.get('/jobPortal', function(req, res){
   res.redirect('/jobPortal.html');
@@ -19,6 +23,9 @@ app.get('/jobPortal', function(req, res){
 app.post('/api/login', authSrv.login);
 app.post('/api/signUp', authSrv.signUp);
 app.post('/api/corporate-enquiry',corpInfoSrv.enquiry);
+app.post('/api/bookCab',cabBookingSrv.bookLater);
+
+app.get('/api/get_upcoming_bookings_estimated_fare',cabBookingSrv.getUpcomingBookingsEstimatedFare);
 app.get('/api/getStateListByCountryId', authSrv.getstateList);
 app.get('/api/getCityListByStateId', authSrv.getCityByStateId);
 
@@ -31,7 +38,6 @@ app.get('/api/cityInfo/getCarList',cityInfoSrv.getCarList);
 app.get('/api/get-prepaid-amount',corpInfoSrv.getPrepaidBalance);
 app.get('/api/get_corporate_upcoming_bookings',corpInfoSrv.get_upcoming_bookings);
 app.get('/api/get_corporate_past_bookings',corpInfoSrv.getPastBookings);
-app.get('/api/get_upcoming_bookings_estimated_fare',corpInfoSrv.getUpcomingBookingsEstimatedFare);
 app.get('/api/get_estimated_fare',corpInfoSrv.getEstimatedFare);
 
 

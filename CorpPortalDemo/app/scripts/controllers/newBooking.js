@@ -998,15 +998,10 @@ angular.module('corporateApp')
         	return sanityChekClear;
         }
 
-        function performBalanceCheck (argument) {
-
-        	/*RTFS Payment mode
-			3:prepaid
-			4:cash
-			5:credit*/
-
-			if($scope.paymentMode == 5)
-				availableBalance = availableBalance * -1;
+        function performBalanceCheck (argument)
+        {
+          if($scope.paymentMode == 5)
+				    availableBalance = availableBalance * -1;
 
 			console.log("Inside balanceCheck:", prepaidBalance, cData.overDraftLimit, upcomingBookingsAmount, $scope.estimatedFare);
 			var availableBalance = (prepaidBalance + cData.overDraftLimit) - upcomingBookingsAmount;
@@ -1055,7 +1050,7 @@ angular.module('corporateApp')
 
 			var data = {
 			           'url':'/answer-call/medusa_book_for_later/',
-                       'remote_host': 'RTFS_URL',
+                       'remote_host': 'URL',
                        'channel': 'online',
                        'source':'corporate',
                        'booking_id': $scope.booking_id,
@@ -1102,16 +1097,9 @@ angular.module('corporateApp')
 			data.drop_address = encodeURIComponent(data.drop_address);
 			data.pickup_area  = encodeURIComponent(data.pickup_area);
 			data.drop_area    = encodeURIComponent(data.drop_area);
-
-            //console.log(data);
-            /*if( data.city == 'Delhi'){
-            	alert("Sorry! Dear customer, we are currently undergoing a system upgrade due to which your booking could not be confirmed. Please try after some time. We apologize for the inconvenience.");
-            	return false;
-            }*/
-
 			$('#newForm .spin').show();
 
-            var myRes = $resource("/api/generic_request/",{});
+            var myRes = $resource("/api/bookCab/",{});
 
             myRes.save(data, function success(response){
 		  		var resData = response.response_data || {};

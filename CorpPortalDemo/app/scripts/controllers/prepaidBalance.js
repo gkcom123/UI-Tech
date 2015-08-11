@@ -7,15 +7,15 @@ angular.module('corporateApp')
 		'GetTotalCurrentTripFare',
 		'localStorageService',
 		function( $scope, $rootScope, GetPrepaidBalance, GetTotalCurrentTripFare, localStorageService ){
-      	
+
       		var cData = localStorageService.get('corp-details');
 			$scope.balance;
 			$scope.head1;
 			$scope.head2;
 			$scope.pbartype;
 			$scope.maxLimit;
-			$scope.pPercent;      
-			$scope.corpID = localStorageService.get('corp-id');  
+			$scope.pPercent;
+			$scope.corpID = localStorageService.get('corp-id');
 
 			$scope.payType = cData.paymentType;
 			$scope.showPrepaidLink = true;
@@ -37,18 +37,18 @@ angular.module('corporateApp')
 			loadCurrentTrips();
 
 	  function loadPrepaidBalance() {
-	  	
-		  	var prepaidBalanceResource = GetPrepaidBalance.getResource(localStorageService.get('corp-id'))      
+
+		  	var prepaidBalanceResource = GetPrepaidBalance.getResource(localStorageService.get('corp-id'));
 		  	prepaidBalanceResource.get(function(response){
 
-			  	if(response.status == 'error' && response.error_code == 400){		
+			  	if(response.status == 'error' && response.error_code == 400){
 				   		$rootScope.$broadcast('LogoutThisUser',{});
 				   		return;
 				}
-				
+
 				$scope.balance = response.response_data;
 				$rootScope.$emit('PrepaidBalanceAmountEvent', $scope.balance);
-				console.log("Prepaid balance API Response :", response);		
+				console.log("Prepaid balance API Response :", response);
 				if($scope.payType == 4 || $scope.payType ==5){
 					setCreditProgress();
 					$scope.showProgress = true;
@@ -56,22 +56,22 @@ angular.module('corporateApp')
 				else{
 					$scope.showProgress = false;
 				}
-		  	});	  
-	  }     
-	  
+		  	});
+	  }
+
 
 	  function loadCurrentTrips(){
 
 		  var totalCurrentTripsResource = GetTotalCurrentTripFare.getResource(localStorageService.get('corp-id'));
 		  totalCurrentTripsResource.get(function(response){
 
-			  	if(response.status == 'error' && response.error_code == 400){		   		
+			  	if(response.status == 'error' && response.error_code == 400){
 				   		$rootScope.$broadcast('LogoutThisUser',{});
 				   		return;
 				   }
 
 				console.log("GetTotalCurrentTripFare API Response:", response);
-				
+
 				$scope.totalFare = response.response_data.total_estimated_fare;
 				$scope.tripsCount = response.response_data.count;
 				$rootScope.$emit('UpcomingBookingsAmountEvent',$scope.totalFare);
@@ -90,7 +90,7 @@ angular.module('corporateApp')
 
 	  function setCreditProgress(){
 	  	 if($scope.balance < 0)
-	  	 	$scope.balance = $scope.balance * -1;	  	 
+	  	 	$scope.balance = $scope.balance * -1;
 
 		  if($scope.balance <= $scope.maxLimit*.5)
 		  		$scope.pbartype = "success";
@@ -99,7 +99,7 @@ angular.module('corporateApp')
 		  else if($scope.balance > $scope.maxLimit*.75)
 		  		$scope.pbartype = "danger";
 
-		  $scope.pPercent = (($scope.balance * 100) / $scope.maxLimit).toFixed(1);		  
+		  $scope.pPercent = (($scope.balance * 100) / $scope.maxLimit).toFixed(1);
 	  }
 
 	  $rootScope.$on('RefreshCurrentTripsCount', function(event, data){

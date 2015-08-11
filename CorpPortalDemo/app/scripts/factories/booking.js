@@ -70,7 +70,7 @@ angular.module('corporateApp')
 	.factory('GetTotalCurrentTripFare',function($resource){
 		return {
 			getResource: function(id){
-				return $resource('api/get_upcoming_bookings_estimated_fare/',{'url':'answer-call/get_upcoming_bookings_estimated_fare/','corporate_id': id, 'remote_host':'RTFS_URL'});
+				return $resource('api/get_upcoming_bookings_estimated_fare/',{'url':'answer-call/get_upcoming_bookings_estimated_fare/','corporate_id': id, 'remote_host':'URL'});
 			}
 		}
 	})
