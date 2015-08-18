@@ -10,8 +10,10 @@ exports.bookLater = function(req,res)
     "response_data": {"status": "success", "error_desc": "", "error_code": "",
       "response_data": {"booking_id": "GKCOM-C123456",
         "trip_count": 0, "status_message": "", "booking_confirmed": true, "wait": false}}};
+  setTimeout(function(){
+    res.send(result);
+  }, 1000);
 
-  res.send(result);
 };
 exports.getUpcomingBookingsEstimatedFare = function(req,res)
 {

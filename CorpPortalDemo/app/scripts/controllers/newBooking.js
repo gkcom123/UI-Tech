@@ -160,7 +160,7 @@ angular.module('corporateApp')
 
 
         $tfsApi.getCities(function( cities ){
-     		debugger;
+     		//debugger;
      		$scope.cities = cities;
 
      		//Re-enabling Dehli

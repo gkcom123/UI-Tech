@@ -20,6 +20,14 @@ exports.getCorporateDetails = function(req,res)
 
   res.send(result);
 };
+exports.getCorpBookingCount = function(req,res)
+{
+  var name = req.query["corporate_id"];
+  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": {"cancelled": 2, "issue_booking": 1, "serviced": 3}};
+  setTimeout(function(){
+    res.send(result);
+  }, 1000);
+};
 exports.enquiry = function(req,res)
 {
   var reqObj = JSON.parse(Object.keys(req.body)[0]);
@@ -57,7 +65,45 @@ exports.getEstimatedFare = function(req,res)
   var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": {"estimated_fare": 500}};
   res.send(result);
 }
+exports.getCorpReceipts = function(req,res)
+{
 
+  var name = req.query["corporate_id"];
+  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": [
+    {"status": "Paid", "outstandingAmount": 0.0, "userId": 0, "corporateId": 3,
+      "fileName": "a6fbb51b-a7a6-4562-9100-ec4e65126f6f/566312.pdf",
+      "paymentDate": "2015-06-03", "receiptNumber": "GKCOM-1488567612", "invoiceNumber": "",
+      "paidAmount": 1500.0, "id": 133, "purposePiad": "Prepaid Payment"}]};
+  setTimeout(function(){
+    res.send(result);
+  }, 500);
+};
+exports.getCorpInvoice = function(req,res)
+{
+
+  var name = req.query["corporate_id"];
+  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": [
+    {"status": "Paid", "outstandingAmount": 100.0, "userId": 0, "corporateId": 3,
+      "fileName": "a6fbb51b-a7a6-4562-9100-ec4e65126f6f/566312.pdf",
+      "invoiceDate": "2015-06-03", "receiptNumber": "", "invoiceNumber": "GKCOM-124563",
+      "amount": 1300.0, "id": 133, "purposePiad": "Prepaid Payment"}]};
+  setTimeout(function(){
+    res.send(result);
+  }, 500);
+};
+exports.getCorporateTransaction = function(req,res)
+{
+
+  var name = req.query["corporate_id"];
+  var result = {"status": "success", "error_desc": "", "error_code": "", "response_data": [
+    {"status": "Paid", "postTransactionBalance": 100.0, "userId": 0, "corporateId": 3,
+      "fileName": "a6fbb51b-a7a6-4562-9100-ec4e65126f6f/566312.pdf",
+      "transactionDateTime": "2015-06-07", "receiptNumber": "", "transactionId": "GKCOM-1263",
+      "transactionValue": 600.0, "id": 133, "transactionType": "DEBIT"}]};
+  setTimeout(function(){
+    res.send(result);
+  }, 500);
+};
 exports.get_upcoming_bookings = function(req,res)
 {
   var tomo =  getDate();

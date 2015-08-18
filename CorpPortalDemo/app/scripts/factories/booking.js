@@ -56,7 +56,7 @@ angular.module('corporateApp')
 	.factory('GetBookingCount',function($resource){
 		return {
 		    getResource: function(id){
-		        return $resource('api/generic_request/',{'url':'/answer-call/get_corporate_booking_counts_json/', 'corporate_id':id, 'remote_host':'RTFS_URL'});
+		        return $resource('api/getCorpBookingCount/',{'url':'/api/get_corporate_booking_counts_json/', 'corporate_id':id, 'remote_host':'URL'});
 	    	}
 		}
 	})
@@ -124,13 +124,13 @@ angular.module('corporateApp')
 	.factory('GetCorporateReceipts', function($resource){
 		return {
 			getResource: function(fromDate, tillDate, id){
-				return $resource('api/generic_request/',{
-					'url':'/settlements/api/settlement/getCorporateRecipts/',
+				return $resource('api/getCorporateRecipts/',{
+					'url':'/api/settlement/getCorporateRecipts/',
 				 	'corporateId': id,
 				 	'corporate_id': id,
 				 	'fromDate': fromDate,
 				 	'tillDate': tillDate,
-				 	'remote_host':'SETTLEMENT_URL'
+				 	'remote_host':'URL'
 				});
 			}
 		}
@@ -138,13 +138,13 @@ angular.module('corporateApp')
 	.factory('GetCorporateInvoices', function($resource){
 		return {
 			getResource: function(fromDate, tillDate, id){
-				return $resource('api/generic_request/', {
+				return $resource('api/getCorporateInvoice/', {
 					'url':'/settlements/api/settlement/getCorporateInvoice',
 				 	'corporateId': id,
 				 	'corporate_id': id,
 				 	'fromDate' 	 : fromDate,
 				 	'tillDate'	 : tillDate,
-				 	'remote_host':'SETTLEMENT_URL'
+				 	'remote_host':'URL'
 				});
 			}
 		}

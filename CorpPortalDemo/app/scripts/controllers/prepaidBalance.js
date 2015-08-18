@@ -69,9 +69,6 @@ angular.module('corporateApp')
 				   		$rootScope.$broadcast('LogoutThisUser',{});
 				   		return;
 				   }
-
-				console.log("GetTotalCurrentTripFare API Response:", response);
-
 				$scope.totalFare = response.response_data.total_estimated_fare;
 				$scope.tripsCount = response.response_data.count;
 				$rootScope.$emit('UpcomingBookingsAmountEvent',$scope.totalFare);

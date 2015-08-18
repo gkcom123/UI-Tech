@@ -8,14 +8,14 @@ angular.module('corporateApp')
 
 		GetTransactionReport : function(fromDate, tillDate, id, callbackFn){
 			callbackFn = callbackFn || $.noop;
-			request = $resource("api/generic_request");
+			request = $resource("api/getCorporateTransaction");
             data = {
-                    'url':'/settlements/api/settlement/getCorporateTransaction',
+                    'url':'/api/settlement/getCorporateTransaction',
 				 	'corporateId': id,
-				 	'corporate_id': id, 
+				 	'corporate_id': id,
 				 	'fromDate': fromDate,
 				 	'tillDate': tillDate,
-				 	'remote_host':'SETTLEMENT_URL'
+				 	'remote_host':'_URL'
             	};
 
             request.get(data, function success( res ){
@@ -33,8 +33,8 @@ angular.module('corporateApp')
 			callbackFn = callbackFn || $.noop;
 			request = $resource("api/download_report/");
             data = {
-                    'url':'/settlements/api/settlement/downloadCorporateTxnHistoryPDF',				 	
-				 	'corporate_id': id, 
+                    'url':'/settlements/api/settlement/downloadCorporateTxnHistoryPDF',
+				 	'corporate_id': id,
 				 	'fromDate': fromDate,
 				 	'tillDate': tillDate,
 				 	'remote_host':'SETTLEMENT_URL'
@@ -53,8 +53,8 @@ angular.module('corporateApp')
 			callbackFn = callbackFn || $.noop;
 			request = $resource("api/download_report/");
             data = {
-                    'url':'/settlements/api/settlement/downloadCorporateTxnHistoryXL',				 	
-				 	'corporate_id': id, 
+                    'url':'/settlements/api/settlement/downloadCorporateTxnHistoryXL',
+				 	'corporate_id': id,
 				 	'fromDate': fromDate,
 				 	'tillDate': tillDate,
 				 	'remote_host':'SETTLEMENT_URL'

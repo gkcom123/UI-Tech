@@ -30,6 +30,7 @@ app.get('/api/getStateListByCountryId', authSrv.getstateList);
 app.get('/api/getCityListByStateId', authSrv.getCityByStateId);
 
 app.get('/api/get-corporate-details',corpInfoSrv.getCorporateDetails);
+app.get('/api/getCorpBookingCount',corpInfoSrv.getCorpBookingCount);
 app.get('/api/get-citylist',cityInfoSrv.getCityList);
 app.get('/api/cityInfo/getProdByCityId',cityInfoSrv.getProdList);
 app.get('/api/cityInfo/getPolygonByCityId',cityInfoSrv.getPolygonByCityId);
@@ -39,6 +40,10 @@ app.get('/api/get-prepaid-amount',corpInfoSrv.getPrepaidBalance);
 app.get('/api/get_corporate_upcoming_bookings',corpInfoSrv.get_upcoming_bookings);
 app.get('/api/get_corporate_past_bookings',corpInfoSrv.getPastBookings);
 app.get('/api/get_estimated_fare',corpInfoSrv.getEstimatedFare);
+app.get('/api/getCorporateRecipts',corpInfoSrv.getCorpReceipts);
+app.get('/api/getCorporateInvoice',corpInfoSrv.getCorpInvoice);
+app.get('/api/getCorporateTransaction',corpInfoSrv.getCorporateTransaction);
+
 
 
 /*
