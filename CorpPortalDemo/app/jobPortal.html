@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="description" content="">
+   <meta name="description" content="Demo Web page">
    <meta name="author" content="Gunjan Kumar" >
 
-   <title>Simple Sidebar - Start Bootstrap Template</title>
+   <title>Dashboard</title>
 
  	<!-- Bootstrap Core CSS -->
    <link href="styles/bootstrap.min.css" rel="stylesheet">
@@ -31,18 +31,18 @@
     	<div id="sidebar-wrapper">
      		<ul class="sidebar-nav nav nav-tabs">
         		<li><span >&nbsp;</span></li>
-         	<li id="parent1"><a href="#account" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a></li>
+         	<li id="parent1"><a href="#account" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a>
          		<ul class="sub-menu nav nav-tabs" style="display:none;" id="child1">
                     <li><a href="#addUser" data-toggle="tab">User</a></li>
                     <li><a href="#ab" data-toggle="tab">Budget</a></li>
                     <li><a href="#ac" data-toggle="tab">Password</a></li>
-         		</ul>
-	       	<li id="parent2"><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-briefcase"></span> JOBS</a></li>
+         		</ul></li>
+	       	<li id="parent2"><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-briefcase"></span> JOBS</a>
 	       		<ul class="sub-menu nav nav-tabs" style="display:none;" id="child2">
                     <li><a href="#addNewJob" data-toggle="tab">Add new</a></li>
                     <li><a href="#manageJobs" data-toggle="tab">Manage jobs</a></li>
                     <li><a href="#bc" data-toggle="tab">Expired jobs</a></li>
-         		</ul>
+         		</ul></li>
 	       	<li><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> ANALYTICS</a></li>
       	</ul>
      	</div>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-lg-4 text-center"><h4>JOIL SYSTEM</h4></div>
                     <div class="col-lg-4 text-right">
-                        Hello, Adrian <span class="glyphicon glyphicon-off"></span> LOGOUT
+                        Hello, Adrian <button class="btn logoutBtn"><span class="glyphicon glyphicon-off"></span></button>LOGOUT
                     </div>
               	</div>
           	</div>
@@ -176,7 +176,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Type of job</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -198,7 +198,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Industry</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -206,8 +206,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
-								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label text-right">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+					        </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -220,7 +224,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Rate</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -228,8 +232,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -242,7 +250,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Duration</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -256,7 +264,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Location-country</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -270,7 +278,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Location-city</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -284,7 +292,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Travel</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -292,8 +300,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -306,7 +318,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Language</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -314,8 +326,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -328,7 +344,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Start date</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -336,8 +352,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -347,12 +367,12 @@
 					    	</div>
 					 	</div>
 
-						<div class="well well-sm inner-well" style="width: 93%;">Basic Info</div><button class="btn" type="submit">Update</button>
+						<div class="well well-sm inner-well" style="width: 91%;">Basic Info</div><button class="btn" type="submit">Update</button>
 						<div class="row">
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">DP</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -360,8 +380,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -374,7 +398,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">SNP</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -382,8 +406,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -396,7 +424,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">PPDS</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -404,8 +432,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -418,7 +450,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">GATP</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -426,8 +458,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -440,7 +476,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">Hana</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -448,8 +484,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -462,7 +502,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">CIF</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -470,8 +510,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -484,7 +528,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">BI</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -492,8 +536,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -506,7 +554,7 @@
 					  		<div class="col-md-2 text-right">
 					    		<label class="control-label">SNP Optimiser</label><span class="glyphicon glyphicon-menu-right"></span>
 					    	</div>
-					    	<div class="col-sm-10" style="display:inline-flex;">
+					    	<div class="col-sm-4">
 								<select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
@@ -514,8 +562,12 @@
 								  <option>4</option>
 								  <option>5</option>
 								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
 								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-								<select class="form-control leftSelect">
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
 								  <option>1</option>
 								  <option>2</option>
 								  <option>3</option>
@@ -753,7 +805,7 @@
   	<!-- /#wrapper -->
 
    <!-- jQuery -->
-   <script src="vendor/jquery/jquery.js"></script>
+   <script src="vendor/jquery/jquery.min.js"></script>
 
    <!-- Bootstrap Core JavaScript -->
    <script src="vendor/bootstrap/bootstrap.min.js"></script>
