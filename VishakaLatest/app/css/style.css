@@ -1,0 +1,297 @@
+/* Toggle Styles */
+body{background:#a7cbed;}
+html{overflow-x: hidden;}
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#wrapper.toggled {
+    padding-left: 150px;
+}
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 150px;
+    width: 0;
+    height: 100%;
+    margin-left: -150px;
+    overflow-y: auto;
+    background: #81b4e5;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+    width: 150px;
+}
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 10px;
+    z-index: 1;
+    background:#333;color:#fff;
+}
+#page-content-wrapper h4{margin: 0}
+#page-content-wrapper a{color:#fff;}
+#page-content-wrapper button.logoutBtn{
+    border-radius: 50%;
+    padding: 2px 6px;
+    color: #555;
+    margin:-2px 5px;
+    outline: none;
+}
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -150px;
+}
+
+/* Sidebar Styles */
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sidebar-nav li {
+	width:150px;   
+    line-height: 40px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #f2f2f2;
+}
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+    
+}
+.sidebar-nav li.active{background:#000;}
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+.sidebar-nav > .sidebar-brand a {
+    color: #f2f2f2;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+.sub-menu li{
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+}
+.sub-menu li a{
+	color: #555;
+}
+ .sub-menu li a:hover{
+	color:#555;
+	background:#ccc; 
+ }
+.sub-menu li.active > a,
+.sub-menu li.active > a:hover,
+.sub-menu li.active > a:focus {
+  color: #fff;
+  cursor: default;
+  background-color: #555;
+  border: 1px solid #555;
+  border-bottom-color: transparent;
+}
+
+.caretdown {
+    border-left: 10px solid #000000;
+    border-bottom: 6px solid rgba(0, 0, 0, 0);
+    border-top: 6px solid rgba(0, 0, 0, 0);
+    content: "";
+    display: inline-block;
+    height: 0;
+	 z-index: 9;
+    width: 0;
+    position: absolute;
+    right: -1px;
+}
+.nav-tabs>li>a {margin-right: 0}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #fff;
+  cursor: default;
+  background-color: #555;
+  border: 1px solid #555;
+  border-bottom-color: transparent;
+}
+.tab-content {
+	padding: 10px;
+}
+.tab-content ul li span.glyphicon{
+	background: #333;
+  color: #a7cbed;
+  font-size: 30px;
+  border-radius: 50%;
+  padding: 30px;
+  margin: 50px 50px 15px 50px;
+  cursor: pointer;
+}
+.tab-content ul li span.glyphicon:hover{
+	background: #666;
+  color: #a7cbed;
+}
+.tab-content ul li p{
+	font-size: 14px;
+	font-weight: bold;
+	color: #333;
+	border-top:2px solid #333;
+	margin:15px 40px;
+	padding-top: 10px; 
+}
+.main-well {
+    background: #56616b;
+    color: #fff;
+    border:1px solid #56616b;
+    text-transform: uppercase;
+}
+.list-group {width: 90%;}
+.list-group-item {
+  background: #4f6092; 
+  color: #fff;
+  border: 1px solid #4f6092;
+  text-transform: uppercase;
+ }
+.tab-pane table{
+	width: 100%;
+	background-color: transparent;
+}
+.tab-pane table thead{
+	text-transform: uppercase;
+	background:#56616b;
+	color:#fff;
+}
+.tab-pane table tbody{
+	background:#e4effa;
+	color:#555;
+}
+.tab-pane th, .tab-pane td {text-align: center;}
+.tab-pane table {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+#addNewUser{
+	color: #555;
+	text-decoration: none;
+}
+#addNewUser span{
+	background:#555;
+	color: #fff;
+	border-radius: 50%;
+	padding: 0px 6px;
+  	font-size: 24px;
+}
+#addUser{padding: 50px;}
+
+/*custom checkbox */
+#addUser input[type="checkbox"] {
+    display:none;
+}
+#addUser input[type="checkbox"] + label {
+    color: #999999;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+#addUser input[type="checkbox"] + label span {
+    display:inline-block;
+    width:15px;
+    height:15px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+#addUser input[type="checkbox"] + label span {
+     background-color: #999999;
+}
+
+#addUser input[type="checkbox"]:checked + label span{
+     background-color:#f68211;
+}
+#addUser input[type="checkbox"] + label span,
+#addUser input[type="checkbox"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;
+  -moz-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}
+/*custom checkbox ends*/
+
+/*Add new jobs*/
+#addNewJob {
+	padding: 20px 50px;
+}
+#addNewJob .control-label {font-weight: normal;color: #555;}
+#addNewJob .form-control {
+  width: 98%;
+}
+#addNewJob select.form-control {
+  width: 94%;
+}
+#addJobs .row{
+	margin-bottom: 10px;
+}
+#addJobs input, #addJobs textarea, #addJobs select{
+	border-radius: 0px;
+	background:#d3e5f6;
+	border:none;
+}
+#addJobs span{color: #81b4e5;margin-left: 20px;}
+#addJobs .leftSelect{margin-left: 20px;}
+#addJobs select{margin-right: 20px;}
+
+#addNewJob .inner-well{width: 93%;float: left;}
+#addNewJob button{color: #fff;background:#f68211;height: 40px;}
+#basicInfo select.form-control{width: 100% !important;}
+/*Add new jobs ends*/
+
+/*Manage jobs*/
+#manageJobs{padding: 50px;}
+/*Manage jobs ends*/
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 150px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 150px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 10px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}

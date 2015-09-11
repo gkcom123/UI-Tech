@@ -1,6 +1,110 @@
 /* Toggle Styles */
-body{background:#a7cbed;}
+html, body, .contentWrap{
+  height: 100%;
+}
+body{background:#ffffff;}
 html{overflow-x: hidden;}
+.bdr5{border-radius: 5px !important;}
+.validateform  label.error{color:#F37575; font-size:12px; font-weight:normal; text-align:left;}
+.whiteValidaForm label.error{color:#fff; font-size:12px; font-weight:normal; text-align:left;}
+.alignCenter{text-align: center;}
+.whiteText{color: #F8F8F8}
+.underline{
+  text-decoration: underline;
+}
+.loginSection{
+  height: 100%;
+  display: table;
+  width: 100%;
+  background: url(../images/toil_login_background.jpg) no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+.blueBtn{
+  background: #029795;
+  color: #fff;
+  padding: 10px 25px;
+  width: 300px;
+  border: 2px solid #029795;
+  font-family: 'PT Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.blueBtn:active, .blueBtn:focus, .blueBtn:hover{
+  background: #fff;
+  color: #029795;
+  outline: 0px !important;
+}
+.loginBlueBtn:active, .loginBlueBtn:focus, .loginBlueBtn:hover{
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+  outline: 0px !important;
+}
+.blueBdrBtn{
+  background: #fff;
+  color: #029795;
+  padding: 10px 25px;
+  border: 2px solid #029795;
+  font-family: 'PT Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.blueBdrBtn:active, .blueBdrBtn:focus, .blueBdrBtn:hover{
+  background: #029795;
+  color: #fff;
+  outline: 0px !important;
+}
+.loginSectionContainer {
+  display: table-cell;
+  padding-top: 75px;
+}
+.signin-form{
+  max-width: 300px;
+  margin: 0px auto 0 auto;
+}
+.forgotPass {
+  margin-top: 20px;
+}
+.logininput {
+  height: 45px;
+  background-color: rgba(0,0,0,0.1);
+  font-size: 20px;
+  border-radius: 15px;
+  width: 300px;
+}
+::-webkit-input-placeholder {
+  text-align: center;
+  color: floralwhite;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+  color: floralwhite;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;
+  color: floralwhite;
+}
+
+:-ms-input-placeholder {
+  text-align: center;
+  color: floralwhite;
+}
+.corpFooter {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+
+}
+.corpFooter a{
+  color: #fff;
+  text-decoration: underline;
+}
+
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -19,7 +123,7 @@ html{overflow-x: hidden;}
   height: 100%;
   margin-left: -150px;
   overflow-y: auto;
-  background: #81b4e5;
+  background: #F5821F;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -184,6 +288,10 @@ html{overflow-x: hidden;}
   background:#e4effa;
   color:#555;
 }
+.orangeColor
+{
+  background: #FBBD82;
+}
 .tab-pane th, .tab-pane td {text-align: center;}
 .tab-pane table {
   border-collapse: separate;
@@ -260,7 +368,7 @@ html{overflow-x: hidden;}
 #addJobs .leftSelect{margin-left: 20px;}
 #addJobs select{margin-right: 20px;}
 
-#addNewJob .inner-well{width: 93%;float: left;}
+#addNewJob .inner-well{width: 93%;float: left; background: #FBBD82}
 #addNewJob button{color: #fff;background:#f68211;height: 40px;}
 #basicInfo select.form-control{width: 100% !important;}
 /*Add new jobs ends*/
