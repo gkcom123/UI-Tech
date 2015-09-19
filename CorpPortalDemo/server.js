@@ -18,8 +18,10 @@ app.get('/corpPortal', function(req, res){
   res.redirect('/CorpPortal.html');
 });
 app.get('/jobPortal', function(req, res){
-  res.redirect('/toilPortalMain.html');
+  res.redirect('/toilPortal/toilPortalMain.html');
 });
+
+
 app.post('/api/login', authSrv.login);
 app.post('/api/signUp', authSrv.signUp);
 app.post('/api/corporate-enquiry',corpInfoSrv.enquiry);
