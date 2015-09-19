@@ -5,16 +5,16 @@
 	<meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="description" content="Demo Web page">
+   <meta name="description" content="Toil Portal page">
    <meta name="author" content="Gunjan Kumar" >
 
    <title>Dashboard</title>
 
  	<!-- Bootstrap Core CSS -->
-   <link href="styles/bootstrap.min.css" rel="stylesheet">
+   <link href="../../styles/bootstrap.min.css" rel="stylesheet">
 
   	<!-- Custom CSS -->
-  	<link href="styles/jobPortalStyle.css" rel="stylesheet">
+  	<link href="../../styles/jobPortalStyle.css" rel="stylesheet">
 
    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,8 +30,8 @@
   		<!-- Sidebar -->
     	<div id="sidebar-wrapper">
      		<ul class="sidebar-nav nav nav-tabs">
-        		<li><span >&nbsp;</span></li>
-         	<li id="parent1"><a href="#account" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a>
+        		<li class="orangeColor"><span>&nbsp;</span></li>
+         	<li id="parent1"><a href="#analytics" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a>
          		<ul class="sub-menu nav nav-tabs" style="display:none;" id="child1">
                     <li><a href="#addUser" data-toggle="tab">User</a></li>
                     <li><a href="#ab" data-toggle="tab">Budget</a></li>
@@ -43,7 +43,7 @@
                     <li><a href="#manageJobs" data-toggle="tab">Manage jobs</a></li>
                     <li><a href="#bc" data-toggle="tab">Expired jobs</a></li>
          		</ul></li>
-	       	<li><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> ANALYTICS</a></li>
+	       	<li id="parent3"><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> ANALYTICS</a></li>
       	</ul>
      	</div>
     	<!-- /#sidebar-wrapper -->
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-lg-4 text-center"><h4>TOIL SYSTEM</h4></div>
                     <div class="col-lg-4 text-right">
-                        Hello, Adrian <button class="btn logoutBtn"><span class="glyphicon glyphicon-off"></span></button>LOGOUT
+                        Hello, Adrian !<button class="btn logoutBtn"><span class="glyphicon glyphicon-off"></span></button>LOGOUT
                     </div>
               	</div>
           	</div>
@@ -756,7 +756,7 @@
 						<div class="col-md-12">
 							<div class="well well-sm">JOBS - TOTAL</div>
 							<div class="row">
-								<div class="col-md-6"><img src="images/graph1.png" alt=""></div>
+								<div class="col-md-6"><img src="../../images/graph1.png" alt=""></div>
 								<div class="col-md-6">
 									<ul class="list-group">
 									 <li class="list-group-item">
@@ -778,7 +778,7 @@
 						<div class="col-md-12">
 							<div class="well well-sm">JOBS - SPECIFIC</div>
 							<div class="row">
-								<div class="col-md-6"><img src="images/graph2.png" alt=""></div>
+								<div class="col-md-6"><img src="../../images/graph2.png" alt=""></div>
 								<div class="col-md-6">
 									<ul class="list-group">
 									 <li class="list-group-item">
@@ -805,10 +805,10 @@
   	<!-- /#wrapper -->
 
    <!-- jQuery -->
-   <script src="vendor/jquery/jquery.min.js"></script>
+   <script src="../../vendor/jquery/jquery.min.js"></script>
 
    <!-- Bootstrap Core JavaScript -->
-   <script src="vendor/bootstrap/bootstrap.min.js"></script>
+   <script src="../../vendor/bootstrap/bootstrap.min.js"></script>
 
    <!-- Menu Toggle Script -->
    <script>
@@ -821,11 +821,14 @@
   		$('#child1').toggle();
   		$('#child2').hide();
   	})
-  	$('#parent2').click(function(e) {
-		e.preventDefault();
-  		$('#child2').toggle();
-  		$('#child1').hide();
-  	})
+   $('#parent2').click(function(e) {
+     e.preventDefault();
+     $('#child2').toggle();
+     $('#child1').hide();
+   })
+   $('#parent3').click(function(e) {
+     e.preventDefault();
+   })
    </script>
 </body>
 </html>

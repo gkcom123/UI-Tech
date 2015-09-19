@@ -50,7 +50,7 @@ summary {
     background-position: -11px -9px;
 }
 .corp_sprite.realtime.activeIcon{
-    background-position: -11px -78px;   
+    background-position: -11px -78px;
 }
 .corp_sprite.onepartner {
     width: 67px;
@@ -58,7 +58,7 @@ summary {
     background-position: -71px -9px;
 }
 .corp_sprite.onepartner.activeIcon{
-    background-position: -71px -78px;   
+    background-position: -71px -78px;
 }
 .corp_sprite.costefficiency {
     width: 34px;
@@ -66,7 +66,7 @@ summary {
     background-position: -151px -9px;
 }
 .corp_sprite.costefficiency.activeIcon{
-    background-position: -151px -78px;   
+    background-position: -151px -78px;
 }
 .corp_sprite.reliabiltyquality {
     width: 44px;
@@ -74,7 +74,7 @@ summary {
     background-position: -194px -9px;
 }
 .corp_sprite.reliabiltyquality.activeIcon{
-    background-position: -194px -78px ;  
+    background-position: -194px -78px ;
 }
 .corp_sprite.cashless {
     width: 52px;
@@ -90,7 +90,7 @@ summary {
     background-position: -304px -9px;
 }
 .corp_sprite.simplifybooking.activeIcon{
-    background-position: -304px -78px   
+    background-position: -304px -78px
 }
 .bgFFF {background: #fff;}
 .bgEBEC{background: #EBEBEC}
@@ -347,13 +347,13 @@ footer {
 }
 
 .prepaidWap hr {
-    margin: 15px 0;    
+    margin: 15px 0;
 }
 
 .prepaidWap .prepaidBalance label{
     text-transform: uppercase;
     font-size: 10px;
-    font-weight: normal;    
+    font-weight: normal;
 }
 .prepaidWap .prepaidBalance h4{
     color: #72c934;
@@ -504,7 +504,7 @@ footer {
     background: #f8da15;
     position: absolute;
     margin-top: 8px;
-    z-index: 1060;    
+    z-index: 1060;
     max-width: 400px;
     padding: 8px;
     text-align: left;
@@ -566,7 +566,7 @@ footer {
 
 
 .loader, .spin{background:rgba(0,0,0,0.3); position:absolute; top:0; right:0; bottom:0; left:0; z-index:11;}
-.spin .spinIcon{background:#fff url("http://cdn1.taxiforsure.com/v2/img/corp/cab.png") no-repeat 6px 6px; position:absolute; width:60px; height:60px; top:50%; left:50%; 
+.spin .spinIcon{background:#fff url("http://cdn1.taxiforsure.com/v2/img/corp/cab.png") no-repeat 6px 6px; position:absolute; width:60px; height:60px; top:50%; left:50%;
 	margin:-30px 0 0 -30px; border-radius:70px; border:2px solid #f8da15;}
 .loader{top:0px; right:15px; left:15px; padding-top:5px; text-align:center;}
 .loader img{background:#fff; border-radius:15px; padding:1px; border:1px solid #f8da15;}
@@ -582,17 +582,17 @@ footer {
 .bookingSuccess:hover {
     background: #f8e77c;
 }
-	
+
 .dropSelect{
-    height:34px; 
+    height:34px;
     width:100%;
     border:1px solid #ccc;
-    
+
     padding:6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
-}    
+}
 
 .dropSelect:active{
 border:1px solid #f8da15;
@@ -600,12 +600,12 @@ border:1px solid #f8da15;
 
 .dropList{top:30px; width: 100%; background:#ddd; left:0; z-index:11; padding:0; border:1px solid #ccc;}
 .dropList li{
-    background:#fff; 
-    width:100%; 
-    outline: none; 
-    list-style:none; 
-    line-height:20px; 
-    cursor:pointer; 
+    background:#fff;
+    width:100%;
+    outline: none;
+    list-style:none;
+    line-height:20px;
+    cursor:pointer;
     padding:5px 10px 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
@@ -792,7 +792,7 @@ header.newheader.fixheader{
     background: transparent;
     color: #fff;
     padding: 10px 25px;
-    border: 2px solid #fff;   
+    border: 2px solid #fff;
     font-family: 'PT Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 .whiteBdrTxtBtn:active, .whiteBdrTxtBtn:focus, .whiteBdrTxtBtn:hover{
@@ -895,7 +895,7 @@ header.newheader.fixheader{
 }
 .cropHomeSignUpWrap {
     background: url("//cdn1.taxiforsure.com/v2/img/corp/bottom_background.jpg") no-repeat;
-    background-size: 100% 100%;   
+    background-size: 100% 100%;
 }
 .homeHeader {
     background: rgba(255, 255, 255, 0.1);
@@ -1036,7 +1036,7 @@ footer.homeFooter a.last{
 .fareTabs li:first-child {border-left: none;}
 .fareTabs li.activeTabCls, .fareTabs li:hover, .fareTabs li:active, .fareTabs li:focus{
    background: #f8da15;
-  color: #3f3f3f;  
+  color: #3f3f3f;
 }
 .fare-tab-content {font-size: 17px;line-height: 25px;}
 .fare-tab-content table{width: 100%;border: none;}
@@ -1217,21 +1217,25 @@ footer.homeFooter a.last{
     transform: translateY(-15px);
   }
 }
-@moz-keyframes bounce{
-    0%, 20%, 50%, 80%, 100% {
-        -moz-transform: translateY(0);
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
+@-moz-keyframes bounce {
+  0%, 20%,50%, 80%, 100%
+  {
+    -moz-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
   }
-  40% {
+  40%
+  {
     -moz-transform: translateY(-30px);
     -webkit-transform: translateY(-30px);
     transform: translateY(-30px);
   }
-  60% {
+  60%
+  {
     -moz-transform: translateY(-15px);
     -webkit-transform: translateY(-15px);
     transform: translateY(-15px);
+
   }
 }
 .scrollDwnPanel {
@@ -1243,7 +1247,7 @@ footer.homeFooter a.last{
     font-size: 18px;
     -webkit-animation: bounce 3s linear infinite;
        -moz-animation: bounce 3s linear infinite;
-        animation: bounce 3s linear infinite;  
+        animation: bounce 3s linear infinite;
 }
 .scrollDwnPanel:hover, .scrollDwnPanel:focus, .scrollDwnPanel:active{
     color: #f2f2f2;
@@ -1344,7 +1348,7 @@ a.anchor{display: block; position: relative; top: -60px; visibility: hidden;}
 
 
 #myMarquee{
-  width: 100%;  
+  width: 100%;
   position: fixed;
   overflow: hidden;
   bottom: 0;

@@ -1,0 +1,28 @@
+<div class="spin" style="display: none;"><span class="spinIcon"></span></div>
+<section class="loginSection">
+ <div class="container loginSectionContainer">
+   <div class="alignCenter">
+     <a href="/jobPortal"><img src="../../toilPortal/images/toil_logo.png" style="width: 175px;"></a>
+   </div>
+   <div class="alignCenter">
+     <h4 class="whiteText">PORTAL</h4>
+   </div>
+
+   <div class="loginBody">
+      		<form id="signInFormID" class="signin-form rel whiteValidaForm" ng-controller="loginController " role="form" name="form">
+			        <input type="text" name="username" class="form-control logininput" placeholder="Username" autofocus>
+			        <input type="password" name="password" class="form-control logininput" placeholder="Password" style="margin-top:20px;">
+			        <button class="btn btn-lg btn-block blueBtn bdr5 loginBlueBtn" type="submit" ng-click="login()"  style="margin-top:20px;">Login</button>
+			        <div class="alignCenter forgotPass">
+			            <a href="/" class="whiteText underline">Forgotten your password?</a>
+			           <div class="clearfix"></div>
+			        </div>
+			        <div class="clearfix"></div>
+			</form>
+      </div>
+      <footer class="toilFooter">
+         <a href="/#/tnc" target="_blank">Terms & Conditions</a>
+      </footer>
+  </div>
+</section>
+

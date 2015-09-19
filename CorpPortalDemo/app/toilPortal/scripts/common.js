@@ -44,7 +44,7 @@ $.QueryString = function( url ) {
 };
 
 var toilVersion = 10,
-    viewPath =  "/views/",
+    viewPath =  "/toilPortal/views/",
     Helper = {
      version: toilVersion
     ,viewPath: viewPath
@@ -56,18 +56,42 @@ var toilVersion = 10,
             loginRequired: false,
             templateUrl: viewPath + 'main/toilLogin.html?v=' + toilVersion
           },
-          'analytics': {
-            url: '/analytics',
-            title: 'Toil Portal',
-            loginRequired: true,
-            templateUrl: viewPath + 'main/toilPortal.html?v=' + toilVersion
-          },
+        'addUser': {
+          url: '/addUser',
+          title: 'Toil Portal',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/addUser.html?v=' + toilVersion
+        },
+        'addJob': {
+          url: '/addJob',
+          title: 'Toil Portal',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/addJob.html?v=' + toilVersion
+        },
+        'manageJob': {
+          url: '/manageJob',
+          title: 'Toil Portal',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/manageJob.html?v=' + toilVersion
+        },
+        'analytics': {
+          url: '/analytics',
+          title: 'Toil Portal',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/toilLandingPage.html?v=' + toilVersion
+        },
           'budget': {
             url: '/budget',
             title: 'Toil Portal | Budget',
             loginRequired: true,
             templateUrl: viewPath + 'main/budget.html?v=' + toilVersion
-          }
+          },
+        'tnc': {
+          url: '/tnc',
+          title: 'Toil | Terms & Condition',
+          loginRequired: "both",
+          templateUrl: viewPath + 'main/tnc.html?v=' + toilVersion
+        }
 
         }
 };

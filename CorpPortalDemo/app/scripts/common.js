@@ -152,7 +152,7 @@ var corpVersion = 10,
     ,routes:  { // if u are adding new url here add new url in urls.py also
         'home': {
             url: "/",
-            title: 'Corporate | Taxiforsure',
+            title: 'Corporate | Demo',
             loginRequired: false,
             templateUrl: viewPath + 'main/home.html?v='+ corpVersion
         },

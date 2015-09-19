@@ -16,7 +16,7 @@ html{overflow-x: hidden;}
   height: 100%;
   display: table;
   width: 100%;
-  background: url(../images/toil_login_background.jpg) no-repeat;
+  background: url(../images/login_background.jpg) no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -73,6 +73,7 @@ html{overflow-x: hidden;}
   font-size: 20px;
   border-radius: 15px;
   width: 300px;
+  color: #ffffff;
 }
 ::-webkit-input-placeholder {
   text-align: center;
@@ -93,14 +94,14 @@ html{overflow-x: hidden;}
   text-align: center;
   color: floralwhite;
 }
-.corpFooter {
+.toilFooter {
   position: absolute;
   bottom: 20px;
   width: 100%;
   text-align: center;
 
 }
-.corpFooter a{
+.toilFooter a{
   color: #fff;
   text-decoration: underline;
 }
@@ -175,14 +176,15 @@ html{overflow-x: hidden;}
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #fff;
-  background: rgba(255,255,255,0.2);
+  background: #333;
 }
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;
+  background: #333333;
 
 }
-.sidebar-nav li.active{background:#000;}
+.sidebar-nav li:active{background:#333333;}
 .sidebar-nav > .sidebar-brand {
   height: 65px;
   font-size: 18px;
@@ -196,11 +198,11 @@ html{overflow-x: hidden;}
   background: none;
 }
 .sub-menu li{
-  background-color: #f5f5f5;
+  background-color: #FBBD82;
   border: 1px solid #ccc;
 }
 .sub-menu li a{
-  color: #555;
+  color: #000;
 }
 .sub-menu li a:hover{
   color:#555;
@@ -243,10 +245,20 @@ html{overflow-x: hidden;}
 }
 .tab-content ul li span.glyphicon{
   background: #333;
-  color: #a7cbed;
+  color: #fff;
   font-size: 30px;
   border-radius: 50%;
   padding: 30px;
+  margin: 50px 50px 15px 50px;
+  cursor: pointer;
+
+}
+.tab-content ul li span.glyphicon.glyphicon-remove{
+  background: #333;
+  color: #fff;
+  font-size: 60px;
+  border-radius: 50%;
+  padding: 10px;
   margin: 50px 50px 15px 50px;
   cursor: pointer;
 }
@@ -292,23 +304,31 @@ html{overflow-x: hidden;}
 {
   background: #FBBD82;
 }
+.homeBanner {
+  background: url(../images/toil_banner_active.jpg) no-repeat;
+  background-size: 100% 100%;
+  height: 275px;
+}
+.homeDeactiveBanner {
+  background: url(../images/toil_banner_deactive.png) no-repeat;
+  background-size: 100% 100%;
+  height: 275px;
+}
 .tab-pane th, .tab-pane td {text-align: center;}
 .tab-pane table {
   border-collapse: separate;
-  border-spacing: 5px;
+  border-spacing: 3px;
 }
 #addNewUser{
   color: #555;
   text-decoration: none;
+
 }
-#addNewUser span{
-  background:#555;
-  color: #fff;
-  border-radius: 50%;
-  padding: 0px 6px;
-  font-size: 24px;
+.glyphicon.glyphicon-plus-sign
+{
+  font-size: 40px;
 }
-#addUser{padding: 50px;}
+#addUser{padding: 50px 150px;}
 
 /*custom checkbox */
 #addUser input[type="checkbox"] {
@@ -347,7 +367,7 @@ html{overflow-x: hidden;}
 
 /*Add new jobs*/
 #addNewJob {
-  padding: 20px 50px;
+  padding: 50px 150px;
 }
 #addNewJob .control-label {font-weight: normal;color: #555;}
 #addNewJob .form-control {
@@ -374,8 +394,11 @@ html{overflow-x: hidden;}
 /*Add new jobs ends*/
 
 /*Manage jobs*/
-#manageJobs{padding: 50px;}
+#manageJobs{padding: 50px 150px;}
+
 /*Manage jobs ends*/
+
+
 @media(min-width:768px) {
   #wrapper {
     padding-left: 150px;
