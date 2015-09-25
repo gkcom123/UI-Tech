@@ -7,7 +7,19 @@ angular.module('toilApp')
     function($scope, $rootScope, $toilApi){
         var ajaxLock = false,
            rules = {};
-            $scope.login = function(){
-              $toilApi.gotoAnalytics();
-            }
+          Helper.requireRule(rules, ['username', 'password']);
+      var jForm = $("#signInFormID");
+      jForm.validate({
+        rules: rules
+      });
+
+      $scope.login = function() {
+        if( jForm.valid() ){
+          Helper.showMask();
+          $toilApi.gotoAnalytics();
+          Helper.hideMask();
+
+        }
+      }
+
   }]);

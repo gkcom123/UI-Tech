@@ -49,7 +49,31 @@ var toilVersion = 10,
      version: toilVersion
     ,viewPath: viewPath
     ,remoteUrl: ''
-    ,routes:  {
+      ,requireRule: function( obj, arr ) {
+        var len = arr.length
+          ,name;
+
+        while( len-- ){
+          name = arr[len];
+          if( obj[name] ){
+            obj[name].required = true;
+          }else {
+            obj[name] = {
+              required: true
+            }
+          }
+        }
+
+        return obj;
+      }
+      ,showMask: function( parentDom ){
+        $((parentDom || "") + " .spin").show();
+      }
+      ,hideMask: function( parentDom ){
+        $((parentDom || "") + " .spin").hide();
+      }
+
+      ,routes:  {
           'home': {
             url: "/",
             title: 'Toil Portal',
@@ -60,37 +84,64 @@ var toilVersion = 10,
           url: '/addUser',
           title: 'Toil Portal',
           loginRequired: true,
-          templateUrl: viewPath + 'main/addUser.html?v=' + toilVersion
+          templateUrl: viewPath + 'main/addUser.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Add User',
+            parent: 'analytics'
+          }
+
         },
         'addJob': {
           url: '/addJob',
           title: 'Toil Portal',
           loginRequired: true,
-          templateUrl: viewPath + 'main/addJob.html?v=' + toilVersion
+          templateUrl: viewPath + 'main/addJob.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Add Job',
+            parent: 'analytics'
+          }
         },
         'manageJob': {
           url: '/manageJob',
           title: 'Toil Portal',
           loginRequired: true,
-          templateUrl: viewPath + 'main/manageJob.html?v=' + toilVersion
+          templateUrl: viewPath + 'main/manageJob.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Manage Job',
+            parent: 'analytics'
+          }
+
         },
         'analytics': {
-          url: '/analytics',
+          url: '/jobPortal',
           title: 'Toil Portal',
           loginRequired: true,
-          templateUrl: viewPath + 'main/toilLandingPage.html?v=' + toilVersion
+          templateUrl: viewPath + 'main/toilLandingPage.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Home'
+          }
         },
           'budget': {
             url: '/budget',
             title: 'Toil Portal | Budget',
             loginRequired: true,
-            templateUrl: viewPath + 'main/budget.html?v=' + toilVersion
+            templateUrl: viewPath + 'main/budget.html?v=' + toilVersion,
+            ncyBreadcrumb: {
+              label: 'Budget',
+              parent: 'analytics'
+            }
+
           },
         'tnc': {
           url: '/tnc',
           title: 'Toil | Terms & Condition',
           loginRequired: "both",
-          templateUrl: viewPath + 'main/tnc.html?v=' + toilVersion
+          templateUrl: viewPath + 'main/tnc.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Terms & Conditions',
+            parent: 'analytics'
+          }
+
         }
 
         }
