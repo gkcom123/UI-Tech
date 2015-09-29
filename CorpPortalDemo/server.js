@@ -10,6 +10,7 @@ var authSrv = require('./srvProvider/login');
 var corpInfoSrv = require('./srvProvider/corporateInfo');
 var cityInfoSrv = require('./srvProvider/cityInfo');
 var cabBookingSrv = require('./srvProvider/cabBooking');
+var toilLoginSrv = require('./toilSrvProvider/toilLogin');
 
 app.get('/', function(req, res){
   res.redirect('/index.html');
@@ -46,6 +47,8 @@ app.get('/api/getCorporateRecipts',corpInfoSrv.getCorpReceipts);
 app.get('/api/getCorporateInvoice',corpInfoSrv.getCorpInvoice);
 app.get('/api/getCorporateTransaction',corpInfoSrv.getCorporateTransaction);
 
+/*Toil Api backend*/
+app.post('/toilAPi/login', toilLoginSrv.login);
 
 
 /*

@@ -4,10 +4,11 @@ angular.module('toilApp')
     '$scope',
     '$rootScope',
     '$toilApi',
-    function($scope, $rootScope, $toilApi){
+        '$resource',
+    function($scope, $rootScope, $toilApi,$resource){
         var ajaxLock = false,
            rules = {};
-          Helper.requireRule(rules, ['username', 'password']);
+      Helper.requireRule(rules, ['username', 'password']);
       var jForm = $("#signInFormID");
       jForm.validate({
         rules: rules
@@ -16,7 +17,20 @@ angular.module('toilApp')
       $scope.login = function() {
         if( jForm.valid() ){
           Helper.showMask();
-          $toilApi.gotoAnalytics();
+          var data =jForm.serializeObject(),
+              request = $resource("/toilAPi/login");
+          request.save(data, function success(res){
+            if( res.status == 'success'){
+              var resData = res.response_data;
+              $scope.userName = resData.username;
+
+              $toilApi.gotoAnalytics();
+              //afterLogin();
+            }else{
+              alert('Please check your login credentials');
+            }
+        })
+
           Helper.hideMask();
 
         }

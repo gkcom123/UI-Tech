@@ -1,5 +1,5 @@
 'use strict';
-angular.module('toilApp', ['ui.router','ncy-angular-breadcrumb']);
+angular.module('toilApp', ['ui.router','ngResource','ncy-angular-breadcrumb']);
 
 angular.module('toilApp')
 .config(['$stateProvider', '$urlRouterProvider','$breadcrumbProvider',

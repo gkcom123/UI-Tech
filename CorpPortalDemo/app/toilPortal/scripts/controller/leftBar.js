@@ -7,7 +7,7 @@ angular.module('toilApp')
   {
 
     $scope.uiRouterState = $state.current.name;
-    console.log("ghg"+$scope.uiRouterState);
+
     if($scope.uiRouterState=='analytics' || $scope.uiRouterState=='analytSection')
     {
       $("#child1").css("display", "none");
