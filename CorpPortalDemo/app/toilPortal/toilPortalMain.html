@@ -30,39 +30,48 @@
     <div id="page-content-wrapper">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-4">
-            <a href="#menu-toggle" ><span id="menu-toggle" class="glyphicon glyphicon-menu-hamburger"></span></a>
-          </div>
-          <div class="col-lg-4 text-center"><h4>TOIL SYSTEM</h4></div>
-          <div class="col-lg-4 text-right">
+<!--
+          <div class="col-lg-4" style="background-color: red">
+            <a href="#menu-toggle" ><span id="menu-toggle" class="glyphicon glyphicon-menu-hamburger"></span>click</a>
+          </div>style="display:none;"
+-->
+          <div class="col-lg-4 col-sm-4" ><span>&nbsp;</span></div>
+          <div class="col-lg-4 col-sm-4 text-center"><h4>TOIL SYSTEM</h4></div>
+          <div class="col-lg-4 col-sm-4 text-right">
             Hello, Adrian <button class="btn logoutBtn"><span class="glyphicon glyphicon-off"></span></button>LOGOUT
           </div>
         </div>
-        <div class="well" ncy-breadcrumb></div>
       </div>
+
     </div>
+    <div ncy-breadcrumb></div>
     <!-- /#Header -->
   </header>
 </script>
 <script type="text/ng-template" id="toil-leftBar.html">
-  <div id="sidebar-wrapper" ng-controller="leftBarController">
-    <ul class="sidebar-nav nav nav-tabs">
-      <li class="orangeColor"><span>&nbsp;</span></li>
-      <li id="parent1"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a>
-        <ul class="sub-menu nav nav-tabs" style="display:none;" id="child1">
-          <li><a ng-href="#" ng-click="userClick()">User</a></li>
-          <li><a ng-href="#" ng-click="sideClick()">Budget</a></li>
-          <li><a ng-href="#" ng-click="sideClick()">Password</a></li>
-        </ul></li>
-      <li id="parent2"><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-briefcase"></span> JOBS</a>
-        <ul class="sub-menu nav nav-tabs" style="display:none;" id="child2">
-          <li><a ng-href="#" ng-click="addJobClick()">Add new</a></li>
-          <li><a ng-href="#" ng-click="manageJobClick()">Manage jobs</a></li>
-          <li><a href="#bc" data-toggle="tab">Expired jobs</a></li>
-        </ul></li>
-      <li id="parent3"><a ng-href="#" ng-click="sideClick()" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> ANALYTICS</a></li>
-    </ul>
+
+  <div class="navbar-default" role="navigation" id="sidebar-wrapper" ng-controller="leftBarController">
+    <div class="sidebar-nav navbar-collapse" >
+      <ul class="nav" id="side-menu">
+        <li class="orangeColor"><span>&nbsp;</span></li>
+        <li id="parent1"><a data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a>
+          <ul class="sub-menu nav nav-tabs" id="child1">
+            <li ui-sref-active="active"><a ng-href="#/addUser" ui-sref="addUser">User</a></li>
+            <li ui-sref-active="active"><a ng-href="#/budget" ui-sref="budget">Budget</a></li>
+            <li ui-sref-active="active"><a ng-href="#/password" ui-sref="password">Password</a></li>
+          </ul>
+        </li>
+        <li id="parent2"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-briefcase"></span> JOBS</a>
+          <ul class="sub-menu nav nav-tabs" id="child2">
+            <li ui-sref-active="active"><a ng-href="#/addJob" ui-sref="addJob">Add new</a></li>
+            <li ui-sref-active="active"><a ng-href="#/manageJob" ui-sref="manageJob">Manage jobs</a></li>
+            <li ui-sref-active="active"><a ng-href="#/expJob" ui-sref="expJob">Expired jobs</a></li>
+          </ul></li>
+        <li id="parent3"><a ng-href="#" ng-click="analyticsClick()" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> ANALYTICS</a></li>
+      </ul>
+    </div>
   </div>
+
   </script>
 
 <script src="vendor/jquery/jquery.min.js"></script>

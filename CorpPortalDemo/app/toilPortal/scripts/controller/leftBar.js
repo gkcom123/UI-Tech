@@ -3,46 +3,71 @@
  */
 'use strict';
 angular.module('toilApp')
-  .controller('leftBarController', ['$rootScope','$scope','$state',function ($rootScope,$scope,$state) {
-    $scope.sideClick = function()
+  .controller('leftBarController', ['$rootScope','$scope','$state','$location',function ($rootScope,$scope,$state,$location)
+  {
+
+    $scope.uiRouterState = $state.current.name;
+    console.log("ghg"+$scope.uiRouterState);
+    if($scope.uiRouterState=='analytics' || $scope.uiRouterState=='analytSection')
     {
-      $state.go('budget');
-      //event.preventDefault();
+      $("#child1").css("display", "none");
+      $("#child2").css("display", "none");
     }
+    else if($scope.uiRouterState=='addUser' || $scope.uiRouterState=='budget' || $scope.uiRouterState=='password')
+    {
+      $("#child1").css("display", "block");
+      $("#child2").css("display", "none");
+
+    }
+    else if($scope.uiRouterState=='addJob' || $scope.uiRouterState=='manageJob'|| $scope.uiRouterState=='expJob')
+    {
+      $("#child1").css("display", "none");
+      $("#child2").css("display", "block");
+
+    }
+    else
+    {
+      $("#child1").css("display", "block");
+      $("#child2").css("display", "block");
+    }
+    $scope.analyticsClick = function(e)
+    {
+      $state.go('analytSection');
+    };
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
     $('#parent1').click(function(e) {
-      e.preventDefault();
+      //$scope.showInfo();
       $('#child1').toggle();
       $('#child2').hide();
-    })
-    $('#parent2').click(function(e) {
       e.preventDefault();
+    });
+    $('#parent2').click(function(e) {
       $('#child2').toggle();
       $('#child1').hide();
-    })
+      e.preventDefault();
+    });
+
     $('#parent3').click(function(e) {
       e.preventDefault();
-    })
-    $scope.userClick = function()
+      $('#child1').hide();
+      $('#child2').hide();
+    });
+   $scope.userClick = function(event)
     {
-      $state.go('addUser');
 
-      //event.preventDefault();
+      $state.go('addUser');
     }
     $scope.addJobClick = function()
     {
+      $scope.myVal = true;
       $state.go('addJob');
-
-      //event.preventDefault();
     }
     $scope.manageJobClick = function()
     {
       $state.go('manageJob');
-
-      //event.preventDefault();
     }
    // $scope.page = $state.current;
     //$scope.corpID = localStorageService.get('corp-id');

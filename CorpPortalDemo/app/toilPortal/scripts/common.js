@@ -84,6 +84,7 @@ var toilVersion = 10,
           url: '/addUser',
           title: 'Toil Portal',
           loginRequired: true,
+          name:'addUser',
           templateUrl: viewPath + 'main/addUser.html?v=' + toilVersion,
           ncyBreadcrumb: {
             label: 'Add User',
@@ -94,6 +95,7 @@ var toilVersion = 10,
         'addJob': {
           url: '/addJob',
           title: 'Toil Portal',
+          name:'addJob',
           loginRequired: true,
           templateUrl: viewPath + 'main/addJob.html?v=' + toilVersion,
           ncyBreadcrumb: {
@@ -121,17 +123,54 @@ var toilVersion = 10,
             label: 'Home'
           }
         },
-          'budget': {
-            url: '/budget',
-            title: 'Toil Portal | Budget',
-            loginRequired: true,
-            templateUrl: viewPath + 'main/budget.html?v=' + toilVersion,
-            ncyBreadcrumb: {
-              label: 'Budget',
-              parent: 'analytics'
-            }
+        'budget': {
+          url: '/budget',
+          title: 'Toil Portal | Budget',
+          name:'budget',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/budget.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Budget',
+            parent: 'analytics'
+          }
 
-          },
+        },
+        'password': {
+          url: '/password',
+          title: 'Toil Portal | Password',
+          name:'password',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/budget.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Password',
+            parent: 'analytics'
+          }
+
+        },
+        'expJob': {
+          url: '/expJob',
+          title: 'Toil Portal | Expired Jobs',
+          name:'expJob',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/budget.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Expired Jobs',
+            parent: 'analytics'
+          }
+
+        },
+        'analytSection': {
+          url: '/analyticsSection',
+          title: 'Toil Portal | Analytics',
+          name:'analytSection',
+          loginRequired: true,
+          templateUrl: viewPath + 'main/budget.html?v=' + toilVersion,
+          ncyBreadcrumb: {
+            label: 'Analytics',
+            parent: 'analytics'
+          }
+
+        },
         'tnc': {
           url: '/tnc',
           title: 'Toil | Terms & Condition',
