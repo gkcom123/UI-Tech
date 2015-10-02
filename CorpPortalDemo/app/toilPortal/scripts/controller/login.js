@@ -22,7 +22,7 @@ angular.module('toilApp')
           request.save(data, function success(res){
             if( res.status == 'success'){
               var resData = res.response_data;
-              $scope.userName = resData.username;
+              $rootScope.userName = resData.username;
 
               $toilApi.gotoAnalytics();
               //afterLogin();

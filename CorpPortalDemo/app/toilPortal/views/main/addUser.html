@@ -2,7 +2,7 @@
   <div id="wrapper">
   <toil-left-bar></toil-left-bar>
   <toil-header></toil-header>
-  <div class="tab-pane container" id="addUser" >
+  <div class="tab-pane container" id="addUser" ng-controller="addUserController">
     <div class="row">
       <div class="col-md-12">
         <table class="table">
@@ -16,52 +16,18 @@
           <th><span class="glyphicon glyphicon-trash"></span></th>
           </thead>
           <tbody>
-          <tr>
-            <td>John</td>
-            <td>Smith</td>
-            <td>tsjsm.15</td>
-            <td>j.smith@company.com</td>
+          <tr ng-repeat="user in Users.data">
+            <td><span ng-bind="user.firstName"></span></td>
+            <td><span ng-bind="user.surName"></span></td>
+            <td><span ng-bind="user.userName"></span></td>
+            <td><span ng-bind="user.emailId"></span></td>
             <td>
-              <input type="checkbox" id="checkbox1" name="checkbox1" />
-              <label for="checkbox1"><span></span></label>
+              <span ng-if="user.status==0">
+                <input type="checkbox" id="checkbox1" name="checkbox1" />
+                <label for="checkbox1"><span></span></label>
+              </span>
             </td>
-            <td><span class="glyphicon glyphicon-pencil"></span></td>
-            <td><span class="glyphicon glyphicon-trash"></span></td>
-          </tr>
-          <tr>
-            <td>Patricia</td>
-            <td>Johnson</td>
-            <td>tspjo.15</td>
-            <td>p.johnson@company.com</td>
-            <td>
-              <input type="checkbox" id="checkbox2" name="checkbox2" />
-              <label for="checkbox2"><span></span></label>
-            </td>
-            <td><span class="glyphicon glyphicon-pencil"></span></td>
-            <td><span class="glyphicon glyphicon-trash"></span></td>
-          </tr>
-          <tr>
-            <td>Hannah</td>
-            <td>Walsh</td>
-            <td>tshwa.15</td>
-            <td>h.walsh@company.com</td>
-            <td>
-              <input type="checkbox" id="checkbox3" name="checkbox3" />
-              <label for="checkbox3"><span></span></label>
-            </td>
-            <td><span class="glyphicon glyphicon-pencil"></span></td>
-            <td><span class="glyphicon glyphicon-trash"></span></td>
-          </tr>
-          <tr>
-            <td>Adrin</td>
-            <td>Bond</td>
-            <td>tsabo.15</td>
-            <td>a.bond@company.com</td>
-            <td>
-              <input type="checkbox" id="checkbox4" name="checkbox4" />
-              <label for="checkbox4"><span></span></label>
-            </td>
-            <td><span class="glyphicon glyphicon-pencil"></span></td>
+            <td><span ng-if="user.isEditable" class="glyphicon glyphicon-pencil"></span></td>
             <td><span class="glyphicon glyphicon-trash"></span></td>
           </tr>
           </tbody>

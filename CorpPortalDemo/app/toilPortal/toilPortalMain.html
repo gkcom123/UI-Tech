@@ -29,7 +29,7 @@
     <!-- Header -->
     <div id="page-content-wrapper">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row" ng-controller="toilHeaderController">
 <!--
           <div class="col-lg-4" style="background-color: red">
             <a href="#menu-toggle" ><span id="menu-toggle" class="glyphicon glyphicon-menu-hamburger"></span>click</a>
@@ -38,7 +38,7 @@
           <div class="col-lg-4 col-sm-4" ><span>&nbsp;</span></div>
           <div class="col-lg-4 col-sm-4 text-center"><h4>TOIL SYSTEM</h4></div>
           <div class="col-lg-4 col-sm-4 text-right">
-            Hello, Adrian <button class="btn logoutBtn"><span class="glyphicon glyphicon-off"></span></button>LOGOUT
+            Hello, {{userName}} <button class="btn logoutBtn"><span class="glyphicon glyphicon-off" ng-click="logOut()"></span></button>LOGOUT
           </div>
         </div>
       </div>
@@ -92,11 +92,17 @@
 
 <script src="scripts/common.js"></script>
 <script src="scripts/app.js"></script>
+
 <script src="scripts/directive/index.js"></script>
+
 <script src="scripts/factories/toilApi.js"></script>
+<script src="scripts/factories/userFactory.js"></script>
+
 <script src="scripts/controller/app.js"></script>
 <script src="scripts/controller/login.js"></script>
+<script src="scripts/controller/header.js"></script>
 <script src="scripts/controller/leftBar.js"></script>
+<script src="scripts/controller/addUser.js"></script>
 
 </body>
 </html>
