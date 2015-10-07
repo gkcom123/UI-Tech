@@ -12,6 +12,7 @@ var cityInfoSrv = require('./srvProvider/cityInfo');
 var cabBookingSrv = require('./srvProvider/cabBooking');
 var toilLoginSrv = require('./toilSrvProvider/toilLogin');
 var toilUserSrv = require('./toilSrvProvider/toilUsers');
+var toilJobsSrv = require('./toilSrvProvider/toilJobs');
 
 app.get('/', function(req, res){
   res.redirect('/index.html');
@@ -51,6 +52,7 @@ app.get('/api/getCorporateTransaction',corpInfoSrv.getCorporateTransaction);
 /*Toil Api backend*/
 app.post('/toilAPi/login', toilLoginSrv.login);
 app.get('/toilAPi/get_user_list', toilUserSrv.getUserList);
+app.get('/toilAPi/get_current_jobList', toilJobsSrv.getCurrentJobList);
 
 /*
 app.post('/call/login',function(req,res){

@@ -4,7 +4,7 @@ html, body, .contentWrap{
 }
 body{background:#ffffff;}
 html{overflow-x: hidden;}
-.bdr5{border-radius: 5px !important;}
+.bdr15{border-radius: 15px !important;}
 .validateform  label.error{color:#F37575; font-size:12px; font-weight:normal; text-align:left;}
 .redValidForm label.error{color:#FF0000; font-size:12px; font-weight:normal; text-align:left;}
 .alignCenter{text-align: center;}
@@ -25,17 +25,18 @@ html{overflow-x: hidden;}
   background-position: center center;
   background-attachment: fixed;
 }
-.blueBtn{
-  background: #029795;
+.yellowBtn{
+  background: #F5821F;
   color: #fff;
-  padding: 10px 25px;
-  width: 300px;
-  border: 2px solid #029795;
+  width: 220px;
+  border: 2px solid #F5821F;
   font-family: 'PT Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  font-size: 15px;
 }
-.blueBtn:active, .blueBtn:focus, .blueBtn:hover{
+.yellowBtn:active, .blueBtn:focus, .blueBtn:hover{
   background: #fff;
-  color: #029795;
+  color: #F5821F;
   outline: 0px !important;
 }
 .loginBlueBtn:active, .loginBlueBtn:focus, .loginBlueBtn:hover{
@@ -44,68 +45,57 @@ html{overflow-x: hidden;}
   border-color: #fff;
   outline: 0px !important;
 }
-.blueBdrBtn{
-  background: #fff;
-  color: #029795;
-  padding: 10px 25px;
-  border: 2px solid #029795;
-  font-family: 'PT Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-.blueBdrBtn:active, .blueBdrBtn:focus, .blueBdrBtn:hover{
-  background: #029795;
-  color: #fff;
-  outline: 0px !important;
-}
 .loginSectionContainer {
   display: table-cell;
   padding-top: 75px;
 }
 .signin-form{
-  max-width: 300px;
+  max-width: 220px;
   margin: 0px auto 0 auto;
+  text-align: center;
 }
 .forgotPass {
-  margin-top: 20px;
+  margin-top: 10px;
+  width: 220px;
 }
 .logininput {
-  height: 45px;
+  height: 35px;
   background-color: rgba(0,0,0,0.1);
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 15px;
-  width: 300px;
-  color: #ffffff;
+  border-width: 3px;
+  width: 220px;
+  color: #F8F8F8;
 }
 ::-webkit-input-placeholder {
   text-align: center;
-  color: floralwhite;
+  color: #F8F8F8;
 }
 
 :-moz-placeholder { /* Firefox 18- */
   text-align: center;
-  color: floralwhite;
+  color: #F8F8F8;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
   text-align: center;
-  color: floralwhite;
+  color: #F8F8F8;
 }
 
 :-ms-input-placeholder {
   text-align: center;
-  color: floralwhite;
+  color: #F8F8F8;
 }
 .toilFooter {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
   text-align: center;
+  padding:20px 0px;
+  margin-top: 150px;
 
 }
 .toilFooter a{
   color: #fff;
   text-decoration: underline;
 }
-
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -152,7 +142,6 @@ html{overflow-x: hidden;}
   position: absolute;
   margin-right: -150px;
 }
-
 /* Sidebar Styles */
 .sidebar-nav {
   position: absolute;

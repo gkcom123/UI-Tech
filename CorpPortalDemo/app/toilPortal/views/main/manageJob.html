@@ -2,7 +2,7 @@
   <div id="wrapper">
   <toil-left-bar></toil-left-bar>
   <toil-header></toil-header>
-  <div class="tab-pane container" id="manageJobs">
+  <div class="tab-pane container" id="manageJobs" ng-controller="manageJobController">
     <div class="well well-sm main-well">Current Jobs</div>
     <table class="table">
       <thead>
@@ -18,43 +18,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>43</td>
-        <td>Global Director of IT - SAP</td>
-        <td>13/07/2015</td>
-        <td>jsjsm.15</td>
-        <td>13</td>
-        <td>0</td>
-        <td><span class="glyphicon glyphicon-pencil"></span></td>
-        <td><span class="glyphicon glyphicon-trash"></span></td>
-      </tr>
-      <tr>
-        <td>45</td>
-        <td>SAP Analyst - MM,PP</td>
-        <td>11/07/2015</td>
-        <td>tspjo.15</td>
-        <td>23</td>
-        <td>2</td>
-        <td><span class="glyphicon glyphicon-pencil"></span></td>
-        <td><span class="glyphicon glyphicon-trash"></span></td>
-      </tr>
-      <tr>
-        <td>47</td>
-        <td>Data Analyst - Excel(SAP or JDE)</td>
-        <td>09/07/2015</td>
-        <td>tshwa.15</td>
-        <td>3</td>
-        <td>0</td>
-        <td><span class="glyphicon glyphicon-pencil"></span></td>
-        <td><span class="glyphicon glyphicon-trash"></span></td>
-      </tr>
-      <tr>
-        <td>68</td>
-        <td>SAP Application Security Administrator</td>
-        <td>01/07/2015</td>
-        <td>tsabo.15</td>
-        <td>26</td>
-        <td>4</td>
+      <tr ng-repeat="job in currentJobs.data">
+        <td><span ng-bind="job.id"></span></td>
+        <td><span ng-bind="job.jobTitle"></span></td>
+        <td><span ng-bind="job.datePosted"></span></td>
+        <td><span ng-bind="job.postedBy"></span></td>
+        <td><span ng-bind="job.views"></span></td>
+        <td><span ng-bind="job.applicants"></span></td>
         <td><span class="glyphicon glyphicon-pencil"></span></td>
         <td><span class="glyphicon glyphicon-trash"></span></td>
       </tr>
