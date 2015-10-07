@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<!--[if lte IE 9]>
+<div style="margin:5px;">
+  <h4 style="color:#cc3333;margin-bottom:5px;">Your Browser Is Not Supported!</h4><br />
+  <p>Please upgrade to the latest version of <a href='http://getfirefox.com' style='text-decoration:underline;'>FireFox</a>, <a href='https://www.google.com/chrome/browser/' style='text-decoration:underline;'>Chrome</a> or <a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie' style='text-decoration:underline;'>Internet Explorer</a>.</p>
+</div>
+<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toil Portal</title>
+  <link rel="shortcut icon" type="image/ico" href="http://cdn1.taxiforsure.com/v2/img/corp/favicon.ico">
+
+    <!-- build:css(app) styles/vendor.css -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css" />
+  <!-- endbuild -->
+    <!-- build:css(app) styles/style.css -->
+  <link rel="stylesheet" href="styles/jobPortalStyle.css" />
+  <!-- endbuild -->
+
+</head>
+<body ng-app="toilApp">
+<div ui-view class="contentWrap" ng-controller= "toilAppController"></div>
+<script type="text/ng-template" id="toil-header.html">
+  <header class="newheader">
+    <!-- Header -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row" ng-controller="toilHeaderController">
+<!--
+          <div class="col-lg-4" style="background-color: red">
+            <a href="#menu-toggle" ><span id="menu-toggle" class="glyphicon glyphicon-menu-hamburger"></span>click</a>
+          </div>
+-->
+          <div class="col-lg-4 col-sm-4" ><span>&nbsp;</span></div>
+          <div class="col-lg-4 col-sm-4 text-center"><h4>TOIL SYSTEM</h4></div>
+          <div class="col-lg-4 col-sm-4 text-right">
+            Hello, {{userName}} <button class="btn logoutBtn"><span class="glyphicon glyphicon-off" ng-click="logOut()"></span></button>LOGOUT
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div ncy-breadcrumb></div>
+    <!-- /#Header -->
+  </header>
+</script>
+<script type="text/ng-template" id="toil-leftBar.html">
+
+  <div class="navbar-default" role="navigation" id="sidebar-wrapper" ng-controller="leftBarController">
+    <div class="sidebar-nav navbar-collapse" >
+      <ul class="nav" id="side-menu">
+        <li class="orangeColor"><span>&nbsp;</span></li>
+        <li id="parent1"><a data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a>
+          <ul class="sub-menu nav nav-tabs" id="child1">
+            <li ui-sref-active="active"><a ng-href="#/addUser" ui-sref="addUser">User</a></li>
+            <li ui-sref-active="active"><a ng-href="#/budget" ui-sref="budget">Budget</a></li>
+            <li ui-sref-active="active"><a ng-href="#/password" ui-sref="password">Password</a></li>
+          </ul>
+        </li>
+        <li id="parent2"><a href="#" data-toggle="tab"><span class="glyphicon glyphicon-briefcase"></span> JOBS</a>
+          <ul class="sub-menu nav nav-tabs" id="child2">
+            <li ui-sref-active="active"><a ng-href="#/addJob" ui-sref="addJob">Add new</a></li>
+            <li ui-sref-active="active"><a ng-href="#/manageJob" ui-sref="manageJob">Manage jobs</a></li>
+            <li ui-sref-active="active"><a ng-href="#/expJob" ui-sref="expJob">Expired jobs</a></li>
+          </ul></li>
+        <li id="parent3"><a ng-href="#" ng-click="analyticsClick()" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> ANALYTICS</a></li>
+      </ul>
+    </div>
+  </div>
+
+  </script>
+<!-- build:js(app) scripts/vendor.js -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/jquey-plugins/jquery.validate.min.js"></script>
+<script src="vendor/angular/angular.js"></script>
+<script src="vendor/angular/angular-resource.min.js"></script>
+<script src="vendor/angular/angular-sanitize.min.js"></script>
+<script src="vendor/angular/angular-animate.min.js"></script>
+<script src="vendor/angular/angular-ui-router.min.js"></script>
+<script src="vendor/angular/angular-ui-bootstrap.js"></script>
+<script src="vendor/angular/angular-local-storage.js"></script>
+<script src="vendor/angular/angular-dropdowns.js"></script>
+<script src="vendor/angular/ngAutocomplete.js"></script>
+<script src="vendor/angular/daterangepicker.js"></script>
+<script src="vendor/angular/ng-bs-daterangepicker.js"></script>
+<script src="vendor/angular/angular-file-upload.min.js"></script>
+<script src="vendor/angular/angular-breadcrumb.min.js"></script>
+<!-- endbuild -->
+<!-- build:js(app) scripts/scripts.js -->
+<script src="scripts/common.js"></script>
+<script src="scripts/app.js"></script>
+
+<script src="scripts/directive/index.js"></script>
+
+<script src="scripts/factories/toilApi.js"></script>
+<script src="scripts/factories/userFactory.js"></script>
+<script src="scripts/factories/jobFactory.js"></script>
+
+<script src="scripts/controller/app.js"></script>
+<script src="scripts/controller/login.js"></script>
+<script src="scripts/controller/header.js"></script>
+<script src="scripts/controller/leftBar.js"></script>
+<script src="scripts/controller/addUser.js"></script>
+<script src="scripts/controller/jobController.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

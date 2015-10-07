@@ -1,0 +1,83 @@
+<div class="addToilUser">
+  <div id="wrapper">
+  <toil-left-bar></toil-left-bar>
+  <toil-header></toil-header>
+  <div class="tab-pane container" id="manageJobs" ng-controller="manageJobController">
+    <div class="well well-sm main-well">Current Jobs</div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Job Title</th>
+        <th>Date Posted</th>
+        <th>Posted by</th>
+        <th>Views</th>
+        <th>Applicants</th>
+        <th><span class="glyphicon glyphicon-pencil"></span></th>
+        <th><span class="glyphicon glyphicon-trash"></span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="job in currentJobs.data">
+        <td><span ng-bind="job.id"></span></td>
+        <td><span ng-bind="job.jobTitle"></span></td>
+        <td><span ng-bind="job.datePosted"></span></td>
+        <td><span ng-bind="job.postedBy"></span></td>
+        <td><span ng-bind="job.views"></span></td>
+        <td><span ng-bind="job.applicants"></span></td>
+        <td><span class="glyphicon glyphicon-pencil"></span></td>
+        <td><span class="glyphicon glyphicon-trash"></span></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="well well-sm main-well">Achived Jobs</div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Job Title</th>
+        <th>Date Posted</th>
+        <th>Posted by</th>
+        <th>Views</th>
+        <th>Applicants</th>
+        <th><span class="glyphicon glyphicon-pencil"></span></th>
+        <th><span class="glyphicon glyphicon-trash"></span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>43</td>
+        <td>Consultant - SAP</td>
+        <td>13/06/2015</td>
+        <td>tsjsm.15</td>
+        <td>43</td>
+        <td>7</td>
+        <td><span class="glyphicon glyphicon-pencil"></span></td>
+        <td><span class="glyphicon glyphicon-trash"></span></td>
+      </tr>
+      <tr>
+        <td>45</td>
+        <td>SAP Analyst - PP/DS</td>
+        <td>11/07/2015</td>
+        <td>tspjo.15</td>
+        <td>35</td>
+        <td>1</td>
+        <td><span class="glyphicon glyphicon-pencil"></span></td>
+        <td><span class="glyphicon glyphicon-trash"></span></td>
+      </tr>
+      <tr>
+        <td>47</td>
+        <td>Data Analyst SAP</td>
+        <td>09/07/2015</td>
+        <td>tshwa.15</td>
+        <td>6</td>
+        <td>1</td>
+        <td><span class="glyphicon glyphicon-pencil"></span></td>
+        <td><span class="glyphicon glyphicon-trash"></span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

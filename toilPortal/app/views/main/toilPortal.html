@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="Toil Portal page">
+   <meta name="author" content="Gunjan Kumar" >
+
+   <title>Dashboard</title>
+
+ 	<!-- Bootstrap Core CSS -->
+   <link href="../../styles/bootstrap.min.css" rel="stylesheet">
+
+  	<!-- Custom CSS -->
+  	<link href="../../styles/jobPortalStyle.css" rel="stylesheet">
+
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
+     	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+ 	<![endif]-->
+
+</head>
+
+<body>
+ 	<div id="wrapper">
+  		<!-- Sidebar -->
+    	<div id="sidebar-wrapper">
+     		<ul class="sidebar-nav nav nav-tabs">
+        		<li class="orangeColor"><span>&nbsp;</span></li>
+         	<li id="parent1"><a href="#analytics" data-toggle="tab"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a>
+         		<ul class="sub-menu nav nav-tabs" style="display:none;" id="child1">
+                    <li><a href="#addUser" data-toggle="tab">User</a></li>
+                    <li><a href="#ab" data-toggle="tab">Budget</a></li>
+                    <li><a href="#ac" data-toggle="tab">Password</a></li>
+         		</ul></li>
+	       	<li id="parent2"><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-briefcase"></span> JOBS</a>
+	       		<ul class="sub-menu nav nav-tabs" style="display:none;" id="child2">
+                    <li><a href="#addNewJob" data-toggle="tab">Add new</a></li>
+                    <li><a href="#manageJobs" data-toggle="tab">Manage jobs</a></li>
+                    <li><a href="#bc" data-toggle="tab">Expired jobs</a></li>
+         		</ul></li>
+	       	<li id="parent3"><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span> ANALYTICS</a></li>
+      	</ul>
+     	</div>
+    	<!-- /#sidebar-wrapper -->
+
+   	<!-- Page Content -->
+   	<div class="main-wrapper">
+   		<!-- Header -->
+      	<div id="page-content-wrapper">
+          	<div class="container-fluid">
+             	<div class="row">
+                	<div class="col-lg-4">
+                        <a href="#menu-toggle" ><span id="menu-toggle" class="glyphicon glyphicon-menu-hamburger"></span></a>
+                    </div>
+                    <div class="col-lg-4 text-center"><h4>TOIL SYSTEM</h4></div>
+                    <div class="col-lg-4 text-right">
+                        Hello, Adrian !<button class="btn logoutBtn"><span class="glyphicon glyphicon-off"></span></button>LOGOUT
+                    </div>
+              	</div>
+          	</div>
+     		</div>
+     		<!-- /#Header -->
+     		<!-- Tab content -->
+    		<div class="tab-content">
+	       	<div class="tab-pane container active" id="account">
+			    <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-inline text-center">
+                            <li><a href="#a" data-toggle="tab"><span class="glyphicon glyphicon-user"></span><p>Account</p></a></li>
+                            <li><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-briefcase"></span><p>Jobs</p></a></li>
+                            <li><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-flash"></span><p>Analytics</p></a></li>
+                        </ul>
+                    </div>
+	            </div>
+	        	</div>
+	        	<div class="tab-pane container" id="addUser" >
+	        		<div class="row">
+						<div class="col-md-12">
+							<table class="table">
+								<thead>
+									<th>First Name</th>
+									<th>Surname</th>
+									<th>Username</th>
+									<th>Email Address</th>
+									<th><span class="glyphicon glyphicon-ok"></span></th>
+									<th><span class="glyphicon glyphicon-pencil"></span></th>
+									<th><span class="glyphicon glyphicon-trash"></span></th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>John</td>
+										<td>Smith</td>
+										<td>tsjsm.15</td>
+										<td>j.smith@company.com</td>
+										<td>
+									  		<input type="checkbox" id="checkbox1" name="checkbox1" />
+									  		<label for="checkbox1"><span></span></label>
+										</td>
+										<td><span class="glyphicon glyphicon-pencil"></span></td>
+										<td><span class="glyphicon glyphicon-trash"></span></td>
+									</tr>
+									<tr>
+										<td>Patricia</td>
+										<td>Johnson</td>
+										<td>tspjo.15</td>
+										<td>p.johnson@company.com</td>
+										<td>
+									  		<input type="checkbox" id="checkbox2" name="checkbox2" />
+									  		<label for="checkbox2"><span></span></label>
+										</td>
+										<td><span class="glyphicon glyphicon-pencil"></span></td>
+										<td><span class="glyphicon glyphicon-trash"></span></td>
+									</tr>
+									<tr>
+										<td>Hannah</td>
+										<td>Walsh</td>
+										<td>tshwa.15</td>
+										<td>h.walsh@company.com</td>
+										<td>
+									  		<input type="checkbox" id="checkbox3" name="checkbox3" />
+									  		<label for="checkbox3"><span></span></label>
+										</td>
+										<td><span class="glyphicon glyphicon-pencil"></span></td>
+										<td><span class="glyphicon glyphicon-trash"></span></td>
+									</tr>
+									<tr>
+										<td>Adrin</td>
+										<td>Bond</td>
+										<td>tsabo.15</td>
+										<td>a.bond@company.com</td>
+										<td>
+									  		<input type="checkbox" id="checkbox4" name="checkbox4" />
+									  		<label for="checkbox4"><span></span></label>
+										</td>
+										<td><span class="glyphicon glyphicon-pencil"></span></td>
+										<td><span class="glyphicon glyphicon-trash"></span></td>
+									</tr>
+								</tbody>
+							</table>
+                            <a href="#" id="addNewUser"><span>+</span> Add new user</a>
+						</div>
+	        		</div>
+	        	</div>
+	        	<div class="tab-pane container" id="ab">form1</div>
+	        	<div class="tab-pane container" id="ac">form2</div>
+
+	      	<div class="tab-pane container" id="b">
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="list-inline text-center">
+								<li><span class="glyphicon glyphicon-plus"></span><p>Add a new job</p></li>
+								<li><span class="glyphicon glyphicon-wrench"></span><p>Manage old jobs</p></li>
+							</ul>
+						</div>
+	          	</div>
+	       	</div>
+	       	<div class="tab-pane container" id="addNewJob">
+	       		<div class="well well-sm main-well">ADD A NEW JOB</div>
+
+					<form class="form-group" id="addJobs">
+						<div class="well well-sm inner-well">Basic Info</div><button class="btn" type="submit">Save</button>
+						<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label for="inputEmail" class="control-label">Job Title</label><span class="glyphicon glyphicon-menu-right"></span>
+				     		</div>
+					    	<div class="col-md-10">
+					      	<input type="text" class="form-control" id="inputEmail">
+					    	</div>
+						</div>
+						<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Type of job</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Job Description</label><span class="glyphicon glyphicon-menu-right"></span>
+				     		</div>
+					    	<div class="col-md-10">
+					      	<textarea class="form-control" rows="3"></textarea>
+					    	</div>
+						</div>
+						<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Industry</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label text-right">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+					        </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Rate</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Duration</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Location-country</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Location-city</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Travel</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Language</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row" style="margin-bottom:40px;">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Start date</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+
+						<div class="well well-sm inner-well" style="width: 91%;">Basic Info</div><button class="btn" type="submit">Update</button>
+						<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">DP</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">SNP</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">PPDS</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">GATP</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">Hana</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">CIF</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					 	<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">BI</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+							</div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+						<div class="row">
+					  		<div class="col-md-2 text-right">
+					    		<label class="control-label">SNP Optimiser</label><span class="glyphicon glyphicon-menu-right"></span>
+					    	</div>
+					    	<div class="col-sm-4">
+								<select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+                            </div>
+                            <div class="col-md-2 text-right">
+								<label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
+						    </div>
+                            <div class="col-md-4">
+                                <select class="form-control">
+								  <option>1</option>
+								  <option>2</option>
+								  <option>3</option>
+								  <option>4</option>
+								  <option>5</option>
+								</select>
+					    	</div>
+					 	</div>
+					</form>
+					<div class="well well-sm inner-well">Basic Info</div><button class="btn" type="submit">Save</button>
+					<table class="table" id="basicInfo">
+						<thead>
+							<tr>
+								<th>Toil Id</th>
+								<th>Applicant's Name</th>
+								<th>Date Applied</th>
+								<th>Match</th>
+								<th>Status</th>
+								<th><span class="glyphicon glyphicon-eye-open"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>T2</td>
+								<td>Melanie Green</td>
+								<td>11/07/2015</td>
+								<td>96%</td>
+								<td>
+									<select class="form-control">
+									  <option>to be interviewed</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</td>
+								<td><span class="glyphicon glyphicon-eye-open"></span></td>
+							</tr>
+							<tr>
+								<td>T4</td>
+								<td>Patrick Quince</td>
+								<td>11/07/2015</td>
+								<td>83%</td>
+								<td>
+									<select class="form-control">
+									  <option>to be contacted</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</td>
+								<td><span class="glyphicon glyphicon-eye-open"></span></td>
+							</tr>
+							<tr>
+								<td>T7</td>
+								<td>Sujita Reddy</td>
+								<td>09/07/2015</td>
+								<td>75%</td>
+								<td>
+									<select class="form-control">
+									  <option>contacted, waiting replay</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</td>
+								<td><span class="glyphicon glyphicon-eye-open"></span></td>
+							</tr>
+						</tbody>
+					</table>
+
+	       	</div>
+	        <div class="tab-pane container" id="manageJobs">
+                <div class="well well-sm main-well">Current Jobs</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Job Title</th>
+                            <th>Date Posted</th>
+                            <th>Posted by</th>
+                            <th>Views</th>
+                            <th>Applicants</th>
+                            <th><span class="glyphicon glyphicon-pencil"></span></th>
+                            <th><span class="glyphicon glyphicon-trash"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>43</td>
+                            <td>Global Director of IT - SAP</td>
+                            <td>13/07/2015</td>
+                            <td>jsjsm.15</td>
+                            <td>13</td>
+                            <td>0</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                        <tr>
+                            <td>45</td>
+                            <td>SAP Analyst - MM,PP</td>
+                            <td>11/07/2015</td>
+                            <td>tspjo.15</td>
+                            <td>23</td>
+                            <td>2</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                        <tr>
+                            <td>47</td>
+                            <td>Data Analyst - Excel(SAP or JDE)</td>
+                            <td>09/07/2015</td>
+                            <td>tshwa.15</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                        <tr>
+                            <td>68</td>
+                            <td>SAP Application Security Administrator</td>
+                            <td>01/07/2015</td>
+                            <td>tsabo.15</td>
+                            <td>26</td>
+                            <td>4</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="well well-sm main-well">Achived Jobs</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Job Title</th>
+                            <th>Date Posted</th>
+                            <th>Posted by</th>
+                            <th>Views</th>
+                            <th>Applicants</th>
+                            <th><span class="glyphicon glyphicon-pencil"></span></th>
+                            <th><span class="glyphicon glyphicon-trash"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>43</td>
+                            <td>Consultant - SAP</td>
+                            <td>13/06/2015</td>
+                            <td>tsjsm.15</td>
+                            <td>43</td>
+                            <td>7</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                        <tr>
+                            <td>45</td>
+                            <td>SAP Analyst - PP/DS</td>
+                            <td>11/07/2015</td>
+                            <td>tspjo.15</td>
+                            <td>35</td>
+                            <td>1</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                        <tr>
+                            <td>47</td>
+                            <td>Data Analyst SAP</td>
+                            <td>09/07/2015</td>
+                            <td>tshwa.15</td>
+                            <td>6</td>
+                            <td>1</td>
+                            <td><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+	        </div>
+	        <div class="tab-pane container" id="bc">form2</div>
+
+	       	<div class="tab-pane container" id="c">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="well well-sm">JOBS - TOTAL</div>
+							<div class="row">
+								<div class="col-md-6"><img src="../../images/graph1.png" alt=""></div>
+								<div class="col-md-6">
+									<ul class="list-group">
+									 <li class="list-group-item">
+									    <span class="badge">13</span>
+									    Total job listing
+									  </li>
+									</ul>
+									<ul class="list-group">
+									 <li class="list-group-item">
+									    <span class="badge">257</span>
+									    Total number of views
+									  </li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="well well-sm">JOBS - SPECIFIC</div>
+							<div class="row">
+								<div class="col-md-6"><img src="../../images/graph2.png" alt=""></div>
+								<div class="col-md-6">
+									<ul class="list-group">
+									 <li class="list-group-item">
+									    <span class="badge">13</span>
+									    Other
+									  </li>
+									</ul>
+									<ul class="list-group">
+									 <li class="list-group-item">
+									    <span class="badge">257</span>
+									    Other 2
+									  </li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+	        	</div>
+	    	</div>
+	    	<!-- /#Tab content -->
+		</div>
+   	<!-- /#page-content-wrapper -->
+  	</div>
+  	<!-- /#wrapper -->
+
+   <!-- jQuery -->
+   <script src="../../vendor/jquery/jquery.min.js"></script>
+
+   <!-- Bootstrap Core JavaScript -->
+   <script src="../../vendor/bootstrap/bootstrap.min.js"></script>
+
+   <!-- Menu Toggle Script -->
+   <script>
+   $("#menu-toggle").click(function(e) {
+   	e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  	});
+  	$('#parent1').click(function(e) {
+		e.preventDefault();
+  		$('#child1').toggle();
+  		$('#child2').hide();
+  	})
+   $('#parent2').click(function(e) {
+     e.preventDefault();
+     $('#child2').toggle();
+     $('#child1').hide();
+   })
+   $('#parent3').click(function(e) {
+     e.preventDefault();
+   })
+   </script>
+</body>
+</html>

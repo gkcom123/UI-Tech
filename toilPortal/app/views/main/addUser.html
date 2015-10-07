@@ -1,0 +1,42 @@
+<div class="addToilUser">
+  <div id="wrapper">
+  <toil-left-bar></toil-left-bar>
+  <toil-header></toil-header>
+  <div class="tab-pane container" id="addUser" ng-controller="addUserController">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+          <th>First Name</th>
+          <th>Surname</th>
+          <th>Username</th>
+          <th>Email Address</th>
+          <th><span class="glyphicon glyphicon-ok"></span></th>
+          <th><span class="glyphicon glyphicon-pencil"></span></th>
+          <th><span class="glyphicon glyphicon-trash"></span></th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="user in Users.data">
+            <td><span ng-bind="user.firstName"></span></td>
+            <td><span ng-bind="user.surName"></span></td>
+            <td><span ng-bind="user.userName"></span></td>
+            <td><span ng-bind="user.emailId"></span></td>
+            <td>
+              <span ng-if="user.status==0">
+                <input type="checkbox" id="checkbox1" name="checkbox1" />
+                <label for="checkbox1"><span></span></label>
+              </span>
+            </td>
+            <td><span ng-if="user.isEditable" class="glyphicon glyphicon-pencil"></span></td>
+            <td><span class="glyphicon glyphicon-trash"></span></td>
+          </tr>
+          </tbody>
+        </table>
+        <a href="#" id="addNewUser"><span class="glyphicon glyphicon-plus-sign" style="vertical-align: middle;
+          margin-right: 5px"></span>Add new user</a>
+      </div>
+    </div>
+  </div>
+    </div>
+</div>
+
