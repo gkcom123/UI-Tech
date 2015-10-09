@@ -9,20 +9,22 @@
    </div>
 
    <div class="loginBody">
-      		<form id="signInFormID" class="signin-form rel redValidForm" ng-controller="loginController " role="form" name="form">
-			        <input type="text" name="username" class="form-control logininput" placeholder="Email address" autofocus>
-			        <input type="password" name="password" class="form-control logininput" placeholder="Password" style="margin-top:20px;">
-                    <div class="alignCenter forgotPass">
-                        <a href="/" class="whiteText underline" style="font-size: 13px">Forgotten your password?</a>
-                    </div>
-                    <button class="btn btn-sm btn-block yellowBtn bdr15 loginBlueBtn" type="submit" ng-click="login()"  style="margin-top:40px;">Log in</button>
+      		<form id="signInFormID" method="post" class="signin-form redValidForm" ng-controller="loginController " role="form" name="form">
+                <div class="error yellowText">
+                </div>
+                <input type="text" name="username" class="form-control logininput" placeholder="Email address" autofocus>
+                <input type="password" name="password" class="form-control logininput" placeholder="Password" style="margin-top:20px;">
+                <div class="alignCenter forgotPass">
+                    <a href="/" class="whiteText underline" style="font-size: 13px">Forgotten your password?</a>
+                </div>
+                <button class="btn btn-sm btn-block yellowBtn bdr15 loginBlueBtn" type="submit" ng-click="login()"  style="margin-top:40px;">Log in</button>
 			</form>
       </div>
-      <footer class="toilFooter">
+      <footer class="toilFooter" ng-controller="footerController">
           <div class="container">
               <div class="row">
                   <div class="col-lg-12">
-                      <a href="/#/tnc" target="_blank">Terms & Conditions</a>
+                      <a ng-href="#/tnc" class="headerLink">Terms & Conditions</a>
                   </div>
               </div>
           </div>

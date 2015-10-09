@@ -4,8 +4,8 @@ angular.module('toilApp')
 
 
     $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-      console.log('toState.name: '+toState.name+ toState.loginRequired);
-      console.log('fromState.name: '+fromState.name);
+      //console.log('toState.name: '+toState.name+ toState.loginRequired);
+      //console.log('fromState.name: '+fromState.name);
 
       /*if( (toState.loginRequired == false)){
             event.preventDefault();

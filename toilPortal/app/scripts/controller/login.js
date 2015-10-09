@@ -11,9 +11,17 @@ angular.module('toilApp')
       Helper.requireRule(rules, ['username', 'password']);
       var jForm = $("#signInFormID");
       jForm.validate({
-        rules: rules
+        rules: rules,
+        errorLabelContainer: $("#signInFormID div.error"),
+        showErrors: function(errorMap, errorList) {
+          if (errorList.length > 0) {
+            $("#signInFormID div.error").html("Invalid email address or password.");
+          }
+          else{
+            $("#signInFormID div.error").html("");
+          }
+        }
       });
-
       $scope.login = function() {
         if( jForm.valid() ){
           Helper.showMask();

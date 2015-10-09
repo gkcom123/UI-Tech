@@ -9,6 +9,21 @@ html{overflow-x: hidden;}
 .redValidForm label.error{color:#FF0000; font-size:12px; font-weight:normal; text-align:left;}
 .alignCenter{text-align: center;}
 .whiteText{color: #F8F8F8}
+.yellowText{
+  color: #F5821F;
+}
+#signInFormID div.error
+{
+  margin-bottom: 10px;
+}
+.blackText
+{
+  color:#000000;
+}
+.tnclogo{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 .underline{
   text-decoration: underline;
 }
@@ -96,6 +111,7 @@ html{overflow-x: hidden;}
   color: #fff;
   text-decoration: underline;
 }
+
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -250,6 +266,11 @@ html{overflow-x: hidden;}
   margin: 10px 50px 15px 50px;
   cursor: pointer;
 }
+.loginLink
+{
+  font-size: 15px;
+  color: #333;
+}
 .tab-content ul li span.glyphicon:hover{
   background: #666;
   color: #a7cbed;
@@ -397,7 +418,6 @@ html{overflow-x: hidden;}
 #manageJobs{padding: 50px 150px;}
 
 /*Manage jobs ends*/
-
 
 @media(min-width:768px) {
   #wrapper {

@@ -56,13 +56,26 @@ var toilVersion = 10,
 
         while( len-- ){
           name = arr[len];
-          if( obj[name] ){
-            obj[name].required = true;
-          }else {
-            obj[name] = {
-              required: true
+
+            if(name=='username') {
+                if (obj[name]) {
+                    obj[name].required = true;
+                    obj[name].email = true;
+                } else {
+                    obj[name] = {
+                        required: true, email: true
+                    }
+                }
             }
-          }
+            else{
+                if( obj[name] ){
+                    obj[name].required = true;
+                }else {
+                    obj[name] = {
+                        required: true
+                    }
+                }
+            }
         }
 
         return obj;
@@ -175,7 +188,7 @@ var toilVersion = 10,
         'tnc': {
           url: '/tnc',
           title: 'Toil | Terms & Condition',
-          loginRequired: "both",
+          loginRequired: "false",
           templateUrl: viewPath + 'main/tnc.html?v=' + toilVersion,
           ncyBreadcrumb: {
             label: 'Terms & Conditions',

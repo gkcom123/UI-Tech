@@ -9,6 +9,5 @@ angular.module('toilApp')
             }
           })(state)
       }
-      console.log(navFns)
       return navFns;
 });
