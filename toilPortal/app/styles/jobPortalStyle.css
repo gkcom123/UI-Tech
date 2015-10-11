@@ -111,6 +111,14 @@ html{overflow-x: hidden;}
   color: #fff;
   text-decoration: underline;
 }
+.pucIcon{
+  content:url("../images/pucIcon.png");
+  margin-top: 20px;
+}
+.toilWhiteIcon
+{
+  content:url("../images/toil_logo.png");
+}
 
 #wrapper {
   padding-left: 0;
