@@ -20,10 +20,6 @@ html{overflow-x: hidden;}
 {
   color:#000000;
 }
-.tnclogo{
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
 .underline{
   text-decoration: underline;
 }
@@ -115,11 +111,20 @@ html{overflow-x: hidden;}
   content:url("../images/pucIcon.png");
   margin-top: 20px;
 }
+.tncIcon{
+  content:url("../images/tncIcon.png");
+  width: 5em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 .toilWhiteIcon
 {
   content:url("../images/toil_logo.png");
 }
-
+.toilBlackIcon
+{
+  content:url("../images/toil_blackLogo.png");
+}
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;
@@ -279,6 +284,11 @@ html{overflow-x: hidden;}
   font-size: 15px;
   color: #333;
 }
+.tncToillogo{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
 .tab-content ul li span.glyphicon:hover{
   background: #666;
   color: #a7cbed;
