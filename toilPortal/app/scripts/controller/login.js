@@ -8,7 +8,7 @@ angular.module('toilApp')
     function($scope, $rootScope, $toilApi,$resource){
         var ajaxLock = false,
            rules = {};
-      Helper.requireRule(rules, ['username', 'password']);
+      Helper.requireRule(rules, ['emailid', 'password']);
       var jForm = $("#signInFormID");
       jForm.validate({
         rules: rules,
@@ -35,7 +35,7 @@ angular.module('toilApp')
               $toilApi.gotoAnalytics();
               //afterLogin();
             }else{
-              alert('Please check your login credentials');
+              $("#signInFormID div.error").html('Please check your login credentials');
             }
         })
 
@@ -43,5 +43,4 @@ angular.module('toilApp')
 
         }
       }
-
-  }]);
+    }]);

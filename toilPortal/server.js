@@ -15,6 +15,7 @@ app.get('/', function(req, res){
 });
 /*Toil Api backend*/
 app.post('/toilAPi/login', toilLoginSrv.login);
+app.post('/toilAPi/forgotPw', toilLoginSrv.forgotPw);
 app.get('/toilAPi/get_user_list', toilUserSrv.getUserList);
 app.get('/toilAPi/get_current_jobList', toilJobsSrv.getCurrentJobList);
 

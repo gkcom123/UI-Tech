@@ -57,7 +57,7 @@ var toilVersion = 10,
         while( len-- ){
           name = arr[len];
 
-            if(name=='username') {
+            if(name=='emailid') {
                 if (obj[name]) {
                     obj[name].required = true;
                     obj[name].email = true;
