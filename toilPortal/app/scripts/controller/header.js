@@ -3,12 +3,14 @@
  */
 'use strict';
 angular.module('toilApp')
-    .controller('toilHeaderController', ['$rootScope','$scope','$state','$resource',function ($rootScope,$scope,$state,$resource) {
+    .controller('toilHeaderController', ['$rootScope','$scope','$state','$resource','localStorageService',
+        function ($rootScope,$scope,$state,$resource,localStorageService) {
         $scope.page = $state.current;
         var userName = $rootScope.userName;
         $scope.logOut = function(){
+            localStorageService.remove('toil-id');
+            localStorageService.clearAll();
             $state.go('home');
-            //$rootScope.$broadcast('LogoutThisUser',{});
         };
 
 

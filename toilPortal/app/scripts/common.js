@@ -188,7 +188,7 @@ var toilVersion = 10,
         'tnc': {
           url: '/tnc',
           title: 'Toil | Terms & Condition',
-          loginRequired: "false",
+          loginRequired: false,
           templateUrl: viewPath + 'main/tnc.html?v=' + toilVersion,
           ncyBreadcrumb: {
             label: 'Terms & Conditions',
