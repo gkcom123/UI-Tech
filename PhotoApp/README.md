@@ -1,5 +1,7 @@
 To run 
 
+http://www.adobe.com/devnet/archive/html5/articles/getting-started-with-angularjs.html#articlecontentAdobe_numberedheader_3
+
 C02Q4JZ3G8WP:PhotoApp gunjan.kumar$ npm start
 http://localhost:8000/app/index.html?
 
