@@ -1,0 +1,52 @@
+/* Custom styling for the Bootstrap website. 
+These styles do not ship with Bootstrap. 
+Some are overrides of existing Bootstrap styles, while others are new styles not existing in Bootstrap.
+In the starting CSS document, styles are based on custom classes not in Bootstrap.
+*/
+
+/* below styles are the default -- take effect at resolutions <768 px */
+.logo {
+	text-align: center;
+}
+.tagline {
+	color: #602F8D;
+	font-family: Georgia, serif;
+	font-style: italic;
+	font-size: 1.5em;
+	text-align: center;
+	padding-top: 1em;
+}
+
+/* footer styling for all resolutions */
+
+.siteinfo {
+	text-align: center;
+	padding: 3em 0;
+	border-top: 1px solid #ddd;
+}
+.siteinfo a {
+	text-decoration: none;
+	color: #999;
+	font-size: 0.8em;
+}
+.siteinfo a:hover {
+	color: #602F8D;
+	text-decoration: underline;
+}
+
+/* Small devices (tablets, 768px and up) 
+
+Greater than 768 px, push logo left and tagline right. Alter 
+tagline font size, alignment, and padding for larger dimensions.
+
+*/
+@media (min-width: 768px) {  
+	.logo {
+		text-align: left;
+	}
+	.tagline {
+		font-size: 2em;
+		text-align: right;
+		padding-top: 1.6em;
+	}
+}

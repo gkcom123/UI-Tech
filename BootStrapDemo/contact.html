@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>The Landon Hotel:  You'll Feel At Home in Our Neighborhood</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<header class="row">
+			<div class="col-sm-3 logo"><img src="images/logo.png" alt="The Landon Hotel. "></div>
+			<div class="col-sm-9 tagline">You'll feel at home in our neighborhood</div>
+		</header>
+		<div class="row">
+			<nav class="navbar navbar-default" role="navigation">
+			  <div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			    </div>
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="navbar">
+			      <ul class="nav navbar-nav">
+			        <li><a href="index.html">Home</a></li>
+			        <li><a href="execs.html">Executive Team</a></li>
+			        <li class="active"><a href="contact.html">Contact</a></li>
+			      </ul>
+			    </div><!-- end navbar-collapse -->
+			  </div><!-- end container-fluid -->
+			</nav>
+		</div>
+		<div class="row">
+			<h2>Contact Us</h2>
+			<form role="form">
+		        <fieldset>
+		          <legend>Have more questions?</legend>
+		          <div class="form-group">
+		          	<label>Your name</label>
+		          	<input type="text" name="name">
+		          </div>
+		          <div class="form-group">
+		          	<label>What kind of room are you interested in?</label>
+		            <label>
+		              <input type="radio" name="roomtype" value="queen">
+		              Queen bed</label>
+		            <label>
+		              <input type="radio" name="roomtype" value="king">
+		              King bed with pull out sofa</label>
+		            <label>
+		              <input type="radio" name="roomtype" value="2queen">
+		              Two queen beds</label>
+		            <label>
+		              <input type="radio" name="roomtype" value="suite">
+		              Suite with kitchenette</label>
+		           </div>
+		           <div class="form-group">
+			          <label>Would you prefer a smoking or non-smoking room?</label>
+			          <label>
+			            <input type="radio" name="smoking" value="smoking">
+			            Smoking</label>
+			          <label>
+			            <input type="radio" name="smoking" value="nonsmoking">
+			            Non-smoking</label>
+			       </div>
+			       <div class="form-group">
+			          <label>Your continent:</label>
+			          <select name="continent" size="1">
+			            <option selected>Select one...</option>
+			            <option value="afr">Africa</option>
+			            <option value="ant">Antarctica</option>
+			            <option value="asia">Asia</option>
+			            <option value="aus">Australia</option>
+			            <option value="eur">Europe</option>
+			            <option value="na">North America</option>
+			            <option value="sa">South America</option>
+			          </select>
+		      		</div>
+		      		<div class="form-group">
+			          <label>Comments:</label>
+			          <textarea name="comments"></textarea>
+			        </div>
+			        <div class="form-group">
+			          <label>
+			            <input name="subscribe" type="checkbox" value="subscribe">
+			            Subscribe me to the newsletter </label>
+			          <label>Your email</label>
+			            <input type="text" name="email">
+			        </div>
+		          <button type="submit">Submit</button>
+		        </fieldset>
+		    </form>
+
+		</div>
+		<footer class="row siteinfo">
+			<a href="http://lynda.com/">The Landon Hotel is a fictitious brand created by lynda.com solely for the purpose of training. All products and people associated with The Landon Hotel are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</a>
+		</footer>
+	</div><!-- end container -->
+
+    
+<!-- javascript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
