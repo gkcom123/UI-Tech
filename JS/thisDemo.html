@@ -12,13 +12,14 @@
 
   // In web browsers, the window object is also the global object:
   console.log(this === window); // true
+  console.log(typeof this);
 
   this.a = 37;
   console.log(window.a); // 37
 
   var obj = {};
   obj.foo = function() {
-    alert(this.firstName);
+    console.log(this.firstName);
   };
   var f = obj.foo;
   f();
@@ -28,7 +29,7 @@
 
   var obj = {};
   obj.foo = function() {
-    alert(this.firstName);
+    console.log(this.firstName);
   };
   obj.firstName = "Fred";
   obj.foo(); // alerts "Fred"
@@ -48,7 +49,7 @@
   Guess.prototype.accuse = function()
   {
     //alert(this);
-    alert('It was ' + this.killer
+    console.log('It was ' + this.killer
     + ' in the ' + this.location
     + ' with the ' + this.weapon
     + '!');
@@ -91,7 +92,7 @@
     accuse();
   }
   testGuess();
-  alert("Calling Ref Function")
+  console.log("Calling Ref Function")
   testGuessRef();
 
   function testGuess2()
