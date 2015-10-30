@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  var counter = (function() {
+    var privateCounter = 0;
+    function changeBy(val) {
+      privateCounter += val;
+    }
+    return {
+      increment: function() {
+        changeBy(1);
+      },
+      decrement: function() {
+        changeBy(-1);
+      },
+      value: function() {
+        return privateCounter;
+      }
+    };
+  })();
+  //Those three public functions are closures that share the same environment.
+  // Thanks to JavaScript's lexical scoping, they each have access to the
+  // privateCounter variable and changeBy function.
+
+
+  console.log(counter.value()); // logs 0
+  counter.increment();
+  counter.increment();
+  console.log(counter.value()); // logs 2
+  counter.decrement();
+  console.log(counter.value()); // logs 1
+</script>
+
+</body>
+</html>
