@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head lang="en" >
+    <meta charset="UTF-8">
+    <title>Service demo using service method</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.js"></script>
+</head>
+<body>
+<div ng-controller="StringController">
+  Enter Name:
+  <input ng-model="name">
+  <button  ng-click="findReverse()">Reverse Name</button>
+  <div>{{reversename}}</div>
+</div>
+<script>
+  var myApp = angular.module('myApp', ['CalculatorService']);
+  myApp.controller('StringController', function ($scope, StringManipulation) {
+
+    $scope.findReverse = function () {
+
+      $scope.reversename = StringManipulation.reverseString($scope.name);
+    }
+  });
+
+
+</script>
+  <script src="ServiceFactoryDemo.js" ></script>
+
+</body>
+</html>
