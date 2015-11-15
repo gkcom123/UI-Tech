@@ -16,9 +16,11 @@ exports.login = function(req,res)
     email: name,
     id: 1234
   };
-  var token = jwt.sign(profile, secret, { expiresIn: 600*5 });
+  //var token = jwt.sign(profile, secret, { expiresIn: 600*5 });
+  //expiry time has been removed as per Marcin request
+  var token = jwt.sign(profile, secret);
 
-  if(name != undefined && pw!=undefined )//&& name == pw)
+  if(name != undefined && pw!=undefined )
   {
     /*var result = {status: 'success', error_desc: '', error_code: '200', response_data: {username: name,
       session_id: "c08ba7f4868c15aaba5c1a67012344a0"}, message:'Verified'};*/

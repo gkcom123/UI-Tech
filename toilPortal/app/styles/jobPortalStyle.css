@@ -45,6 +45,12 @@ html{overflow-x: hidden;}
   font-weight: bold;
   font-size: 15px;
 }
+.saveBtn
+{
+  background: #F5821F;
+  color: #fff;
+  border-radius: 0px;
+}
 .yellowBtn:active, .blueBtn:focus, .blueBtn:hover{
   background: #fff;
   color: #F5821F;
@@ -324,10 +330,15 @@ html{overflow-x: hidden;}
   padding-top: 5px;
 }
 .main-well {
-  background: #56616b;
+  background: #000000;
   color: #fff;
-  border:1px solid #56616b;
   text-transform: uppercase;
+  margin-bottom: 5px;
+
+}
+.basicInfo
+{
+  padding: 6px;
 }
 .list-group {width: 90%;}
 .list-group-item {
@@ -429,6 +440,9 @@ html{overflow-x: hidden;}
 /*Add new jobs*/
 #addNewJob {
   padding: 50px 150px;
+}
+#addtoilUser {
+  padding: 20px 50px;
 }
 #addNewJob .control-label {font-weight: normal;color: #555;}
 #addNewJob .form-control {

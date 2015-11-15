@@ -1,0 +1,93 @@
+<div class="addToilUser" ng-controller="addUserController">
+  <div id="wrapper">
+  <toil-left-bar></toil-left-bar>
+  <toil-header></toil-header>
+  <div class="tab-pane container" id="addUser" ng-hide="addUserFlag">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+          <th>First Name</th>
+          <th>Surname</th>
+          <th>Username</th>
+          <th>Email Address</th>
+          <th><span class="glyphicon glyphicon-ok"></span></th>
+          <th><span class="glyphicon glyphicon-pencil"></span></th>
+          <th><span class="glyphicon glyphicon-trash"></span></th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="user in Users.data">
+            <td><span ng-bind="user.firstName"></span></td>
+            <td><span ng-bind="user.surName"></span></td>
+            <td><span ng-bind="user.userName"></span></td>
+            <td><span ng-bind="user.emailId"></span></td>
+            <td>
+              <span ng-if="user.status==0">
+                <input type="checkbox" id="checkbox1" name="checkbox1" />
+                <label for="checkbox1"><span></span></label>
+              </span>
+            </td>
+            <td><span ng-if="user.isEditable" class="glyphicon glyphicon-pencil"></span></td>
+            <td><span class="glyphicon glyphicon-trash"></span></td>
+          </tr>
+          </tbody>
+        </table>
+        <a id="addNewUser" ng-click="addUserClick()" ><span class="glyphicon glyphicon-plus-sign" style="vertical-align: middle;
+          margin-right: 5px"></span>Add new user</a>
+      </div>
+    </div>
+  </div>
+    <div ng-show="addUserFlag">
+      <div class="tab-pane container" id="addtoilUser">
+        <div class="row">
+          <div class="col-md-9 col-md-offset-1 well well-sm main-well">ADD A NEW USER</div>
+        </div>
+        <div class="row">
+          <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">Basic Info</div><button class="btn col-md-1 saveBtn" type="submit">Save</button>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-right">
+            <label for="fName" class="control-label">First Name</label><span class="glyphicon glyphicon-menu-right"></span>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="fName">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-right">
+            <label for="lName" class="control-label">Last Name</label><span class="glyphicon glyphicon-menu-right"></span>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="lName">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-right">
+            <label for="emailAdd" class="control-label">Email Address</label><span class="glyphicon glyphicon-menu-right"></span>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="emailAdd">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-right">
+            <label for="company" class="control-label">Company</label><span class="glyphicon glyphicon-menu-right"></span>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="company">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 text-right">
+            <label for="phoneNum" class="control-label">Work Phone Number</label><span class="glyphicon glyphicon-menu-right"></span>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" id="phoneNum">
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+</div>
+

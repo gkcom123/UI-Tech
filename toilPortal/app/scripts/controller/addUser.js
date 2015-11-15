@@ -32,7 +32,7 @@ angular.module("toilApp")
                         console.warn("GetUpcomingBookings API returned empty Object");
                     }
                     else{
-                        console.log("Got in response");
+                       // console.log("Got in response");
 
                         userList = response.response_data.results;
                         //console.log("Got in response==>"+userList);
@@ -40,6 +40,10 @@ angular.module("toilApp")
                     }
                 });
             }
-
+            $scope.addUserClick = function()
+            {
+                console.log('i m in adduser');
+                $scope.addUserFlag = true;
+            }
             loadUsers();
         }]);

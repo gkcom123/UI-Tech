@@ -44,8 +44,8 @@ $.QueryString = function( url ) {
 };
 
 var toilVersion = 10,
-    viewPath =  "/toilPortal/views/",
-    //viewPath =  "/views/",
+    //viewPath =  "/toilPortal/views/",
+    viewPath =  "/views/",
     Helper = {
      version: toilVersion
     ,viewPath: viewPath
@@ -94,18 +94,22 @@ var toilVersion = 10,
             loginRequired: false,
             templateUrl: viewPath + 'main/toilLogin.html?v=' + toilVersion
           },
-        'addUser': {
-          url: '/addUser',
+        'user': {
+          url: '/user',
           title: 'Toil Portal',
           loginRequired: true,
-          name:'addUser',
-          templateUrl: viewPath + 'main/addUser.html?v=' + toilVersion,
+          name:'user',
+          templateUrl: viewPath + 'main/user.html?v=' + toilVersion,
           ncyBreadcrumb: {
-            label: 'Add User',
+            label: 'User',
             parent: 'analytics'
           }
 
         },
+            'user.newUser':{
+                url:'/newUser',
+                templateUrl: viewPath + 'main/addNewUser.html?v=' + toilVersion,
+            },
         'addJob': {
           url: '/addJob',
           title: 'Toil Portal',

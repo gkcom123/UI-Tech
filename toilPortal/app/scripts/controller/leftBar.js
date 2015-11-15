@@ -13,7 +13,7 @@ angular.module('toilApp')
       $("#child1").css("display", "none");
       $("#child2").css("display", "none");
     }
-    else if($scope.uiRouterState=='addUser' || $scope.uiRouterState=='budget' || $scope.uiRouterState=='password')
+    else if($scope.uiRouterState=='user' || $scope.uiRouterState=='budget' || $scope.uiRouterState=='password')
     {
       $("#child1").css("display", "block");
       $("#child2").css("display", "none");
@@ -58,7 +58,7 @@ angular.module('toilApp')
    $scope.userClick = function(event)
     {
 
-      $state.go('addUser');
+      $state.go('user');
     }
     $scope.addJobClick = function()
     {
