@@ -51,6 +51,17 @@ html{overflow-x: hidden;}
   color: #fff;
   border-radius: 0px;
 }
+.arrowIcon
+{
+  top:2px;
+  padding-left: 8px;
+  color: #F5821F;
+}
+.inputBox
+{
+  border-radius: 0px;
+  height: 30px;
+}
 .yellowBtn:active, .blueBtn:focus, .blueBtn:hover{
   background: #fff;
   color: #F5821F;

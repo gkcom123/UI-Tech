@@ -38,55 +38,45 @@
     </div>
   </div>
     <div ng-show="addUserFlag">
-      <div class="tab-pane container" id="addtoilUser">
-        <div class="row">
-          <div class="col-md-9 col-md-offset-1 well well-sm main-well">ADD A NEW USER</div>
-        </div>
-        <div class="row">
-          <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">Basic Info</div><button class="btn col-md-1 saveBtn" type="submit">Save</button>
-        </div>
-        <div class="row">
-          <div class="col-md-3 text-right">
-            <label for="fName" class="control-label">First Name</label><span class="glyphicon glyphicon-menu-right"></span>
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="fName">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 text-right">
-            <label for="lName" class="control-label">Last Name</label><span class="glyphicon glyphicon-menu-right"></span>
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="lName">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 text-right">
-            <label for="emailAdd" class="control-label">Email Address</label><span class="glyphicon glyphicon-menu-right"></span>
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="emailAdd">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 text-right">
-            <label for="company" class="control-label">Company</label><span class="glyphicon glyphicon-menu-right"></span>
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="company">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 text-right">
-            <label for="phoneNum" class="control-label">Work Phone Number</label><span class="glyphicon glyphicon-menu-right"></span>
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="phoneNum">
-          </div>
-        </div>
-
+      <div class="row">
+        <div class="col-md-9 col-md-offset-1 well well-sm main-well">ADD A NEW USER</div>
       </div>
+      <div class="row">
+        <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">Basic Info</div><button class="btn col-md-1 saveBtn" type="submit">Save</button>
+      </div>
+
+      <form class="form-horizontal col-md-offset-1">
+        <div class="form-group">
+          <label for="fName" class="col-sm-2 control-label">First Name<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
+          <div class="col-md-4">
+            <input type="text" class="form-control inputBox" id="fName">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lName" class="col-sm-2 control-label">Last Name<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control inputBox" id="lName">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">Email Address<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
+          <div class="col-sm-4">
+            <input type="email" class="form-control inputBox" id="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="company" class="col-sm-2 control-label">Company<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control inputBox" id="company">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phoneNum" class="col-sm-2 control-label">Work Phone Number<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
+          <div class="col-sm-4">
+            <input type="number" class="form-control inputBox" id="phoneNum">
+          </div>
+        </div>
+      </form>
     </div>
     </div>
 </div>
