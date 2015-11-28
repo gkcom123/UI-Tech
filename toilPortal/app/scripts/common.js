@@ -44,8 +44,8 @@ $.QueryString = function( url ) {
 };
 
 var toilVersion = 10,
-    //viewPath =  "/toilPortal/views/",
-    viewPath =  "/views/",
+    //viewPath =  "/toilPortal/views/",// For Prod
+    viewPath =  "/views/",//for Dev/local
     Helper = {
      version: toilVersion
     ,viewPath: viewPath

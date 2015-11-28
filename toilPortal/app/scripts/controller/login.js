@@ -35,14 +35,14 @@ angular.module('toilApp')
               //console.log(res.response_data);
               var encodedProfile = res.response_data.split('.')[1];
               var profile = JSON.parse(url_base64_decode(encodedProfile));
-
              // var resData = res.response_data;
               $rootScope.userName = profile.email;
 
               $toilApi.gotoAnalytics();
               //afterLogin();
             }else{
-              delete $window.sessionStorage.token;
+              localStorageService.remove('toil-id');
+              localStorageService.clearAll();
               $("#signInFormID div.error").html('Please check your login credentials');
             }
         })

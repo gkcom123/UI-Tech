@@ -3,35 +3,56 @@
  */
 var jwt = require('jsonwebtoken');
 var secret = 'ToilPortalKey12356';
-
+var dbPool = require('./db').pool;
 exports.login = function(req,res)
 {
   var reqObj = req.body;
-  var name = reqObj["emailid"];
+  var emailId = reqObj["emailid"];
   var pw = reqObj["password"];
+  var finalresult;
+  if(emailId != undefined && pw!=undefined )
+  {
+    dbPool.getConnection(function(err, conn) {
+      conn.query("SELECT * FROM toilUser WHERE email_id='" + emailId + "' AND passwd='" + pw + "'"
+          , function (err, result) {
+            if (!err && result.length == 1) {
+              var profile = {
+                first_name: result[0]["f_name"],
+                last_name: result[0]["l_name"],
+                email: result[0]["email_id"],
+                company: result[0]["company"],
+                user_id: result[0]["user_id"]
+              };
+              //var token = jwt.sign(profile, secret, { expiresIn: 600*5 });
+              //expiry time has been removed as per Marcin request
+              var token = jwt.sign(profile, secret);
+              finalresult = {
+                status: 'success',
+                error_desc: '',
+                error_code: '200',
+                response_data: token,
+                message: 'Verified'
+              };
+              res.send(finalresult);
+            }
+            else {
+              finalresult = {
+                status: 'failed',
+                error_desc: '',
+                error_code: '201',
+                response_data: {},
+                message: 'Not verified'
+              };
+              res.send(finalresult);
 
-  var profile = {
-    first_name: 'John',
-    last_name: 'Doe',
-    email: name,
-    id: 1234
+            }
+          });
+      conn.release();
+    });
+  }
+
   };
-  //var token = jwt.sign(profile, secret, { expiresIn: 600*5 });
-  //expiry time has been removed as per Marcin request
-  var token = jwt.sign(profile, secret);
 
-  if(name != undefined && pw!=undefined )
-  {
-    /*var result = {status: 'success', error_desc: '', error_code: '200', response_data: {username: name,
-      session_id: "c08ba7f4868c15aaba5c1a67012344a0"}, message:'Verified'};*/
-    var result = {status: 'success', error_desc: '', error_code: '200', response_data: token, message:'Verified'};
-  }
-  else
-  {
-    var result = {status: 'failed', error_desc: '', error_code: '201', response_data: {}, message:'Not verified'};
-  }
-  res.send(result);
-};
 exports.forgotPw = function(req,res)
 {
   var reqObj = req.body;
