@@ -37,6 +37,7 @@ angular.module('toilApp')
               var profile = JSON.parse(url_base64_decode(encodedProfile));
              // var resData = res.response_data;
               $rootScope.userName = profile.email;
+              $rootScope.userId = profile.user_id;
 
               $toilApi.gotoAnalytics();
               //afterLogin();

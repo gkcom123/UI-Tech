@@ -8,14 +8,14 @@ angular.module('toilApp')
             getResource: function(id,pageNo,paginationCount){
                 return $resource('/toilAPi/get_user_list/', {
                     'url':'/toilAPi/get_user_list/',
-                    'corporate_id': id,
+                    'user_id': id,
                     'page_number' : pageNo,
                     'pagination_count' : paginationCount
                 });
             }
         }
     })
-/*    .factory('GetPastBookings', function($resource){
+    .factory('AddUser', function($resource){
         return {
             getResource: function(id,pageNo,paginationCount){
                 var data = {
@@ -30,7 +30,7 @@ angular.module('toilApp')
         }
     })
 
-    .factory('DownloadReceipt', function($resource){
+    /*.factory('DownloadReceipt', function($resource){
         return {
             getResource: function(receiptNumber,id){
                 return $resource('api/download_file/',{

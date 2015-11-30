@@ -11,7 +11,7 @@ angular.module("toilApp")
         function( $scope, $rootScope, $location, GetUserList){
 
             var userList 	= {};
-            var userId = "";
+            var userId = $rootScope.userId;
             var pageNo 				= 1;
             var paginationCount		= 4 ;
 
@@ -20,7 +20,7 @@ angular.module("toilApp")
 
                // $('.viewBookingWap .spin').show();
                 //$scope.radioModel = 'Left';
-                //$scope.showFilters = false;
+                //$scope.showFilters = false;;
                 var userListResource = GetUserList.getResource(userId, pageNo, paginationCount);
 
                 userListResource.get(function(response){
@@ -29,20 +29,16 @@ angular.module("toilApp")
                     }
 
                     if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("GetUpcomingBookings API returned empty Object");
+                        console.warn("Get User API returned empty Object");
                     }
                     else{
-                       // console.log("Got in response");
-
                         userList = response.response_data.results;
-                        //console.log("Got in response==>"+userList);
                         $scope.Users.data = response.response_data.results;
                     }
                 });
             }
             $scope.addUserClick = function()
             {
-                console.log('i m in adduser');
                 $scope.addUserFlag = true;
             }
             loadUsers();

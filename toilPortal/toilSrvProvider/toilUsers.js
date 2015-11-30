@@ -1,76 +1,50 @@
 /**
  * Created by gunjan.kumar on 10/2/15.
  */
+var dbPool = require('./db').pool;
 exports.getUserList = function(req,res)
 {
+    var userid = req.query["user_id"];
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM toilUser WHERE admin_id='" + userid +"'"
+            , function (err, result) {
+                if (!err && result.length > 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var profile = {
+                            firstName: result[i]["f_name"],
+                            lastName: result[i]["l_name"],
+                            emailId: result[i]["email_id"],
+                            company: result[i]["company"],
+                            userName: result[i]["user_id"],
+                            "isEditable": true,
+                            "isRemovable":true
+                        };
+                        jsonRes.push(profile);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
     var tomo =  getDate();
-    var result = {
-        "status": "success",
-        "error_desc": "",
-        "error_code": "",
-        "response_data": {
-            "pagination": {
-                "has_next": false,
-                "next_page": 2,
-                "previous_page": 0,
-                "current_page": 1,
-                "total_pages": 1,
-                "has_previous": false
-            },
-            "results": [{
-                "firstName": "Patricia",
-                "surName": "Johnson",
-                "userName": "tspjo.15",
-                "emailId":"p.johnson@company.com",
-                "status":0,
-                "isEditable": true,
-                "isRemovable":true
-            },{
-                "firstName": "Robert",
-                "surName": "C",
-                "userName": "tspjo.15",
-                "emailId":"p.robert@company.com",
-                "status":0,
-                "isEditable": true,
-                "isRemovable":true
-            },{
-                "firstName": "G",
-                "surName": "Henry",
-                "userName": "tspjo.55",
-                "emailId":"p.henry@company.com",
-                "status":0,
-                "isEditable": true,
-                "isRemovable":true
-            },{
-                "firstName": "Chris",
-                "surName": "J",
-                "userName": "tspjo.45",
-                "emailId":"p.johnson@company.com",
-                "status":1,
-                "isEditable": true,
-                "isRemovable":true
-            },{
-                "firstName": "Adrin",
-                "surName": "Bond",
-                "userName": "tspjo.5",
-                "emailId":"a.bondn@company.com",
-                "status":0,
-                "isEditable": false,
-                "isRemovable":true
-            },{
-                "firstName": "Hannah",
-                "surName": "Walsh",
-                "userName": "tspjo.76",
-                "emailId":"h.Walsh@company.com",
-                "status":0,
-                "isEditable": true,
-                "isRemovable":true
-            }
-            ]
-        }
-    }
-    res.send(result);
-
 }
 function getDate()
 {
