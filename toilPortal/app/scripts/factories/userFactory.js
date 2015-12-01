@@ -17,15 +17,8 @@ angular.module('toilApp')
     })
     .factory('AddUser', function($resource){
         return {
-            getResource: function(id,pageNo,paginationCount){
-                var data = {
-                    'url':'/api/get_corporate_past_bookings/',
-                    'corporate_id': id,
-                    'page_number' : pageNo,
-                    'pagination_count' : paginationCount,
-                    'remote_host':'RTFS_URL'
-                }
-                return $resource('/api/get_corporate_past_bookings/', data);
+            getResource: function(){
+                return $resource('/toilAPi/addNewUser/', {});
             }
         }
     })

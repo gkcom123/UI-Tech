@@ -46,6 +46,40 @@ exports.getUserList = function(req,res)
     });
     var tomo =  getDate();
 }
+exports.addNewUser = function(req,res)
+{
+    var reqObj = req.body;
+    var firstName = reqObj["firstName"];
+    var lastName = reqObj["lastName"];
+    var emailid = reqObj["emailid"];
+    var company = reqObj["company"];
+    var phoneNumber = reqObj["phoneNumber"];
+    var admin_id = reqObj["user_id"];
+/*
+    INSERT INTO toilUser (email_id,f_name,l_name,company,phoneNumber,isActive,passwd,isadmin,admin_id)
+    VALUES ('shilpa1@yahoo.com','Shilpa1','Goj','adobe','9877876',1,'admin',1,2);
+*/
+
+    dbPool.getConnection(function(err, conn) {
+        conn.query("INSERT INTO toilUser (email_id,f_name,l_name,company,phoneNumber,isActive,passwd,isadmin,admin_id) VALUES" +
+            "('" + emailid +"','"+firstName+"','"+lastName+"','"+company+"','"+phoneNumber+"','"+'1'+"','"+'admin'+"','"+'1'+"','"+admin_id +"')",
+            function (err, result) {
+                if (!err) {
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
 function getDate()
 {
     var m_names = new Array("January", "February", "March",

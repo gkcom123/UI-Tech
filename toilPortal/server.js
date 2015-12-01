@@ -11,7 +11,7 @@ app.use(express.bodyParser());
 app.use('/toilAPi', expressJwt({secret: secret}));
 
 app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/app'));
 app.use(function(err, req, res, next){
   if (err.constructor.name === 'UnauthorizedError') {
     res.status(401).send('Unauthorized');
@@ -28,7 +28,9 @@ app.get('/', function(req, res){
 /*Toil Api backend*/
 app.post('/toil/login', toilLoginSrv.login);
 app.post('/toilAPi/forgotPw', toilLoginSrv.forgotPw);
+
 app.get('/toilAPi/get_user_list', toilUserSrv.getUserList);
+app.post('/toilAPi/addNewUser', toilUserSrv.addNewUser);
 app.get('/toilAPi/get_current_jobList', toilJobsSrv.getCurrentJobList);
 
 http.createServer(app).listen(app.get('port'), function(){
