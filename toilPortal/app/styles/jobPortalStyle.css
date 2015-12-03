@@ -350,6 +350,7 @@ html{overflow-x: hidden;}
 .basicInfo
 {
   padding: 6px;
+  background: #FBBD82
 }
 .list-group {width: 90%;}
 .list-group-item {
@@ -450,7 +451,6 @@ html{overflow-x: hidden;}
 
 /*Add new jobs*/
 #addNewJob {
-  padding: 50px 150px;
 }
 #addtoilUser {
   padding: 20px 50px;
@@ -475,7 +475,7 @@ html{overflow-x: hidden;}
 #addJobs select{margin-right: 20px;}
 
 #addNewJob .inner-well{width: 93%;float: left; background: #FBBD82}
-#addNewJob button{color: #fff;background:#f68211;height: 40px;}
+#addNewJob button{color: #fff;background:#f68211}
 #basicInfo select.form-control{width: 100% !important;}
 /*Add new jobs ends*/
 

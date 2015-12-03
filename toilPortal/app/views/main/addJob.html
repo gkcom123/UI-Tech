@@ -3,424 +3,442 @@
   <toil-left-bar></toil-left-bar>
   <toil-header></toil-header>
 
-  <div class="tab-pane container" id="addNewJob">
-  <div class="well well-sm main-well">ADD A NEW JOB</div>
+  <div id="addNewJob">
+    <div class="row">
+      <div class="col-md-9 col-md-offset-1 well well-sm main-well">ADD A NEW JOB</div>
+    </div>
+    <div class="row">
+      <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">Basic Info</div>
+      <button class="btn col-md-1 saveBtn" type="submit">Save</button>
+    </div>
+    <form id ="addJobForm" class="form-horizontal col-md-offset-1">
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label for="jobTitle" class="control-label">Job title</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-7">
+          <input type="text" class="form-control inputBox" id="jobTitle">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Type of job</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>Contract</option>
+            <option>Permanent</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Job Description</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-7">
+          <textarea class="form-control" rows="4"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Industry</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label text-right">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label for="rate" class="control-label">Rate/Salary</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control inputBox" id="rate">
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Currency</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>US Dollar</option>
+            <option>UK Pound</option>
+            <option>EUR-Euros</option>
+            <option>INR-Rupees</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Duration</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option><1 Month</option>
+            <option>1-2 Months</option>
+            <option>3-6 Months</option>
+            <option>7-9 Months</option>
+            <option>>9 Months</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Location-country</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Location-city</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Travel</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Primary language</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:40px;">
+        <div class="col-md-2 text-right">
+          <label for="stDate" class="control-label">Start date</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control inputBox" id="stDate">
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        </div>
+    </form>
+    <div class="row">
+      <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">SAP SKILLS/COMPETENCE</div>
+      <button class="btn col-md-1 saveBtn" type="submit">Save</button>
+    </div>
+    <form id ="addSkillsForm" class="form-horizontal col-md-offset-1">
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">DP</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">SNP</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">PPDS</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">GATP</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">Hana</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">CIF</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">BI</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-2 text-right">
+          <label class="control-label">SNP Optimiser</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-sm-3">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2 text-right">
+          <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
 
-  <form class="form-group" id="addJobs">
-    <div class="well well-sm inner-well">Basic Info</div><button class="btn" type="submit">Save</button>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label for="inputEmail" class="control-label">Job Title</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-10">
-        <input type="text" class="form-control" id="inputEmail">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Type of job</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Job Description</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-10">
-        <textarea class="form-control" rows="3"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Industry</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label text-right">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Rate</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Duration</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Location-country</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Location-city</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Travel</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Language</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row" style="margin-bottom:40px;">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Start date</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="well well-sm inner-well" style="width: 91%;">Basic Info</div><button class="btn" type="submit">Update</button>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">DP</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">SNP</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">PPDS</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">GATP</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">Hana</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">CIF</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">BI</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <label class="control-label">SNP Optimiser</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-sm-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-      <div class="col-md-2 text-right">
-        <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right"></span>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-  </form>
+<!--
   <div class="well well-sm inner-well">Basic Info</div><button class="btn" type="submit">Save</button>
   <table class="table" id="basicInfo">
     <thead>
@@ -484,7 +502,6 @@
     </tr>
     </tbody>
   </table>
-
-</div>
-    </div>
+-->
+  </div>
 </div>
