@@ -23,6 +23,10 @@ angular.module("toilApp")
                // $('.viewBookingWap .spin').show();
                 //$scope.radioModel = 'Left';
                 //$scope.showFilters = false;;
+                if(!userId)
+                {
+                    return;
+                }
                 var userListResource = GetUserList.getResource(userId, pageNo, paginationCount);
 
                 userListResource.get(function(response){

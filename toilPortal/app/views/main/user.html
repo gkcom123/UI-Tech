@@ -1,42 +1,42 @@
 <div class="addToilUser" ng-controller="addUserController">
   <div id="wrapper">
-  <toil-left-bar></toil-left-bar>
-  <toil-header></toil-header>
-  <div class="tab-pane container" id="addUser" ng-hide="addUserFlag">
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table">
-          <thead>
-          <th>First Name</th>
-          <th>LAST NAME</th>
-          <th>Username</th>
-          <th>Email Address</th>
-          <th><span class="glyphicon glyphicon-ok"></span></th>
-          <th><span class="glyphicon glyphicon-pencil"></span></th>
-          <th><span class="glyphicon glyphicon-trash"></span></th>
-          </thead>
-          <tbody>
-          <tr ng-repeat="user in Users.data">
-            <td><span ng-bind="user.firstName"></span></td>
-            <td><span ng-bind="user.lastName"></span></td>
-            <td><span ng-bind="user.userName"></span></td>
-            <td><span ng-bind="user.emailId"></span></td>
-            <td>
-              <span ng-if="user.status==0">
-                <input type="checkbox" id="checkbox1" name="checkbox1" />
-                <label for="checkbox1"><span></span></label>
-              </span>
-            </td>
-            <td><span ng-if="user.isEditable" class="glyphicon glyphicon-pencil"></span></td>
-            <td><span class="glyphicon glyphicon-trash"></span></td>
-          </tr>
-          </tbody>
-        </table>
-        <a id="addNewUser" ng-click="addUserClick()" ><span class="glyphicon glyphicon-plus-sign" style="vertical-align: middle;
-          margin-right: 5px"></span>Add new user</a>
+    <toil-left-bar></toil-left-bar>
+    <toil-header></toil-header>
+    <div class="tab-pane container" id="addUser" ng-hide="addUserFlag">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+            <th>First Name</th>
+            <th>LAST NAME</th>
+            <th>Username</th>
+            <th>Email Address</th>
+            <th><span class="glyphicon glyphicon-ok"></span></th>
+            <th><span class="glyphicon glyphicon-pencil"></span></th>
+            <th><span class="glyphicon glyphicon-trash"></span></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in Users.data">
+              <td><span ng-bind="user.firstName"></span></td>
+              <td><span ng-bind="user.lastName"></span></td>
+              <td><span ng-bind="user.userName"></span></td>
+              <td><span ng-bind="user.emailId"></span></td>
+              <td>
+                <span ng-if="user.status==0">
+                  <input type="checkbox" id="checkbox1" name="checkbox1" />
+                  <label for="checkbox1"><span></span></label>
+                </span>
+              </td>
+              <td><span ng-if="user.isEditable" class="glyphicon glyphicon-pencil"></span></td>
+              <td><span class="glyphicon glyphicon-trash"></span></td>
+            </tr>
+            </tbody>
+          </table>
+          <a id="addNewUser" ng-click="addUserClick()" ><span class="glyphicon glyphicon-plus-sign" style="vertical-align: middle;
+            margin-right: 5px"></span>Add new user</a>
+        </div>
       </div>
     </div>
-  </div>
     <div ng-show="addUserFlag">
       <div class="row">
         <div class="col-md-9 col-md-offset-1 well well-sm main-well">ADD A NEW USER</div>
@@ -45,7 +45,6 @@
         <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">Basic Info</div>
         <button class="btn col-md-1 saveBtn" type="submit" ng-click="createNewUser()">Save</button>
       </div>
-
       <form id ="addUserForm" class="form-horizontal col-md-offset-1">
         <div class="form-group">
           <label for="fName" class="col-sm-2 control-label">First Name<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
@@ -72,13 +71,13 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="phoneNum" class="col-sm-2 control-label" style="padding-left: 5px">Work Phone Number<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
+          <label for="phoneNum" class="col-sm-2 control-label" style="padding-right: 0px">Work Phone Number<span class="glyphicon glyphicon-menu-right arrowIcon"></span></label>
           <div class="col-sm-4">
             <input type="number" class="form-control inputBox" id="phoneNum" ng-model="phoneNumber">
           </div>
         </div>
       </form>
     </div>
-    </div>
+  </div>
 </div>
 
