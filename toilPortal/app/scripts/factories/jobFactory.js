@@ -14,5 +14,28 @@ angular.module('toilApp')
                 });
             }
         }
-    });
+    })
+    .factory('GetJobType', function($resource){
+        return {
+            getResource: function(){
+                return $resource('/toilAPi/get_job_type/', {});
+            }
+        }
+    })
+    .factory('GetIndustry', function($resource) {
+        return {
+            getResource: function () {
+                return $resource('/toilAPi/get_job_industry/', {});
+            }
+        }
+    })
+    .factory('GetCurrency', function($resource) {
+        return {
+            getResource: function () {
+                return $resource('/toilAPi/get_currency/', {});
+            }
+        }
+    })
+;
+
 

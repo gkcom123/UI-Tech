@@ -1,4 +1,4 @@
-<div class="addToilUser">
+<div class="addToilUser" ng-controller="addJobController">
   <div id="wrapper">
   <toil-left-bar></toil-left-bar>
   <toil-header></toil-header>
@@ -25,9 +25,7 @@
           <label class="control-label">Type of job</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-sm-3">
-          <select class="form-control">
-            <option>Contract</option>
-            <option>Permanent</option>
+          <select ng-model="selectedJobType" class="form-control" ng-options="x.type_id as x.type for x in jobTypes.data">
           </select>
         </div>
       </div>
@@ -44,12 +42,7 @@
           <label class="control-label">Industry</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-sm-3">
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select ng-model="selectedIndustries" class="form-control" ng-options="x.industry_id as x.name for x in industries.data">
           </select>
         </div>
         <div class="col-md-2 text-right">
@@ -90,11 +83,7 @@
           <label class="control-label">Currency</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-sm-3">
-          <select class="form-control">
-            <option>US Dollar</option>
-            <option>UK Pound</option>
-            <option>EUR-Euros</option>
-            <option>INR-Rupees</option>
+          <select ng-model="selectedCurrency" class="form-control" ng-options="x.currency_id as x.name for x in currencies.data">
           </select>
         </div>
       </div>
@@ -104,11 +93,11 @@
         </div>
         <div class="col-sm-3">
           <select class="form-control">
-            <option><1 Month</option>
+            <option> &lt;1 Month</option>
             <option>1-2 Months</option>
             <option>3-6 Months</option>
             <option>7-9 Months</option>
-            <option>>9 Months</option>
+            <option>&gt;9 Months</option>
           </select>
         </div>
       </div>

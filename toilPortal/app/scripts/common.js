@@ -43,7 +43,7 @@ $.QueryString = function( url ) {
     return b;
 };
 
-var toilVersion = 10,
+var toilVersion = 11,
     //viewPath =  "/toilPortal/views/",// For Prod
     viewPath =  "/views/",//for Dev/local
     Helper = {

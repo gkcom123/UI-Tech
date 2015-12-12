@@ -32,6 +32,9 @@ app.post('/toilAPi/forgotPw', toilLoginSrv.forgotPw);
 app.get('/toilAPi/get_user_list', toilUserSrv.getUserList);
 app.post('/toilAPi/addNewUser', toilUserSrv.addNewUser);
 app.get('/toilAPi/get_current_jobList', toilJobsSrv.getCurrentJobList);
+app.get('/toilAPi/get_job_type', toilJobsSrv.getJobTypeList);
+app.get('/toilAPi/get_job_industry', toilJobsSrv.getIndustryList);
+app.get('/toilAPi/get_currency', toilJobsSrv.get_currency);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
