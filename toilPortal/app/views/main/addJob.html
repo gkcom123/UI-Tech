@@ -180,17 +180,13 @@
           <div class="input-group pickupDate form-group ">
             <div ng-controller="DatepickerCtrl">
               <p class="input-group">
-                <input id="dateField" datepicker ng-model="$parent.currentDate">
-<!--
-
-                <input type="text" class="form-control" datepicker-popup="{{format}}"
-                       ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate"
-                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
-                       ng-required="true" show-button-bar="false"
-                       ng-change="changed()" readonly />
--->
+                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+                       is-open="status.opened"
+                       min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)" show-button-bar="false" ng-required="true"/>
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                          class="glyphicon glyphicon-calendar"></i></button>
                 </span>
               </p>
             </div>

@@ -1,5 +1,6 @@
 'use strict';
-angular.module('toilApp', ['ui.router','ngResource','ncy-angular-breadcrumb','LocalStorageModule']);
+angular.module('toilApp', ['ui.router','ngAnimate', 'ui.bootstrap',
+    'ngResource','ncy-angular-breadcrumb','LocalStorageModule']);
 
 //This factory is used to protect the API call. If toid-id localstorage is not available, we will mark it as
 //unauthorized
