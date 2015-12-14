@@ -92,12 +92,7 @@
           <label class="control-label">Duration</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-sm-3">
-          <select class="form-control">
-            <option> &lt;1 Month</option>
-            <option>1-2 Months</option>
-            <option>3-6 Months</option>
-            <option>7-9 Months</option>
-            <option>&gt;9 Months</option>
+          <select ng-model="selectedDuration" class="form-control" ng-options="x.duration_id as x.duration for x in durations.data">
           </select>
         </div>
       </div>
@@ -106,12 +101,7 @@
           <label class="control-label">Location-country</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-sm-3">
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select ng-model="selectedCountry" class="form-control" ng-options="x.country_id as x.name for x in country.data">
           </select>
         </div>
         <div class="col-md-2 text-right">
@@ -133,11 +123,8 @@
         </div>
         <div class="col-sm-3">
           <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            <option>London</option>
+            <option>New York</option>
           </select>
         </div>
       </div>
@@ -169,12 +156,7 @@
           <label class="control-label">Primary language</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-sm-3">
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+          <select ng-model="selectedLanguage" class="form-control" ng-options="x.language_id as x.language for x in language.data">
           </select>
         </div>
         <div class="col-md-2 text-right">
@@ -190,13 +172,30 @@
           </select>
         </div>
       </div>
-      <div class="form-group" style="margin-bottom:40px;">
+      <div class="row">
         <div class="col-md-2 text-right">
-          <label for="stDate" class="control-label">Start date</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+          <label class="control-label">Start date</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
-        <div class="col-sm-3">
-          <input type="text" class="form-control inputBox" id="stDate">
-        </div>
+        <div class="col-md-3">
+          <div class="input-group pickupDate form-group ">
+            <div ng-controller="DatepickerCtrl">
+              <p class="input-group">
+                <input id="dateField" datepicker ng-model="$parent.currentDate">
+<!--
+
+                <input type="text" class="form-control" datepicker-popup="{{format}}"
+                       ng-model="dt" is-open="opened" min-date="minDate" max-date="maxDate"
+                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                       ng-required="true" show-button-bar="false"
+                       ng-change="changed()" readonly />
+-->
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="openCal($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+          </div>
         <div class="col-md-2 text-right">
           <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
@@ -209,8 +208,8 @@
             <option>5</option>
           </select>
         </div>
-        </div>
-    </form>
+      </div>
+      </form>
     <div class="row">
       <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">SAP SKILLS/COMPETENCE</div>
       <button class="btn col-md-1 saveBtn" type="submit">Save</button>

@@ -22,18 +22,4 @@ angular.module('toilApp')
             }
         }
     })
-
-    /*.factory('DownloadReceipt', function($resource){
-        return {
-            getResource: function(receiptNumber,id){
-                return $resource('api/download_file/',{
-                    'url':'/settlements/api/settlement/getDownloadRecipts',
-                    'corporate_id': id,
-                    'receiptNumber': receiptNumber,
-                    'remote_host':'SETTLEMENT_URL'
-                });
-
-            }
-        }
-    })*/
 ;

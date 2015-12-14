@@ -35,6 +35,9 @@ app.get('/toilAPi/get_current_jobList', toilJobsSrv.getCurrentJobList);
 app.get('/toilAPi/get_job_type', toilJobsSrv.getJobTypeList);
 app.get('/toilAPi/get_job_industry', toilJobsSrv.getIndustryList);
 app.get('/toilAPi/get_currency', toilJobsSrv.get_currency);
+app.get('/toilAPi/get_duration', toilJobsSrv.get_duration);
+app.get('/toilAPi/get_location', toilJobsSrv.getLanguageList);
+app.get('/toilAPi/get_country', toilJobsSrv.getCountryList);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -22,6 +22,13 @@ angular.module('toilApp')
             }
         }
     })
+    .factory('GetCountry', function($resource) {
+        return {
+            getResource: function () {
+                return $resource('/toilAPi/get_country/', {});
+            }
+        }
+    })
     .factory('GetIndustry', function($resource) {
         return {
             getResource: function () {
@@ -33,6 +40,20 @@ angular.module('toilApp')
         return {
             getResource: function () {
                 return $resource('/toilAPi/get_currency/', {});
+            }
+        }
+    })
+    .factory('GetDuration', function($resource) {
+        return {
+            getResource: function () {
+                return $resource('/toilAPi/get_duration/', {});
+            }
+        }
+    })
+    .factory('GetLanguage', function($resource) {
+        return {
+            getResource: function () {
+                return $resource('/toilAPi/get_location/', {});
             }
         }
     })

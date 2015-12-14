@@ -476,6 +476,9 @@ html{overflow-x: hidden;}
 
 #addNewJob .inner-well{width: 93%;float: left; background: #FBBD82}
 #addNewJob button{color: #fff;background:#f68211}
+.pickupDate{
+  padding-left: 20px;
+}
 #basicInfo select.form-control{width: 100% !important;}
 /*Add new jobs ends*/
 

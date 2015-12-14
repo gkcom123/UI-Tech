@@ -83,6 +83,43 @@ exports.get_currency = function(req,res)
         conn.release();
     });
 }
+exports.get_duration = function(req,res)
+{
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM job_duration"
+            , function (err, result) {
+                if (!err && result.length > 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var durationList = {
+                            duration_id: result[i]["duration_id"],
+                            duration: result[i]["duration"]
+                        };
+                        jsonRes.push(durationList);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+}
 
 exports.getIndustryList = function(req,res)
 {
@@ -99,6 +136,81 @@ exports.getIndustryList = function(req,res)
                             name: result[i]["name"]
                         };
                         jsonRes.push(industryList);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+}
+exports.getLanguageList = function(req,res)
+{
+    //var userid = req.query["user_id"];
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM language"
+            , function (err, result) {
+                if (!err && result.length > 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var languageList = {
+                            language_id: result[i]["language_id"],
+                            language: result[i]["language"]
+                        };
+                        jsonRes.push(languageList);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+}
+exports.getCountryList = function(req,res)
+{
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM country"
+            , function (err, result) {
+                if (!err && result.length > 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var countryList = {
+                            country_id: result[i]["country_id"],
+                            name: result[i]["name"]
+                        };
+                        jsonRes.push(countryList);
                     }
                     var finalResult = {
                         "status": "success",
