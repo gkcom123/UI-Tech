@@ -1,8 +1,12 @@
 /**
  * Created by gunjan.kumar on 14/12/15.
  */
+'use strict';
 var datemodule = angular.module('toilApp');
-datemodule.controller('DatepickerCtrl', function ($scope) {
+datemodule.controller('DatepickerCtrl',['$scope','$rootScope',
+	function ($scope,$rootScope) {
+		$scope.dt;
+
 	$scope.today = function() {
 		$scope.dt = new Date();
 	};
@@ -24,9 +28,13 @@ datemodule.controller('DatepickerCtrl', function ($scope) {
 	$scope.maxDate = new Date(2020, 5, 22);
 
 	$scope.open = function($event) {
-		console.log("Open");
+		$event.preventDefault();
+		$event.stopPropagation();
 		$scope.status.opened = true;
 	};
+		$scope.changed = function(){
+			$rootScope.$emit('jobDateChanged', $scope.dt);
+		};
 
 	$scope.setDate = function(year, month, day) {
 		$scope.dt = new Date(year, month, day);
@@ -72,7 +80,6 @@ datemodule.controller('DatepickerCtrl', function ($scope) {
 				}
 			}
 		}
-
 		return '';
 	};
-});
+}]);

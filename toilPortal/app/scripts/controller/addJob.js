@@ -7,13 +7,14 @@ angular.module("toilApp")
         '$scope',
         '$rootScope',
         '$location',
-        'GetJobType','GetIndustry','GetCurrency','GetDuration','GetLanguage','GetCountry',
-        function( $scope, $rootScope, $location, GetJobType,GetIndustry,GetCurrency,
-                  GetDuration,GetLanguage,GetCountry){
+        '$filter',
+        'GetJobType','GetIndustry','GetCurrency','GetDuration','GetLanguage','GetCountry','AddJob',
+        function( $scope, $rootScope, $location, $filter,GetJobType,GetIndustry,GetCurrency,
+                  GetDuration,GetLanguage,GetCountry,AddJob){
 
             var jobTypeList = {};
             var industryList = {};
-
+            var userId = $rootScope.userId;
             $scope.jobTypes 		= {};
             $scope.selectedJobType = "";
             $scope.industries 		= {};
@@ -26,6 +27,60 @@ angular.module("toilApp")
             $scope.selectedDuration = "";
             $scope.selectedLanguage = "";
             $scope.selectedCountry = "";
+            $scope.createNewJob = function()
+            {
+
+                var validation = $("#addJobForm").valid();
+                if(validation==false)
+                {
+                    alert('Please provide all information.');
+                    return false;
+                }
+                var data ={
+                    'jobTitle': $scope.jobTitle,
+                    'jobType': $scope.selectedJobType,
+                    'description':$scope.description,
+                    'industry_id':$scope.selectedIndustries,
+                    'indWtg':$scope.indWtg,
+                    'rate': $scope.rateSal,
+                    'rateWtg':$scope.rateWtg,
+                    'currency': $scope.selectedCurrency,
+                    'duration': $scope.selectedDuration,
+                    'country': $scope.selectedCountry,
+                    'countryWtg':$scope.countryWtg,
+                    'city': $scope.city,
+                    'travel': $scope.selectedTravel,
+                    'travelWtg':$scope.travelWtg,
+                    'prLang': $scope.selectedLanguage,
+                    'prlangWtg':$scope.prlangWtg,
+                    'stDate': $scope.jobStDate,
+                    'stDateWtg':$scope.stDateWtg,
+                    'created_by':userId
+                }
+                var addJobRes = AddJob.getResource();
+                addJobRes.save(data, function success(response) {
+                    var resData = response.response_data || {};
+                    // $('#newForm .spin').hide();
+
+                    if (response.status == 'success') {
+                        alert("Job Added Successfully");
+                  }
+                    else{
+                        var reason = 'Job Creation Failed. Please Try After Some Time.';
+                        if(resData.error_code == 201) {
+                            reason = resData.error_desc;
+                        }
+                    }
+                },
+                    function error(){}
+                );
+            }
+            $rootScope.$on('jobDateChanged', function(event,data){
+                var pDate = ( $filter('date')(data, 'yyyy-MM-dd'));
+                //console.log(pDate);
+                $scope.jobStDate = pDate;
+            });
+
             function loadJobTypeList(){
                 var jobTypeListResource = GetJobType.getResource();
                 jobTypeListResource.get(function(response){

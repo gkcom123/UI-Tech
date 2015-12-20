@@ -234,7 +234,65 @@ exports.getCountryList = function(req,res)
         conn.release();
     });
 }
+exports.addNewJob = function(req,res)
+{
+    var reqObj = req.body;
+    var jobTitle = reqObj["jobTitle"];
+    var jobType = reqObj["jobType"];
+    var description = reqObj["description"];
+    var industry_id = reqObj["industry_id"];
+    var indWtg = reqObj["indWtg"];
+    var rate = reqObj["rate"];
+    var rateWtg = reqObj["rateWtg"];
+    var currency = reqObj["currency"];
+    var duration = reqObj["duration"];
+    var country = reqObj["country"];
+    var countryWtg = reqObj["countryWtg"];
+    var city = reqObj["city"];
+    var travel ;
+    if(reqObj["travel"]=='No')
+    {
+        travel = '2';
+    }
+    else{
+        travel = '1';
+    }
+    var travelWtg = reqObj["travelWtg"];
+    var prLang = reqObj["prLang"];
+    var prlangWtg = reqObj["prlangWtg"];
+    var stDate = reqObj["stDate"];
+    var stDateWtg = reqObj["stDateWtg"];
+    var created_by = reqObj["created_by"];
+    /*
+     INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id,duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)
+     VALUES('Big data','1','Big dataBig dataBig dataBig databig data','2','2','456','2','3','3','3','3','London','1','1','2','2','2015-12-24','3','3')
+     */
+    var query = "INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id," +
+        "duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)" +
+        " VALUES" + "('" + jobTitle + "','" + jobType + "','" + description + "','" + industry_id + "','" + indWtg + "','" +
+        rate + "','" + rateWtg + "','" + currency + "','" + duration + "','" + country + "','" + countryWtg + "','" +
+        city + "','" + travel + "','" + travelWtg + "','" + prLang + "','" + prlangWtg + "','" + stDate +
+        "','" + stDateWtg + "','" + created_by + "')";
 
+    dbPool.getConnection(function(err, conn) {
+        conn.query(query,
+            function (err, result) {
+                if (!err) {
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
 exports.getCurrentJobList = function(req,res)
 {
     var result = {
