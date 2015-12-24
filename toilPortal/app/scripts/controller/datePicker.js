@@ -51,24 +51,32 @@ datemodule.controller('DatepickerCtrl',['$scope','$rootScope',
 	$scope.status = {
 		opened: false
 	};
+		function resetDate(){
+			$scope.dt = new Date();
+			$scope.maxDate = new Date();
 
-	var tomorrow = new Date();
-	tomorrow.setDate(tomorrow.getDate() + 1);
-	var afterTomorrow = new Date();
-	afterTomorrow.setDate(tomorrow.getDate() + 2);
-	$scope.events =
-		[
-			{
-				date: tomorrow,
-				status: 'full'
-			},
-			{
-				date: afterTomorrow,
-				status: 'partially'
+			var m = $scope.dt.getMonth(),
+				y = $scope.dt.getFullYear(),
+				d = $scope.dt.getDate();
+
+			if( m == 10 ) {
+				m == 0;
+				y ++;
+			} else if( m == 11 ) {
+				m == 1;
+				y++;
+			} else if( m <=9 ) {
+				m += 2;
 			}
-		];
 
-	$scope.getDayClass = function(date, mode) {
+			$scope.maxDate.setFullYear(y, m, d);
+			$rootScope.$emit('jobDateChanged', $scope.dt);
+		}
+		var init = function(){
+			resetDate();
+		};
+		init();
+	/*$scope.getDayClass = function(date, mode) {
 		if (mode === 'day') {
 			var dayToCheck = new Date(date).setHours(0,0,0,0);
 
@@ -81,5 +89,5 @@ datemodule.controller('DatepickerCtrl',['$scope','$rootScope',
 			}
 		}
 		return '';
-	};
+	};*/
 }]);

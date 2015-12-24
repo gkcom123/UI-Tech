@@ -479,6 +479,63 @@ html{overflow-x: hidden;}
 .pickupDate{
   padding-left: 20px;
 }
+.wrap-dd-select.defaultPlaceHolder {
+  color: rgba(0, 0, 0, 0.35)
+}
+.wrap-dd-select:after {
+  right: 6px !important;
+}
+.wrap-dd-select .dropdown{
+  display: none;
+}
+.wrap-dd-select.active .dropdown{display: block;}
+.dropdown-list {
+  position: absolute;
+  z-index: 999;
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 0;
+  left: 15px;
+  right: 15px;
+  background: #F8F8F8;
+  border-radius: inherit;
+  border: 1px solid rgba(0,0,0,0.17);
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  font-weight: normal;
+  transition: all 0.2s ease-in;
+  list-style: none;
+  opacity: 1;
+}
+.dropdown-list li {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #555;
+  border-bottom: 1px solid #ccc;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,1);
+  transition: all 0.3s ease-out;
+  list-style: none;
+  padding: 10px;
+  cursor: pointer;
+  background: #F8F8F8;
+}
+.searchInput
+{
+  width: 100%;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+
+}
+
+.dropdown-list li input {
+  margin-right: 20px;
+  border: 1px solid #ccc;
+}
+.dropdown-list li:first-child {border-bottom: none;}
+.dropdown-list li:first-child:hover {background: none;}
+.dropdown-list li:hover {background: #FBBD82;}
+
 #basicInfo select.form-control{width: 100% !important;}
 /*Add new jobs ends*/
 

@@ -13,56 +13,56 @@ angular.module('toilApp')
                     'pagination_count' : paginationCount
                 });
             }
-        }
+        };
     })
     .factory('GetJobType', function($resource){
         return {
             getResource: function(){
                 return $resource('/toilAPi/get_job_type/', {});
             }
-        }
+        };
     })
     .factory('GetCountry', function($resource) {
         return {
             getResource: function () {
                 return $resource('/toilAPi/get_country/', {});
             }
-        }
+        };
     })
     .factory('GetIndustry', function($resource) {
         return {
             getResource: function () {
                 return $resource('/toilAPi/get_job_industry/', {});
             }
-        }
+        };
     })
     .factory('GetCurrency', function($resource) {
         return {
             getResource: function () {
                 return $resource('/toilAPi/get_currency/', {});
             }
-        }
+        };
     })
     .factory('GetDuration', function($resource) {
         return {
             getResource: function () {
                 return $resource('/toilAPi/get_duration/', {});
             }
-        }
+        };
     })
     .factory('GetLanguage', function($resource) {
         return {
             getResource: function () {
                 return $resource('/toilAPi/get_location/', {});
             }
-        }
+        };
     })
     .factory('AddJob', function($resource){
         return {
             getResource: function(){
                 return $resource('/toilAPi/addNewJob/', {});
             }
-        }
+        };
     })
 
 ;
