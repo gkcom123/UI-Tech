@@ -27,61 +27,17 @@ angular.module("toilApp")
             $scope.selectedDuration = "";
             $scope.selectedLanguage = "";
             $scope.selectedCountry = "";
-            $scope.profSkill 	  = {name:"Professional"};
-            $scope.projSkill 	  = {name:"Project Related"};
-            $scope.personalSkill 	  = {name:"Personal"};
-            $scope.selected_items = [];
-            $scope.skillsList = [
-                {
-                    "name": "Alabama",
-                    "id": "AL"
-                },
-                {
-                    "name": "Alaska",
-                    "id": "AK"
-                },
-                {
-                    "name": "American Samoa",
-                    "id": "AS"
-                },
-                {
-                    "name": "New Hampshire",
-                    "id": "NH"
-                },
-                {
-                    "name": "New Jersey",
-                    "id": "NJ"
-                },
-                {
-                    "name": "Wyoming",
-                    "id": "WY"
-                }
-            ];
+            $scope.jobType 	  = {type:"Please Select"};
+            $scope.showDropList = function(){
+                $('.dropdown-list').toggle();
+            }
+            $scope.jobTypeSelected = function(j){
+                $scope.jobType = j;
+                $('.dropdown-list').hide();
 
-            $scope.showProfList = function(){
-                $('.prof-dropdown-list').toggle();
-            }
-            $scope.showProjList = function(){
-                $('.proj-dropdown-list').toggle();
-            }
-            $scope.showPersonalList = function(){
-                $('.pres-dropdown-list').toggle();
-            }
-            $scope.profSkillSelected = function(skill){
-                //$scope.profSkill = skill;
-                $scope.selectedSkill   = skill.name;
-                $scope.selectedSkillID = skill.id;
+                $scope.selectedJobType   = j;
             };
-            $scope.projSkillSelected = function(skill){
-                //$scope.projSkill = skill;
-                $scope.selectedSkill   = skill.name;
-                $scope.selectedSkillID = skill.id;
-            };
-            $scope.personalSkillSelected = function(skill){
-                //$scope.personalSkill = skill;
-                $scope.selectedSkill   = skill.name;
-                $scope.selectedSkillID = skill.id;
-            };
+
             $scope.createNewJob = function()
             {
 
@@ -93,7 +49,7 @@ angular.module("toilApp")
                 }
                 var data ={
                     'jobTitle': $scope.jobTitle,
-                    'jobType': $scope.selectedJobType,
+                    'jobType': $scope.selectedJobType.type_id,
                     'description':$scope.description,
                     'industry_id':$scope.selectedIndustries,
                     'indWtg':$scope.indWtg,

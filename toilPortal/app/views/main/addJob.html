@@ -24,10 +24,18 @@
         <div class="col-md-2 text-right">
           <label class="control-label">Type of job</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
-        <div class="col-sm-3">
-          <select ng-model="selectedJobType" class="form-control" ng-options="x.type_id as x.type for x in jobTypes.data">
-          </select>
+        <div class="col-md-3">
+          <div class="wrap-dd-select" ng-click="showDropList()">
+            <span ng-bind="jobType.type"></span>
+          </div>
+          <ul bs-selectbox  class="dropdown-list" style="display:none;">
+<!--
+            <li ng-repeat="j in jobTypes.data" ng-click="cityOneSelected(state)">{{ j.type }}</li>
+-->
+            <li ng-repeat="j in jobTypes.data" ng-click="jobTypeSelected(j)">{{ j.type }}</li>
+          </ul>
         </div>
+
       </div>
       <div class="form-group">
         <div class="col-md-2 text-right">
@@ -217,8 +225,8 @@
       <button class="btn col-md-1 saveBtn" type="submit">Save</button>
     </div>
     <form id ="addSkillsForm" class="form-horizontal col-md-offset-1">
-      <div class="form-group">
-        <div class="row">
+      <div class="form-group" ng-controller="SkillController">
+        <div class="row" >
           <div class="col-md-3">
             <input type="hidden" ng-model="states" readonly/>
 
@@ -230,11 +238,13 @@
               <li class='divider'></li>
               <li ng-repeat="skill in skillsList | filter:searchProfSkill" ng-click="profSkillSelected(skill)">
                 <div>
-                  <label class="skLab"><input class="skIn" type="checkbox"/> {{skill.name}}</label>
+                  <label class="skLab"><input class="skIn" type="checkbox"  ng-model="selectedProfSkill"
+                                              ng-change="setProfSelectedItem(skill,selectedProfSkill)"/> {{skill.name}}</label>
                 </div>
 
               </li>
             </ul>
+
           </div>
           <div class="col-md-3">
             <input type="hidden" ng-model="states" readonly/>
@@ -247,7 +257,8 @@
               <li class='divider'></li>
               <li ng-repeat="skill in skillsList | filter:searchProjSkill" ng-click="projSkillSelected(skill)">
                 <div>
-                  <label class="skLab"><input class="skIn" type="checkbox"/> {{skill.name}}</label>
+                  <label class="skLab"><input class="skIn" type="checkbox" ng-model="selectedProjSkill"
+                                              ng-change="setProjSelectedItem(skill,selectedProjSkill)"/> {{skill.name}}</label>
                 </div>
 
               </li>
@@ -262,15 +273,60 @@
             <ul ng-model="example1" bs-selectbox class="dropdown-list pres-dropdown-list" style="display:none;">
               <li><input type="text" class="searchInput" ng-model="searchPerSkill" placeholder="Search Skill"/></li>
               <li class='divider'></li>
-              <!--<li ng-repeat="state in states | filter:searchCity" value="1" ng-click="citySelected(state)">{{ state.name }}</li>-->
-
               <li ng-repeat="skill in skillsList | filter:searchPerSkill" ng-click="personalSkillSelected(skill)">
                 <div>
-                  <label class="skLab"><input class="skIn" type="checkbox"/> {{skill.name}}</label>
+                  <label class="skLab"><input class="skIn" type="checkbox" ng-model="selectedPersonalSkill"
+                                              ng-change="setPersonalSelectedItem(skill,selectedPersonalSkill)"/> {{skill.name}}</label>
                 </div>
 
               </li>
             </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div ng-repeat="profSkill in profModel track by $index">
+              <label class="control-label">{{profSkill.name}}</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+              <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <!--
+                            <pre>selected roles = {{profSkill}}</pre>
+              -->
+            </div>
+
+          </div>
+          <div class="col-md-3">
+            <div ng-repeat="projSkill in projModel track by $index">
+              <label class="control-label">{{projSkill.name}}</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+              <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              <!--
+                            <pre>selected roles = {{profSkill}}</pre>
+              -->
+            </div>
+
+          </div>
+          <div class="col-md-3">
+            <div ng-repeat="personalSkill in personalModel track by $index">
+              <label class="control-label">{{personalSkill.name}}</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
+              <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
