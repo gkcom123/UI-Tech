@@ -3,8 +3,8 @@
  */
 'use strict';
 var datemodule = angular.module('toilApp');
-datemodule.controller('SkillController',['$scope','$rootScope','GetSkill',
-    function ($scope,$rootScope,GetSkill) {
+datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSkill',
+    function ($scope,$rootScope,$filter,GetSkill) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};
         $scope.personalSkill 	  = {name:"Personal"};
@@ -70,16 +70,13 @@ datemodule.controller('SkillController',['$scope','$rootScope','GetSkill',
 
         $scope.showProfList = function(){
             $('.prof-dropdown-list').toggle();
-        }
+        };
         $scope.showProjList = function(){
             $('.proj-dropdown-list').toggle();
-        }
+        };
         $scope.showPersonalList = function(){
             $('.pres-dropdown-list').toggle();
-        }
-        $scope.setChangeSelected = function(selectedProfSkill){
-
-        }
+        };
         $scope.profSkillSelected = function(skill){
             //$scope.profSkill = skill;
             $scope.selectedSkill   = skill.skill_name;
@@ -95,6 +92,5 @@ datemodule.controller('SkillController',['$scope','$rootScope','GetSkill',
             $scope.selectedSkill   = skill.skill_name;
             $scope.selectedSkillID = skill.skill_id;
         };
-
     }
     ]);
