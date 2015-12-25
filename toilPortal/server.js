@@ -39,6 +39,7 @@ app.get('/toilAPi/get_duration', toilJobsSrv.get_duration);
 app.get('/toilAPi/get_location', toilJobsSrv.getLanguageList);
 app.get('/toilAPi/get_country', toilJobsSrv.getCountryList);
 app.post('/toilAPi/addNewJob', toilJobsSrv.addNewJob);
+app.get('/toilAPi/get_Skill_list', toilJobsSrv.getSkillList);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -64,6 +64,13 @@ angular.module('toilApp')
             }
         };
     })
+    .factory('GetSkill', function($resource){
+        return {
+            getResource: function(){
+                return $resource('/toilAPi/get_Skill_list/', {});
+            }
+        };
+    })
 
 ;
 

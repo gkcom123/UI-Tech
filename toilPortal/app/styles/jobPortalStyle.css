@@ -57,6 +57,20 @@ html{overflow-x: hidden;}
   padding-left: 8px;
   color: #F5821F;
 }
+.skillarrowIcon
+{
+  top:8px;
+  color: #F5821F;
+}
+.skillRateClass
+{
+  padding: 2px 2px;
+  top: 5px;
+}
+.skillClass
+ {
+  padding: 2px 2px;
+ }
 .inputBox
 {
   border-radius: 0px;
@@ -537,6 +551,8 @@ html{overflow-x: hidden;}
 .dropdown-list li:hover {background: #FBBD82;}
 
 #basicInfo select.form-control{width: 100% !important;}
+
+.skill-label {font-weight: normal;color: #000;}
 /*Add new jobs ends*/
 
 /*Manage jobs*/

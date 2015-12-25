@@ -197,6 +197,44 @@ exports.getLanguageList = function(req,res)
         conn.release();
     });
 }
+exports.getSkillList = function(req,res)
+{
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM skill"
+            , function (err, result) {
+                if (!err && result.length > 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var skillList = {
+                            skill_id: result[i]["skill_id"],
+                            skill_name: result[i]["skill_name"]
+                        };
+                        jsonRes.push(skillList);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
 exports.getCountryList = function(req,res)
 {
     dbPool.getConnection(function(err, conn) {

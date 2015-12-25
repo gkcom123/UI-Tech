@@ -3,41 +3,32 @@
  */
 'use strict';
 var datemodule = angular.module('toilApp');
-datemodule.controller('SkillController',['$scope','$rootScope',
-    function ($scope,$rootScope) {
+datemodule.controller('SkillController',['$scope','$rootScope','GetSkill',
+    function ($scope,$rootScope,GetSkill) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};
         $scope.personalSkill 	  = {name:"Personal"};
         $scope.selected_items = [];
-        $scope.skillsList = [
-            {
-                "name": "Alabama",
-                "id": "AL"
-            },
-            {
-                "name": "Alaska",
-                "id": "AK"
-            },
-            {
-                "name": "American Samoa",
-                "id": "AS"
-            },
-            {
-                "name": "New Hampshire",
-                "id": "NH"
-            },
-            {
-                "name": "New Jersey",
-                "id": "NJ"
-            },
-            {
-                "name": "Wyoming",
-                "id": "WY"
-            }
-        ];
+        $scope.skillList 		= {};
         $scope.profModel = [];
         $scope.projModel = [];
         $scope.personalModel = [];
+        function loadSkillList(){
+            var skillListResource = GetSkill.getResource();
+            skillListResource.get(function(response){
+                if(response.status == 'error' && response.error_code == 400){
+                    //$rootScope.$broadcast('LogoutThisUser',{});
+                }
+                if(Object.getOwnPropertyNames(response.response_data).length === 0){
+                    console.warn("Get Skill API returned empty Object");
+                }
+                else{
+                   // skillList = response.response_data.results;
+                    $scope.skillList.data = response.response_data.results;
+                }
+            });
+        }
+        loadSkillList();
         $scope.setProfSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];
             if (skillStatus == true) {
@@ -91,18 +82,18 @@ datemodule.controller('SkillController',['$scope','$rootScope',
         }
         $scope.profSkillSelected = function(skill){
             //$scope.profSkill = skill;
-            $scope.selectedSkill   = skill.name;
-            $scope.selectedSkillID = skill.id;
+            $scope.selectedSkill   = skill.skill_name;
+            $scope.selectedSkillID = skill.skill_id;
         };
         $scope.projSkillSelected = function(skill){
             //$scope.projSkill = skill;
-            $scope.selectedSkill   = skill.name;
-            $scope.selectedSkillID = skill.id;
+            $scope.selectedSkill   = skill.skill_name;
+            $scope.selectedSkillID = skill.skill_id;
         };
         $scope.personalSkillSelected = function(skill){
             //$scope.personalSkill = skill;
-            $scope.selectedSkill   = skill.name;
-            $scope.selectedSkillID = skill.id;
+            $scope.selectedSkill   = skill.skill_name;
+            $scope.selectedSkillID = skill.skill_id;
         };
 
     }
