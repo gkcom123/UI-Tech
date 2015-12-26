@@ -17,7 +17,7 @@ INDEX (email_id(10))
 )
 select * from toilUser;
  INSERT INTO toilUser (email_id,f_name,l_name,company,phoneNumber,isActive,passwd,isadmin,admin_id) 
- VALUES ('shilpa@yahoo.com','Shilpa','G','adobe','9877876',1,'admin',1,3);
+ VALUES ('shilbbbpa@yahoo.com','Shijjjlpa','G','adobe','987jjj7876',1,'admin',1,3);
  
  CREATE TABLE job_type(
 type_id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -408,6 +408,7 @@ FULLTEXT job_key (job_title)
  INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id,duration_id,
  country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)
  VALUES ('Developer',2,'Description hfdgdsfh',2,2,3000,2,2,2,2,1,'London',1,2,2,2,STR_TO_DATE('10/11/2016', '%d/%m/%Y'),2,2);
+ 
  INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id,duration_id,
  country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)
  VALUES ('Developer',2,'Description hfdgdsfh',2,2,3000,2,2,2,2,1,'London',1,2,2,2,'2016-11-30',2,2);
@@ -415,6 +416,7 @@ FULLTEXT job_key (job_title)
  INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id,duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by) 
  VALUES('Big data','1','Big dataBig dataBig dataBig databig data','2','2','456','2','3','3','3','3','London','1','1','2','2','2015-12-24','3','3')
  select * from job_table
+SELECT LAST_INSERT_ID();
 -----
 
 CREATE TABLE skill(
@@ -704,4 +706,12 @@ INSERT into skill (skill_name) values
 ('SAP IS-Utilities'),
 ('SAP IS-Postal Services')
 
+CREATE TABLE job_skills(
+skill_id INT(10) UNSIGNED NOT NULL,
+skil_wtg TINYINT(2) UNSIGNED,
+skill_type_id INT(10) UNSIGNED NOT NULL,
+job_id INT(10) UNSIGNED NOT NULL,
+created_by INT(10) UNSIGNED NOT NULL
+)
 
+SELECT LAST_INSERT_ID() from job_table;

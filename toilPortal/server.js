@@ -40,6 +40,7 @@ app.get('/toilAPi/get_location', toilJobsSrv.getLanguageList);
 app.get('/toilAPi/get_country', toilJobsSrv.getCountryList);
 app.post('/toilAPi/addNewJob', toilJobsSrv.addNewJob);
 app.get('/toilAPi/get_Skill_list', toilJobsSrv.getSkillList);
+app.post('/toilAPi/save_Skill_list', toilJobsSrv.saveJobSkills);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

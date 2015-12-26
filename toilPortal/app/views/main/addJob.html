@@ -132,15 +132,6 @@
         <div class="col-md-3">
           <input type="text" class="form-control inputBox" id="LocCity" ng-model="city">
         </div>
-
-<!--
-        <div class="col-sm-3">
-          <select class="form-control">
-            <option>London</option>
-            <option>New York</option>
-          </select>
-        </div>
--->
       </div>
       <div class="form-group">
         <div class="col-md-2 text-right">
@@ -293,10 +284,10 @@
                 <span class="glyphicon glyphicon-menu-right skillarrowIcon"></span>
               </div>
               <div class="col-md-2 skillRateClass">
-                <select>
+                <select  ng-model="profSkillRating[$index]">
                   <option>1</option>
                   <option>2</option>
-                  <option>3</option>
+                  <option ng-selected= "3">3</option>
                   <option>4</option>
                   <option>5</option>
                 </select>
@@ -313,10 +304,10 @@
                 <span class="glyphicon glyphicon-menu-right skillarrowIcon"></span>
               </div>
               <div class="col-md-2 skillRateClass">
-                <select>
+                <select ng-model="projSkillRating[$index]">
                   <option>1</option>
                   <option>2</option>
-                  <option>3</option>
+                  <option ng-selected= "true">3</option>
                   <option>4</option>
                   <option>5</option>
                 </select>
@@ -336,10 +327,10 @@
               </div>
 
                <div class="col-md-2 skillRateClass">
-                 <select >
+                 <select ng-model="personalSkillRating[$index]">
                    <option>1</option>
                    <option>2</option>
-                   <option>3</option>
+                   <option ng-selected= "true">3</option>
                    <option>4</option>
                    <option>5</option>
                  </select>
@@ -348,7 +339,6 @@
           </div>
         </div>
       </div>
-
       </form>
     </div>
   </div>

@@ -34,13 +34,11 @@ angular.module("toilApp")
             $scope.jobTypeSelected = function(j){
                 $scope.jobType = j;
                 $('.dropdown-list').hide();
-
                 $scope.selectedJobType   = j;
             };
 
             $scope.createNewJob = function()
             {
-
                 var validation = $("#addJobForm").valid();
                 if(validation==false)
                 {
@@ -67,13 +65,14 @@ angular.module("toilApp")
                     'stDate': $scope.jobStDate,
                     'stDateWtg':$scope.stDateWtg,
                     'created_by':userId
-                }
+                };
                 var addJobRes = AddJob.getResource();
                 addJobRes.save(data, function success(response) {
                     var resData = response.response_data || {};
                     // $('#newForm .spin').hide();
 
                     if (response.status == 'success') {
+                        $scope.$broadcast ('saveSkills');
                         alert("Job Added Successfully");
                   }
                     else{
@@ -86,9 +85,11 @@ angular.module("toilApp")
                     function error(){}
                 );
             }
+            $scope.$on('skillSaved', function(e,data) {
+                $scope.msg = data;
+            });
             $rootScope.$on('jobDateChanged', function(event,data){
                 var pDate = ( $filter('date')(data, 'yyyy-MM-dd'));
-                //console.log(pDate);
                 $scope.jobStDate = pDate;
             });
 

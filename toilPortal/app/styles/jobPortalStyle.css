@@ -16,6 +16,14 @@ html{overflow-x: hidden;}
 {
   margin-bottom: 10px;
 }
+.ng-invalid.ng-dirty
+{
+  border-color: red;
+}
+.ng-valid.ng-dirty
+{
+  border-color: green;
+}
 .blackText
 {
   color:#000000;
@@ -173,6 +181,10 @@ html{overflow-x: hidden;}
 .toilWhiteIcon
 {
   content:url("../images/toil_logo.png");
+}
+.toilWhiteIcon::after
+{  /*this for firefox browser*/
+  content: url("../images/toil_logo.png");
 }
 .toilBlackIcon
 {

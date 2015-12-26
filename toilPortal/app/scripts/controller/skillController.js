@@ -3,8 +3,8 @@
  */
 'use strict';
 var datemodule = angular.module('toilApp');
-datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSkill',
-    function ($scope,$rootScope,$filter,GetSkill) {
+datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSkill','SaveSkill',
+    function ($scope,$rootScope,$filter,GetSkill,SaveSkill) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};
         $scope.personalSkill 	  = {name:"Personal"};
@@ -13,6 +13,10 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
         $scope.profModel = [];
         $scope.projModel = [];
         $scope.personalModel = [];
+        $scope.profSkillRating 		= {};
+        $scope.projSkillRating 		= {};
+        $scope.personalSkillRating 		= {};
+        var created_by = $rootScope.userId;
         function loadSkillList(){
             var skillListResource = GetSkill.getResource();
             skillListResource.get(function(response){
@@ -23,16 +27,54 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
                     console.warn("Get Skill API returned empty Object");
                 }
                 else{
-                   // skillList = response.response_data.results;
+                    // skillList = response.response_data.results;
                     $scope.skillList.data = response.response_data.results;
                 }
             });
         }
         loadSkillList();
+        $scope.saveSkills = function() {
+            var data ={
+                'profModel': $scope.profModel,
+                'profRating': $scope.profSkillRating,
+                'projModel':$scope.projModel,
+                'projSkillRating':$scope.projSkillRating,
+                'personalModel':$scope.personalModel,
+                'personalSkillRating': $scope.personalSkillRating,
+                'created_by':created_by
+            }
+            console.log(data);
+            var saveSkillResource = SaveSkill.getResource();
+            saveSkillResource.save(data, function success(response) {
+                    var resData = response.response_data || {};
+                    // $('#newForm .spin').hide();
+
+                    if (response.status == 'success') {
+/*
+                        $scope.$broadcast ('saveSkills');
+                        alert("Job Added Successfully");
+*/
+                    }
+                    else{
+                        var reason = 'Skill Creation Failed. Please Try After Some Time.';
+                        if(resData.error_code == 201) {
+                            reason = resData.error_desc;
+                        }
+                    }
+                },
+                function error(){}
+            );
+        }
+
+        $scope.$on('saveSkills', function(e) {
+            // save the Prof skill,proj, and personal skill in one go
+            $scope.$emit("skillSaved", $scope.saveSkills());
+        });
         $scope.setProfSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];
             if (skillStatus == true) {
                 $scope.profModel.push(skill);
+               // $scope.profSkillRating.push('3');
             } else {
                 filteredArray = $scope.profModel.filter(function (value) {
                     return value != skill;
@@ -70,12 +112,22 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
 
         $scope.showProfList = function(){
             $('.prof-dropdown-list').toggle();
+            $('.pres-dropdown-list').hide();
+            $('.proj-dropdown-list').hide();
+
+           // e.stopPropagation();
         };
         $scope.showProjList = function(){
             $('.proj-dropdown-list').toggle();
+            $('.pres-dropdown-list').hide();
+            $('.prof-dropdown-list').hide();
+
         };
         $scope.showPersonalList = function(){
+            //console.log($scope.profSkillRating);
             $('.pres-dropdown-list').toggle();
+            $('.prof-dropdown-list').hide();
+            $('.proj-dropdown-list').hide();
         };
         $scope.profSkillSelected = function(skill){
             //$scope.profSkill = skill;

@@ -63,7 +63,6 @@ angular.module("toilApp")
                     'phoneNumber':$scope.phoneNumber,
                     'user_id':userId
                 }
-               // console.log("Data is here -->"+data["firstName"]);
                 var addUserRes = AddUser.getResource();
                 addUserRes.save(data, function success(response){
                         var resData = response.response_data || {};
@@ -73,33 +72,11 @@ angular.module("toilApp")
                             alert("User Added Successfully");
                             $scope.addUserFlag = false;
                             loadUsers();
-/*
-                            $rootScope.$emit('RefreshViewBookings',{});
-                            $rootScope.$emit('RefreshCurrentTripsCount',{});
-
-                            if(stat=='' && rtfsData.booking_confirmed == true){
-                                stat = 'Confirmed';
-                            }
-*/
-
-                           /* $rootScope.$broadcast('BookingSuccessful', {
-                                'bookingdata': {
-                                    'booking_id': bookid,
-                                    'pickupLocation':$scope.pickupLocation,
-                                    'dropLocation':$scope.dropLocation,
-                                    'pickuptime':$scope.pickupDate+', '+$scope.pickupTime,
-                                    'status': stat,
-                                    'action':$scope.action,
-                                    'showDrop':$scope.showDrop
-                                }
-                            });*/
-                            //clearBookingData();
                         } else {
                             var reason = 'User Creation Failed. Please Try After Some Time.';
                             if(resData.error_code == 201) {
                                 reason = resData.error_desc;
                             }
-                           // $rootScope.$broadcast('BookingFailed', {'bookingdata': {'reason': reason }});
                         }
                     },
                     function error(){}

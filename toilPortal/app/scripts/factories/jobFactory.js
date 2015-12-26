@@ -71,6 +71,13 @@ angular.module('toilApp')
             }
         };
     })
+    .factory('SaveSkill', function($resource){
+        return {
+            getResource: function(){
+                return $resource('/toilAPi/save_Skill_list/', {});
+            }
+        };
+    })
 
 ;
 
