@@ -33,7 +33,8 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
             });
         }
         loadSkillList();
-        $scope.saveSkills = function() {
+
+        $scope.saveSkills = function(jobId) {
             var data ={
                 'profModel': $scope.profModel,
                 'profRating': $scope.profSkillRating,
@@ -41,19 +42,15 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
                 'projSkillRating':$scope.projSkillRating,
                 'personalModel':$scope.personalModel,
                 'personalSkillRating': $scope.personalSkillRating,
+                'jobId':jobId,
                 'created_by':created_by
             }
-            console.log(data);
             var saveSkillResource = SaveSkill.getResource();
             saveSkillResource.save(data, function success(response) {
                     var resData = response.response_data || {};
                     // $('#newForm .spin').hide();
 
                     if (response.status == 'success') {
-/*
-                        $scope.$broadcast ('saveSkills');
-                        alert("Job Added Successfully");
-*/
                     }
                     else{
                         var reason = 'Skill Creation Failed. Please Try After Some Time.';
@@ -66,9 +63,9 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
             );
         }
 
-        $scope.$on('saveSkills', function(e) {
+        $scope.$on('saveSkills', function(e,data) {
             // save the Prof skill,proj, and personal skill in one go
-            $scope.$emit("skillSaved", $scope.saveSkills());
+            $scope.$emit("skillSaved", $scope.saveSkills(data));
         });
         $scope.setProfSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];
@@ -82,6 +79,13 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
                 $scope.profModel = filteredArray;
                 // $scope.checkAll = false;
             }
+            if($scope.profSkillRating.length!=0)
+            {
+                for(var i = 0; i < $scope.profModel.length; i++)
+                {
+                    $scope.profSkillRating[i]='3';
+                }
+            }
             return false;
         };
         $scope.setProjSelectedItem = function (skill,skillStatus) {
@@ -94,6 +98,15 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
                 });
                 $scope.projModel = filteredArray;
             }
+            if($scope.projSkillRating.length!=0)
+            {
+                for(var i = 0; i < $scope.projModel.length; i++)
+                {
+                    $scope.projSkillRating[i]='3';
+                }
+
+            }
+
             return false;
         };
 
@@ -106,6 +119,14 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
                     return value != skill;
                 });
                 $scope.personalModel = filteredArray;
+            }
+            if($scope.personalSkillRating.length!=0)
+            {
+                for(var i = 0; i < $scope.personalModel.length; i++)
+                {
+                    $scope.personalSkillRating[i]='3';
+                }
+
             }
             return false;
         };

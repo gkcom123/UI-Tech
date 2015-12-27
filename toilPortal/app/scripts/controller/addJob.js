@@ -39,7 +39,7 @@ angular.module("toilApp")
 
             $scope.createNewJob = function()
             {
-                var validation = $("#addJobForm").valid();
+               var validation = $("#addJobForm").valid();
                 if(validation==false)
                 {
                     alert('Please provide all information.');
@@ -72,8 +72,8 @@ angular.module("toilApp")
                     // $('#newForm .spin').hide();
 
                     if (response.status == 'success') {
-                        $scope.$broadcast ('saveSkills');
-                        alert("Job Added Successfully");
+                        var jobId = response.response_data["jobId"];
+                        $scope.$broadcast ('saveSkills',jobId);
                   }
                     else{
                         var reason = 'Job Creation Failed. Please Try After Some Time.';
@@ -86,7 +86,7 @@ angular.module("toilApp")
                 );
             }
             $scope.$on('skillSaved', function(e,data) {
-                $scope.msg = data;
+                alert("Job saved Successfully");
             });
             $rootScope.$on('jobDateChanged', function(event,data){
                 var pDate = ( $filter('date')(data, 'yyyy-MM-dd'));

@@ -272,8 +272,7 @@ exports.getCountryList = function(req,res)
         conn.release();
     });
 }
-exports.addNewJob = function(req,res)
-{
+exports.addNewJob = function(req,res) {
     var reqObj = req.body;
     var jobTitle = reqObj["jobTitle"];
     var jobType = reqObj["jobType"];
@@ -287,12 +286,11 @@ exports.addNewJob = function(req,res)
     var country = reqObj["country"];
     var countryWtg = reqObj["countryWtg"];
     var city = reqObj["city"];
-    var travel ;
-    if(reqObj["travel"]=='No')
-    {
+    var travel;
+    if (reqObj["travel"] == 'No') {
         travel = '2';
     }
-    else{
+    else {
         travel = '1';
     }
     var travelWtg = reqObj["travelWtg"];
@@ -312,65 +310,71 @@ exports.addNewJob = function(req,res)
         city + "','" + travel + "','" + travelWtg + "','" + prLang + "','" + prlangWtg + "','" + stDate +
         "','" + stDateWtg + "','" + created_by + "')";
 
-    dbPool.getConnection(function(err, conn) {
+    var finalResult = "";
+    dbPool.getConnection(function (err, conn) {
         conn.query(query,
             function (err, result) {
                 if (!err) {
-                    var finalResult = {
+                    finalResult = {
                         "status": "success",
                         "error_desc": "",
                         "error_code": "",
-                        "response_data": {
-
-                        }
+                        "response_data": {}
                     }
-                    res.send(finalResult);
+                    //res.send(finalResult);
+                    if (finalResult.status == 'success') {
+                        conn.query("SELECT LAST_INSERT_ID()",
+                            function (err, result) {
+                                if (!err) {
+                                    var arrayLength = result.length;
+                                    for (var i = 0; i < arrayLength; i++) {
+                                        var profile = {
+                                            jobId: result[i]["LAST_INSERT_ID()"],
+                                        };
+                                        var callResult = {
+                                            "status": "success",
+                                            "error_desc": "",
+                                            "error_code": "",
+                                            "response_data": profile
+                                        };
+                                        res.send(callResult);
+                                    }
+                                }
+                            });
+                    }
                 }
             });
         conn.release();
     });
-
 }
 exports.saveJobSkills = function(req,res)
 {
     var reqObj = req.body;
-    console.log("Here--",reqObj);
-    var jobTitle = reqObj["jobTitle"];
-    var jobType = reqObj["jobType"];
-    var description = reqObj["description"];
-    var industry_id = reqObj["industry_id"];
-    var indWtg = reqObj["indWtg"];
-    var rate = reqObj["rate"];
-    var rateWtg = reqObj["rateWtg"];
-    var currency = reqObj["currency"];
-    var duration = reqObj["duration"];
-    var country = reqObj["country"];
-    var countryWtg = reqObj["countryWtg"];
-    var city = reqObj["city"];
-    var travel ;
-    if(reqObj["travel"]=='No')
-    {
-        travel = '2';
-    }
-    else{
-        travel = '1';
-    }
-    var travelWtg = reqObj["travelWtg"];
-    var prLang = reqObj["prLang"];
-    var prlangWtg = reqObj["prlangWtg"];
-    var stDate = reqObj["stDate"];
-    var stDateWtg = reqObj["stDateWtg"];
+    var profModel = reqObj["profModel"];
+    var profRating = reqObj["profRating"];
+    var projModel = reqObj["projModel"];
+    var projRating = reqObj["projSkillRating"];
+    var personalModel = reqObj["personalModel"];
+    var personalSkillRating = reqObj["personalSkillRating"];
+    var job_id = reqObj["jobId"];
     var created_by = reqObj["created_by"];
+    var valueQuery = "";
+    for(var i=0;i<profModel.length;i++)
+    {
+        valueQuery = valueQuery +"('"+profModel[i].skill_id+"','"+profRating[i]+"','1','"+job_id+"','"+created_by+"'),";
+    }
+    for(var j=0;j<projModel.length;j++)
+    {
+        valueQuery = valueQuery +"('"+projModel[j].skill_id+"','"+projRating[j]+"','2','"+job_id+"','"+created_by+"'),";
+    }
+    for(var k=0;k<personalModel.length;k++)
+    {
+        valueQuery = valueQuery +"('"+personalModel[k].skill_id+"','"+personalSkillRating[k]+"','3','"+job_id+"','"+created_by+"'),";
+    }
+    var query = "INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES "+valueQuery.slice(0,-1);
     /*
-     INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id,duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)
-     VALUES('Big data','1','Big dataBig dataBig dataBig databig data','2','2','456','2','3','3','3','3','London','1','1','2','2','2015-12-24','3','3')
+     INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES(1,2,3,LAST_INSERT_ID(),3),(4,5,6,LAST_INSERT_ID(),4);
      */
-    var query = "INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id," +
-        "duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)" +
-        " VALUES" + "('" + jobTitle + "','" + jobType + "','" + description + "','" + industry_id + "','" + indWtg + "','" +
-        rate + "','" + rateWtg + "','" + currency + "','" + duration + "','" + country + "','" + countryWtg + "','" +
-        city + "','" + travel + "','" + travelWtg + "','" + prLang + "','" + prlangWtg + "','" + stDate +
-        "','" + stDateWtg + "','" + created_by + "')";
 
     dbPool.getConnection(function(err, conn) {
         conn.query(query,
