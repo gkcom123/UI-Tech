@@ -18,6 +18,16 @@ angular.module("toilApp")
             var paginationCount		= 4 ;
 
             $scope.Users 		= {};
+            function resetValues()
+            {
+                $scope.firstName ="";
+                $scope.lastName ="";
+                $scope.emailid="";
+                $scope.company="";
+                $scope.phoneNumber="";
+                if ($scope.addtoilUserForm)
+                    $scope.addtoilUserForm.$setPristine();
+            }
             function loadUsers(){
 
                // $('.viewBookingWap .spin').show();
@@ -71,6 +81,7 @@ angular.module("toilApp")
                         if(response.status == 'success') {
                             alert("User Added Successfully");
                             $scope.addUserFlag = false;
+                            resetValues();
                             loadUsers();
                         } else {
                             var reason = 'User Creation Failed. Please Try After Some Time.';

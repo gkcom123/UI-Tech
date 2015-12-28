@@ -397,63 +397,54 @@ exports.saveJobSkills = function(req,res)
 }
 exports.getCurrentJobList = function(req,res)
 {
-    var result = {
-        "status": "success",
-        "error_desc": "",
-        "error_code": "",
-        "response_data": {
-            "pagination": {
-                "has_next": false,
-                "next_page": 2,
-                "previous_page": 0,
-                "current_page": 1,
-                "total_pages": 1,
-                "has_previous": false
-            },
-            "results": [{
-                "id": 43,
-                "jobTitle": "Global Director of IT - SAP",
-                "datePosted": "13/07/2015",
-                "postedBy":"jsjsm.15",
-                "views":14,
-                "applicants": 12,
-                "isRemovable":true
-            },{
-                "id": "44",
-                "jobTitle": "SAP Analyst - MM,PP",
-                "datePosted": "11/07/2015",
-                "postedBy":"p.johnson@company.com",
-                "views":0,
-                "applicants": 12,
-                "isRemovable":true
-            },{
-                "id": "45",
-                "jobTitle": "Data Analyst - Excel(SAP or JDE)",
-                "datePosted": "11/04/2015",
-                "postedBy":"tshwa.15",
-                "views":0,
-                "applicants": 12,
-                "isRemovable":true
-            },{
-                "id": "46",
-                "jobTitle": "Java Dev",
-                "datePosted": "11/04/2014",
-                "postedBy":"p.johnson",
-                "views":2,
-                "applicants": 34,
-                "isRemovable":true
-            },{
-                "id": "47",
-                "jobTitle": "UI Consultant",
-                "datePosted": "13/04/2015",
-                "postedBy":"p.johnsonm",
-                "views":12,
-                "applicants": 344,
-                "isRemovable":true
-            }
-            ]
-        }
-    }
-    res.send(result);
+    var userid = req.query["user_id"];
+    var pageNo= req.query["page_number"];
+    var pagination_count = req.query["pagination_count"];
+/*
+ SELECT Job.job_id, job.job_title,job.start_date,toilUser.f_name
+ FROM job_table as job
+ INNER JOIN toilUser
+ ON job.created_by=toilUser.user_id where toilUser.user_id=5;
+ */
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT Job.job_id, job.job_title,job.start_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
+            "ON job.created_by=toilUser.user_id LIMIT "+ pageNo+","+pagination_count
+            , function (err, result) {
+                if (!err && result.length > 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var profile = {
+                            id: result[i]["job_id"],
+                            jobTitle: result[i]["job_title"],
+                            datePosted: result[i]["start_date"],
+                            postedBy: result[i]["f_name"],
+                            views: 12,
+                            "applicants": 12,
+                            "isRemovable":true
+                        };
+                        jsonRes.push(profile);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
 
 }

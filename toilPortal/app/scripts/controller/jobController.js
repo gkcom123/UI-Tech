@@ -11,9 +11,9 @@ angular.module("toilApp")
         function( $scope, $rootScope, $location, GetCurrentJobList){
 
             var currentJobList 	= {};
-            var userId = "";
+            var userId = $rootScope.userId;
             var pageNo 				= 1;
-            var paginationCount		= 4 ;
+            var paginationCount		= 20 ;
 
             $scope.currentJobs 		= {};
             function loadCurrentJobs(){

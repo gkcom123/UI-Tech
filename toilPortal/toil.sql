@@ -1,4 +1,4 @@
-toilUser use toil;
+ use toil;
  describe toil;
  CREATE TABLE toilUser(
 user_id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -715,3 +715,7 @@ created_by INT(10) UNSIGNED NOT NULL
 )
 
 SELECT LAST_INSERT_ID() from job_table;
+SELECT Job.job_id, job.job_title,job.start_date,toilUser.f_name
+FROM job_table as job
+INNER JOIN toilUser
+ON job.created_by=toilUser.user_id where toilUser.user_id=5;
