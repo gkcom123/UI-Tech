@@ -718,4 +718,9 @@ SELECT LAST_INSERT_ID() from job_table;
 SELECT Job.job_id, job.job_title,job.start_date,toilUser.f_name
 FROM job_table as job
 INNER JOIN toilUser
-ON job.created_by=toilUser.user_id where toilUser.user_id=5;
+ON job.created_by=toilUser.user_id where toilUser.user_id=5 LIMIT 0,1;
+-----
+Update the user 
+---
+
+UPDATE toil.toilUser SET isActive=0 WHERE user_id=6 AND email_id='kjahs@hg.com';

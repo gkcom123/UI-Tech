@@ -31,6 +31,15 @@ html{overflow-x: hidden;}
 .underline{
   text-decoration: underline;
 }
+.spin{ position:absolute; top:0; right:0; bottom:0; left:0}
+.spin .spinIcon {
+  content: url("../images/busyIcon.gif");
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 60px 0 0 -30px;
+}
+
 .loginSection{
   height: 100%;
   display: table;

@@ -28,13 +28,43 @@ angular.module("toilApp")
             $scope.selectedLanguage = "";
             $scope.selectedCountry = "";
             $scope.jobType 	  = {type:"Please Select"};
+            $scope.industryLabel 	  = {name:"Please Select"};
+            $scope.currLabel 	  = {name:"Please Select"};
+            $scope.durLabel 	  = {duration:"Please Select"};
+
             $scope.showDropList = function(){
-                $('.dropdown-list').toggle();
+                $('.jobt-dropdown-list').toggle();
             }
+            $scope.showIndDropList = function(){
+                $('.ind-dropdown-list').toggle();
+            }
+            $scope.showCrcDropList = function(){
+                $('.curr-dropdown-list').toggle();
+            }
+            $scope.showDurDropList = function(){
+                $('.dur-dropdown-list').toggle();
+            }
+
             $scope.jobTypeSelected = function(j){
                 $scope.jobType = j;
-                $('.dropdown-list').hide();
+                $('.jobt-dropdown-list').hide();
                 $scope.selectedJobType   = j;
+            };
+            $scope.industryDataSelected = function(x){
+                $scope.industryLabel = x;
+                $('.ind-dropdown-list').hide();
+                $scope.selectedIndustries   = x;
+            };
+            $scope.currencyDataSelected = function(c){
+                $scope.currLabel = c;
+                $('.curr-dropdown-list').hide();
+                $scope.selectedCurrency   = c;
+            };
+
+            $scope.durationDataSelected = function(d){
+                $scope.durLabel = d;
+                $('.dur-dropdown-list').hide();
+                $scope.selectedDuration   = d;
             };
 
             $scope.createNewJob = function()
@@ -49,12 +79,12 @@ angular.module("toilApp")
                     'jobTitle': $scope.jobTitle,
                     'jobType': $scope.selectedJobType.type_id,
                     'description':$scope.description,
-                    'industry_id':$scope.selectedIndustries,
+                    'industry_id':$scope.selectedIndustries.industry_id,
                     'indWtg':$scope.indWtg,
                     'rate': $scope.rateSal,
                     'rateWtg':$scope.rateWtg,
-                    'currency': $scope.selectedCurrency,
-                    'duration': $scope.selectedDuration,
+                    'currency': $scope.selectedCurrency.currency_id,
+                    'duration': $scope.selectedDuration.duration_id,
                     'country': $scope.selectedCountry,
                     'countryWtg':$scope.countryWtg,
                     'city': $scope.city,

@@ -9,8 +9,8 @@ angular.module("toilApp")
         '$rootScope',
         '$location',
         'GetUserList',
-        'AddUser',
-        function( $scope, $state,$rootScope, $location, GetUserList,AddUser){
+        'AddUser','UpdateUser',
+        function( $scope, $state,$rootScope, $location, GetUserList,AddUser,UpdateUser){
 
             var userList 	= {};
             var userId = $rootScope.userId;
@@ -57,6 +57,33 @@ angular.module("toilApp")
             {
                 $scope.addUserFlag = true;
             }
+            $scope.deleteUser = function(user)
+            {
+                var data ={
+                    'userName':user.userName,
+                    'emailId':user.emailId,
+                    'user_id':userId
+                }
+                var updateUserRes = UpdateUser.getResource();
+                updateUserRes.save(data, function success(response){
+                        var resData = response.response_data || {};
+                        // $('#newForm .spin').hide();
+
+                        if(response.status == 'success') {
+                            alert("User Removed Successfully");
+                            loadUsers();
+                        } else {
+                            var reason = 'User Deletion Failed. Please Try After Some Time.';
+                            if(resData.error_code == 201) {
+                                reason = resData.error_desc;
+                            }
+                        }
+                    },
+                    function error(){}
+                );
+
+            }
+
             $scope.createNewUser = function()
             {
                 var validation = $("#addUserForm").valid();
@@ -92,8 +119,6 @@ angular.module("toilApp")
                     },
                     function error(){}
                 );
-
-
             }
             loadUsers();
         }]);

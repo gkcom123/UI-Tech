@@ -6,7 +6,7 @@ exports.getUserList = function(req,res)
 {
     var userid = req.query["user_id"];
     dbPool.getConnection(function(err, conn) {
-        conn.query("SELECT * FROM toilUser WHERE admin_id='" + userid +"'"
+        conn.query("SELECT * FROM toilUser WHERE isActive=1 AND admin_id='" + userid +"'"
             , function (err, result) {
                 if (!err && result.length > 0) {
                     var jsonRes = [];
@@ -18,6 +18,7 @@ exports.getUserList = function(req,res)
                             emailId: result[i]["email_id"],
                             company: result[i]["company"],
                             userName: result[i]["user_id"],
+                            isActive:result[i]["isActive"],
                             "isEditable": true,
                             "isRemovable":true
                         };
@@ -46,6 +47,33 @@ exports.getUserList = function(req,res)
     });
     var tomo =  getDate();
 }
+exports.updateUser = function(req,res)
+{
+    var reqObj = req.body;
+    var emailId = reqObj["emailId"];
+    var userName = reqObj["userName"];
+   /* UPDATE toil.toilUser SET isActive=0 WHERE user_id=6 AND email_id='kjahs@hg.com';*/
+    var queryq = "UPDATE toilUser SET isActive=0 WHERE user_id='"+userName+"' AND email_id='"+emailId+"'";
+    dbPool.getConnection(function(err, conn) {
+        conn.query(queryq,
+            function (err, result) {
+                if (!err) {
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
+
 exports.addNewUser = function(req,res)
 {
     var reqObj = req.body;

@@ -28,10 +28,7 @@
           <div class="wrap-dd-select" ng-click="showDropList()">
             <span ng-bind="jobType.type"></span>
           </div>
-          <ul bs-selectbox  class="dropdown-list" style="display:none;">
-<!--
-            <li ng-repeat="j in jobTypes.data" ng-click="cityOneSelected(state)">{{ j.type }}</li>
--->
+          <ul bs-selectbox  class="dropdown-list jobt-dropdown-list" style="display:none;">
             <li ng-repeat="j in jobTypes.data" ng-click="jobTypeSelected(j)">{{ j.type }}</li>
           </ul>
         </div>
@@ -49,10 +46,20 @@
         <div class="col-md-2 text-right">
           <label class="control-label">Industry</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
+        <div class="col-md-3">
+          <div class="wrap-dd-select" ng-click="showIndDropList()">
+            <span ng-bind="industryLabel.name"></span>
+          </div>
+          <ul bs-selectbox  class="dropdown-list ind-dropdown-list" style="display:none;">
+            <li ng-repeat="x in industries.data" ng-click="industryDataSelected(x)">{{ x.name }}</li>
+          </ul>
+        </div>
+<!--
         <div class="col-sm-3">
           <select ng-model="selectedIndustries" class="form-control" ng-options="x.industry_id as x.name for x in industries.data">
           </select>
         </div>
+-->
         <div class="col-md-2 text-right">
           <label class="control-label text-right">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
@@ -90,19 +97,29 @@
         <div class="col-md-2 text-right">
           <label class="control-label">Currency</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
-        <div class="col-sm-3">
-          <select ng-model="selectedCurrency" class="form-control" ng-options="x.currency_id as x.name for x in currencies.data">
-          </select>
+
+        <div class="col-md-3">
+          <div class="wrap-dd-select" ng-click="showCrcDropList()">
+            <span ng-bind="currLabel.name"></span>
+          </div>
+          <ul bs-selectbox  class="dropdown-list curr-dropdown-list" style="display:none;">
+            <li ng-repeat="c in currencies.data" ng-click="currencyDataSelected(c)">{{ c.name }}</li>
+          </ul>
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-2 text-right">
           <label class="control-label">Duration</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
-        <div class="col-sm-3">
-          <select ng-model="selectedDuration" class="form-control" ng-options="x.duration_id as x.duration for x in durations.data">
-          </select>
+        <div class="col-md-3">
+          <div class="wrap-dd-select" ng-click="showDurDropList()">
+            <span ng-bind="durLabel.duration"></span>
+          </div>
+          <ul bs-selectbox  class="dropdown-list dur-dropdown-list" style="display:none;">
+            <li ng-repeat="d in durations.data" ng-click="durationDataSelected(d)">{{ d.duration }}</li>
+          </ul>
         </div>
+
       </div>
       <div class="form-group">
         <div class="col-md-2 text-right">

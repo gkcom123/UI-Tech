@@ -22,4 +22,11 @@ angular.module('toilApp')
             }
         }
     })
+    .factory('UpdateUser', function($resource){
+        return {
+            getResource: function(){
+                return $resource('/toilAPi/updateUser/', {});
+            }
+        }
+    })
 ;
