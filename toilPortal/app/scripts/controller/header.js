@@ -5,14 +5,21 @@
 angular.module('toilApp')
     .controller('toilHeaderController', ['$rootScope','$scope','$state','$resource','localStorageService',
         function ($rootScope,$scope,$state,$resource,localStorageService) {
-        $scope.page = $state.current;
-        var userName = $rootScope.userName;
-        $scope.logOut = function(){
-            localStorageService.remove('toil-id');
-            localStorageService.clearAll();
-            $state.go('home');
-        };
-
+            $scope.page = $state.current;
+            var profile = getUserProfile();
+            $scope.userName  = profile.email;
+            $scope.logOut = function(){
+                localStorageService.remove('toil-id');
+                localStorageService.clearAll();
+                $state.go('home');
+            };
+            function getUserProfile()
+            {
+                var toilId = localStorageService.get('toil-id');
+                var encodedProfile = toilId.split('.')[1];
+                var profile = JSON.parse(Helper.url_base64_decode(encodedProfile));
+                return profile;
+            }
 
         /*        $("#resetPwd").validate({
                     rules: {

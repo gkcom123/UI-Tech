@@ -7,14 +7,14 @@ angular.module("toilApp")
         '$scope',
         '$rootScope',
         '$location',
-        '$filter',
+        '$filter','localStorageService',
         'GetJobType','GetIndustry','GetCurrency','GetDuration','GetLanguage','GetCountry','AddJob',
-        function( $scope, $rootScope, $location, $filter,GetJobType,GetIndustry,GetCurrency,
+        function( $scope, $rootScope, $location, $filter,localStorageService,GetJobType,GetIndustry,GetCurrency,
                   GetDuration,GetLanguage,GetCountry,AddJob){
 
             var jobTypeList = {};
             var industryList = {};
-            var userId = $rootScope.userId;
+            var userId = getUserProfile().user_id;
             $scope.jobTypes 		= {};
             $scope.selectedJobType = "";
             $scope.industries 		= {};
@@ -66,6 +66,26 @@ angular.module("toilApp")
                 $('.dur-dropdown-list').hide();
                 $scope.selectedDuration   = d;
             };
+            function getUserProfile()
+            {
+                var toilId = localStorageService.get('toil-id');
+                var encodedProfile = toilId.split('.')[1];
+                var profile = JSON.parse(Helper.url_base64_decode(encodedProfile));
+                return profile;
+            }
+
+            function resetValues()
+            {
+                $scope.jobTitle ="";
+                $scope.description ="";
+                $scope.indWtg="3";
+                $scope.city="";
+                $scope.rateSal="";
+/*
+                if ($scope.addtoilUserForm)
+                    $scope.addtoilUserForm.$setPristine();
+*/
+            }
 
             $scope.createNewJob = function()
             {
@@ -117,6 +137,7 @@ angular.module("toilApp")
             }
             $scope.$on('skillSaved', function(e,data) {
                 alert("Job saved Successfully");
+                resetValues();
             });
             $rootScope.$on('jobDateChanged', function(event,data){
                 var pDate = ( $filter('date')(data, 'yyyy-MM-dd'));

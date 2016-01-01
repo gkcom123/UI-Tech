@@ -6,8 +6,8 @@ angular.module('toilApp')
     '$toilApi',
         '$resource','localStorageService',
     function($scope, $rootScope, $toilApi,$resource,localStorageService){
-        var ajaxLock = false,
-           rules = {};
+      var ajaxLock = false,
+          rules = {};
       $scope.isAuthenticated = false;
       Helper.requireRule(rules, ['emailid', 'password']);
       var jForm = $("#signInFormID");
@@ -34,7 +34,7 @@ angular.module('toilApp')
               localStorageService.set('toil-id', res.response_data);
               //console.log(res.response_data);
               var encodedProfile = res.response_data.split('.')[1];
-              var profile = JSON.parse(url_base64_decode(encodedProfile));
+              var profile = JSON.parse(Helper.url_base64_decode(encodedProfile));
               $rootScope.userName = profile.email;
               $rootScope.userId = profile.user_id;
 
@@ -51,20 +51,5 @@ angular.module('toilApp')
 
         }
       }
-      function url_base64_decode(str) {
-        var output = str.replace('-', '+').replace('_', '/');
-        switch (output.length % 4) {
-          case 0:
-            break;
-          case 2:
-            output += '==';
-            break;
-          case 3:
-            output += '=';
-            break;
-          default:
-            throw 'Illegal base64url string!';
-        }
-        return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
-      }
+
     }]);

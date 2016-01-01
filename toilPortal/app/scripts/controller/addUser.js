@@ -7,13 +7,13 @@ angular.module("toilApp")
         '$scope',
         '$state',
         '$rootScope',
-        '$location',
+        'localStorageService',
         'GetUserList',
         'AddUser','UpdateUser',
-        function( $scope, $state,$rootScope, $location, GetUserList,AddUser,UpdateUser){
+        function( $scope, $state,$rootScope, localStorageService, GetUserList,AddUser,UpdateUser){
 
             var userList 	= {};
-            var userId = $rootScope.userId;
+            var userId = getUserProfile().user_id;
             var pageNo 				= 1;
             var paginationCount		= 4 ;
 
@@ -28,11 +28,15 @@ angular.module("toilApp")
                 if ($scope.addtoilUserForm)
                     $scope.addtoilUserForm.$setPristine();
             }
-            function loadUsers(){
+            function getUserProfile()
+            {
+                var toilId = localStorageService.get('toil-id');
+                var encodedProfile = toilId.split('.')[1];
+                var profile = JSON.parse(Helper.url_base64_decode(encodedProfile));
+                return profile;
+            }
 
-               // $('.viewBookingWap .spin').show();
-                //$scope.radioModel = 'Left';
-                //$scope.showFilters = false;;
+            function loadUsers(){
                 if(!userId)
                 {
                     return;
@@ -59,6 +63,12 @@ angular.module("toilApp")
             }
             $scope.deleteUser = function(user)
             {
+                var cancelIt = confirm('Do you want to delete the user with Email: ' + user.emailId);
+                if(!cancelIt)
+                {
+                    return;
+                }
+
                 var data ={
                     'userName':user.userName,
                     'emailId':user.emailId,

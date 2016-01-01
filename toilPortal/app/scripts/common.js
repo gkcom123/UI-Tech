@@ -80,12 +80,29 @@ var toilVersion = 11,
 
         return obj;
       }
-      ,showMask: function( parentDom ){
-        $((parentDom || "") + " .spin").show();
-      }
-      ,hideMask: function( parentDom ){
-        $((parentDom || "") + " .spin").hide();
-      }
+        , showMask: function (parentDom) {
+            $((parentDom || "") + " .spin").show();
+        }
+        , hideMask: function (parentDom) {
+            $((parentDom || "") + " .spin").hide();
+        },
+        url_base64_decode: function (str) {
+            var output = str.replace('-', '+').replace('_', '/');
+            switch (output.length % 4) {
+                case 0:
+                    break;
+                case 2:
+                    output += '==';
+                    break;
+                case 3:
+                    output += '=';
+                    break;
+                default:
+                    throw 'Illegal base64url string!';
+            }
+            return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
+
+        }
 
       ,routes:  {
           'home': {

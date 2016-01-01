@@ -6,14 +6,21 @@ angular.module("toilApp")
     .controller('manageJobController', [
         '$scope',
         '$rootScope',
-        '$location',
+        'localStorageService',
         'GetCurrentJobList',
-        function( $scope, $rootScope, $location, GetCurrentJobList){
+        function( $scope, $rootScope, localStorageService, GetCurrentJobList){
 
             var currentJobList 	= {};
-            var userId = $rootScope.userId;
+            var userId = getUserProfile().user_id;
             var pageNo 				= 1;
             var paginationCount		= 20 ;
+            function getUserProfile()
+            {
+                var toilId = localStorageService.get('toil-id');
+                var encodedProfile = toilId.split('.')[1];
+                var profile = JSON.parse(Helper.url_base64_decode(encodedProfile));
+                return profile;
+            }
 
             $scope.currentJobs 		= {};
             function loadCurrentJobs(){
