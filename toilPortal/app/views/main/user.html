@@ -45,7 +45,7 @@
       </div>
       <div class="row">
         <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">Basic Info</div>
-        <button class="btn col-md-1 saveBtn" type="submit" ng-click="addtoilUserForm.$valid && createNewUser()">Save</button>
+        <button class="btn col-md-1 saveBtn" type="submit" ng-disabled="!addtoilUserForm.$valid" ng-click="addtoilUserForm.$valid && createNewUser()">Save</button>
       </div>
       <form name="addtoilUserForm" id ="addUserForm" class="form-horizontal col-md-offset-1" novalidate>
         <div class="form-group">

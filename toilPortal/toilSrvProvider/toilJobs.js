@@ -286,13 +286,7 @@ exports.addNewJob = function(req,res) {
     var country = reqObj["country"];
     var countryWtg = reqObj["countryWtg"];
     var city = reqObj["city"];
-    var travel;
-    if (reqObj["travel"] == 'No') {
-        travel = '2';
-    }
-    else {
-        travel = '1';
-    }
+    var travel = reqObj["travel"];
     var travelWtg = reqObj["travelWtg"];
     var prLang = reqObj["prLang"];
     var prlangWtg = reqObj["prlangWtg"];
@@ -419,8 +413,8 @@ exports.getCurrentJobList = function(req,res)
                             jobTitle: result[i]["job_title"],
                             datePosted: result[i]["start_date"],
                             postedBy: result[i]["f_name"],
-                            views: 12,
-                            "applicants": 12,
+                            views: 0,
+                            "applicants": 0,
                             "isRemovable":true
                         };
                         jsonRes.push(profile);

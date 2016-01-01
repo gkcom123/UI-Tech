@@ -33,6 +33,23 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
             });
         }
         loadSkillList();
+        function performSkillsSanityCheck(){
+
+            var missingData;
+            var sanityChekClear = false;
+            if($scope.profModel.length==0)
+                missingData = 'Please Select Professional Skill';
+            else if($scope.projModel.length==0)
+                missingData = 'Please Select Project Skill';
+            else if($scope.personalModel.length==0)
+                missingData = 'Please Select Personal Skill';
+            else
+                sanityChekClear = true;
+            if(!sanityChekClear)
+                alert(missingData);
+
+            return sanityChekClear;
+        }
 
         $scope.saveSkills = function(jobId) {
             var data ={
@@ -66,6 +83,15 @@ datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSki
         $scope.$on('saveSkills', function(e,data) {
             // save the Prof skill,proj, and personal skill in one go
             $scope.$emit("skillSaved", $scope.saveSkills(data));
+        });
+        $scope.$on('performSkillsSanityCheck', function(e,data) {
+            // save the Prof skill,proj, and personal skill in one go
+            var signal = performSkillsSanityCheck();
+            if(signal)
+            {
+                $scope.$emit("sanityCheckDone");
+            }
+
         });
         $scope.setProfSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];

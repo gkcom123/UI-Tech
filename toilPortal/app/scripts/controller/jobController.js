@@ -23,6 +23,7 @@ angular.module("toilApp")
             }
 
             $scope.currentJobs 		= {};
+            $scope.archivedJobs 		= {};
             function loadCurrentJobs(){
                 var jobListResource = GetCurrentJobList.getResource(userId, pageNo, paginationCount);
 
