@@ -2,8 +2,8 @@
  * Created by gunjan.kumar on 24/12/15.
  */
 'use strict';
-var datemodule = angular.module('toilApp');
-datemodule.controller('SkillController',['$scope','$rootScope','$filter','GetSkill','SaveSkill',
+angular.module('toilApp')
+    .controller('SkillController',['$scope','$rootScope','$filter','GetSkill','SaveSkill',
     function ($scope,$rootScope,$filter,GetSkill,SaveSkill) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};

@@ -428,7 +428,8 @@ exports.getCurrentJobList = function(req,res)
  */
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT job.job_id, job.job_title,job.start_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
-            "ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
+            "ON job.created_by=toilUser.user_id where job.isActive=1 "
+        //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
                 if (!err && result.length > 0) {
                     var jsonRes = [];

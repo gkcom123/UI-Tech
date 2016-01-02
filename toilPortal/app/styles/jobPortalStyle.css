@@ -39,6 +39,29 @@ html{overflow-x: hidden;}
   left: 50%;
   margin: 60px 0 0 -30px;
 }
+.pagination
+{
+  margin: 0px;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #F5821F;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  color: #F5821F;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #F5821F;
+  border-color: #F5821F;
+}
 
 .loginSection{
   height: 100%;
@@ -400,12 +423,12 @@ html{overflow-x: hidden;}
 }
 .tab-pane table thead{
   text-transform: uppercase;
-  background:#56616b;
+  background:#404041;
   color:#fff;
 }
 .tab-pane table tbody{
-  background:#e4effa;
-  color:#555;
+  background:#E9E9E9;
+  color:#010101;
 }
 .orangeColor
 {
@@ -427,7 +450,7 @@ html{overflow-x: hidden;}
   border-spacing: 3px;
 }
 #addNewUser{
-  color: #555;
+  color: #010101;
   text-decoration: none;
 
 }

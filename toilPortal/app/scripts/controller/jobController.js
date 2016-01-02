@@ -15,6 +15,8 @@ angular.module("toilApp")
             var userId = getUserProfile().user_id;
             var pageNo 				= 1;
             var paginationCount		= 20 ;
+            $scope.currentPage = 1;
+            $scope.pageSize = 10;
             function getUserProfile()
             {
                 var toilId = localStorageService.get('toil-id');

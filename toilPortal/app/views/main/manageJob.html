@@ -8,17 +8,17 @@
       <thead>
       <tr>
         <th>ID</th>
-        <th>Job Title</th>
-        <th>Date Posted</th>
-        <th>Posted by</th>
-        <th>Views</th>
-        <th>Applicants</th>
+        <th>JOB TITLE</th>
+        <th>DATE POSTED</th>
+        <th>POSTED BY</th>
+        <th>VIEWS</th>
+        <th>INTEREST</th>
         <th><span class="glyphicon glyphicon-pencil"></span></th>
         <th><span class="glyphicon glyphicon-trash"></span></th>
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="job in currentJobs.data">
+      <tr dir-paginate="job in currentJobs.data |itemsPerPage: pageSize" current-page="currentPage">
         <td><span ng-bind="job.id"></span></td>
         <td><span ng-bind="job.jobTitle"></span></td>
         <td><span ng-bind="job.datePosted"></span></td>
@@ -30,17 +30,20 @@
       </tr>
       </tbody>
     </table>
+    <div class="text-right">
+      <dir-pagination-controls boundary-links="true" template-url="views/shared/dirPagination.tpl.html"></dir-pagination-controls>
+    </div>
 
     <div class="well well-sm main-well">Achived Jobs</div>
     <table class="table">
       <thead>
       <tr>
         <th>ID</th>
-        <th>Job Title</th>
-        <th>Date Posted</th>
-        <th>Posted by</th>
-        <th>Views</th>
-        <th>Applicants</th>
+        <th>JOB TITLE</th>
+        <th>DATE POSTED</th>
+        <th>POSTED BY</th>
+        <th>VIEWS</th>
+        <th>INTEREST</th>
         <th><span class="glyphicon glyphicon-pencil"></span></th>
         <th><span class="glyphicon glyphicon-trash"></span></th>
       </tr>

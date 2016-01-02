@@ -13,8 +13,10 @@
             <th>LAST NAME</th>
             <th>Username</th>
             <th>Email Address</th>
+<!--
             <th><span class="glyphicon glyphicon-ok"></span></th>
             <th><span class="glyphicon glyphicon-pencil"></span></th>
+-->
             <th><span class="glyphicon glyphicon-trash"></span></th>
             </thead>
             <tbody>
@@ -23,6 +25,7 @@
               <td><span ng-bind="user.lastName"></span></td>
               <td><span ng-bind="user.userName"></span></td>
               <td><span ng-bind="user.emailId"></span></td>
+<!--
               <td>
                 <span ng-if="user.isActive==1">
                   <input type="checkbox" id="checkbox1" name="checkbox1" />
@@ -30,6 +33,7 @@
                 </span>
               </td>
               <td><span ng-if="user.isEditable" class="glyphicon glyphicon-pencil"></span></td>
+-->
               <td><span class="glyphicon glyphicon-trash" ng-click="deleteUser(user)"></span></td>
             </tr>
             </tbody>
