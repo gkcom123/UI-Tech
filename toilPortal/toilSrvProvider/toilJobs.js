@@ -389,6 +389,32 @@ exports.saveJobSkills = function(req,res)
     });
 
 }
+exports.updateJob = function(req,res)
+{
+    var reqObj = req.body;
+    var id = reqObj["id"];
+    var jobTitle = reqObj["jobTitle"];
+    var queryq = "UPDATE job_table SET isActive=0 WHERE job_id='"+id+"' AND job_title='"+jobTitle+"'";
+    dbPool.getConnection(function(err, conn) {
+        conn.query(queryq,
+            function (err, result) {
+                if (!err) {
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
+
 exports.getCurrentJobList = function(req,res)
 {
     var userid = req.query["user_id"];
@@ -401,8 +427,8 @@ exports.getCurrentJobList = function(req,res)
  ON job.created_by=toilUser.user_id where toilUser.user_id=5;
  */
     dbPool.getConnection(function(err, conn) {
-        conn.query("SELECT Job.job_id, job.job_title,job.start_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
-            "ON job.created_by=toilUser.user_id LIMIT "+ pageNo+","+pagination_count
+        conn.query("SELECT job.job_id, job.job_title,job.start_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
+            "ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
                 if (!err && result.length > 0) {
                     var jsonRes = [];

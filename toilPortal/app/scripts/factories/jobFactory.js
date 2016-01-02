@@ -78,6 +78,14 @@ angular.module('toilApp')
             }
         };
     })
+    .factory('UpdateJob', function($resource){
+        return {
+            getResource: function(){
+                return $resource('/toilAPi/updateJob/', {});
+            }
+        }
+    })
+
 
 ;
 

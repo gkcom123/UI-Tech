@@ -724,3 +724,5 @@ Update the user
 ---
 
 UPDATE toil.toilUser SET isActive=0 WHERE user_id=6 AND email_id='kjahs@hg.com';
+ALTER TABLE job_table ADD isActive TINYINT(1) UNSIGNED  NOT NULL DEFAULT 1;
+
