@@ -8,7 +8,7 @@ exports.getUserList = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM toilUser WHERE isActive=1 AND admin_id='" + userid +"'"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {

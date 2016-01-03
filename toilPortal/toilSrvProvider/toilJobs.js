@@ -11,7 +11,7 @@ exports.getJobTypeList = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM job_type"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -51,7 +51,7 @@ exports.get_currency = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM job_currency"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -88,7 +88,7 @@ exports.get_duration = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM job_duration"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -127,7 +127,7 @@ exports.getIndustryList = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM job_industry"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -165,7 +165,7 @@ exports.getLanguageList = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM language"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -202,7 +202,7 @@ exports.getSkillList = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM skill"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -240,7 +240,7 @@ exports.getCountryList = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT * FROM country"
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -431,7 +431,7 @@ exports.getCurrentJobList = function(req,res)
             "ON job.created_by=toilUser.user_id where job.isActive=1 "
         //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
-                if (!err && result.length > 0) {
+                if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
