@@ -3,8 +3,8 @@
  */
 'use strict';
 angular.module('toilApp')
-    .controller('SkillController',['$scope','$rootScope','$filter','GetSkill','SaveSkill',
-    function ($scope,$rootScope,$filter,GetSkill,SaveSkill) {
+    .controller('SkillController',['$scope','$rootScope','localStorageService','$filter','GetSkill','SaveSkill',
+    function ($scope,$rootScope,localStorageService,$filter,GetSkill,SaveSkill) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};
         $scope.personalSkill 	  = {name:"Personal"};
@@ -16,7 +16,7 @@ angular.module('toilApp')
         $scope.profSkillRating 		= {};
         $scope.projSkillRating 		= {};
         $scope.personalSkillRating 		= {};
-        var created_by = $rootScope.userId;
+        var created_by = getUserProfile().user_id;
         function loadSkillList(){
             var skillListResource = GetSkill.getResource();
             skillListResource.get(function(response){
@@ -31,6 +31,13 @@ angular.module('toilApp')
                     $scope.skillList.data = response.response_data.results;
                 }
             });
+        }
+        function getUserProfile()
+        {
+            var toilId = localStorageService.get('toil-id');
+            var encodedProfile = toilId.split('.')[1];
+            var profile = JSON.parse(Helper.url_base64_decode(encodedProfile));
+            return profile;
         }
         loadSkillList();
         function performSkillsSanityCheck(){
