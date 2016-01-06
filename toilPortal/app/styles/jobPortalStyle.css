@@ -537,11 +537,17 @@ html{overflow-x: hidden;}
 .pickupDate{
   padding-left: 20px;
 }
+.wrap-dd-select
+{
+  background: #E9E9E9;
+  color: #010101;
+}
 .wrap-dd-select.defaultPlaceHolder {
   color: rgba(0, 0, 0, 0.35)
 }
 .wrap-dd-select:after {
   right: 6px !important;
+  border-color: #f68211 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);;
 }
 .wrap-dd-select .dropdown{
   display: none;
