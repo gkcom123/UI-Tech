@@ -33,6 +33,7 @@ app.get('/toilAPi/get_user_list', toilUserSrv.getUserList);
 app.post('/toilAPi/addNewUser', toilUserSrv.addNewUser);
 app.post('/toilAPi/updateUser', toilUserSrv.updateUser);
 app.get('/toilAPi/get_current_jobList', toilJobsSrv.getCurrentJobList);
+app.get('/toilAPi/getCurrentJobListForApp', toilJobsSrv.getCurrentJobListForApp);
 app.get('/toilAPi/get_job_type', toilJobsSrv.getJobTypeList);
 app.get('/toilAPi/get_job_industry', toilJobsSrv.getIndustryList);
 app.get('/toilAPi/get_currency', toilJobsSrv.get_currency);

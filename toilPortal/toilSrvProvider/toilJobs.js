@@ -469,3 +469,90 @@ exports.getCurrentJobList = function(req,res)
     });
 
 }
+
+exports.getCurrentJobListForApp = function(req,res)
+{
+    var userid = req.query["user_id"];
+    var pageNo= req.query["page_number"];
+    var pagination_count = req.query["pagination_count"];
+    /*
+     SELECT Job.job_id, job.job_title,job.start_date,toilUser.f_name
+     FROM job_table as job
+     INNER JOIN toilUser
+     ON job.created_by=toilUser.user_id where toilUser.user_id=5;
+     */
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT job.job_id, job.job_title,job.job_type,job_type.type,job.job_desc,job.industry_id," +
+            "job_industry.name as industry_name,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,job_currency.name," +
+            "job.duration_id,job_duration.duration,job.country_id,country.name as countryName,job.country_wtg," +
+            "job.city,job.isTravel,job.trvl_wtg,job.lang_id,language.language,job.lang_wtg,job.start_date," +
+            "job.srtdt_wtg,toilUser.f_name as createdBy FROM job_table as job " +
+            "INNER JOIN toilUser  ON job.created_by=toilUser.user_id " +
+            "JOIN job_industry ON job.industry_id=job_industry.industry_id " +
+            "JOIN job_type ON job.job_type=job_type.type_id " +
+            "JOIN job_currency ON job.currency_id=job_currency.currency_id " +
+            "JOIN job_duration ON job.duration_id=job_duration.duration_id " +
+            "JOIN country ON job.country_id=country.country_id " +
+            "JOIN language ON job.lang_id=language.language_id where job.isActive=1"
+            //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
+            , function (err, result) {
+                if (!err && result.length >= 0) {
+                    console.log(err);
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var profile = {
+                            id: result[i]["job_id"],
+                            jobTitle: result[i]["job_title"],
+                            job_type: result[i]["type"],
+                            job_desc: result[i]["job_desc"],
+                            industry_id: result[i]["industry_id"],
+                            industry_name: result[i]["industry_name"],
+                            ind_wtg: result[i]["ind_wtg"],
+                            salary: result[i]["salary"],
+                            sal_wtg: result[i]["sal_wtg"],
+                            currency_id: result[i]["currency_id"],
+                            currency_name: result[i]["name"],
+                            duration_id: result[i]["duration_id"],
+                            duration_name: result[i]["duration"],
+                            country_id: result[i]["country_id"],
+                            country_name: result[i]["countryName"],
+                            country_wtg: result[i]["country_wtg"],
+                            city: result[i]["city"],
+                            isTravel: result[i]["isTravel"],
+                            trvl_wtg: result[i]["trvl_wtg"],
+                            lang_id: result[i]["lang_id"],
+                            lang_name: result[i]["language"],
+                            lang_wtg: result[i]["lang_wtg"],
+                            strdt_wtg: result[i]["srtdt_wtg"],
+                            datePosted: result[i]["start_date"],
+                            postedBy: result[i]["createdBy"],
+                            views: 0,
+                            "applicants": 0,
+                            "isRemovable":true
+                        };
+                        jsonRes.push(profile);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
