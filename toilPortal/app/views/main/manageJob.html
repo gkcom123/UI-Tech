@@ -25,7 +25,7 @@
         <td><span ng-bind="job.postedBy"></span></td>
         <td><span ng-bind="job.views"></span></td>
         <td><span ng-bind="job.applicants"></span></td>
-        <td><span class="glyphicon glyphicon-pencil"></span></td>
+        <td><span class="glyphicon glyphicon-pencil" ng-click="editJob(job)"></span></td>
         <td><span class="glyphicon glyphicon-trash" ng-click="deleteJob(job)"></span></td>
       </tr>
       </tbody>

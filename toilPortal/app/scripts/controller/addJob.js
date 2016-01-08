@@ -8,9 +8,9 @@ angular.module("toilApp")
         '$rootScope',
         '$location',
         '$filter','localStorageService',
-        'GetJobType','GetIndustry','GetCurrency','GetDuration','GetLanguage','GetCountry','AddJob',
-        function( $scope, $rootScope, $location, $filter,localStorageService,GetJobType,GetIndustry,GetCurrency,
-                  GetDuration,GetLanguage,GetCountry,AddJob){
+        'JobTypeLoader','GetIndustry','GetCurrency','GetDuration','GetLanguage','GetCountry','AddJob','JobService',
+        function( $scope, $rootScope, $location, $filter,localStorageService,JobTypeLoader,GetIndustry,GetCurrency,
+                  GetDuration,GetLanguage,GetCountry,AddJob,JobService){
 
             var jobTypeList = {};
             var industryList = {};
@@ -212,20 +212,29 @@ angular.module("toilApp")
             });
 
             function loadJobTypeList(){
-                var jobTypeListResource = GetJobType.getResource();
-                jobTypeListResource.get(function(response){
-                    if(response.status == 'error' && response.error_code == 400){
-                        //$rootScope.$broadcast('LogoutThisUser',{});
-                    }
-                    if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("Get Job Type API returned empty Object");
-                    }
-                    else{
-                        jobTypeList = response.response_data.results;
-                        $scope.jobTypes.data = response.response_data.results;
-                    }
-                });
+                JobTypeLoader.getAllJobTypes()
+                    .then(function(data) {
+                        $scope.jobTypes.data = data;
+                        if(JobService.getTypeOfChange()=='edit')
+                        {
+                            setJobType(JobService.getSelectedJob(),$scope.jobTypes.data);
+
+                        }
+                    },
+                    function(data) {
+                        console.log('Data retrieval failed.')
+                    });
             }
+            function setJobType(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].type_id == selectedJob.job_type){
+                        $scope.jobType = masterData[i];
+                        $scope.selectedJobType = selectedJob;
+                        break;
+                    }
+                }
+            }
+
             function loadIndustryList(){
                 var industryListResource = GetIndustry.getResource();
                 industryListResource.get(function(response){

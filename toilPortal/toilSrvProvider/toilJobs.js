@@ -427,7 +427,9 @@ exports.getCurrentJobList = function(req,res)
  ON job.created_by=toilUser.user_id where toilUser.user_id=5;
  */
     dbPool.getConnection(function(err, conn) {
-        conn.query("SELECT job.job_id, job.job_title,job.start_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
+        conn.query("SELECT job.job_id, job.job_title,job.job_type,job.job_desc,job.industry_id,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id," +
+            "job.duration_id,job.country_id,job.country_wtg,job.city,job.isTravel,job.trvl_wtg,job.lang_id,job.lang_wtg," +
+            "job.start_date,job.srtdt_wtg,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
             "ON job.created_by=toilUser.user_id where job.isActive=1 "
         //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
@@ -438,6 +440,22 @@ exports.getCurrentJobList = function(req,res)
                         var profile = {
                             id: result[i]["job_id"],
                             jobTitle: result[i]["job_title"],
+                            job_type: result[i]["job_type"],
+                            job_desc: result[i]["job_desc"],
+                            industry_id: result[i]["industry_id"],
+                            ind_wtg: result[i]["ind_wtg"],
+                            salary: result[i]["salary"],
+                            sal_wtg: result[i]["sal_wtg"],
+                            currency_id: result[i]["currency_id"],
+                            duration_id: result[i]["duration_id"],
+                            country_id: result[i]["country_id"],
+                            country_wtg: result[i]["country_wtg"],
+                            city: result[i]["city"],
+                            isTravel: result[i]["isTravel"],
+                            trvl_wtg: result[i]["trvl_wtg"],
+                            lang_id: result[i]["lang_id"],
+                            lang_wtg: result[i]["lang_wtg"],
+                            strdt_wtg: result[i]["srtdt_wtg"],
                             datePosted: result[i]["start_date"],
                             postedBy: result[i]["f_name"],
                             views: 0,
@@ -497,7 +515,6 @@ exports.getCurrentJobListForApp = function(req,res)
             //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
                 if (!err && result.length >= 0) {
-                    console.log(err);
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
