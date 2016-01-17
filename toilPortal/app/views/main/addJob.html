@@ -250,7 +250,7 @@
             <ul ng-model="example1" bs-selectbox class="dropdown-list prof-dropdown-list" style="display:none;">
               <li><input type="text" class="searchInput" ng-model="searchProfSkill" placeholder="Search Skill"/></li>
               <li class='divider'></li>
-              <li ng-repeat="skill in skillList.data | filter:searchProfSkill" ng-click="profSkillSelected(skill)">
+              <li ng-repeat="skill in profskillList.data | filter:searchProfSkill" ng-click="profSkillSelected(skill)">
                 <div>
                   <label class="skLab"><input class="skIn" type="checkbox"  ng-model="selectedProfSkill"
                                               ng-change="setProfSelectedItem(skill,selectedProfSkill)"/> {{skill.skill_name}}</label>
@@ -269,7 +269,7 @@
             <ul ng-model="example1" bs-selectbox class="dropdown-list proj-dropdown-list " style="display:none;">
               <li><input type="text" class="searchInput" ng-model="searchProjSkill" placeholder="Search Skill"/></li>
               <li class='divider'></li>
-              <li ng-repeat="skill in skillList.data | filter:searchProjSkill" ng-click="projSkillSelected(skill)">
+              <li ng-repeat="skill in projskillList.data | filter:searchProjSkill" ng-click="projSkillSelected(skill)">
                 <div>
                   <label class="skLab"><input class="skIn" type="checkbox" ng-model="selectedProjSkill"
                                               ng-change="setProjSelectedItem(skill,selectedProjSkill)"/> {{skill.skill_name}}</label>
@@ -287,7 +287,7 @@
             <ul ng-model="example1" bs-selectbox class="dropdown-list pres-dropdown-list" style="display:none;">
               <li><input type="text" class="searchInput" ng-model="searchPerSkill" placeholder="Search Skill"/></li>
               <li class='divider'></li>
-              <li ng-repeat="skill in skillList.data | filter:searchPerSkill" ng-click="personalSkillSelected(skill)">
+              <li ng-repeat="skill in personalskillList.data | filter:searchPerSkill" ng-click="personalSkillSelected(skill)">
                 <div>
                   <label class="skLab"><input class="skIn" type="checkbox" ng-model="selectedPersonalSkill"
                                               ng-change="setPersonalSelectedItem(skill,selectedPersonalSkill)"/> {{skill.skill_name}}</label>
