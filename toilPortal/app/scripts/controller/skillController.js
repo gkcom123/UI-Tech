@@ -9,7 +9,9 @@ angular.module('toilApp')
         $scope.projSkill 	  = {name:"Project Related"};
         $scope.personalSkill 	  = {name:"Personal"};
         $scope.selected_items = [];
-        $scope.skillList 		= {};
+        $scope.profskillList 		= {};
+        $scope.projskillList 		= {};
+        $scope.personalskillList		= {};
         $scope.profModel = [];
         $scope.projModel = [];
         $scope.personalModel = [];
@@ -27,8 +29,31 @@ angular.module('toilApp')
                     console.warn("Get Skill API returned empty Object");
                 }
                 else{
-                    // skillList = response.response_data.results;
-                    $scope.skillList.data = response.response_data.results;
+                    var profSkillsList=[];
+                    var projSkillsList=[];
+                    var personalSkillsList=[];
+                    for( var s=0;s< response.response_data.results.length;s++)
+                    {
+                        var skill = response.response_data.results[s];
+                        if(skill.type_id==1)
+                        {
+                            profSkillsList.push(skill);
+
+                        }
+                        else if(skill.type_id==3)
+                        {
+                            personalSkillsList.push(skill);
+
+                        }
+                        else{
+                            projSkillsList.push(skill);
+
+                        }
+                    }
+                    $scope.profskillList.data = profSkillsList;
+                    $scope.projskillList.data = projSkillsList;
+                    $scope.personalskillList.data = personalSkillsList;
+
                 }
             });
         }

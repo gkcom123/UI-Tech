@@ -200,7 +200,7 @@ exports.getLanguageList = function(req,res)
 exports.getSkillList = function(req,res)
 {
     dbPool.getConnection(function(err, conn) {
-        conn.query("SELECT * FROM skill"
+        conn.query("SELECT * FROM skill WHERE isActive=1 "
             , function (err, result) {
                 if (!err && result.length >= 0) {
                     var jsonRes = [];
@@ -208,7 +208,8 @@ exports.getSkillList = function(req,res)
                     for (var i = 0; i < arrayLength; i++) {
                         var skillList = {
                             skill_id: result[i]["skill_id"],
-                            skill_name: result[i]["skill_name"]
+                            skill_name: result[i]["skill_name"],
+                            type_id: result[i]["type_id"]
                         };
                         jsonRes.push(skillList);
                     }
