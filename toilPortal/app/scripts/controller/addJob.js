@@ -106,6 +106,7 @@ angular.module("toilApp")
             function resetValues()
             {
                 $scope.jobTitle ="";
+                $scope.compName="";
                 $scope.description ="";
                 $scope.indWtg="3";
                 $scope.city="";
@@ -146,6 +147,7 @@ angular.module("toilApp")
                     'jobTitle': $scope.jobTitle,
                     'jobType': $scope.selectedJobType.type_id,
                     'description':$scope.description,
+                    'compName':$scope.compName,
                     'industry_id':$scope.selectedIndustries.industry_id,
                     'indWtg':$scope.indWtg || 3,
                     'rate': $scope.rateSal,
