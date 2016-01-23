@@ -8,32 +8,33 @@ angular.module("toilApp")
         '$rootScope',
         '$location',
         '$filter','localStorageService',
-        'JobTypeLoader','GetIndustry','GetCurrency','GetDuration','GetLanguage','GetCountry','AddJob','JobService',
+        'JobTypeLoader','GetIndustry','GetCurrency','GetDuration','GetLanguage','CountryLoader','AddJob','JobService',
         function( $scope, $rootScope, $location, $filter,localStorageService,JobTypeLoader,GetIndustry,GetCurrency,
-                  GetDuration,GetLanguage,GetCountry,AddJob,JobService){
+                  GetDuration,GetLanguage,CountryLoader,AddJob,JobService){
 
-            var jobTypeList = {};
             var industryList = {};
             var userId = getUserProfile().user_id;
             $scope.jobTypes 		= {};
+            $scope.jobType 	  = {type:"Please Select"};
             $scope.selectedJobType = "";
+
+            $scope.country          = {};
+            $scope.cntLabel 	  = {name:"Please Select"};
+            $scope.selectedCountry = "";
+
             $scope.industries 		= {};
             $scope.currencies 		= {};
             $scope.durations 		= {};
             $scope.travels 		= {};
             $scope.language 		= {};
-            $scope.country          = {};
             $scope.selectedIndustries = "";
             $scope.selectedCurrency = "";
             $scope.selectedDuration = "";
             $scope.selectedLanguage = "";
-            $scope.selectedCountry = "";
             $scope.selectedTravel = "";
-            $scope.jobType 	  = {type:"Please Select"};
             $scope.industryLabel 	  = {name:"Please Select"};
             $scope.currLabel 	  = {name:"Please Select"};
             $scope.durLabel 	  = {duration:"Please Select"};
-            $scope.cntLabel 	  = {name:"Please Select"};
             $scope.langLabel 	  = {language:"Please Select"};
             $scope.travelLabel 	  = {name:"Please Select"};
 
@@ -224,7 +225,7 @@ angular.module("toilApp")
                         }
                     },
                     function(data) {
-                        console.log('Data retrieval failed.')
+                        console.log('Data retrieval failed.');
                     });
             }
             function setJobType(selectedJob,masterData){
@@ -236,6 +237,7 @@ angular.module("toilApp")
                     }
                 }
             }
+
 
             function loadIndustryList(){
                 var industryListResource = GetIndustry.getResource();
@@ -295,21 +297,38 @@ angular.module("toilApp")
                 });
             }
             function loadCountryList(){
-                var countryListResource = GetCountry.getResource();
-                countryListResource.get(function(response){
-                    if(response.status == 'error' && response.error_code == 400){
-                    }
-                    if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("GetCountry API returned empty Object");
-                    }
-                    else{
-                        $scope.country.data = response.response_data.results;
+                CountryLoader.getCountryList()
+                    .then(function(data) {
+                        $scope.country.data = data;
+                        if(JobService.getTypeOfChange()=='edit')
+                        {
+                            setCountry(JobService.getSelectedJob(),$scope.country.data);
 
-                    }
-                });
+                        }
+                    },
+                    function(data) {
+                        console.log('Country Data retrieval failed.');
+                    });
             }
+            function setCountry(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].country_id == selectedJob.country_id){
+                        $scope.cntLabel = masterData[i];
+                        $scope.selectedCountry = selectedJob;
+                        break;
+                    }
+                }
+            }
+
             function loadTravelList(){
                 $scope.travels.data= [{"travel_id":1,"name":"Yes"},{"travel_id":2,"name":"No"}]
+            }
+            function populateAllTextForEdit()
+            {
+                if(JobService.getTypeOfChange()=='edit')
+                {
+                    $scope.jobTitle = JobService.getSelectedJob().jobTitle;
+                }
             }
             loadJobTypeList();
             loadIndustryList();
@@ -318,4 +337,5 @@ angular.module("toilApp")
             loadLanguageList();
             loadCountryList();
             loadTravelList();
+            populateAllTextForEdit();
         }]);

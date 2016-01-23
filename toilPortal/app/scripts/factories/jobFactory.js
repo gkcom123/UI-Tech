@@ -19,7 +19,6 @@ angular.module('toilApp')
         function($resource) {
             return $resource('/toilAPi/get_job_type/', {});
         }])
-
     .factory('JobTypeLoader', ['GetJobType', '$q',
         function(GetJobType, $q) {
             var items = [];
@@ -43,13 +42,34 @@ angular.module('toilApp')
                 getAllJobTypes: getAllJobTypes
             };
         }])
-    .factory('GetCountry', function($resource) {
-        return {
-            getResource: function () {
-                return $resource('/toilAPi/get_country/', {});
+    .factory('GetCountry', ['$resource',
+        function($resource) {
+            return $resource('/toilAPi/get_country/', {});
+        }])
+    .factory('CountryLoader', ['GetCountry', '$q',
+        function(GetCountry, $q) {
+            var items = [];
+            var last_request_failed = true;
+            var jobPromise = undefined;
+            var getCountryList = function() {
+                if(!jobPromise || last_request_failed) {
+                    var delay = $q.defer();
+                    GetCountry.get(function(response) {
+                        last_request_failed = false;
+                        delay.resolve(response.response_data.results);
+                    }, function() {
+                        last_request_failed = true;
+                        delay.reject('Unable to fetch Country List ');
+                    });
+                    jobPromise = delay.promise;
+                }
+                return jobPromise;
             }
-        };
-    })
+            return {
+                getCountryList: getCountryList
+            };
+        }])
+
     .factory('GetIndustry', function($resource) {
         return {
             getResource: function () {
