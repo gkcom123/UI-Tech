@@ -8,6 +8,7 @@ angular.module('toilApp')
             $scope.page = $state.current;
             var profile = getUserProfile();
             $scope.userName  = profile.email;
+            $scope.first_name  = profile.first_name;
             $scope.logOut = function(){
                 localStorageService.remove('toil-id');
                 localStorageService.clearAll();

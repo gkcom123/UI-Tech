@@ -15,13 +15,34 @@ angular.module('toilApp')
             }
         };
     })
-    .factory('GetJobType', function($resource){
-        return {
-            getResource: function(){
-                return $resource('/toilAPi/get_job_type/', {});
+    .factory('GetJobType', ['$resource',
+        function($resource) {
+            return $resource('/toilAPi/get_job_type/', {});
+        }])
+
+    .factory('JobTypeLoader', ['GetJobType', '$q',
+        function(GetJobType, $q) {
+            var items = [];
+            var last_request_failed = true;
+            var jobPromise = undefined;
+            var getAllJobTypes = function() {
+                if(!jobPromise || last_request_failed) {
+                    var delay = $q.defer();
+                    GetJobType.get(function(response) {
+                        last_request_failed = false;
+                        delay.resolve(response.response_data.results);
+                    }, function() {
+                        last_request_failed = true;
+                        delay.reject('Unable to fetch job type ');
+                    });
+                    jobPromise = delay.promise;
+                }
+                return jobPromise;
             }
-        };
-    })
+            return {
+                getAllJobTypes: getAllJobTypes
+            };
+        }])
     .factory('GetCountry', function($resource) {
         return {
             getResource: function () {

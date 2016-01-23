@@ -149,14 +149,25 @@ var toilVersion = 11,
           }
 
         },
+        'editJob': {
+            url: '/editJob',
+            title: 'Toil Portal',
+            loginRequired: true,
+            templateUrl: viewPath + 'main/addJob.html?v=' + toilVersion,
+            ncyBreadcrumb: {
+                label: 'Edit Job',
+                parent: 'manageJob'
+            }
+
+        },
         'analytics': {
-          url: '/jobPortal',
-          title: 'Toil Portal',
-          loginRequired: true,
-          templateUrl: viewPath + 'main/toilLandingPage.html?v=' + toilVersion,
-          ncyBreadcrumb: {
-            label: 'Home'
-          }
+            url: '/jobPortal',
+            title: 'Toil Portal',
+            loginRequired: true,
+            templateUrl: viewPath + 'main/toilLandingPage.html?v=' + toilVersion,
+            ncyBreadcrumb: {
+                label: 'Home'
+            }
         },
         'budget': {
           url: '/budget',

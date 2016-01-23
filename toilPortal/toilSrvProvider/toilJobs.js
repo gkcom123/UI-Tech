@@ -278,6 +278,7 @@ exports.addNewJob = function(req,res) {
     var jobTitle = reqObj["jobTitle"];
     var jobType = reqObj["jobType"];
     var description = reqObj["description"];
+    var compName = reqObj["compName"];
     var industry_id = reqObj["industry_id"];
     var indWtg = reqObj["indWtg"];
     var rate = reqObj["rate"];
@@ -298,12 +299,12 @@ exports.addNewJob = function(req,res) {
      INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id,duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)
      VALUES('Big data','1','Big dataBig dataBig dataBig databig data','2','2','456','2','3','3','3','3','London','1','1','2','2','2015-12-24','3','3')
      */
-    var query = "INSERT INTO job_table (job_title,job_type,job_desc,industry_id,ind_wtg,salary,sal_wtg,currency_id," +
-        "duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by)" +
-        " VALUES" + "('" + jobTitle + "','" + jobType + "','" + description + "','" + industry_id + "','" + indWtg + "','" +
+    var query = "INSERT INTO job_table (job_title,job_type,job_desc,comp_name,industry_id,ind_wtg,salary,sal_wtg,currency_id," +
+        "duration_id,country_id,country_wtg,city,istravel,trvl_wtg,lang_id,lang_wtg,start_date,srtdt_wtg,created_by,post_date)" +
+        " VALUES" + "('" + jobTitle + "','" + jobType + "','" + description + "','"+compName+"','" + industry_id + "','" + indWtg + "','" +
         rate + "','" + rateWtg + "','" + currency + "','" + duration + "','" + country + "','" + countryWtg + "','" +
         city + "','" + travel + "','" + travelWtg + "','" + prLang + "','" + prlangWtg + "','" + stDate +
-        "','" + stDateWtg + "','" + created_by + "')";
+        "','" + stDateWtg + "','" + created_by + "',CURDATE())";
 
     var finalResult = "";
     dbPool.getConnection(function (err, conn) {
@@ -428,7 +429,9 @@ exports.getCurrentJobList = function(req,res)
  ON job.created_by=toilUser.user_id where toilUser.user_id=5;
  */
     dbPool.getConnection(function(err, conn) {
-        conn.query("SELECT job.job_id, job.job_title,job.start_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
+        conn.query("SELECT job.job_id, job.job_title,job.job_type,job.job_desc,job.comp_name,job.industry_id,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id," +
+            "job.duration_id,job.country_id,job.country_wtg,job.city,job.isTravel,job.trvl_wtg,job.lang_id,job.lang_wtg," +
+            "job.start_date,job.srtdt_wtg,job.post_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
             "ON job.created_by=toilUser.user_id where job.isActive=1 "
         //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
@@ -439,7 +442,25 @@ exports.getCurrentJobList = function(req,res)
                         var profile = {
                             id: result[i]["job_id"],
                             jobTitle: result[i]["job_title"],
-                            datePosted: result[i]["start_date"],
+                            job_type: result[i]["job_type"],
+                            job_desc: result[i]["job_desc"],
+                            comp_name: result[i]["comp_name"],
+                            industry_id: result[i]["industry_id"],
+                            ind_wtg: result[i]["ind_wtg"],
+                            salary: result[i]["salary"],
+                            sal_wtg: result[i]["sal_wtg"],
+                            currency_id: result[i]["currency_id"],
+                            duration_id: result[i]["duration_id"],
+                            country_id: result[i]["country_id"],
+                            country_wtg: result[i]["country_wtg"],
+                            city: result[i]["city"],
+                            isTravel: result[i]["isTravel"],
+                            trvl_wtg: result[i]["trvl_wtg"],
+                            lang_id: result[i]["lang_id"],
+                            lang_wtg: result[i]["lang_wtg"],
+                            strdt_wtg: result[i]["srtdt_wtg"],
+                            startDate: result[i]["start_date"],
+                            datePosted: result[i]["post_date"],
                             postedBy: result[i]["f_name"],
                             views: 0,
                             "applicants": 0,
@@ -483,11 +504,11 @@ exports.getCurrentJobListForApp = function(req,res)
      ON job.created_by=toilUser.user_id where toilUser.user_id=5;
      */
     dbPool.getConnection(function(err, conn) {
-        conn.query("SELECT job.job_id, job.job_title,job.job_type,job_type.type,job.job_desc,job.industry_id," +
+        conn.query("SELECT job.job_id, job.job_title,job.job_type,job_type.type,job.job_desc,job.comp_name,job.industry_id," +
             "job_industry.name as industry_name,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,job_currency.name," +
             "job.duration_id,job_duration.duration,job.country_id,country.name as countryName,job.country_wtg," +
             "job.city,job.isTravel,job.trvl_wtg,job.lang_id,language.language,job.lang_wtg,job.start_date," +
-            "job.srtdt_wtg,toilUser.f_name as createdBy FROM job_table as job " +
+            "job.srtdt_wtg,job.post_date,toilUser.f_name as createdBy FROM job_table as job " +
             "INNER JOIN toilUser  ON job.created_by=toilUser.user_id " +
             "JOIN job_industry ON job.industry_id=job_industry.industry_id " +
             "JOIN job_type ON job.job_type=job_type.type_id " +
@@ -498,7 +519,6 @@ exports.getCurrentJobListForApp = function(req,res)
             //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
                 if (!err && result.length >= 0) {
-                    console.log(err);
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
@@ -507,13 +527,14 @@ exports.getCurrentJobListForApp = function(req,res)
                             jobTitle: result[i]["job_title"],
                             job_type: result[i]["type"],
                             job_desc: result[i]["job_desc"],
+                            company_name: result[i]["comp_name"],
                             industry_id: result[i]["industry_id"],
                             industry_name: result[i]["industry_name"],
                             ind_wtg: result[i]["ind_wtg"],
                             salary: result[i]["salary"],
                             sal_wtg: result[i]["sal_wtg"],
                             currency_id: result[i]["currency_id"],
-                            currency_name: result[i]["name"],
+                            currency_name: result[i]["name"].substring(0,3),
                             duration_id: result[i]["duration_id"],
                             duration_name: result[i]["duration"],
                             country_id: result[i]["country_id"],
@@ -526,7 +547,8 @@ exports.getCurrentJobListForApp = function(req,res)
                             lang_name: result[i]["language"],
                             lang_wtg: result[i]["lang_wtg"],
                             strdt_wtg: result[i]["srtdt_wtg"],
-                            datePosted: result[i]["start_date"],
+                            startDate: result[i]["start_date"],
+                            datePosted: result[i]["post_date"],
                             postedBy: result[i]["createdBy"],
                             views: 0,
                             "applicants": 0,

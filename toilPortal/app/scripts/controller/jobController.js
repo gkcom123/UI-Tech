@@ -5,11 +5,11 @@
 angular.module("toilApp")
     .controller('manageJobController', [
         '$scope',
-        '$rootScope',
+        '$rootScope','$state',
         'localStorageService',
         'GetCurrentJobList',
-        'UpdateJob',
-        function( $scope, $rootScope, localStorageService, GetCurrentJobList,UpdateJob){
+        'UpdateJob','JobService',
+        function( $scope, $rootScope,$state, localStorageService, GetCurrentJobList,UpdateJob,JobService){
 
             var currentJobList 	= {};
             var userId = getUserProfile().user_id;
@@ -45,6 +45,16 @@ angular.module("toilApp")
                 });
             }
             loadCurrentJobs();
+
+            $scope.editJob = function(job)
+            {
+                JobService.setTitle("EDIT A JOB");
+                JobService.setSelectedJob(job);
+                JobService.setTypeOfChange("edit");
+                //$rootScope.$emit('ModifyToilJob',job);
+                $state.go('editJob');
+
+            }
             $scope.deleteJob = function(job)
             {
                 var cancelIt = confirm('Do you want to delete the job:' + job.jobTitle);
