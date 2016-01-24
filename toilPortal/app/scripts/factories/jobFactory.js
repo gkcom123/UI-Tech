@@ -69,35 +69,114 @@ angular.module('toilApp')
                 getCountryList: getCountryList
             };
         }])
-
-    .factory('GetIndustry', function($resource) {
-        return {
-            getResource: function () {
-                return $resource('/toilAPi/get_job_industry/', {});
+    .factory('GetIndustry', ['$resource',
+        function($resource) {
+            return $resource('/toilAPi/get_job_industry/', {});
+        }])
+    .factory('IndustryLoader', ['GetIndustry', '$q',
+        function(GetIndustry, $q) {
+            var items = [];
+            var last_request_failed = true;
+            var jobPromise = undefined;
+            var getIndustryList = function() {
+                if(!jobPromise || last_request_failed) {
+                    var delay = $q.defer();
+                    GetIndustry.get(function(response) {
+                        last_request_failed = false;
+                        delay.resolve(response.response_data.results);
+                    }, function() {
+                        last_request_failed = true;
+                        delay.reject('Unable to fetch Industry List ');
+                    });
+                    jobPromise = delay.promise;
+                }
+                return jobPromise;
             }
-        };
-    })
-    .factory('GetCurrency', function($resource) {
-        return {
-            getResource: function () {
-                return $resource('/toilAPi/get_currency/', {});
+            return {
+                getIndustryList: getIndustryList
+            };
+        }])
+    .factory('GetCurrency', ['$resource',
+        function($resource) {
+            return $resource('/toilAPi/get_currency/', {});
+        }])
+    .factory('CurrencyLoader', ['GetCurrency', '$q',
+        function(GetCurrency, $q) {
+            var items = [];
+            var last_request_failed = true;
+            var jobPromise = undefined;
+            var getCurrencyList = function() {
+                if(!jobPromise || last_request_failed) {
+                    var delay = $q.defer();
+                    GetCurrency.get(function(response) {
+                        last_request_failed = false;
+                        delay.resolve(response.response_data.results);
+                    }, function() {
+                        last_request_failed = true;
+                        delay.reject('Unable to fetch Currency List ');
+                    });
+                    jobPromise = delay.promise;
+                }
+                return jobPromise;
             }
-        };
-    })
-    .factory('GetDuration', function($resource) {
-        return {
-            getResource: function () {
-                return $resource('/toilAPi/get_duration/', {});
+            return {
+                getCurrencyList: getCurrencyList
+            };
+        }])
+    .factory('GetDuration', ['$resource',
+        function($resource) {
+            return $resource('/toilAPi/get_duration/', {});
+        }])
+    .factory('DurationLoader', ['GetDuration', '$q',
+        function(GetDuration, $q) {
+            var items = [];
+            var last_request_failed = true;
+            var jobPromise = undefined;
+            var getDurationList = function() {
+                if(!jobPromise || last_request_failed) {
+                    var delay = $q.defer();
+                    GetDuration.get(function(response) {
+                        last_request_failed = false;
+                        delay.resolve(response.response_data.results);
+                    }, function() {
+                        last_request_failed = true;
+                        delay.reject('Unable to fetch Duration List ');
+                    });
+                    jobPromise = delay.promise;
+                }
+                return jobPromise;
             }
-        };
-    })
-    .factory('GetLanguage', function($resource) {
-        return {
-            getResource: function () {
-                return $resource('/toilAPi/get_location/', {});
+            return {
+                getDurationList: getDurationList
+            };
+        }])
+    .factory('GetLanguage', ['$resource',
+        function($resource) {
+            return $resource('/toilAPi/get_language/', {});
+        }])
+    .factory('LanguageLoader', ['GetLanguage', '$q',
+        function(GetLanguage, $q) {
+            var items = [];
+            var last_request_failed = true;
+            var jobPromise = undefined;
+            var getLanguageList = function() {
+                if(!jobPromise || last_request_failed) {
+                    var delay = $q.defer();
+                    GetLanguage.get(function(response) {
+                        last_request_failed = false;
+                        delay.resolve(response.response_data.results);
+                    }, function() {
+                        last_request_failed = true;
+                        delay.reject('Unable to fetch Language List ');
+                    });
+                    jobPromise = delay.promise;
+                }
+                return jobPromise;
             }
-        };
-    })
+            return {
+                getLanguageList: getLanguageList
+            };
+        }])
     .factory('AddJob', function($resource){
         return {
             getResource: function(){

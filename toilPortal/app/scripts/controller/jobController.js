@@ -52,7 +52,7 @@ angular.module("toilApp")
                 JobService.setSelectedJob(job);
                 JobService.setTypeOfChange("edit");
                 //$rootScope.$emit('ModifyToilJob',job);
-                $state.go('editJob');
+                $state.go('editJob',{typeOfChange:'edit'});
 
             }
             $scope.deleteJob = function(job)

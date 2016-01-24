@@ -133,6 +133,10 @@ var toilVersion = 11,
           name:'addJob',
           loginRequired: true,
           templateUrl: viewPath + 'main/addJob.html?v=' + toilVersion,
+          params:
+          {
+              typeOfChange: 'add'
+          },
           ncyBreadcrumb: {
             label: 'Add Job',
             parent: 'analytics'
@@ -157,8 +161,11 @@ var toilVersion = 11,
             ncyBreadcrumb: {
                 label: 'Edit Job',
                 parent: 'manageJob'
+            },
+            params:
+            {
+                typeOfChange: 'edit'
             }
-
         },
         'analytics': {
             url: '/jobPortal',
