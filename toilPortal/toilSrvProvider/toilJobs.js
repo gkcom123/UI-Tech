@@ -5,6 +5,8 @@
  * Created by gunjan.kumar on 10/2/15.
  */
 var dbPool = require('./db').pool;
+var request = require('request');
+
 exports.getJobTypeList = function(req,res)
 {
     //var userid = req.query["user_id"];
@@ -502,9 +504,9 @@ function syncJob()
         }
     }, function(error, response, body){
         if(error) {
-            console.log(error);
+            //console.log(error);
         } else {
-            console.log(response.statusCode, body);
+            //console.log(response.statusCode, body);
         }
     });
 }
