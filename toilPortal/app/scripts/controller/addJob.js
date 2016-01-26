@@ -185,6 +185,31 @@ angular.module("toilApp")
                 );
 
             }
+/*
+            $scope.syncJob = function() {
+                console.log("working");
+                $scope.code = null;
+                $scope.response = null;
+                $http({
+                    method: 'PATCH',
+                    url: 'http://synchronization.api.toilme.com/schedule',
+                    headers: {
+                        "Authorization": "Bearer Haingabeith1asaechaiboagaihaeRooyaesh9Ameitubae8iekaht6oong6pae7zahpahm7eibie4shoveix8ohrae4Ophe",
+                        "Access-Control-Allow-Origin": "true"
+                    }
+                })
+                    .then(function(response) {
+                        console.log(response);
+                        if (response.data == 'ok') {
+                            // success
+
+                        }
+                        else {
+                            // failed
+                        }
+                    });
+            };
+*/
             $scope.createNewJob = function()
             {
                var validation = $("#addJobForm").valid();

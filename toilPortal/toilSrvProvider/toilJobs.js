@@ -389,6 +389,7 @@ exports.saveJobSkills = function(req,res)
             });
         conn.release();
     });
+    syncJob();
 
 }
 exports.updateJob = function(req,res)
@@ -414,7 +415,7 @@ exports.updateJob = function(req,res)
             });
         conn.release();
     });
-
+    syncJob();
 }
 
 exports.getCurrentJobList = function(req,res)
@@ -491,7 +492,22 @@ exports.getCurrentJobList = function(req,res)
     });
 
 }
-
+function syncJob()
+{
+    request({
+        url: 'http://synchronization.api.toilme.com/schedule', //URL to hit
+        method: 'PATCH',
+        headers: {
+            'Authorization': 'Bearer Haingabeith1asaechaiboagaihaeRooyaesh9Ameitubae8iekaht6oong6pae7zahpahm7eibie4shoveix8ohrae4Ophe'
+        }
+    }, function(error, response, body){
+        if(error) {
+            console.log(error);
+        } else {
+            console.log(response.statusCode, body);
+        }
+    });
+}
 exports.getCurrentJobListForApp = function(req,res)
 {
     var userid = req.query["user_id"];
