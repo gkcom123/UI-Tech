@@ -387,11 +387,12 @@ exports.saveJobSkills = function(req,res)
                         }
                     }
                     res.send(finalResult);
+                    syncJob();
                 }
             });
         conn.release();
     });
-    syncJob();
+
 
 }
 exports.updateJob = function(req,res)
@@ -413,11 +414,12 @@ exports.updateJob = function(req,res)
                         }
                     }
                     res.send(finalResult);
+                    syncJob();
                 }
             });
         conn.release();
     });
-    syncJob();
+
 }
 
 exports.getCurrentJobList = function(req,res)
