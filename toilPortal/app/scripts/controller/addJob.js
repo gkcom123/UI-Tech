@@ -39,26 +39,50 @@ angular.module("toilApp")
             $scope.selectedTravel = "";
             $scope.travelLabel 	  = {name:"Please Select"};
 
+            $scope.fieldEditable = true;
+
             $scope.showDropList = function(){
-                $('.jobt-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.jobt-dropdown-list').toggle();
+                }
             }
             $scope.showIndDropList = function(){
-                $('.ind-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.ind-dropdown-list').toggle();
+                }
+
             }
             $scope.showCrcDropList = function(){
-                $('.curr-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.curr-dropdown-list').toggle();
+                }
+
             }
             $scope.showDurDropList = function(){
                 $('.dur-dropdown-list').toggle();
             }
             $scope.showCntDropList = function(){
-                $('.cnt-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.cnt-dropdown-list').toggle();
+                }
+
             }
             $scope.showTravelDropList = function(){
-                $('.tr-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.tr-dropdown-list').toggle();
+                }
+
             }
             $scope.showLangDropList = function(){
-                $('.lang-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.lang-dropdown-list').toggle();
+                }
             }
 
             $scope.jobTypeSelected = function(j){
@@ -214,7 +238,6 @@ angular.module("toilApp")
                 var pDate = ( $filter('date')(data, 'yyyy-MM-dd'));
                 $scope.jobStDate = pDate;
             });
-
             function loadJobTypeList(){
                 JobTypeLoader.getAllJobTypes()
                     .then(function(data) {
@@ -367,11 +390,18 @@ angular.module("toilApp")
                     $scope.compName = JobService.getSelectedJob().comp_name;
                     $scope.rateSal = JobService.getSelectedJob().salary;
                     $scope.city = JobService.getSelectedJob().city;
-
+                    $scope.fieldEditable = false;
+                    var stDate = ( $filter('date')(JobService.getSelectedJob().startDate, 'dd-MMMM-yyyy'));
+                    var dt = new Date( stDate ),
+                        year = dt.getUTCFullYear(),
+                        month = dt.getUTCMonth(),
+                        day = dt.getUTCDate();
+                    $scope.dt= new Date(year, month, day);
                 }
                 else if($stateParams.typeOfChange=='add')
                 {
                     resetValues();
+                    $scope.fieldEditable = true;
                 }
             }
             loadJobTypeList();

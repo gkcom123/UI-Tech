@@ -17,7 +17,7 @@
           <label for="jobTitle" class="control-label">Job title</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-md-7">
-          <input type="text" class="form-control inputBox" id="jobTitle" ng-model="jobTitle" required>
+          <input type="text" class="form-control inputBox" id="jobTitle" ng-model="jobTitle" required ng-disabled="!fieldEditable">
         </div>
       </div>
       <div class="form-group">
@@ -47,7 +47,7 @@
           <label for="jobTitle" class="control-label">Company Name</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-md-7">
-          <input type="text" class="form-control inputBox" id="compName" ng-model="compName" required>
+          <input type="text" class="form-control inputBox" id="compName" ng-model="compName" required ng-disabled="!fieldEditable">
         </div>
       </div>
       <div class="form-group">

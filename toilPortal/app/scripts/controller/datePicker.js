@@ -3,15 +3,17 @@
  */
 'use strict';
 var datemodule = angular.module('toilApp');
-datemodule.controller('DatepickerCtrl',['$scope','$rootScope',
-	function ($scope,$rootScope) {
+datemodule.controller('DatepickerCtrl',['$scope','$rootScope','$stateParams',
+	function ($scope,$rootScope,$stateParams) {
 		$scope.dt;
 
+/*
 	$scope.today = function() {
 		$scope.dt = new Date();
 	};
 	$scope.today();
 
+*/
 	$scope.clear = function () {
 		$scope.dt = null;
 	};
@@ -39,7 +41,6 @@ datemodule.controller('DatepickerCtrl',['$scope','$rootScope',
 	$scope.setDate = function(year, month, day) {
 		$scope.dt = new Date(year, month, day);
 	};
-
 	$scope.dateOptions = {
 		formatYear: 'yy',
 		startingDay: 1
@@ -68,26 +69,13 @@ datemodule.controller('DatepickerCtrl',['$scope','$rootScope',
 			} else if( m <=9 ) {
 				m += 2;
 			}
-
 			$scope.maxDate.setFullYear(y, m, d);
 			$rootScope.$emit('jobDateChanged', $scope.dt);
 		}
 		var init = function(){
-			resetDate();
+			if($stateParams.typeOfChange=='add') {
+				resetDate();
+			}
 		};
 		init();
-	/*$scope.getDayClass = function(date, mode) {
-		if (mode === 'day') {
-			var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-			for (var i=0;i<$scope.events.length;i++){
-				var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-				if (dayToCheck === currentDay) {
-					return $scope.events[i].status;
-				}
-			}
-		}
-		return '';
-	};*/
 }]);
