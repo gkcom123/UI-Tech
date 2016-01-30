@@ -236,6 +236,53 @@ exports.getSkillList = function(req,res)
     });
 
 }
+exports.getSkillByJobId = function(req,res)
+{
+    var jobID = req.query["job_id"];
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT jobSkill.skill_id,jobSkill.skil_wtg,jobSkill.skill_type_id,jobSkill.created_by," +
+            "skill.skill_name" +
+            " FROM job_skills as jobSkill INNER JOIN skill " +
+            "ON jobSkill.skill_id=skill.skill_id  WHERE job_id='" + jobID +"'"
+            , function (err, result) {
+                if (!err && result.length >= 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var skillList = {
+                            skill_id: result[i]["skill_id"],
+                            skill_name: result[i]["skill_name"],
+                            skill_wtg: result[i]["skill_wtg"],
+                            type_id: result[i]["skill_type_id"],
+                            created_by: result[i]["created_by"],
+
+                        };
+                        jsonRes.push(skillList);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
+
 exports.getCountryList = function(req,res)
 {
     dbPool.getConnection(function(err, conn) {

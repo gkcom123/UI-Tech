@@ -379,8 +379,24 @@ angular.module("toilApp")
             }
 
             function loadTravelList(){
-                $scope.travels.data= [{"travel_id":1,"name":"Yes"},{"travel_id":2,"name":"No"}]
+                $scope.travels.data= [{"travel_id":1,"name":"Yes"},{"travel_id":2,"name":"No"}];
+                if(JobService.getTypeOfChange()=='edit')
+                {
+                    setTravelType(JobService.getSelectedJob(),$scope.travels.data);
+
+                }
+
             }
+            function setTravelType(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].travel_id == selectedJob.isTravel){
+                        $scope.travelLabel = masterData[i];
+                        $scope.selectedTravel = selectedJob;
+                        break;
+                    }
+                }
+            }
+
             function populateAllTextForEdit()
             {
                 if($stateParams.typeOfChange=='edit')

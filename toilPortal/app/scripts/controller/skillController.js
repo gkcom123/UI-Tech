@@ -3,8 +3,9 @@
  */
 'use strict';
 angular.module('toilApp')
-    .controller('SkillController',['$scope','$rootScope','localStorageService','$filter','GetSkill','SaveSkill',
-    function ($scope,$rootScope,localStorageService,$filter,GetSkill,SaveSkill) {
+    .controller('SkillController',['$scope','$rootScope','$stateParams','localStorageService','$filter','GetSkill','SaveSkill',
+        'GetSkillByJobId','JobService',
+    function ($scope,$rootScope,$stateParams,localStorageService,$filter,GetSkill,SaveSkill,GetSkillByJobId,JobService) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};
         $scope.personalSkill 	  = {name:"Personal"};
@@ -125,6 +126,38 @@ angular.module('toilApp')
             }
 
         });
+        function updateSelectedSkills(data){
+            var getSkillRes = GetSkillByJobId.getResource(data);
+            getSkillRes.get(function(response){
+                if(response.status == 'error' && response.error_code == 400){
+                    //$rootScope.$broadcast('LogoutThisUser',{});
+                }
+
+                if(Object.getOwnPropertyNames(response.response_data).length === 0){
+                    console.warn("Get Skill API returned empty Object");
+                }
+                else{
+                    for( var s=0;s< response.response_data.results.length;s++)
+                    {
+                        var skill = response.response_data.results[s];
+                        if(skill.type_id==1)
+                        {
+                            $scope.profModel.push(skill);
+
+                        }
+                        else if(skill.type_id==3)
+                        {
+                            $scope.personalModel.push(skill);
+
+                        }
+                        else{
+                            $scope.projModel.push(skill);
+
+                        }
+                    }
+                }
+            });
+        }
         $scope.setProfSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];
             if (skillStatus == true) {
@@ -188,6 +221,14 @@ angular.module('toilApp')
             }
             return false;
         };
+        function populateSkillList()
+        {
+            if($stateParams.typeOfChange=='edit')
+            {
+                updateSelectedSkills(JobService.getSelectedJob().id);
+
+            }
+        }
 
         $scope.showProfList = function(){
             $('.prof-dropdown-list').toggle();
@@ -223,5 +264,6 @@ angular.module('toilApp')
             $scope.selectedSkill   = skill.skill_name;
             $scope.selectedSkillID = skill.skill_id;
         };
+        populateSkillList();
     }
     ]);

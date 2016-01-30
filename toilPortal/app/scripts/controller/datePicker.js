@@ -30,9 +30,11 @@ datemodule.controller('DatepickerCtrl',['$scope','$rootScope','$stateParams',
 	$scope.maxDate = new Date(2020, 5, 22);
 
 	$scope.open = function($event) {
-		$event.preventDefault();
-		$event.stopPropagation();
-		$scope.status.opened = true;
+		if($stateParams.typeOfChange=='add') {
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.status.opened = true;
+		}
 	};
 		$scope.changed = function(){
 			$rootScope.$emit('jobDateChanged', $scope.dt);

@@ -191,6 +191,15 @@ angular.module('toilApp')
             }
         };
     })
+    .factory('GetSkillByJobId',function($resource){
+        return {
+            getResource: function(id){
+                return $resource('/toilAPi/get_skill_byJobId/', {
+                    'job_id': id
+                });
+            }
+        }
+    })
     .factory('SaveSkill', function($resource){
         return {
             getResource: function(){
