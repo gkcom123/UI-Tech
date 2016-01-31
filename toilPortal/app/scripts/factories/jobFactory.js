@@ -207,6 +207,20 @@ angular.module('toilApp')
             }
         };
     })
+    .factory('UpdateSkill', function($resource){
+        return {
+            getResource: function(){
+                return $resource('/toilAPi/update_Skill_list/', {});
+            }
+        };
+    })
+    .factory('DeleteJob', function($resource){
+        return {
+            getResource: function(){
+                return $resource('/toilAPi/deleteJob/', {});
+            }
+        }
+    })
     .factory('UpdateJob', function($resource){
         return {
             getResource: function(){

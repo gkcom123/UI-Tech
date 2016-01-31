@@ -41,9 +41,11 @@ app.get('/toilAPi/get_duration', toilJobsSrv.get_duration);
 app.get('/toilAPi/get_language', toilJobsSrv.getLanguageList);
 app.get('/toilAPi/get_country', toilJobsSrv.getCountryList);
 app.post('/toilAPi/addNewJob', toilJobsSrv.addNewJob);
-app.post('/toilAPi/updateJob', toilJobsSrv.updateJob);
+app.post('/toilAPi/deleteJob', toilJobsSrv.deleteJob);
+app.post('/toilAPi/updateJob', toilJobsSrv.upDateJob);
 app.get('/toilAPi/get_Skill_list', toilJobsSrv.getSkillList);
 app.post('/toilAPi/save_Skill_list', toilJobsSrv.saveJobSkills);
+app.post('/toilAPi/update_Skill_list', toilJobsSrv.updateJobSkills);
 app.get('/toilAPi/get_skill_byJobId', toilJobsSrv.getSkillByJobId);
 
 

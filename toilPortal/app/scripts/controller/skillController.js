@@ -4,8 +4,9 @@
 'use strict';
 angular.module('toilApp')
     .controller('SkillController',['$scope','$rootScope','$stateParams','localStorageService','$filter','GetSkill','SaveSkill',
-        'GetSkillByJobId','JobService',
-    function ($scope,$rootScope,$stateParams,localStorageService,$filter,GetSkill,SaveSkill,GetSkillByJobId,JobService) {
+        'GetSkillByJobId','JobService','UpdateSkill',
+    function ($scope,$rootScope,$stateParams,localStorageService,$filter,GetSkill,SaveSkill,
+              GetSkillByJobId,JobService,UpdateSkill) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};
         $scope.personalSkill 	  = {name:"Personal"};
@@ -112,12 +113,46 @@ angular.module('toilApp')
                 function error(){}
             );
         }
+        $scope.updateSkills = function(jobId) {
+            var data ={
+                'profModel': $scope.profModel,
+                'profRating': $scope.profSkillRating,
+                'projModel':$scope.projModel,
+                'projSkillRating':$scope.projSkillRating,
+                'personalModel':$scope.personalModel,
+                'personalSkillRating': $scope.personalSkillRating,
+                'jobId':jobId,
+                'created_by':created_by
+            }
+            var updateSkillResource = UpdateSkill.getResource();
+            updateSkillResource.save(data, function success(response) {
+                    var resData = response.response_data || {};
+                    // $('#newForm .spin').hide();
+
+                    if (response.status == 'success') {
+                    }
+                    else{
+                        var reason = 'Skill Creation Failed. Please Try After Some Time.';
+                        if(resData.error_code == 201) {
+                            reason = resData.error_desc;
+                        }
+                    }
+                },
+                function error(){}
+            );
+        }
 
         $scope.$on('saveSkills', function(e,data) {
             // save the Prof skill,proj, and personal skill in one go
             $scope.$emit("skillSaved", $scope.saveSkills(data));
         });
+        $scope.$on('updateSkills', function(e,data) {
+            // save the Prof skill,proj, and personal skill in one go
+            $scope.$emit("skillSaved", $scope.updateSkills(data));
+        });
+
         $scope.$on('performSkillsSanityCheck', function(e,data) {
+
             // save the Prof skill,proj, and personal skill in one go
             var signal = performSkillsSanityCheck();
             if(signal)
@@ -126,7 +161,7 @@ angular.module('toilApp')
             }
 
         });
-        function updateSelectedSkills(data){
+        function getSelectedSkillsByJobId(data){
             var getSkillRes = GetSkillByJobId.getResource(data);
             getSkillRes.get(function(response){
                 if(response.status == 'error' && response.error_code == 400){
@@ -158,17 +193,35 @@ angular.module('toilApp')
                 }
             });
         }
+
         $scope.setProfSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];
             if (skillStatus == true) {
-                $scope.profModel.push(skill);
-               // $scope.profSkillRating.push('3');
-            } else {
+                if($stateParams.typeOfChange=='edit')
+                {
+                    for( var es=0;es< $scope.profModel.length;es++)
+                    {
+                        var existingSkill = $scope.profModel[es];
+                        if(existingSkill.skill_id == skill.skill_id)
+                        {
+                            return true;
+                            //break;
+                        }
+                    }
+                    skill.isEdit = true;
+                    $scope.profModel.push(skill);
+                }
+                else
+                {
+                    skill.isEdit = false;
+                    $scope.profModel.push(skill);
+                }
+            }
+            else {
                 filteredArray = $scope.profModel.filter(function (value) {
                     return value != skill;
                 });
                 $scope.profModel = filteredArray;
-                // $scope.checkAll = false;
             }
             if($scope.profSkillRating.length!=0)
             {
@@ -179,10 +232,29 @@ angular.module('toilApp')
             }
             return false;
         };
+
+
         $scope.setProjSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];
             if (skillStatus == true) {
-                $scope.projModel.push(skill);
+                if($stateParams.typeOfChange=='edit')
+                {
+                    for( var es=0;es< $scope.projModel.length;es++)
+                    {
+                        var existingSkill = $scope.projModel[es];
+                        if(existingSkill.skill_id == skill.skill_id)
+                        {
+                            return true;
+                            //break;
+                        }
+                    }
+                    skill.isEdit = true;
+                    $scope.projModel.push(skill);
+                }
+                else{
+                    skill.isEdit = false;
+                    $scope.projModel.push(skill);
+                }
             } else {
                 filteredArray = $scope.projModel.filter(function (value) {
                     return value != skill;
@@ -197,14 +269,30 @@ angular.module('toilApp')
                 }
 
             }
-
             return false;
         };
 
         $scope.setPersonalSelectedItem = function (skill,skillStatus) {
             var filteredArray = [];
             if (skillStatus == true) {
-                $scope.personalModel.push(skill);
+                if($stateParams.typeOfChange=='edit')
+                {
+                    for( var es=0;es< $scope.personalModel.length;es++)
+                    {
+                        var existingSkill = $scope.personalModel[es];
+                        if(existingSkill.skill_id == skill.skill_id)
+                        {
+                            return true;
+                            //break;
+                        }
+                    }
+                    skill.isEdit = true;
+                    $scope.personalModel.push(skill);
+                }
+                else{
+                    skill.isEdit = false;
+                    $scope.personalModel.push(skill);
+                }
             } else {
                 filteredArray = $scope.personalModel.filter(function (value) {
                     return value != skill;
@@ -225,7 +313,7 @@ angular.module('toilApp')
         {
             if($stateParams.typeOfChange=='edit')
             {
-                updateSelectedSkills(JobService.getSelectedJob().id);
+                getSelectedSkillsByJobId(JobService.getSelectedJob().id);
 
             }
         }

@@ -4,40 +4,34 @@
 'use strict';
 angular.module("toilApp")
     .controller('addJobController', [
-        '$scope','$rootScope','$stateParams','$filter','localStorageService',
-        'JobTypeLoader','IndustryLoader','CurrencyLoader','DurationLoader','LanguageLoader','CountryLoader','AddJob','JobService',
-        function( $scope, $rootScope, $stateParams, $filter,localStorageService,JobTypeLoader,IndustryLoader,
-                  CurrencyLoader,DurationLoader,LanguageLoader,CountryLoader,AddJob,JobService){
+        '$scope','$rootScope','$state','$stateParams','$filter','$timeout','localStorageService',
+        'JobTypeLoader','IndustryLoader','CurrencyLoader','DurationLoader','LanguageLoader','CountryLoader',
+        'AddJob','UpdateJob','JobService',
+        function( $scope, $rootScope,$state, $stateParams, $filter,$timeout,localStorageService,JobTypeLoader,IndustryLoader,
+                  CurrencyLoader,DurationLoader,LanguageLoader,CountryLoader,AddJob,UpdateJob,JobService){
 
             var industryList = {};
             var userId = getUserProfile().user_id;
             $scope.jobTypes 		= {};
-            $scope.jobType 	  = {type:"Please Select"};
             $scope.selectedJobType = "";
 
             $scope.country          = {};
-            $scope.cntLabel 	  = {name:"Please Select"};
             $scope.selectedCountry = "";
 
             $scope.industries 		= {};
-            $scope.industryLabel 	  = {name:"Please Select"};
             $scope.selectedIndustries = "";
 
             $scope.currencies 		= {};
-            $scope.currLabel 	  = {name:"Please Select"};
             $scope.selectedCurrency = "";
 
             $scope.durations 		= {};
-            $scope.durLabel 	  = {duration:"Please Select"};
             $scope.selectedDuration = "";
 
             $scope.language 		= {};
-            $scope.langLabel 	  = {language:"Please Select"};
             $scope.selectedLanguage = "";
 
             $scope.travels 		= {};
             $scope.selectedTravel = "";
-            $scope.travelLabel 	  = {name:"Please Select"};
 
             $scope.fieldEditable = true;
 
@@ -137,10 +131,16 @@ angular.module("toilApp")
                 $scope.indWtg="3";
                 $scope.city="";
                 $scope.rateSal="";
-/*
-                if ($scope.addtoilUserForm)
-                    $scope.addtoilUserForm.$setPristine();
-*/
+                $timeout(function(){
+                    $scope.jobType 	  = {type:"Please Select"};
+                    $scope.cntLabel   = {name:"Please Select"};
+                    $scope.industryLabel  = {name:"Please Select"};
+                    $scope.currLabel 	  = {name:"Please Select"};
+                    $scope.durLabel 	  = {duration:"Please Select"};
+                    $scope.langLabel 	  = {language:"Please Select"};
+                    $scope.travelLabel 	  = {name:"Please Select"};
+                });
+
             }
             function performSanityCheck(){
 
@@ -169,6 +169,11 @@ angular.module("toilApp")
             }
             function saveJobSkills()
             {
+                if($stateParams.typeOfChange=='edit')
+                {
+                    updateJob();
+                    return;
+                }
                 var data ={
                     'jobTitle': $scope.jobTitle,
                     'jobType': $scope.selectedJobType.type_id,
@@ -227,9 +232,52 @@ angular.module("toilApp")
                     $scope.$broadcast ('performSkillsSanityCheck');
                 }
             }
+            function updateJob()
+            {
+                var cancelIt = confirm('Do you want to update the job:' + $scope.jobTitle);
+                if(!cancelIt)
+                {
+                    return;
+                }
+                var data ={
+                    'id':JobService.getSelectedJob().id,
+                    'description':$scope.description,
+                    'rate': $scope.rateSal,
+                    'duration': $scope.selectedDuration.duration_id,
+                    'user_id':userId
+                }
+                var updateJobRes = UpdateJob.getResource();
+                updateJobRes.save(data, function success(response){
+                        var resData = response.response_data || {};
+                        // $('#newForm .spin').hide();
+
+                        if(response.status == 'success') {
+                            $scope.$broadcast ('updateSkills',JobService.getSelectedJob().id);
+                        }
+                        else
+                        {
+                            var reason = 'Job Updation Failed. Please Try After Some Time.';
+                            if(resData.error_code == 201) {
+                                reason = resData.error_desc;
+                            }
+                        }
+                    },
+                    function error(){}
+                );
+
+            }
+
             $scope.$on('skillSaved', function(e,data) {
-                alert("Job saved Successfully");
-                resetValues();
+                if($stateParams.typeOfChange=='edit')
+                {
+                    alert("Job Updated Successfully");
+                    $state.go('manageJob');
+                }
+                if($stateParams.typeOfChange=='add')
+                {
+                    alert("Job saved Successfully");
+                    resetValues();
+                }
             });
             $scope.$on('sanityCheckDone', function(e,data) {
                 saveJobSkills();
@@ -239,9 +287,11 @@ angular.module("toilApp")
                 $scope.jobStDate = pDate;
             });
             function loadJobTypeList(){
+
                 JobTypeLoader.getAllJobTypes()
                     .then(function(data) {
                         $scope.jobTypes.data = data;
+
                         if(JobService.getTypeOfChange()=='edit')
                         {
                             setJobType(JobService.getSelectedJob(),$scope.jobTypes.data);
@@ -256,7 +306,7 @@ angular.module("toilApp")
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].type_id == selectedJob.job_type){
                         $scope.jobType = masterData[i];
-                        $scope.selectedJobType = selectedJob;
+                        $scope.selectedJobType = masterData[i];
                         break;
                     }
                 }
@@ -279,7 +329,7 @@ angular.module("toilApp")
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].industry_id == selectedJob.industry_id){
                         $scope.industryLabel = masterData[i];
-                        $scope.selectedIndustries = selectedJob;
+                        $scope.selectedIndustries = masterData[i];
                         break;
                     }
                 }
@@ -302,7 +352,7 @@ angular.module("toilApp")
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].currency_id == selectedJob.currency_id){
                         $scope.currLabel = masterData[i];
-                        $scope.selectedCurrency = selectedJob;
+                        $scope.selectedCurrency = masterData[i];
                         break;
                     }
                 }
@@ -325,7 +375,7 @@ angular.module("toilApp")
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].duration_id == selectedJob.duration_id){
                         $scope.durLabel = masterData[i];
-                        $scope.selectedDuration = selectedJob;
+                        $scope.selectedDuration = masterData[i];
                         break;
                     }
                 }
@@ -348,7 +398,7 @@ angular.module("toilApp")
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].language_id == selectedJob.lang_id){
                         $scope.langLabel = masterData[i];
-                        $scope.selectedLanguage = selectedJob;
+                        $scope.selectedLanguage = masterData[i];
                         break;
                     }
                 }
@@ -372,7 +422,7 @@ angular.module("toilApp")
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].country_id == selectedJob.country_id){
                         $scope.cntLabel = masterData[i];
-                        $scope.selectedCountry = selectedJob;
+                        $scope.selectedCountry = masterData[i];
                         break;
                     }
                 }
@@ -391,7 +441,7 @@ angular.module("toilApp")
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].travel_id == selectedJob.isTravel){
                         $scope.travelLabel = masterData[i];
-                        $scope.selectedTravel = selectedJob;
+                        $scope.selectedTravel = masterData[i];
                         break;
                     }
                 }
@@ -413,6 +463,7 @@ angular.module("toilApp")
                         month = dt.getUTCMonth(),
                         day = dt.getUTCDate();
                     $scope.dt= new Date(year, month, day);
+                    $rootScope.$emit('jobDateChanged', $scope.dt);
                 }
                 else if($stateParams.typeOfChange=='add')
                 {

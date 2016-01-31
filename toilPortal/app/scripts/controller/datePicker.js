@@ -69,7 +69,7 @@ datemodule.controller('DatepickerCtrl',['$scope','$rootScope','$stateParams',
 				m == 1;
 				y++;
 			} else if( m <=9 ) {
-				m += 2;
+				m += 6;
 			}
 			$scope.maxDate.setFullYear(y, m, d);
 			$rootScope.$emit('jobDateChanged', $scope.dt);

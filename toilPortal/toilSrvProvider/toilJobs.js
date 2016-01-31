@@ -418,7 +418,10 @@ exports.saveJobSkills = function(req,res)
     /*
      INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES(1,2,3,LAST_INSERT_ID(),3),(4,5,6,LAST_INSERT_ID(),4);
      */
-
+    runSkillQuery(query,res);
+}
+function runSkillQuery(query,res)
+{
     dbPool.getConnection(function(err, conn) {
         conn.query(query,
             function (err, result) {
@@ -437,8 +440,50 @@ exports.saveJobSkills = function(req,res)
         conn.release();
     });
 
+
 }
-exports.updateJob = function(req,res)
+exports.updateJobSkills = function(req,res)
+{
+    var reqObj = req.body;
+    var profModel = reqObj["profModel"];
+    var profRating = reqObj["profRating"];
+    var projModel = reqObj["projModel"];
+    var projRating = reqObj["projSkillRating"];
+    var personalModel = reqObj["personalModel"];
+    var personalSkillRating = reqObj["personalSkillRating"];
+    var job_id = reqObj["jobId"];
+    var created_by = reqObj["created_by"];
+    var valueQuery = "";
+    for(var i=0;i<profModel.length;i++)
+    {
+        if(profModel[i].isEdit)
+        {
+            valueQuery = valueQuery +"('"+profModel[i].skill_id+"','"+profRating[i]+"','1','"+job_id+"','"+created_by+"'),";
+        }
+    }
+    for(var j=0;j<projModel.length;j++)
+    {
+        if(projModel[j].isEdit)
+        {
+            valueQuery = valueQuery +"('"+projModel[j].skill_id+"','"+projRating[j]+"','2','"+job_id+"','"+created_by+"'),";
+        }
+    }
+    for(var k=0;k<personalModel.length;k++)
+    {
+        if(personalModel[k].isEdit)
+        {
+            valueQuery = valueQuery +"('"+personalModel[k].skill_id+"','"+personalSkillRating[k]+"','3','"+job_id+"','"+created_by+"'),";
+        }
+    }
+
+    var query = "INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES "+valueQuery.slice(0,-1);
+    /*
+     INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES(1,2,3,LAST_INSERT_ID(),3),(4,5,6,LAST_INSERT_ID(),4);
+     */
+    runSkillQuery(query,res);
+
+}
+exports.deleteJob = function(req,res)
 {
     var reqObj = req.body;
     var id = reqObj["id"];
@@ -463,7 +508,34 @@ exports.updateJob = function(req,res)
     });
 
 }
+exports.upDateJob = function(req,res)
+{
+    var reqObj = req.body;
+    var id = reqObj["id"];
+    var rate = reqObj["rate"];
+    var description = reqObj["description"];
+    var duration = reqObj["duration"];
+    var updateQuery = "UPDATE job_table SET salary='"+rate+"',job_desc='"+description+"',duration_id='"+duration+
+        "' WHERE job_id='"+id+"'";
+    dbPool.getConnection(function(err, conn) {
+        conn.query(updateQuery,
+            function (err, result) {
+                if (!err) {
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
 
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
 exports.getCurrentJobList = function(req,res)
 {
     var userid = req.query["user_id"];

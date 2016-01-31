@@ -539,7 +539,7 @@ html{overflow-x: hidden;}
 }
 .wrap-dd-select
 {
-  background: #E9E9E9;
+  /*background: #E9E9E9;*/
   color: #010101;
 }
 .wrap-dd-select.defaultPlaceHolder {
