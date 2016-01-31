@@ -43,6 +43,7 @@ angular.module('toilApp')
                 trvl_wtg: "",
                 lang_id: "",
                 lang_wtg: "",
+                startDate:"",
                 strdt_wtg: "",
                 datePosted:"",
                 postedBy: ""

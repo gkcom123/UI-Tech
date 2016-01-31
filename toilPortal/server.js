@@ -38,12 +38,16 @@ app.get('/toilAPi/get_job_type', toilJobsSrv.getJobTypeList);
 app.get('/toilAPi/get_job_industry', toilJobsSrv.getIndustryList);
 app.get('/toilAPi/get_currency', toilJobsSrv.get_currency);
 app.get('/toilAPi/get_duration', toilJobsSrv.get_duration);
-app.get('/toilAPi/get_location', toilJobsSrv.getLanguageList);
+app.get('/toilAPi/get_language', toilJobsSrv.getLanguageList);
 app.get('/toilAPi/get_country', toilJobsSrv.getCountryList);
 app.post('/toilAPi/addNewJob', toilJobsSrv.addNewJob);
-app.post('/toilAPi/updateJob', toilJobsSrv.updateJob);
+app.post('/toilAPi/deleteJob', toilJobsSrv.deleteJob);
+app.post('/toilAPi/updateJob', toilJobsSrv.upDateJob);
 app.get('/toilAPi/get_Skill_list', toilJobsSrv.getSkillList);
 app.post('/toilAPi/save_Skill_list', toilJobsSrv.saveJobSkills);
+app.post('/toilAPi/update_Skill_list', toilJobsSrv.updateJobSkills);
+app.get('/toilAPi/get_skill_byJobId', toilJobsSrv.getSkillByJobId);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

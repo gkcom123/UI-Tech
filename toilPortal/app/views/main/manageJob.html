@@ -21,7 +21,7 @@
       <tr dir-paginate="job in currentJobs.data |itemsPerPage: pageSize" current-page="currentPage">
         <td><span ng-bind="job.id"></span></td>
         <td><span ng-bind="job.jobTitle"></span></td>
-        <td><span ng-bind="job.datePosted"></span></td>
+        <td><span ng-bind="(job.datePosted | date:'dd/MM/yyyy')"></span></td>
         <td><span ng-bind="job.postedBy"></span></td>
         <td><span ng-bind="job.views"></span></td>
         <td><span ng-bind="job.applicants"></span></td>

@@ -57,13 +57,7 @@ angular.module('toilApp')
     });
    $scope.userClick = function(event)
     {
-
       $state.go('user');
-    }
-    $scope.addJobClick = function()
-    {
-      $scope.myVal = true;
-      $state.go('addJob');
     }
     $scope.manageJobClick = function()
     {

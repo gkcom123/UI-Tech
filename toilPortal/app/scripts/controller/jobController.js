@@ -8,9 +8,8 @@ angular.module("toilApp")
         '$rootScope','$state',
         'localStorageService',
         'GetCurrentJobList',
-        'UpdateJob','JobService',
-        function( $scope, $rootScope,$state, localStorageService, GetCurrentJobList,UpdateJob,JobService){
-
+        'DeleteJob','JobService',
+        function( $scope, $rootScope,$state, localStorageService, GetCurrentJobList,DeleteJob,JobService){
             var currentJobList 	= {};
             var userId = getUserProfile().user_id;
             var pageNo 				= 1;
@@ -52,8 +51,7 @@ angular.module("toilApp")
                 JobService.setSelectedJob(job);
                 JobService.setTypeOfChange("edit");
                 //$rootScope.$emit('ModifyToilJob',job);
-                $state.go('editJob');
-
+                $state.go('editJob',{typeOfChange:'edit'});
             }
             $scope.deleteJob = function(job)
             {
@@ -68,8 +66,8 @@ angular.module("toilApp")
                     'jobTitle':job.jobTitle,
                     'user_id':userId
                 }
-                var updateJobRes = UpdateJob.getResource();
-                updateJobRes.save(data, function success(response){
+                var deleteJobRes = DeleteJob.getResource();
+                deleteJobRes.save(data, function success(response){
                         var resData = response.response_data || {};
                         // $('#newForm .spin').hide();
 

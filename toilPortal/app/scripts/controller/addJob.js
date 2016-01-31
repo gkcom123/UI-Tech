@@ -4,59 +4,78 @@
 'use strict';
 angular.module("toilApp")
     .controller('addJobController', [
-        '$scope',
-        '$rootScope',
-        '$location',
-        '$filter','localStorageService',
-        'JobTypeLoader','GetIndustry','GetCurrency','GetDuration','GetLanguage','GetCountry','AddJob','JobService',
-        function( $scope, $rootScope, $location, $filter,localStorageService,JobTypeLoader,GetIndustry,GetCurrency,
-                  GetDuration,GetLanguage,GetCountry,AddJob,JobService){
-
-            var jobTypeList = {};
+        '$scope','$rootScope','$state','$stateParams','$filter','$timeout','localStorageService',
+        'JobTypeLoader','IndustryLoader','CurrencyLoader','DurationLoader','LanguageLoader','CountryLoader',
+        'AddJob','UpdateJob','JobService',
+        function( $scope, $rootScope,$state, $stateParams, $filter,$timeout,localStorageService,JobTypeLoader,IndustryLoader,
+                  CurrencyLoader,DurationLoader,LanguageLoader,CountryLoader,AddJob,UpdateJob,JobService){
             var industryList = {};
             var userId = getUserProfile().user_id;
             $scope.jobTypes 		= {};
             $scope.selectedJobType = "";
-            $scope.industries 		= {};
-            $scope.currencies 		= {};
-            $scope.durations 		= {};
-            $scope.travels 		= {};
-            $scope.language 		= {};
+
             $scope.country          = {};
-            $scope.selectedIndustries = "";
-            $scope.selectedCurrency = "";
-            $scope.selectedDuration = "";
-            $scope.selectedLanguage = "";
             $scope.selectedCountry = "";
+
+            $scope.industries 		= {};
+            $scope.selectedIndustries = "";
+
+            $scope.currencies 		= {};
+            $scope.selectedCurrency = "";
+
+            $scope.durations 		= {};
+            $scope.selectedDuration = "";
+
+            $scope.language 		= {};
+            $scope.selectedLanguage = "";
+
+            $scope.travels 		= {};
             $scope.selectedTravel = "";
-            $scope.jobType 	  = {type:"Please Select"};
-            $scope.industryLabel 	  = {name:"Please Select"};
-            $scope.currLabel 	  = {name:"Please Select"};
-            $scope.durLabel 	  = {duration:"Please Select"};
-            $scope.cntLabel 	  = {name:"Please Select"};
-            $scope.langLabel 	  = {language:"Please Select"};
-            $scope.travelLabel 	  = {name:"Please Select"};
+
+            $scope.fieldEditable = true;
 
             $scope.showDropList = function(){
-                $('.jobt-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.jobt-dropdown-list').toggle();
+                }
             }
             $scope.showIndDropList = function(){
-                $('.ind-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.ind-dropdown-list').toggle();
+                }
+
             }
             $scope.showCrcDropList = function(){
-                $('.curr-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.curr-dropdown-list').toggle();
+                }
+
             }
             $scope.showDurDropList = function(){
                 $('.dur-dropdown-list').toggle();
             }
             $scope.showCntDropList = function(){
-                $('.cnt-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.cnt-dropdown-list').toggle();
+                }
+
             }
             $scope.showTravelDropList = function(){
-                $('.tr-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.tr-dropdown-list').toggle();
+                }
+
             }
             $scope.showLangDropList = function(){
-                $('.lang-dropdown-list').toggle();
+                if($scope.fieldEditable)
+                {
+                    $('.lang-dropdown-list').toggle();
+                }
             }
 
             $scope.jobTypeSelected = function(j){
@@ -111,10 +130,16 @@ angular.module("toilApp")
                 $scope.indWtg="3";
                 $scope.city="";
                 $scope.rateSal="";
-/*
-                if ($scope.addtoilUserForm)
-                    $scope.addtoilUserForm.$setPristine();
-*/
+                $timeout(function(){
+                    $scope.jobType 	  = {type:"Please Select"};
+                    $scope.cntLabel   = {name:"Please Select"};
+                    $scope.industryLabel  = {name:"Please Select"};
+                    $scope.currLabel 	  = {name:"Please Select"};
+                    $scope.durLabel 	  = {duration:"Please Select"};
+                    $scope.langLabel 	  = {language:"Please Select"};
+                    $scope.travelLabel 	  = {name:"Please Select"};
+                });
+
             }
             function performSanityCheck(){
 
@@ -143,6 +168,11 @@ angular.module("toilApp")
             }
             function saveJobSkills()
             {
+                if($stateParams.typeOfChange=='edit')
+                {
+                    updateJob();
+                    return;
+                }
                 var data ={
                     'jobTitle': $scope.jobTitle,
                     'jobType': $scope.selectedJobType.type_id,
@@ -226,9 +256,52 @@ angular.module("toilApp")
                     $scope.$broadcast ('performSkillsSanityCheck');
                 }
             }
+            function updateJob()
+            {
+                var cancelIt = confirm('Do you want to update the job:' + $scope.jobTitle);
+                if(!cancelIt)
+                {
+                    return;
+                }
+                var data ={
+                    'id':JobService.getSelectedJob().id,
+                    'description':$scope.description,
+                    'rate': $scope.rateSal,
+                    'duration': $scope.selectedDuration.duration_id,
+                    'user_id':userId
+                }
+                var updateJobRes = UpdateJob.getResource();
+                updateJobRes.save(data, function success(response){
+                        var resData = response.response_data || {};
+                        // $('#newForm .spin').hide();
+
+                        if(response.status == 'success') {
+                            $scope.$broadcast ('updateSkills',JobService.getSelectedJob().id);
+                        }
+                        else
+                        {
+                            var reason = 'Job Updation Failed. Please Try After Some Time.';
+                            if(resData.error_code == 201) {
+                                reason = resData.error_desc;
+                            }
+                        }
+                    },
+                    function error(){}
+                );
+
+            }
+
             $scope.$on('skillSaved', function(e,data) {
-                alert("Job saved Successfully");
-                resetValues();
+                if($stateParams.typeOfChange=='edit')
+                {
+                    alert("Job Updated Successfully");
+                    $state.go('manageJob');
+                }
+                if($stateParams.typeOfChange=='add')
+                {
+                    alert("Job saved Successfully");
+                    resetValues();
+                }
             });
             $scope.$on('sanityCheckDone', function(e,data) {
                 saveJobSkills();
@@ -237,7 +310,6 @@ angular.module("toilApp")
                 var pDate = ( $filter('date')(data, 'yyyy-MM-dd'));
                 $scope.jobStDate = pDate;
             });
-
             function loadJobTypeList(){
                 JobTypeLoader.getAllJobTypes()
                     .then(function(data) {
@@ -249,92 +321,178 @@ angular.module("toilApp")
                         }
                     },
                     function(data) {
-                        console.log('Data retrieval failed.')
+                        console.log('Data retrieval failed.');
                     });
             }
             function setJobType(selectedJob,masterData){
                 for(var i=0; i < masterData.length; i++){
                     if(masterData[i].type_id == selectedJob.job_type){
                         $scope.jobType = masterData[i];
-                        $scope.selectedJobType = selectedJob;
+                        $scope.selectedJobType = masterData[i];
                         break;
                     }
                 }
             }
 
             function loadIndustryList(){
-                var industryListResource = GetIndustry.getResource();
-                industryListResource.get(function(response){
-                    if(response.status == 'error' && response.error_code == 400){
-                        //$rootScope.$broadcast('LogoutThisUser',{});
+                IndustryLoader.getIndustryList()
+                    .then(function(data) {
+                        $scope.industries.data = data;
+                        if(JobService.getTypeOfChange()=='edit')
+                        {
+                            setIndustry(JobService.getSelectedJob(),$scope.industries.data);
+
+                        }
+                    },
+                    function(data) {
+                        console.log('Industry Data retrieval failed.');
+                    });
+            }
+            function setIndustry(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].industry_id == selectedJob.industry_id){
+                        $scope.industryLabel = masterData[i];
+                        $scope.selectedIndustries = masterData[i];
+                        break;
                     }
-                    if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("Get Industry API returned empty Object");
-                    }
-                    else{
-                        industryList = response.response_data.results;
-                        $scope.industries.data = response.response_data.results;
-                    }
-                });
+                }
             }
             function loadCurrencyList(){
-                var currencyListResource = GetCurrency.getResource();
-                currencyListResource.get(function(response){
-                    if(response.status == 'error' && response.error_code == 400){
-                        //$rootScope.$broadcast('LogoutThisUser',{});
+                CurrencyLoader.getCurrencyList()
+                    .then(function(data) {
+                        $scope.currencies.data = data;
+                        if(JobService.getTypeOfChange()=='edit')
+                        {
+                            setCurrency(JobService.getSelectedJob(),$scope.currencies.data);
+
+                        }
+                    },
+                    function(data) {
+                        console.log('Currencies Data retrieval failed.');
+                    });
+            }
+            function setCurrency(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].currency_id == selectedJob.currency_id){
+                        $scope.currLabel = masterData[i];
+                        $scope.selectedCurrency = masterData[i];
+                        break;
                     }
-                    if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("GetCurrency API returned empty Object");
-                    }
-                    else{
-                        //industryList = response.response_data.results;
-                        $scope.currencies.data = response.response_data.results;
-                    }
-                });
+                }
             }
             function loadDurationList(){
-                var durationListResource = GetDuration.getResource();
-                durationListResource.get(function(response){
-                    if(response.status == 'error' && response.error_code == 400){
+                DurationLoader.getDurationList()
+                    .then(function(data) {
+                        $scope.durations.data = data;
+                        if(JobService.getTypeOfChange()=='edit')
+                        {
+                            setDuration(JobService.getSelectedJob(),$scope.durations.data);
+
+                        }
+                    },
+                    function(data) {
+                        console.log('Durations Data retrieval failed.');
+                    });
+            }
+            function setDuration(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].duration_id == selectedJob.duration_id){
+                        $scope.durLabel = masterData[i];
+                        $scope.selectedDuration = masterData[i];
+                        break;
                     }
-                    if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("GetDuration API returned empty Object");
-                    }
-                    else{
-                        $scope.durations.data = response.response_data.results;
-                        //console.log(JSON.stringify($scope.durations.data));
-                    }
-                });
+                }
             }
             function loadLanguageList(){
-                var languageListResource = GetLanguage.getResource();
-                languageListResource.get(function(response){
-                    if(response.status == 'error' && response.error_code == 400){
-                    }
-                    if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("GetLanguage API returned empty Object");
-                    }
-                    else{
-                        $scope.language.data = response.response_data.results;
-                    }
-                });
-            }
-            function loadCountryList(){
-                var countryListResource = GetCountry.getResource();
-                countryListResource.get(function(response){
-                    if(response.status == 'error' && response.error_code == 400){
-                    }
-                    if(Object.getOwnPropertyNames(response.response_data).length === 0){
-                        console.warn("GetCountry API returned empty Object");
-                    }
-                    else{
-                        $scope.country.data = response.response_data.results;
+                LanguageLoader.getLanguageList()
+                    .then(function(data) {
+                        $scope.language.data = data;
+                        if(JobService.getTypeOfChange()=='edit')
+                        {
+                            setLanguage(JobService.getSelectedJob(),$scope.language.data);
 
-                    }
-                });
+                        }
+                    },
+                    function(data) {
+                        console.log('Language Data retrieval failed.');
+                    });
             }
+            function setLanguage(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].language_id == selectedJob.lang_id){
+                        $scope.langLabel = masterData[i];
+                        $scope.selectedLanguage = masterData[i];
+                        break;
+                    }
+                }
+            }
+
+            function loadCountryList(){
+                CountryLoader.getCountryList()
+                    .then(function(data) {
+                        $scope.country.data = data;
+                        if(JobService.getTypeOfChange()=='edit')
+                        {
+                            setCountry(JobService.getSelectedJob(),$scope.country.data);
+
+                        }
+                    },
+                    function(data) {
+                        console.log('Country Data retrieval failed.');
+                    });
+            }
+            function setCountry(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].country_id == selectedJob.country_id){
+                        $scope.cntLabel = masterData[i];
+                        $scope.selectedCountry = masterData[i];
+                        break;
+                    }
+                }
+            }
+
             function loadTravelList(){
-                $scope.travels.data= [{"travel_id":1,"name":"Yes"},{"travel_id":2,"name":"No"}]
+                $scope.travels.data= [{"travel_id":1,"name":"Yes"},{"travel_id":2,"name":"No"}];
+                if(JobService.getTypeOfChange()=='edit')
+                {
+                    setTravelType(JobService.getSelectedJob(),$scope.travels.data);
+
+                }
+
+            }
+            function setTravelType(selectedJob,masterData){
+                for(var i=0; i < masterData.length; i++){
+                    if(masterData[i].travel_id == selectedJob.isTravel){
+                        $scope.travelLabel = masterData[i];
+                        $scope.selectedTravel = masterData[i];
+                        break;
+                    }
+                }
+            }
+
+            function populateAllTextForEdit()
+            {
+                if($stateParams.typeOfChange=='edit')
+                {
+                    $scope.jobTitle = JobService.getSelectedJob().jobTitle;
+                    $scope.description = JobService.getSelectedJob().job_desc;
+                    $scope.compName = JobService.getSelectedJob().comp_name;
+                    $scope.rateSal = JobService.getSelectedJob().salary;
+                    $scope.city = JobService.getSelectedJob().city;
+                    $scope.fieldEditable = false;
+                    var stDate = ( $filter('date')(JobService.getSelectedJob().startDate, 'dd-MMMM-yyyy'));
+                    var dt = new Date( stDate ),
+                        year = dt.getUTCFullYear(),
+                        month = dt.getUTCMonth(),
+                        day = dt.getUTCDate();
+                    $scope.dt= new Date(year, month, day);
+                    $rootScope.$emit('jobDateChanged', $scope.dt);
+                }
+                else if($stateParams.typeOfChange=='add')
+                {
+                    resetValues();
+                    $scope.fieldEditable = true;
+                }
             }
             loadJobTypeList();
             loadIndustryList();
@@ -343,4 +501,5 @@ angular.module("toilApp")
             loadLanguageList();
             loadCountryList();
             loadTravelList();
+            populateAllTextForEdit();
         }]);

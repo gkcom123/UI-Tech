@@ -238,6 +238,53 @@ exports.getSkillList = function(req,res)
     });
 
 }
+exports.getSkillByJobId = function(req,res)
+{
+    var jobID = req.query["job_id"];
+    dbPool.getConnection(function(err, conn) {
+        conn.query("SELECT jobSkill.skill_id,jobSkill.skil_wtg,jobSkill.skill_type_id,jobSkill.created_by," +
+            "skill.skill_name" +
+            " FROM job_skills as jobSkill INNER JOIN skill " +
+            "ON jobSkill.skill_id=skill.skill_id  WHERE job_id='" + jobID +"'"
+            , function (err, result) {
+                if (!err && result.length >= 0) {
+                    var jsonRes = [];
+                    var arrayLength = result.length;
+                    for (var i = 0; i < arrayLength; i++) {
+                        var skillList = {
+                            skill_id: result[i]["skill_id"],
+                            skill_name: result[i]["skill_name"],
+                            skill_wtg: result[i]["skill_wtg"],
+                            type_id: result[i]["skill_type_id"],
+                            created_by: result[i]["created_by"],
+
+                        };
+                        jsonRes.push(skillList);
+                    }
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+                            "pagination": {
+                                "has_next": false,
+                                "next_page": 2,
+                                "previous_page": 0,
+                                "current_page": 1,
+                                "total_pages": 1,
+                                "has_previous": false
+                            },
+                            "results": jsonRes
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
+
 exports.getCountryList = function(req,res)
 {
     dbPool.getConnection(function(err, conn) {
@@ -373,7 +420,10 @@ exports.saveJobSkills = function(req,res)
     /*
      INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES(1,2,3,LAST_INSERT_ID(),3),(4,5,6,LAST_INSERT_ID(),4);
      */
-
+    runSkillQuery(query,res);
+}
+function runSkillQuery(query,res)
+{
     dbPool.getConnection(function(err, conn) {
         conn.query(query,
             function (err, result) {
@@ -392,10 +442,48 @@ exports.saveJobSkills = function(req,res)
             });
         conn.release();
     });
-
-
 }
-exports.updateJob = function(req,res)
+exports.updateJobSkills = function(req,res)
+{
+    var reqObj = req.body;
+    var profModel = reqObj["profModel"];
+    var profRating = reqObj["profRating"];
+    var projModel = reqObj["projModel"];
+    var projRating = reqObj["projSkillRating"];
+    var personalModel = reqObj["personalModel"];
+    var personalSkillRating = reqObj["personalSkillRating"];
+    var job_id = reqObj["jobId"];
+    var created_by = reqObj["created_by"];
+    var valueQuery = "";
+    for(var i=0;i<profModel.length;i++)
+    {
+        if(profModel[i].isEdit)
+        {
+            valueQuery = valueQuery +"('"+profModel[i].skill_id+"','"+profRating[i]+"','1','"+job_id+"','"+created_by+"'),";
+        }
+    }
+    for(var j=0;j<projModel.length;j++)
+    {
+        if(projModel[j].isEdit)
+        {
+            valueQuery = valueQuery +"('"+projModel[j].skill_id+"','"+projRating[j]+"','2','"+job_id+"','"+created_by+"'),";
+        }
+    }
+    for(var k=0;k<personalModel.length;k++)
+    {
+        if(personalModel[k].isEdit)
+        {
+            valueQuery = valueQuery +"('"+personalModel[k].skill_id+"','"+personalSkillRating[k]+"','3','"+job_id+"','"+created_by+"'),";
+        }
+    }
+
+    var query = "INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES "+valueQuery.slice(0,-1);
+    /*
+     INSERT INTO job_skills (skill_id,skil_wtg,skill_type_id,job_id,created_by) VALUES(1,2,3,LAST_INSERT_ID(),3),(4,5,6,LAST_INSERT_ID(),4);
+     */
+    runSkillQuery(query,res);
+}
+exports.deleteJob = function(req,res)
 {
     var reqObj = req.body;
     var id = reqObj["id"];
@@ -421,7 +509,34 @@ exports.updateJob = function(req,res)
     });
 
 }
+exports.upDateJob = function(req,res)
+{
+    var reqObj = req.body;
+    var id = reqObj["id"];
+    var rate = reqObj["rate"];
+    var description = reqObj["description"];
+    var duration = reqObj["duration"];
+    var updateQuery = "UPDATE job_table SET salary='"+rate+"',job_desc='"+description+"',duration_id='"+duration+
+        "' WHERE job_id='"+id+"'";
+    dbPool.getConnection(function(err, conn) {
+        conn.query(updateQuery,
+            function (err, result) {
+                if (!err) {
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
 
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+
+}
 exports.getCurrentJobList = function(req,res)
 {
     var userid = req.query["user_id"];
@@ -528,14 +643,14 @@ exports.getCurrentJobListForApp = function(req,res)
             "job_industry.name as industry_name,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,job_currency.name," +
             "job.duration_id,job_duration.duration,job.country_id,country.name as countryName,job.country_wtg," +
             "job.city,job.isTravel,job.trvl_wtg,job.lang_id,language.language,job.lang_wtg,job.start_date," +
-            "job.srtdt_wtg,job.post_date,toilUser.f_name as createdBy FROM job_table as job " +
+            "job.srtdt_wtg,job.post_date,job.isActive,toilUser.f_name as createdBy FROM job_table as job " +
             "INNER JOIN toilUser  ON job.created_by=toilUser.user_id " +
             "JOIN job_industry ON job.industry_id=job_industry.industry_id " +
             "JOIN job_type ON job.job_type=job_type.type_id " +
             "JOIN job_currency ON job.currency_id=job_currency.currency_id " +
             "JOIN job_duration ON job.duration_id=job_duration.duration_id " +
             "JOIN country ON job.country_id=country.country_id " +
-            "JOIN language ON job.lang_id=language.language_id where job.isActive=1"
+            "JOIN language ON job.lang_id=language.language_id"
             //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
                 if (!err && result.length >= 0) {
@@ -562,6 +677,7 @@ exports.getCurrentJobListForApp = function(req,res)
                             country_wtg: result[i]["country_wtg"],
                             city: result[i]["city"],
                             isTravel: result[i]["isTravel"],
+                            isActive: result[i]["isActive"],
                             trvl_wtg: result[i]["trvl_wtg"],
                             lang_id: result[i]["lang_id"],
                             lang_name: result[i]["language"],
