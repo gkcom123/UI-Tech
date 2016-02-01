@@ -9,7 +9,6 @@ angular.module("toilApp")
         'AddJob','UpdateJob','JobService',
         function( $scope, $rootScope,$state, $stateParams, $filter,$timeout,localStorageService,JobTypeLoader,IndustryLoader,
                   CurrencyLoader,DurationLoader,LanguageLoader,CountryLoader,AddJob,UpdateJob,JobService){
-            var industryList = {};
             var userId = getUserProfile().user_id;
             $scope.jobTypes 		= {};
             $scope.selectedJobType = "";
@@ -33,7 +32,7 @@ angular.module("toilApp")
             $scope.selectedTravel = "";
 
             $scope.fieldEditable = true;
-
+            $scope.heading ="";
             $scope.showDropList = function(){
                 if($scope.fieldEditable)
                 {
@@ -474,6 +473,7 @@ angular.module("toilApp")
             {
                 if($stateParams.typeOfChange=='edit')
                 {
+                    $scope.heading = "Edit a Job"
                     $scope.jobTitle = JobService.getSelectedJob().jobTitle;
                     $scope.description = JobService.getSelectedJob().job_desc;
                     $scope.compName = JobService.getSelectedJob().comp_name;
@@ -490,6 +490,7 @@ angular.module("toilApp")
                 }
                 else if($stateParams.typeOfChange=='add')
                 {
+                    $scope.heading = "Add a Job"
                     resetValues();
                     $scope.fieldEditable = true;
                 }

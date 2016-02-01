@@ -3,9 +3,9 @@
  */
 'use strict';
 angular.module('toilApp')
-    .controller('SkillController',['$scope','$rootScope','$stateParams','localStorageService','$filter','GetSkill','SaveSkill',
+    .controller('SkillController',['$scope','$rootScope','$stateParams','localStorageService','GetSkill','SaveSkill',
         'GetSkillByJobId','JobService','UpdateSkill',
-    function ($scope,$rootScope,$stateParams,localStorageService,$filter,GetSkill,SaveSkill,
+    function ($scope,$rootScope,$stateParams,localStorageService,GetSkill,SaveSkill,
               GetSkillByJobId,JobService,UpdateSkill) {
         $scope.profSkill 	  = {name:"Professional"};
         $scope.projSkill 	  = {name:"Project Related"};

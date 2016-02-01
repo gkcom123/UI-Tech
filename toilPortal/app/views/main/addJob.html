@@ -5,7 +5,7 @@
 
   <div id="addNewJob">
     <div class="row">
-      <div class="col-md-9 col-md-offset-1 well well-sm main-well">ADD A NEW JOB</div>
+      <div class="col-md-9 col-md-offset-1 well well-sm main-well">{{heading}}</div>
     </div>
     <div class="row">
       <div class=" col-md-8 col-md-offset-1 well well-sm basicInfo">Basic Info</div>
@@ -80,7 +80,7 @@
           <label for="rate" class="control-label">Rate/Salary</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control inputBox" id="rate" ng-model="rateSal" required>
+          <input type="number" class="form-control inputBox" id="rate" ng-model="rateSal" required >
         </div>
         <div class="col-md-2 text-right">
           <label class="control-label">How Important</label><span class="glyphicon glyphicon-menu-right arrowIcon"></span>

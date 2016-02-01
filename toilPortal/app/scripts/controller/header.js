@@ -3,8 +3,8 @@
  */
 'use strict';
 angular.module('toilApp')
-    .controller('toilHeaderController', ['$rootScope','$scope','$state','$resource','localStorageService',
-        function ($rootScope,$scope,$state,$resource,localStorageService) {
+    .controller('toilHeaderController', ['$rootScope','$scope','$state','localStorageService',
+        function ($rootScope,$scope,$state,localStorageService) {
             $scope.page = $state.current;
             var profile = getUserProfile();
             $scope.userName  = profile.email;

@@ -591,7 +591,13 @@ html{overflow-x: hidden;}
   border: 1px solid #ccc;
 
 }
-
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
 .dropdown-list li input {
   margin-right: 20px;
   border: 1px solid #ccc;
