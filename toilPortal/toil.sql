@@ -793,3 +793,26 @@ INSERT into skill (skill_name,type_id) values
 ('Time-Keeping',3),
 ('Training',3),
 ('Verbal Communication',3)
+=======
+SELECT job.job_id, job.job_title,job.job_type,job_type.type,job.job_desc,job.comp_name,job.industry_id,job_industry.name as industry_name,
+job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,job_currency.name,job.duration_id,job_duration.duration,
+job.country_id,country.name as countryName,job.country_wtg,job.city,job.isTravel,job.trvl_wtg,job.lang_id,
+language.language,job.lang_wtg,job.start_date,job.srtdt_wtg,job.post_date,toilUser.f_name as createdBy,
+GROUP_CONCAT(s.skill_id SEPARATOR ',') skillList,
+GROUP_CONCAT(skill.skill_name SEPARATOR ',') skillLnameist,
+GROUP_CONCAT(s.skil_wtg SEPARATOR ',') skillweightageList
+FROM job_table as job INNER JOIN toilUser  ON job.created_by=toilUser.user_id 
+JOIN job_industry ON job.industry_id=job_industry.industry_id 
+JOIN job_type ON job.job_type=job_type.type_id 
+JOIN job_currency ON job.currency_id=job_currency.currency_id 
+JOIN job_duration ON job.duration_id=job_duration.duration_id 
+JOIN country ON job.country_id=country.country_id 
+JOIN language ON job.lang_id=language.language_id
+LEFT JOIN job_skills s ON s.job_id = job.job_id 
+LEFT JOIN skill ON skill.skill_id=s.skill_id 
+where job.isActive=1 group by job.job_id
+
+
+SELECT job.job_id, job.job_title,job.job_type,job.job_desc,job.comp_name,job.industry_id,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,
+job.duration_id,job.country_id,job.country_wtg,job.city,job.isTravel,job.trvl_wtg,job.lang_id,job.lang_wtg,
+job.start_date,job.srtdt_wtg,job.post_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser ON job.created_by=toilUser.user_id where job.isActive=1 

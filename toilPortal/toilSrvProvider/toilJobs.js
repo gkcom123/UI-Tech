@@ -643,20 +643,48 @@ exports.getCurrentJobListForApp = function(req,res)
             "job_industry.name as industry_name,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,job_currency.name," +
             "job.duration_id,job_duration.duration,job.country_id,country.name as countryName,job.country_wtg," +
             "job.city,job.isTravel,job.trvl_wtg,job.lang_id,language.language,job.lang_wtg,job.start_date," +
-            "job.srtdt_wtg,job.post_date,job.isActive,toilUser.f_name as createdBy FROM job_table as job " +
+            "job.srtdt_wtg,job.post_date,job.isActive,toilUser.f_name as createdBy," +
+            "GROUP_CONCAT(s.skill_id SEPARATOR ',') skillidList," +
+            "GROUP_CONCAT(skill.skill_name SEPARATOR ',') skillLnameist," +
+            "GROUP_CONCAT(s.skil_wtg SEPARATOR ',') skillweightageList " +
+            "FROM job_table as job " +
             "INNER JOIN toilUser  ON job.created_by=toilUser.user_id " +
             "JOIN job_industry ON job.industry_id=job_industry.industry_id " +
             "JOIN job_type ON job.job_type=job_type.type_id " +
             "JOIN job_currency ON job.currency_id=job_currency.currency_id " +
             "JOIN job_duration ON job.duration_id=job_duration.duration_id " +
             "JOIN country ON job.country_id=country.country_id " +
-            "JOIN language ON job.lang_id=language.language_id"
+            "JOIN language ON job.lang_id=language.language_id " +
+            "LEFT JOIN job_skills s ON s.job_id = job.job_id " +
+            "LEFT JOIN skill ON skill.skill_id=s.skill_id group by job.job_id"
             //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
                 if (!err && result.length >= 0) {
                     var jsonRes = [];
                     var arrayLength = result.length;
                     for (var i = 0; i < arrayLength; i++) {
+                        var skillArray=[];
+                        //console.log(result[i]);
+                        var skillIdList = result[i]["skillidList"];
+                        var skillList= result[i]["skillLnameist"];
+                        var skillratingList= result[i]["skillweightageList"];
+                        if(skillList!=null && skillratingList!=null)
+                        {
+                            var skillidListArray = skillIdList.split(",");
+                            var skillListArray = skillList.split(",");
+                            var skilratinglListArray = skillratingList.split(",");
+                            for (var sl = 0; sl <skillListArray.length; sl++)
+                            {
+                                var job_skill =
+                                {
+                                    skill_id:skillidListArray[sl],
+                                    skill_name:skillListArray[sl],
+                                    skill_rating:skilratinglListArray[sl]
+                                }
+                                skillArray.push(job_skill);
+                            }
+                        }
+
                         var profile = {
                             id: result[i]["job_id"],
                             jobTitle: result[i]["job_title"],
@@ -676,6 +704,7 @@ exports.getCurrentJobListForApp = function(req,res)
                             country_name: result[i]["countryName"],
                             country_wtg: result[i]["country_wtg"],
                             city: result[i]["city"],
+                            skillList:skillArray,
                             isTravel: result[i]["isTravel"],
                             isActive: result[i]["isActive"],
                             trvl_wtg: result[i]["trvl_wtg"],
