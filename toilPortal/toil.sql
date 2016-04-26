@@ -816,3 +816,7 @@ where job.isActive=1 group by job.job_id
 SELECT job.job_id, job.job_title,job.job_type,job.job_desc,job.comp_name,job.industry_id,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,
 job.duration_id,job.country_id,job.country_wtg,job.city,job.isTravel,job.trvl_wtg,job.lang_id,job.lang_wtg,
 job.start_date,job.srtdt_wtg,job.post_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser ON job.created_by=toilUser.user_id where job.isActive=1 
+------
+ALTER TABLE job_table ADD view SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE job_table ADD interest SMALLINT NOT NULL DEFAULT 0;
+UPDATE toil.job_table SET view=view+1 WHERE job_id=63;

@@ -5,6 +5,8 @@ In Package.json change the following line as below
 "name": "toilPortal",
 
 --------
+package.json: Manage server side dependcies
+bower.json: used for managing client side dependencies.
 Gruntfile.js: This file has all rules to minify,concat and uglify
 ----------
 TO make a build:

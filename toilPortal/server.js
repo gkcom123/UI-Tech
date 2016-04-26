@@ -33,7 +33,6 @@ app.get('/toilAPi/get_user_list', toilUserSrv.getUserList);
 app.post('/toilAPi/addNewUser', toilUserSrv.addNewUser);
 app.post('/toilAPi/updateUser', toilUserSrv.updateUser);
 app.get('/toilAPi/get_current_jobList', toilJobsSrv.getCurrentJobList);
-app.get('/toilAPi/getCurrentJobListForApp', toilJobsSrv.getCurrentJobListForApp);
 app.get('/toilAPi/get_job_type', toilJobsSrv.getJobTypeList);
 app.get('/toilAPi/get_job_industry', toilJobsSrv.getIndustryList);
 app.get('/toilAPi/get_currency', toilJobsSrv.get_currency);
@@ -47,6 +46,10 @@ app.get('/toilAPi/get_Skill_list', toilJobsSrv.getSkillList);
 app.post('/toilAPi/save_Skill_list', toilJobsSrv.saveJobSkills);
 app.post('/toilAPi/update_Skill_list', toilJobsSrv.updateJobSkills);
 app.get('/toilAPi/get_skill_byJobId', toilJobsSrv.getSkillByJobId);
+
+//APP API List: View and interest API
+app.patch('/toilAPi/recordViewOrInterest', toilJobsSrv.updateViewAndInterest);
+app.get('/toilAPi/getCurrentJobListForApp', toilJobsSrv.getCurrentJobListForApp);
 
 
 http.createServer(app).listen(app.get('port'), function(){

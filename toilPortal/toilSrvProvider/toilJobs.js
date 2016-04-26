@@ -392,6 +392,47 @@ exports.addNewJob = function(req,res) {
         conn.release();
     });
 }
+exports.updateViewAndInterest = function(req,res)
+{
+    var reqObj = req.body;
+    var val = reqObj["updateReq"];
+    var job_id = reqObj["job_id"];
+    //var job_title = reqObj["job_title"];
+
+    if(val=="view")
+    {
+        runViewInterestQuery("UPDATE toil.job_table SET view=view+1 WHERE job_id="+job_id,res);
+    }
+    else if(val=="interest")
+    {
+        runViewInterestQuery("UPDATE toil.job_table SET interest=interest+1 WHERE job_id="+job_id,res);
+    }
+    else{
+        res.send("Something Went Wrong.");
+    }
+
+}
+function runViewInterestQuery(query,res)
+{
+    dbPool.getConnection(function(err, conn) {
+        conn.query(query,
+            function (err, result) {
+                if (!err) {
+                    var finalResult = {
+                        "status": "success",
+                        "error_desc": "",
+                        "error_code": "",
+                        "response_data": {
+
+                        }
+                    }
+                    res.send(finalResult);
+                }
+            });
+        conn.release();
+    });
+}
+
 exports.saveJobSkills = function(req,res)
 {
     var reqObj = req.body;
@@ -551,7 +592,7 @@ exports.getCurrentJobList = function(req,res)
     dbPool.getConnection(function(err, conn) {
         conn.query("SELECT job.job_id, job.job_title,job.job_type,job.job_desc,job.comp_name,job.industry_id,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id," +
             "job.duration_id,job.country_id,job.country_wtg,job.city,job.isTravel,job.trvl_wtg,job.lang_id,job.lang_wtg," +
-            "job.start_date,job.srtdt_wtg,job.post_date,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
+            "job.start_date,job.srtdt_wtg,job.post_date,job.view,job.interest,toilUser.f_name FROM job_table as job INNER JOIN toilUser " +
             "ON job.created_by=toilUser.user_id where job.isActive=1 "
         //"ON job.created_by=toilUser.user_id where job.isActive=1 LIMIT "+ pageNo+","+pagination_count
             , function (err, result) {
@@ -582,8 +623,8 @@ exports.getCurrentJobList = function(req,res)
                             startDate: result[i]["start_date"],
                             datePosted: result[i]["post_date"],
                             postedBy: result[i]["f_name"],
-                            views: 0,
-                            "applicants": 0,
+                            views: result[i]["view"],
+                            "interest": result[i]["interest"],
                             "isRemovable":true
                         };
                         jsonRes.push(profile);
@@ -642,7 +683,7 @@ exports.getCurrentJobListForApp = function(req,res)
         conn.query("SELECT job.job_id, job.job_title,job.job_type,job_type.type,job.job_desc,job.comp_name,job.industry_id," +
             "job_industry.name as industry_name,job.ind_wtg,job.salary,job.sal_wtg,job.currency_id,job_currency.name," +
             "job.duration_id,job_duration.duration,job.country_id,country.name as countryName,job.country_wtg," +
-            "job.city,job.isTravel,job.trvl_wtg,job.lang_id,language.language,job.lang_wtg,job.start_date," +
+            "job.city,job.isTravel,job.trvl_wtg,job.lang_id,job.view,job.interest,language.language,job.lang_wtg,job.start_date," +
             "job.srtdt_wtg,job.post_date,job.isActive,toilUser.f_name as createdBy," +
             "GROUP_CONCAT(s.skill_id SEPARATOR ',') skillidList," +
             "GROUP_CONCAT(skill.skill_name SEPARATOR ',') skillLnameist," +
@@ -715,8 +756,8 @@ exports.getCurrentJobListForApp = function(req,res)
                             startDate: result[i]["start_date"],
                             datePosted: result[i]["post_date"],
                             postedBy: result[i]["createdBy"],
-                            views: 0,
-                            "applicants": 0,
+                            views: result[i]["view"],
+                            "interest": result[i]["interest"],
                             "isRemovable":true
                         };
                         jsonRes.push(profile);
